@@ -55,3 +55,29 @@ If make is not enabled :
 localhost:8888
 localhost:8888/api/docs
 ```
+# Install and configure extensions
+
+## Install PHP
+```
+brew install php
+```
+
+## Install recommanded extensions
+[PHP Intelephense]([URL](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client))
+[PHP Getters & Setters](https://marketplace.visualstudio.com/items?itemName=phproberto.vscode-php-getters-setters)
+[Symfony for VSCode](https://marketplace.visualstudio.com/items?itemName=TheNouillet.symfony-vscode)
+[PHP Debug](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug)
+
+## Get PHP Path
+copy the result of this command
+```
+$ which php
+```
+
+## Configure extensions
+Past the result of the previous command in the settings.json file of VSCode:
+```
+  "php.validate.executablePath": "/opt/homebrew/bin/php",
+  "php.debug.executablePath": "/opt/homebrew/bin/php",
+  "symfony-vscode.phpExecutablePath": "/opt/homebrew/bin/php",
+```

@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+      "xdebug.php-debug",
+      "thenouillet.symfony-vscode",
+      "phproberto.vscode-php-getters-setters",
+      "bmewburn.vscode-intelephense-client",
+  ]
+}
