@@ -5,7 +5,7 @@ security:
     providers:
         user_provider:
             entity:
-                class: App\Entity\Auth\User
+                class: App\Entity\User
                 property: email
 
     password_hashers:
@@ -33,9 +33,10 @@ security:
         ROLE_USER: []
 
     access_control:
-        - { path: ^/api/docs, roles: PUBLIC_ACCESS }
-        - { path: ^/api/users, roles: PUBLIC_ACCESS, method: POST }
-        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/, roles: PUBLIC_ACCESS }
+#        - { path: ^/api/docs, roles: PUBLIC_ACCESS }
+#        - { path: ^/api/users, roles: PUBLIC_ACCESS, method: POST }
+#        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:

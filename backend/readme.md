@@ -20,6 +20,7 @@ make help
 > make migration # Create migration with changes
 > make migrate # Apply new migration 
 > make composer # Composer install in docker container
+> make entity # Create new entity
 
 > make docker-disable # Disable docker for php container 
 > make docker-enable # Enable docker for php container

@@ -29,7 +29,7 @@ stop: | $(DOCKER_COMPOSE_DEPS) ## Stop development env
 
 .PHONY: build
 build: | $(DOCKER_COMPOSE_DEPS) ## Build docker image
-	$(DOCKER_COMPOSE_CMD) build --no-cache
+	$(DOCKER_COMPOSE_CMD) build
 
 .PHONY: log
 log: | $(DOCKER_COMPOSE_DEPS) ## Show docker container logs
@@ -106,6 +106,11 @@ migration: | $(SF_CONSOLE_DEPS)  ## Create new migration
 fixtures: | $(SF_CONSOLE_DEPS) ## Load Alice fixtures and post process some data
 	@$(PRINT_COLOR) "$(LOG_START) Add fixtures $(LOG_END)"
 	$(SF_CONSOLE_CMD) hautelook:fixture:load --no-interaction --env=$(env)
+
+.PHONY: entity
+entity: | $(SF_CONSOLE_DEPS) ## Create new entity
+	@$(PRINT_COLOR) "$(LOG_START) Creation entity $(LOG_END)"
+	$(SF_CONSOLE_CMD) make:entity --env=$(env)
 
 ########################################################################################################################
 ##@ Local env
