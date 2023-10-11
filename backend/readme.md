@@ -75,7 +75,7 @@ $ which php
 ```
 
 ## Configure extensions
-Past the result of the previous command in the settings.json file of VSCode:
+Past the result of the previous command in the settings.json file of VSCode for these lines:
 ```
   "php.validate.executablePath": "/opt/homebrew/bin/php",
   "php.debug.executablePath": "/opt/homebrew/bin/php",
