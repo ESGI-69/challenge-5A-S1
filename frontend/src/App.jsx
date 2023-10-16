@@ -9,6 +9,10 @@ import Input from './components/Input';
 function App() {
   const { t } = useTranslation('main');
   const [ count, setCount ] = useState(0);
+  const [ inputValue, setInputValue ] = useState('');
+  const handleInputChange = (value) => {
+    setInputValue(value);
+  };
 
   return (
     <>
@@ -26,7 +30,8 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <Input id='TEst' placeholder="Placeholder" />
+        <Input id='TEst' placeholder="Placeholder" onChange={handleInputChange} />
+        <p>Input value : {inputValue} </p>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
