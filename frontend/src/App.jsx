@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg';
 import './App.css';
 import { useTranslation } from 'react-i18next';
 import LanguageSwticher from './components/LanguageSwitcher';
+import Input from './components/Input';
 
 function App() {
   const { t } = useTranslation('main');
@@ -25,6 +26,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        <Input id='TEst' placeholder="Placeholder" />
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
