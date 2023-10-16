@@ -21,9 +21,9 @@ export default function Input({
   // better way to handle css and var ?
   // https://vitejs.dev/guide/features.html#css-modules or https://styled-components.com/ ??
   const customStyle = {
-    borderRadius: '4px',
+    borderRadius: '0.25rem',
     border: '1px solid var(--Text-regular, #272727)',
-    padding: '4px 8px',
+    padding: '0.25rem 0.5rem',
     fontSize: '14px',
   };
 
