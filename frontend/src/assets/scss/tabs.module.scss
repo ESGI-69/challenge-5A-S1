@@ -1,0 +1,8 @@
+.tabs {
+  display: grid;
+  grid-auto-flow: column;
+  grid-row: auto;
+  grid-auto-columns: 1fr;
+  width: fit-content;
+  gap: var(--spacing-m);
+}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
+import Tabs from './components/Tabs';
 import { useTranslation } from 'react-i18next';
 import LanguageSwticher from './components/LanguageSwitcher';
 import Input from './components/lib/Input';
@@ -13,6 +14,7 @@ function App() {
   const handleInputChange = (value) => {
     setInputValue(value);
   };
+  const [ currentTab, setCurrentTab ] = useState('tab1');
 
   return (
     <>
@@ -39,6 +41,27 @@ function App() {
       <p className="read-the-docs">
         {t('doc')}
       </p>
+      {/* Tabs */}
+      <Tabs onChange={setCurrentTab} tabs={[
+        { value: 'tab1', label: 'Premiere tab' },
+        { value: 'tab2', label: 'Deuxieme tab', count: 2 },
+        { value: 'tab3', label: 'Troisième tab' },
+      ]} />
+      {currentTab === 'tab1' && (
+        <p>
+          Tab 1 content
+        </p>
+      )}
+      {currentTab === 'tab2' && (
+        <p>
+          Tab 2 content
+        </p>
+      )}
+      {currentTab === 'tab3' && (
+        <p>
+          Tab 3 content
+        </p>
+      )}
     </>
   );
 }
