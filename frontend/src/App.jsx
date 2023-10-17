@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 import { useTranslation } from 'react-i18next';
 import LanguageSwticher from './components/LanguageSwitcher';
-import Input from './components/Input';
+import Input from './components/lib/Input';
 
 function App() {
   const { t } = useTranslation('main');
@@ -13,6 +13,12 @@ function App() {
   const handleInputChange = (value) => {
     setInputValue(value);
   };
+
+  const ref = useRef();
+  useEffect(() => {
+    ref.current.focus();
+  }, []);
+
 
   return (
     <>
@@ -30,7 +36,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <Input id='TEst' placeholder="Placeholder" onChange={handleInputChange} />
+        <Input id='Test' placeholder="Caca" onChange={handleInputChange} ref={ref} />
         <p>Input value : {inputValue} </p>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR

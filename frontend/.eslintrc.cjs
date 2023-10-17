@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
@@ -12,10 +14,7 @@ module.exports = {
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh'],
   rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+    'react/prop-types': 'off',
     quotes: [ "error", "single" ],
     "comma-dangle": [ "error", "always-multiline" ],
     "no-console": [ "warn", { "allow": [ "warn", "error" ] } ],
