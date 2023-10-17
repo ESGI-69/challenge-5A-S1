@@ -21,7 +21,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
         new Post(denormalizationContext: ['groups' => ['create-establishment']]),
         new Patch(denormalizationContext: ['groups' => ['update-establishment']]),
         new Delete(),
-    ]
+    ],
+    normalizationContext: ['groups' => ['read-establishment', 'update-establishment']],
 )]
 class Establishment
 {
