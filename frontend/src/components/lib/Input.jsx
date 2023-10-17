@@ -1,11 +1,11 @@
+import PropTypes from 'prop-types';
 import { forwardRef, useState } from 'react';
 import styles from './Input.module.css';
 
-function Input({
+const Input = forwardRef(function InputComponent({
   onChange,
   ...delegated
 }, ref) {
-
   const [ value, setValue ] = useState('');
 
   const handleChange = (event) => {
@@ -14,6 +14,13 @@ function Input({
     if (onChange) {
       onChange(newValue);
     }
+  };
+
+  Input.propTypes = {
+    id: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
+    type: PropTypes.string,
+    onChange: PropTypes.func,
   };
 
   return (
@@ -26,6 +33,6 @@ function Input({
       {...delegated}
     />
   );
-}
+});
 
-export default forwardRef(Input);
+export default Input;
