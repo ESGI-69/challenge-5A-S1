@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
@@ -13,12 +13,6 @@ function App() {
   const handleInputChange = (value) => {
     setInputValue(value);
   };
-
-  const ref = useRef();
-  useEffect(() => {
-    ref.current.focus();
-  }, []);
-
 
   return (
     <>
@@ -36,7 +30,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <Input id='Test' placeholder="Caca" onChange={handleInputChange} ref={ref} />
+        <Input id='Test' placeholder="Caca" onChange={handleInputChange} />
         <p>Input value : {inputValue} </p>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
