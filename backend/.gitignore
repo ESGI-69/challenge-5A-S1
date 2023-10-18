@@ -141,3 +141,8 @@ yarn-error.log
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
+
+
+# prevent uploaded files folder
+public/company_kbis/*
+public/company_logo/*

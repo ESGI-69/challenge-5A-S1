@@ -11,16 +11,19 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 #[ApiResource(
     operations: [
         new Get(normalizationContext: ['groups' => ['read-company']]),
-        new Post(denormalizationContext: ['groups' => ['create-company']]),
-        new Patch(denormalizationContext: ['groups' => ['update-company']]),
+        new Post(denormalizationContext: ['groups' => ['create-company']], inputFormats: ['multipart' => ['multipart/form-data']]),
+        new Patch(denormalizationContext: ['groups' => ['update-company']], inputFormats: ['multipart' => ['multipart/form-data']]),
     ],
     normalizationContext: ['groups' => ['read-company', 'read-company-mutation']]
 )]
+#[Vich\Uploadable]
 class Company
 {
     #[Groups(['read-company-mutation'])]
@@ -33,8 +36,12 @@ class Company
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[Groups(['read-company', 'create-company', 'update-company'])]
-    #[ORM\Column(length: 255)]
+    #[Vich\UploadableField(mapping: 'company_kbis', fileNameProperty:'pathKbis')]
+    #[Groups(['create-company', 'update-company'])]
+    public ?File $fileKbis = null;
+
+    #[Groups(['read-company'])]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $pathKbis = null;
 
     #[Assert\Email()]
@@ -50,7 +57,11 @@ class Company
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $rejectedReason = null;
 
-    #[Groups(['read-company', 'create-company', 'update-company'])]
+    #[Vich\UploadableField(mapping: 'company_logo', fileNameProperty:'logoPath')]
+    #[Groups(['create-company', 'update-company'])]
+    public ?File $fileLogo = null;
+
+    #[Groups(['read-company'])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $logoPath = null;
 
