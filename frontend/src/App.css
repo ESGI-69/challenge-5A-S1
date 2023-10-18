@@ -39,3 +39,21 @@ body {
 .read-the-docs {
   color: #888;
 }
+
+.button--primary {
+  
+}
+.button--success {
+  background-color: green;
+  color: white;
+}
+  
+.button--danger {
+    background-color: red;
+    color: white;
+}
+  
+.button--warning {
+    background-color: yellow;
+    color: black;
+}

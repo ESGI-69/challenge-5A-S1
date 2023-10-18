@@ -4,8 +4,9 @@ import viteLogo from '/vite.svg';
 import '@/App.css';
 import { Tabs, Tab, TabContent, TabsList } from '@/components/lib/Tabs';
 import { useTranslation } from 'react-i18next';
-import LanguageSwticher from '@/components/LanguageSwitcher';
-import Input from '@/components/lib/Input';
+import LanguageSwticher from './components/LanguageSwitcher';
+import Input from './components/lib/Input';
+import Button from './components/Button';
 
 function App() {
   const { t } = useTranslation('main');
@@ -33,6 +34,9 @@ function App() {
         </button>
         <Input id='Test' placeholder="Caca" onChange={handleInputChange} />
         <p>Input value : {inputValue} </p>
+        <Button variant="danger">
+          {t('buttontest')}
+        </Button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>

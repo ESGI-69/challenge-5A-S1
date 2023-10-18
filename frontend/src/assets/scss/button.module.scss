@@ -1,0 +1,22 @@
+.button{
+
+  &--primary { //Pas de style ici:!
+
+  }
+
+  &--success {
+    background-color: green;
+    color: white;
+  }
+
+  &--danger {
+      background-color: red;
+      color: white;
+  }
+
+  &--warning {
+      background-color: yellow;
+      color: black;
+  }
+
+}
