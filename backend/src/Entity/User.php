@@ -45,7 +45,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     #[Assert\NotBlank()]
-    #[Groups(['read-user', 'create-user', 'update-user', 'read-post'])]
+    #[Groups(['read-user', 'create-user', 'update-user'])]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
@@ -63,6 +63,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'validatedBy', targetEntity: Service::class)]
     private Collection $validatedServices;
+    #[ORM\Column(length: 50)]
+    #[Groups(['read-user', 'create-user', 'update-user'])]
+    private ?string $lastname = null;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[Groups(['read-user', 'create-user', 'update-user'])]
+    private ?Company $companyId = null;
+
+    #[ORM\Column(length: 12)]
+    #[Groups(['read-user', 'create-user', 'update-user'])]
+    private ?string $phonenumber = null;
 
     public function __construct()
     {
@@ -228,5 +239,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
 
+    public function setLastname(string $lastname): static
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getCompanyId(): ?Company
+    {
+        return $this->companyId;
+    }
+
+    public function setCompanyId(?Company $companyId): static
+    {
+        $this->companyId = $companyId;
+
+        return $this;
+    }
+
+    public function getPhonenumber(): ?string
+    {
+        return $this->phonenumber;
+    }
+
+    public function setPhonenumber(string $phonenumber): static
+    {
+        $this->phonenumber = $phonenumber;
+
+        return $this;
+    }
 }

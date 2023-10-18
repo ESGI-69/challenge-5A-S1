@@ -78,6 +78,13 @@ class Company
         $this->establishments = new ArrayCollection();
         $this->employees = new ArrayCollection();
     }
+    #[ORM\OneToMany(mappedBy: 'companyId', targetEntity: User::class)]
+    private Collection $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -170,6 +177,24 @@ class Company
             $this->establishments->add($establishment);
             $establishment->setCompany($this);
         }
+    
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setCompanyId($this);
+        }
 
         return $this;
     }
@@ -180,6 +205,18 @@ class Company
             // set the owning side to null (unless already changed)
             if ($establishment->getCompany() === $this) {
                 $establishment->setCompany(null);
+            }
+        }
+        
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getCompanyId() === $this) {
+                $user->setCompanyId(null);
             }
         }
 
