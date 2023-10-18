@@ -8,6 +8,8 @@ use ApiPlatform\Metadata\Post;
 use ApiPLatform\Metadata\Patch;
 use ApiPLatform\Metadata\Delete;
 use App\Repository\WorkingHoursRangeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,6 +34,14 @@ class WorkingHoursRange
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $endDate = null;
+
+    #[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'workingHoursRanges')]
+    private Collection $services;
+
+    public function __construct()
+    {
+        $this->services = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -58,6 +68,30 @@ class WorkingHoursRange
     public function setEndDate(\DateTimeInterface $endDate): static
     {
         $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): static
+    {
+        if (!$this->services->contains($service)) {
+            $this->services->add($service);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): static
+    {
+        $this->services->removeElement($service);
 
         return $this;
     }
