@@ -81,3 +81,9 @@ Past the result of the previous command in the settings.json file of VSCode for 
   "php.debug.executablePath": "/opt/homebrew/bin/php",
   "symfony-vscode.phpExecutablePath": "/opt/homebrew/bin/php",
 ```
+
+# Export open API documentation
+For api usage in hopscotch, you can export the open API documentation with this command:
+```sh
+bin/console api:openapi:export --output=swagger.json
+```
