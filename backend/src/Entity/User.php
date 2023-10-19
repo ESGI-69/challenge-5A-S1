@@ -42,6 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Groups(['read-user'])]
     private array $roles = [];
 
     #[Assert\NotBlank()]
@@ -64,7 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'validatedBy', targetEntity: Service::class)]
     private Collection $validatedServices;
     #[ORM\Column(length: 50)]
-    #[Groups(['read-user', 'create-user', 'update-user'])]
+    #[Groups(['create-user', 'update-user'])]
     private ?string $lastname = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
@@ -72,7 +73,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?Company $companyId = null;
 
     #[ORM\Column(length: 12)]
-    #[Groups(['read-user', 'create-user', 'update-user'])]
+    #[Groups(['create-user', 'update-user'])]
     private ?string $phonenumber = null;
 
     public function __construct()
