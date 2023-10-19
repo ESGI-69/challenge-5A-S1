@@ -27,6 +27,11 @@ services:
       - '8888:80'
     depends_on:
       - database
+    environment:
+      XDEBUG_CONFIG: >-
+        idekey=VSCODE
+        remote_host=host.docker.internal
+      XDEBUG_MODE: debug
   php:
     extra_hosts:
       - "host.docker.internal:host-gateway"
