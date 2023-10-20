@@ -17,12 +17,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: EstablishmentRepository::class)]
 #[ApiResource(
     operations: [
-        new Get(normalizationContext: ['groups' => ['read-establishment']]),
+        new Get(normalizationContext: ['groups' => ['read-establishment', 'read-company']]),
         new Post(denormalizationContext: ['groups' => ['create-establishment']]),
         new Patch(denormalizationContext: ['groups' => ['update-establishment']]),
         new Delete(),
     ],
-    normalizationContext: ['groups' => ['read-establishment', 'update-establishment']],
+    
 )]
 class Establishment
 {
@@ -76,6 +76,11 @@ class Establishment
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 6)]
     #[Groups(['read-establishment', 'create-establishment', 'update-establishment'])]
     private ?string $long = null;
+
+    #[ORM\ManyToOne(inversedBy: 'establishments')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read-establishment', 'create-establishment', 'update-establishment'])]
+    private ?Company $company = null;
 
     public function getId(): ?int
     {
@@ -174,6 +179,18 @@ class Establishment
     public function setLong(string $long): static
     {
         $this->long = $long;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): static
+    {
+        $this->company = $company;
 
         return $this;
     }

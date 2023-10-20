@@ -7,6 +7,8 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Repository\CompanyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -64,6 +66,14 @@ class Company
     #[Groups(['read-company'])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $logoPath = null;
+
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Establishment::class, orphanRemoval: true)]
+    private Collection $establishments;
+
+    public function __construct()
+    {
+        $this->establishments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -138,6 +148,36 @@ class Company
     public function setLogoPath(?string $logoPath): static
     {
         $this->logoPath = $logoPath;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Establishment>
+     */
+    public function getEstablishments(): Collection
+    {
+        return $this->establishments;
+    }
+
+    public function addEstablishment(Establishment $establishment): static
+    {
+        if (!$this->establishments->contains($establishment)) {
+            $this->establishments->add($establishment);
+            $establishment->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEstablishment(Establishment $establishment): static
+    {
+        if ($this->establishments->removeElement($establishment)) {
+            // set the owning side to null (unless already changed)
+            if ($establishment->getCompany() === $this) {
+                $establishment->setCompany(null);
+            }
+        }
 
         return $this;
     }
