@@ -8,45 +8,70 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Delete;
+use App\Controller\Service\ValidateServiceController;
 use App\Repository\ServiceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
+#[UniqueEntity(['name'])]
 #[ApiResource(
     operations: [
-        new GetCollection(),
+        new GetCollection(normalizationContext: ['groups' => ['read-service-all']]),
         new Get(),
-        new Post(),
-        new Patch(),
-        new Delete(),
+        new Post(name: 'creation', security: 'is_granted("ROLE_PRESTA")'),
+        new Post(
+            name: 'validation',
+            uriTemplate: '/services/{id}/validate',
+            security: 'is_granted("ROLE_ADMIN")',
+            controller: ValidateServiceController::class,
+            normalizationContext: ['groups' => ['admin-read-service', 'read-service']],
+            denormalizationContext: ['groups' => []],
+        ),
+        new Patch(name: 'edition-presta', security: 'is_granted("ROLE_PRESTA")'),
+        new Patch(name: 'edition-admin', security: 'is_granted("ROLE_ADMIN")'),
+        new Delete(security: 'is_granted("ROLE_ADMIN")'),
     ],
+    denormalizationContext: ['groups' => ['create-service']],
+    normalizationContext: ['groups' => ['read-service']],
 )]
 class Service
 {
+    #[Groups(['read-service', 'read-service-all'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[Groups(['create-service', 'read-service', 'read-service-all'])]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    #[ORM\Column(length: 50, unique: true)]
     private ?string $name = null;
-
+    
+    #[Groups(['create-service', 'read-service'])]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
-
+    
+    #[Groups(['create-service', 'read-service'])]
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $icon = null;
-
+    
+    #[Groups(['admin-read-service'])]
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $validatedAt = null;
 
+    #[Groups('admin-read-service')]
     #[ORM\ManyToOne(inversedBy: 'authoredServices')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
+    #[Groups(['admin-read-service'])]
     #[ORM\ManyToOne(inversedBy: 'validatedServices')]
     private ?User $validatedBy = null;
 

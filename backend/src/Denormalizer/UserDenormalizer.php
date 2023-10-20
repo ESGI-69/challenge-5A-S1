@@ -40,6 +40,7 @@ class UserDenormalizer implements DenormalizerInterface
         $hashedPassword = $this->hasher->hashPassword($user, $plainPassword);
         $user->setPassword($hashedPassword);
         $user->eraseCredentials();
+        $user->setRoles(['ROLE_USER']);
 
         return $user;
     }
