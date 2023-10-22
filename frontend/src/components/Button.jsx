@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import styles from '../assets/scss/button.module.scss';
 
 export default function Button({
   title = 'Title',
@@ -10,31 +11,17 @@ export default function Button({
   ...others
 }) {
   title = children ?? title;
-  let buttonClasses = '';
 
-  switch (variant) {
-    case 'primary':
-      buttonClasses = 'button--primary';
-      break;
-    case 'success':
-      buttonClasses = 'button--success';
-      break;
-    case 'danger':
-      buttonClasses = 'button--danger';
-      break;
-    case 'warning':
-      buttonClasses = 'button--warning';
-      break;
-  }
-
-  let customStyle = {
-
+  const variantClasses = {
+    primary: 'button--primary',
+    success: 'button--success',
+    danger: 'button--danger',
+    warning: 'button--warning',
   };
-
-  Object.assign(customStyle, style);
+  const buttonClass = styles[variantClasses[variant]];
 
   return (
-    <Component className={buttonClasses} style={customStyle} onClick={onClick} {...others}>
+    <Component className={buttonClass} style={style} onClick={onClick} {...others}>
       {title}
     </Component>
   );
