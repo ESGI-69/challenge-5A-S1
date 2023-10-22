@@ -82,3 +82,25 @@ jobs:
           context: "./frontend"
           push: true
           tags: ${{ env.DOCKERHUB_REPO }}:latest, ${{ env.DOCKERHUB_REPO }}:${{ github.sha }}
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    name: Deploy on VPS (frontend)
+    needs: 
+      - publish_image
+    environment:
+      name: production
+      url: ${{ vars.URL }}
+    concurrency: deploy
+    steps:
+      - uses: actions/checkout@v3
+      - name: Redeploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          script: |
+            kubectl set image deployment/frontend-deployment front=${{ env.DOCKERHUB_REPO }}:${{ github.sha }} -n challenge-5a-s1
+            kubectl wait --for=condition=available deployment/frontend-deployment -n challenge-5a-s1 --timeout=300s
