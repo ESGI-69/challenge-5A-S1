@@ -34,7 +34,7 @@ function App() {
         </button>
         <Input id='Test' placeholder="Caca" onChange={handleInputChange} />
         <p>Input value : {inputValue} </p>
-        <Button variant="danger">
+        <Button variant="danger" onClick={() => alert('Danger!')}>
           {t('buttontest')}
         </Button>
         <p>

@@ -25,11 +25,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-<<<<<<< HEAD
     "sass": "^1.69.3",
-=======
-    "sass": "^1.69.4",
->>>>>>> 3e23bf7 (feat(button_component): use sass style instead of app.jsx, use object instead of switch for variant)
     "vite": "^4.4.5"
   }
 }

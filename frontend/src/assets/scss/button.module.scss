@@ -1,5 +1,5 @@
 .button{
-
+  
   &--primary { 
     background-color: white;
     color: #000;
@@ -8,16 +8,19 @@
   &--success {
     background-color: green;
     color: white;
+    border-radius: 15px;
   }
 
   &--danger {
       background-color: red;
       color: white;
+      border-radius: 15px;
   }
 
   &--warning {
       background-color: rgb(255, 174, 0);
       color: black;
+      border-radius: 15px;
   }
 
 }
