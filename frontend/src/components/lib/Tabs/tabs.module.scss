@@ -1,0 +1,13 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+  width: fit-content;
+
+  &__item {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: var(--spacing-m);
+  }
+}

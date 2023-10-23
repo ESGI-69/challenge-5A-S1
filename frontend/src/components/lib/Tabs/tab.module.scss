@@ -6,9 +6,10 @@
   font-weight: 600;
   color: var(--text-color-regular);
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   gap: var(--spacing-s);
+  grid-row: 1;
 
   &:hover {
     &:not(.tab--active) {

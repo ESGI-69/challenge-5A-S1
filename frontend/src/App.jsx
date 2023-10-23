@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
+import reactLogo from '@/assets/react.svg';
 import viteLogo from '/vite.svg';
-import './App.css';
-import Tabs from './components/Tabs';
+import '@/App.css';
+import { Tabs, Tab, TabContent, TabsList } from '@/components/lib/Tabs';
 import { useTranslation } from 'react-i18next';
-import LanguageSwticher from './components/LanguageSwitcher';
-import Input from './components/lib/Input';
+import LanguageSwticher from '@/components/LanguageSwitcher';
+import Input from '@/components/lib/Input';
 
 function App() {
   const { t } = useTranslation('main');
@@ -14,7 +14,6 @@ function App() {
   const handleInputChange = (value) => {
     setInputValue(value);
   };
-  const [ currentTab, setCurrentTab ] = useState('tab1');
 
   return (
     <>
@@ -42,26 +41,28 @@ function App() {
         {t('doc')}
       </p>
       {/* Tabs */}
-      <Tabs onChange={setCurrentTab} tabs={[
-        { value: 'tab1', label: 'Premiere tab' },
-        { value: 'tab2', label: 'Deuxieme tab', count: 2 },
-        { value: 'tab3', label: 'Troisième tab' },
-      ]} />
-      {currentTab === 'tab1' && (
-        <p>
-          Tab 1 content
-        </p>
-      )}
-      {currentTab === 'tab2' && (
-        <p>
-          Tab 2 content
-        </p>
-      )}
-      {currentTab === 'tab3' && (
-        <p>
-          Tab 3 content
-        </p>
-      )}
+      <Tabs defaultTab="tab1">
+        <TabsList>
+          <Tab value="tab1">Premiere Tab</Tab>
+          <Tab value="tab2" count={2}>Deuxieme Tab</Tab>
+          <Tab value="tab3">Troisième Tab</Tab>
+        </TabsList>
+        <TabContent value="tab1">
+          <p>
+            Tab 1 content
+          </p>
+        </TabContent>
+        <TabContent value="tab2">
+          <p>
+            Tab 2 content
+          </p>
+        </TabContent>
+        <TabContent value="tab3">
+          <p>
+            Tab 3 content
+          </p>
+        </TabContent>
+      </Tabs >
     </>
   );
 }
