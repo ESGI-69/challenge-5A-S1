@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
+import reactLogo from '@/assets/react.svg';
 import viteLogo from '/vite.svg';
-import './App.css';
+import '@/App.css';
+import { Tabs, Tab, TabContent, TabsList } from '@/components/lib/Tabs';
 import { useTranslation } from 'react-i18next';
-import LanguageSwticher from './components/LanguageSwitcher';
-import Input from './components/lib/Input';
+import LanguageSwticher from '@/components/LanguageSwitcher';
+import Input from '@/components/lib/Input';
 
 function App() {
   const { t } = useTranslation('main');
@@ -39,6 +40,29 @@ function App() {
       <p className="read-the-docs">
         {t('doc')}
       </p>
+      {/* Tabs */}
+      <Tabs defaultTab="tab1">
+        <TabsList>
+          <Tab value="tab1">Premiere Tab</Tab>
+          <Tab value="tab2" count={2}>Deuxieme Tab</Tab>
+          <Tab value="tab3">Troisième Tab</Tab>
+        </TabsList>
+        <TabContent value="tab1">
+          <p>
+            Tab 1 content
+          </p>
+        </TabContent>
+        <TabContent value="tab2">
+          <p>
+            Tab 2 content
+          </p>
+        </TabContent>
+        <TabContent value="tab3">
+          <p>
+            Tab 3 content
+          </p>
+        </TabContent>
+      </Tabs >
     </>
   );
 }

@@ -60,6 +60,7 @@ module.exports = {
     "keyword-spacing": [ "error", { "before": true, "after": true } ],
     "comma-spacing": [ "error", { "before": false, "after": true } ],
     "no-empty": [ "error", { "allowEmptyCatch": true } ],
-    "prefer-template": "error"
+    "prefer-template": "error",
+    "no-multiple-empty-lines": [ "error", { "max": 1 } ],
   },
 }
