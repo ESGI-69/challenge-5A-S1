@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Delete;
 use App\Controller\Service\ValidateServiceController;
+use App\Controller\Service\CreateServiceController;
+use App\Controller\Service\GetValidatedServicesController;
 use App\Repository\ServiceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -22,9 +25,22 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity(['name'])]
 #[ApiResource(
     operations: [
-        new GetCollection(normalizationContext: ['groups' => ['read-service-all']]),
-        new Get(),
-        new Post(name: 'creation', security: 'is_granted("ROLE_PRESTA")'),
+        new GetCollection(
+            normalizationContext: ['groups' => ['read-service-all']],
+            controller: GetValidatedServicesController::class,
+            paginationEnabled: false,
+            description: 'Get all validated services',
+        ),
+        new GetCollection(
+            normalizationContext: ['groups' => ['read-service']],
+            uriTemplate: '/services-all',
+            security: 'is_granted("ROLE_ADMIN")',
+        ),
+        new Post(
+            name: 'creation',
+            security: 'is_granted("ROLE_PRESTA")',
+            controller: CreateServiceController::class
+        ),
         new Post(
             name: 'validation',
             uriTemplate: '/services/{id}/validate',
@@ -33,7 +49,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
             normalizationContext: ['groups' => ['admin-read-service', 'read-service']],
             denormalizationContext: ['groups' => []],
         ),
-        new Patch(name: 'edition-presta', security: 'is_granted("ROLE_PRESTA")'),
         new Patch(name: 'edition-admin', security: 'is_granted("ROLE_ADMIN")'),
         new Delete(security: 'is_granted("ROLE_ADMIN")'),
     ],

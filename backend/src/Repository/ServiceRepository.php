@@ -21,6 +21,15 @@ class ServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, Service::class);
     }
 
+    public function findValidated()
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.validatedAt IS NOT NULL')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Service[] Returns an array of Service objects
 //     */
