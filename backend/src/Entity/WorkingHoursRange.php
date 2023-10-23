@@ -13,13 +13,15 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+// WAITING FOR THE EMPLOYE ENTITY 
+
 #[ORM\Entity(repositoryClass: WorkingHoursRangeRepository::class)]
 #[ApiResource(
     operations: [
-        new Get(),
-        new Post(),
-        new Patch(),
-        new Delete(),
+        new Get(security: 'is_granted("ROLE_PRESTA")'),
+        new Post(security: 'is_granted("ROLE_PRESTA")'),
+        new Patch(security: 'is_granted("ROLE_PRESTA")'),
+        new Delete(security: 'is_granted("ROLE_PRESTA")'),
     ],
 )]
 class WorkingHoursRange
