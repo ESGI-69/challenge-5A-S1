@@ -96,7 +96,7 @@ function TabsList({
   children,
 }) {
   return (
-    <div className={tabsStyles['tabs__item']}>
+    <div className={tabsStyles['tabs__items']}>
       {children}
     </div>
   );
