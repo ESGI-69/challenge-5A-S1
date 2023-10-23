@@ -58,7 +58,7 @@ class Service
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
     
-    #[Groups(['create-service', 'read-service'])]
+    #[Groups(['create-service', 'read-service', 'read-service-all'])]
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $icon = null;
     
