@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
-        new Get(normalizationContext: ['groups' => ['read-user']]),
+        new Get(normalizationContext: ['groups' => ['read-user', 'read-company']]),
 //        new Get(uriTemplate: '/users/{id}/infos', normalizationContext: ['groups' => ['read-user', 'read-user-as-admin']], security: 'is_granted("ROLE_ADMIN")'),
         new Post(denormalizationContext: ['groups' => ['create-user']]),
         new Patch(denormalizationContext: ['groups' => ['update-user']]),
@@ -68,9 +68,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['create-user', 'update-user'])]
     private ?string $lastname = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
     #[Groups(['read-user', 'create-user', 'update-user'])]
-    private ?Company $companyId = null;
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Company $company = null;
 
     #[ORM\Column(length: 12)]
     #[Groups(['create-user', 'update-user'])]
@@ -252,18 +252,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCompanyId(): ?Company
-    {
-        return $this->companyId;
-    }
-
-    public function setCompanyId(?Company $companyId): static
-    {
-        $this->companyId = $companyId;
-
-        return $this;
-    }
-
     public function getPhonenumber(): ?string
     {
         return $this->phonenumber;
@@ -272,6 +260,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhonenumber(string $phonenumber): static
     {
         $this->phonenumber = $phonenumber;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): static
+    {
+        $this->company = $company;
 
         return $this;
     }
