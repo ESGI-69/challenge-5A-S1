@@ -20,3 +20,9 @@
 
   --border-radius-m: 0.5rem;
 }
+
+body {
+  margin: 0;
+  font-size: var(--font-size-regular);
+  font-family: sans-serif;
+}
