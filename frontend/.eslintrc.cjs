@@ -62,5 +62,6 @@ module.exports = {
     "no-empty": [ "error", { "allowEmptyCatch": true } ],
     "prefer-template": "error",
     "no-multiple-empty-lines": [ "error", { "max": 1 } ],
+    "sort-imports": [ "error", { "ignoreDeclarationSort": true } ],
   },
 }
