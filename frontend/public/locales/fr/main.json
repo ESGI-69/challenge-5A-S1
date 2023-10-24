@@ -1,3 +1,5 @@
 {
-  "doc": "Lis la documentation !"
+  "doc": "Lis la documentation !",
+  "login": "Se connecter",
+  "register": "Créer un compte"
 }

@@ -1,15 +1,12 @@
 import PropTypes from 'prop-types';
-import LanguageSwticher from '@/components/LanguageSwitcher';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import Header from '@/components/Header';
 
 export default function WebsiteLayout() {
   return (
     <>
-      <header>
-        <a href="/">Platiny</a>
-        <LanguageSwticher />
-      </header>
+      <Header />
       <div>
         <Suspense fallback="Loading...">
           <Outlet />
