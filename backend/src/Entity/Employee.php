@@ -10,20 +10,28 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Repository\EmployeeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+// @todo : Adapt this entity to block other Company to get others Company data
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
 #[ApiResource(
     operations: [
-        new GetCollection(normalizationContext: ['groups' => ['employee:list']]),
-        new Get(normalizationContext: ['groups' => ['employee:item']]),
+        new GetCollection(
+            security: 'is_granted("ROLE_PRESTA")',
+            normalizationContext: ['groups' => ['employee-getall']]
+        ),
+        new Get(
+            security: 'is_granted("ROLE_PRESTA")',
+            normalizationContext: ['groups' => ['employee-get']]),
         new Post(
-            normalizationContext: ['groups' => ['employee:write']],
-            denormalizationContext: ['groups' => ['employee:write']],
+            security: 'is_granted("ROLE_PRESTA")',
+            normalizationContext: ['groups' => ['employee-post']],
+            denormalizationContext: ['groups' => ['employee-post']],
         ),
         new Patch(
-            name: 'patch_employee_presta',
-            normalizationContext: ['groups' => ['employee:write']],
-            denormalizationContext: ['groups' => ['employee:write']],
+            security: 'is_granted("ROLE_PRESTA")',
+            normalizationContext: ['groups' => ['employee-patch']],
+            denormalizationContext: ['groups' => ['employee-patch']],
         ),
         new Delete()
     ]
@@ -33,22 +41,29 @@ class Employee
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['employee-get', 'employee-getall'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'employees')]
+    // Also adapt this so that only the company that created the employee can get it (and admins ofc)
+    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Company $companyId = null;
 
     #[ORM\ManyToOne(inversedBy: 'employees')]
+    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Establishment $preferedEstablishment = null;
 
+    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall'])]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
+    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall'])]
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
+    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall'])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
 
