@@ -28,7 +28,7 @@ Button.propTypes = {
     'success',
     'danger',
     'warning',
-  ]).isRequired,
+  ]),
   style: PropTypes.object,
 };
 
