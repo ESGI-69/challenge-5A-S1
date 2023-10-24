@@ -58,9 +58,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['create-user', 'update-user'])]
     private string $plainPassword = '';
 
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Service::class)]
+    private Collection $authoredServices;
+
+    #[ORM\OneToMany(mappedBy: 'validatedBy', targetEntity: Service::class)]
+    private Collection $validatedServices;
+
     public function __construct()
     {
-
+        $this->authoredServices = new ArrayCollection();
+        $this->validatedServices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +116,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function isAdmin(): bool
+    {
+        return in_array('ROLE_ADMIN', $this->getRoles());
+    }
+
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -154,6 +166,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->plainPassword = $plainPassword;
         $this->password = $plainPassword;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getAuthoredServices(): Collection
+    {
+        return $this->authoredServices;
+    }
+
+    public function addAuthoredService(Service $authoredService): static
+    {
+        if (!$this->authoredServices->contains($authoredService)) {
+            $this->authoredServices->add($authoredService);
+            $authoredService->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuthoredService(Service $authoredService): static
+    {
+        if ($this->authoredServices->removeElement($authoredService)) {
+            // set the owning side to null (unless already changed)
+            if ($authoredService->getAuthor() === $this) {
+                $authoredService->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getValidatedServices(): Collection
+    {
+        return $this->validatedServices;
+    }
+
+    public function addValidatedService(Service $validatedService): static
+    {
+        if (!$this->validatedServices->contains($validatedService)) {
+            $this->validatedServices->add($validatedService);
+            $validatedService->setValidatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeValidatedService(Service $validatedService): static
+    {
+        if ($this->validatedServices->removeElement($validatedService)) {
+            // set the owning side to null (unless already changed)
+            if ($validatedService->getValidatedBy() === $this) {
+                $validatedService->setValidatedBy(null);
+            }
+        }
+
+        return $this;
     }
 
 
