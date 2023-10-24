@@ -1,0 +1,16 @@
+@import "open-props/style";
+
+:root {
+  --color-text-regular: var(--gray-9);
+  --color-text-light: var(--gray-4);
+
+  --color-white: var(--gray-0);
+  --color-hover: var(--gray-1);
+  --color-dark: var(--gray-12);
+
+  --color-font-primary: var(--gray-9);
+  --color-font-secondary: var(--gray-8);
+  --color-font-placeholder: var(--gray-6);
+  --color-font-white: var(--gray-0);
+
+}
