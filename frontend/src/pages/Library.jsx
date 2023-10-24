@@ -8,7 +8,17 @@ export default function Library() {
       <h1>Library</h1>
 
       <h2>Button</h2>
+      <h3>Primary</h3>
       <Button variant="primary">Button</Button>
+
+      <h3>Success</h3>
+      <Button variant="success">Button</Button>
+
+      <h3>Danger</h3>
+      <Button variant="danger">Button</Button>
+
+      <h3>Warning</h3>
+      <Button variant="warning">Button</Button>
 
       <h2>Input</h2>
       <Input placeholder="Placeholder" />
