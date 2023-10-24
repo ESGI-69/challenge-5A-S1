@@ -6,7 +6,7 @@ import { Tabs, Tab, TabContent, TabsList } from '@/components/lib/Tabs';
 import { useTranslation } from 'react-i18next';
 import LanguageSwticher from './components/LanguageSwitcher';
 import Input from './components/lib/Input';
-import Button from './components/lib/Button/Index';
+import Button from './components/lib/Button';
 
 function App() {
   const { t } = useTranslation('main');
@@ -34,7 +34,7 @@ function App() {
         </button>
         <Input id='Test' placeholder="Caca" onChange={handleInputChange} />
         <p>Input value : {inputValue} </p>
-        <Button variant="primary" onClick={() => alert('Danger!')} href="">
+        <Button variant="warning" onClick={() => alert('Danger!')} href="">
           {t('buttontest')}
         </Button>
         <p>

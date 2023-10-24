@@ -3,7 +3,7 @@ import styles from './Button.module.scss';
 import React from 'react';
 
 const Button = React.forwardRef(function Button(
-  { children, href, variant = 'primary', ...others },
+  { children, href, variant = 'primary', ...delegated },
   ref,
 ) {
   const variantClasses = {
@@ -14,7 +14,7 @@ const Button = React.forwardRef(function Button(
   };
   const Element = href ? 'a' : 'button';
   return (
-    <Element ref={ref} href={href} className={styles[variantClasses[variant]]} {...others}>
+    <Element ref={ref} href={href} className={styles[variantClasses[variant]]} {...delegated}>
       {children}
     </Element>
   );
