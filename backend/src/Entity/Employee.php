@@ -33,7 +33,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
             normalizationContext: ['groups' => ['employee-patch']],
             denormalizationContext: ['groups' => ['employee-patch']],
         ),
-        new Delete()
+        new Delete(
+            security: 'is_granted("ROLE_PRESTA")',
+            normalizationContext: ['groups' => ['employee-get']]
+        )
     ]
 )]
 class Employee
