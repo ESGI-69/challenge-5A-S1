@@ -1,0 +1,31 @@
+.button{
+  
+  &--primary { 
+    background-color: white;
+    color: #000;
+    padding:7px;
+    border-radius: 10px;
+  }
+
+  &--success {
+    background-color: green;
+    color: white;
+    padding:10px;
+    border-radius: 10px;
+  }
+
+  &--danger {
+      background-color: red;
+      color: white;
+      border-radius: 10px;
+      padding:7px;
+  }
+
+  &--warning {
+      background-color: rgb(255, 174, 0);
+      color: black;
+      border-radius: 10px;
+      padding:7px;
+  }
+
+}
