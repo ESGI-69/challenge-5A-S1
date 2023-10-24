@@ -1,7 +1,7 @@
 .tabs {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-m);
+  gap: var(--size-2);
   width: 100%;
 
   &__items {
@@ -9,6 +9,6 @@
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
     width: fit-content;
-    gap: var(--spacing-m);
+    gap: var(--size-2);
   }
 }
