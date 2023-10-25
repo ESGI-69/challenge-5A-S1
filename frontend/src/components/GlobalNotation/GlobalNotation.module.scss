@@ -1,0 +1,45 @@
+.GlobalNotation {
+  border-radius: var(--radius-2);
+  border: var(--border-size-1) solid var(--color-border);
+  display: flex;
+
+  &TotalAverage {
+    border-top-left-radius: var(--radius-2);
+    border-bottom-left-radius: var(--radius-2);
+    background: var(--color-dark);
+    font-size: var(--font-size-4);
+    font-weight: var(--font-weight-5);
+    color: var(--color-text-white);
+    padding: 0 var(--size-5);
+    display: flex;
+    align-items: center;
+  }
+
+  &Detail {
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: var(--radius-2);
+    border-bottom-right-radius: var(--radius-2);
+    background: var(--color-hover);
+    flex-grow: 1;
+    padding: var(--size-3);
+    gap: var(--size-2);
+    font-size: var(--font-size-01);
+
+    &Item {
+      gap: var(--size-2);
+      font-weight: var(--font-weight-3);
+      color: var(--color-text-light);
+
+      &Average {
+        color: var(--color-text-regular);
+        font-weight: var(--font-weight-5);
+        margin-left: var(--size-2);
+      }
+    }
+  }
+
+  &Count {
+    margin-top: var(--size-1);
+  }
+}
