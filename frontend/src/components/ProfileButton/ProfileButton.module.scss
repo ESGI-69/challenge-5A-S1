@@ -1,0 +1,13 @@
+.profilebutton {
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &Img {
+        width: var(--size-7);
+        height: var(--size-7);
+        border-radius: var(--radius-round);
+    }
+}

@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './Sidemenu.module.scss';
-import { Expand, Gear, Notif, Shop, Stats, Users } from '@/components/lib/Icons';
+import { Expand, Gear, Shop, Stats, Users } from '@/components/lib/Icons';
+import ProfileButton from '@/components/ProfileButton';
+import NotificationsButton from '../../../../components/NotificationsButton';
 
 function SidemenuLink({ children, to, svgJsx }) {
   return (
@@ -43,15 +45,11 @@ export default function Sidemenu({ ...delegated }) {
         </nav>
         <div className={styles.usermenu}>
           <div className={styles.usermenuList}>
-            <button className={styles.usermenuNotif}>
-              <Notif />
-            </button>
-            <NavLink to="/settings" className={styles.usermenuSettings}>
+            <NotificationsButton />
+            <NavLink to="/settings" className={styles.usermenuItem}>
               <Gear />
             </NavLink>
-            <button className={styles.usermenuProfile}>
-              <img src="https://avatars.githubusercontent.com/u/12610160?v=4" alt="avatar" />
-            </button>
+            <ProfileButton />
           </div>
         </div>
       </div>

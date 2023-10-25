@@ -1,0 +1,10 @@
+.notificationsbutton {
+    all: unset;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: var(--font-weight-5);
+    gap: var(--size-2);
+    line-height: var(--size-3);
+    cursor: pointer;
+}
