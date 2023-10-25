@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\GetCollection;
+use App\Controller\Company\UpdateCompanyController;
 use App\Repository\CompanyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -35,7 +36,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         ),
         new Patch(
             security: 'is_granted("ROLE_USER")',
-            denormalizationContext: ['groups' => ['company-update']], inputFormats: ['multipart' => ['multipart/form-data']]
+            denormalizationContext: ['groups' => ['company-update']], inputFormats: ['multipart' => ['multipart/form-data']],
+            controller: UpdateCompanyController::class
         ),
         new Delete(
             security: 'is_granted("ROLE_ADMIN")'
