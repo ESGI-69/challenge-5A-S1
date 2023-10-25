@@ -15,6 +15,16 @@
     align-items: center;
     width: 32px;
     height: 32px;
+
+    svg {
+        width: 32px;
+        height: 32px;
+
+        path {
+            stroke: var(--color-text-regular);
+            stroke-width: 1.5;
+        }
+    }
 }
 
 .nav {
@@ -42,6 +52,20 @@
                 text-decoration: none;
                 font-weight: 500;
 
+                &Svg svg {
+                    width: 32px;
+                    height: 32px;
+
+                    path {
+                        fill: var(--color-text-regular);
+                    }
+
+                }
+
+                &Text {
+                    display: inline;
+                }
+
                 &Active {
                     background: var(--color-primary);
                 }
@@ -57,7 +81,9 @@
     align-items: flex-start;
     gap: 8px;
 
-    &Notif, &Settings, &Profile {
+    &Notif,
+    &Settings,
+    &Profile {
         all: unset;
         display: flex;
         justify-content: flex-start;
@@ -68,10 +94,11 @@
     }
 
     &Profile {
-        border: var( --border-light-gray);
+        border: var(--border-light-gray);
         border-radius: var(--border-radius-m);
         padding: 4px 8px;
         cursor: pointer;
+
         img {
             width: 32px;
             height: 32px;

@@ -7,6 +7,7 @@ export default function Dashboard() {
       <BackofficeHeader actionsComponent={<Button>Lorem le ipsum</Button>}>
         <h1>Tableau de bord</h1>
       </BackofficeHeader>
+      <p>Se tableau le bord</p>
     </>
   );
 }
