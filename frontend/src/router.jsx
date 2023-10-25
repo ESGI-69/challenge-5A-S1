@@ -15,12 +15,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-        errorElement: <ErrorPage />,
       },
       {
         path: '/library',
         element: <Library />,
-        errorElement: <ErrorPage />,
+      },
+      {
+        path: '*',
+        element: <h1>404</h1>,
       },
     ],
   },
@@ -32,13 +34,12 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
-        errorElement: <ErrorPage />,
+      },
+      {
+        path: '*',
+        element: <h1>404</h1>,
       },
     ],
-  },
-  {
-    path: '*',
-    element: <ErrorPage />,
   },
 ]);
 
