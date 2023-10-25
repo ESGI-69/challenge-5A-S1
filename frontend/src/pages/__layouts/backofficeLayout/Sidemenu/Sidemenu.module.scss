@@ -21,27 +21,6 @@
       }
     }
   }
-
-  .usermenu {
-    align-items: center;
-
-    &Profile {
-      padding-left: 0;
-      padding-right: 0;
-      border-color: transparent;
-      width: auto;
-    }
-    
-    &Notif, &Settings {
-      padding-left: 0;
-    }
-
-    &NotifText,
-    &SettingsText,
-    &ProfileText {
-      display: none;
-    }
-  }
 }
 
 .expand {
@@ -120,11 +99,15 @@
 .usermenu {
   grid-area: usermenu;
   align-self: flex-end;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--size-3);
+  justify-self: flex-start;
+
+  &List {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--size-3);
+  }
 
   &Notif,
   &Settings,
@@ -132,19 +115,15 @@
     all: unset;
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     font-weight: var(--font-weight-5);
     gap: var(--size-2);
     line-height: var(--size-3);
     cursor: pointer;
   }
-  
+
   &Profile {
     align-items: center;
-    border: var(--border-size-1) solid var(--color-border);
-    border-radius: var(--radius-2);
-    padding: var(--size-1) var(--size-2);
-    width: 100%;
     cursor: pointer;
 
     img {

@@ -31,29 +31,28 @@ export default function Sidemenu({ ...delegated }) {
         <nav className={styles.nav}>
           <ul className={styles.navMenu}>
             <SidemenuLink to="/backoffice" svgJsx={<Stats />}>
-                Statistiques
+              Statistiques
             </SidemenuLink>
             <SidemenuLink to="/backoffice/employees" svgJsx={<Users />}>
-                Employés
+              Employés
             </SidemenuLink>
             <SidemenuLink to="/backoffice/employees" svgJsx={<Shop />}>
-                Etablissements
+              Etablissements
             </SidemenuLink>
           </ul>
         </nav>
         <div className={styles.usermenu}>
-          <button className={styles.usermenuNotif}>
-            <Notif />
-            <span className={styles.usermenuNotifText}>Notifications</span>
-          </button>
-          <NavLink to="/settings" className={styles.usermenuSettings}>
-            <Gear />
-            <span className={styles.usermenuSettingsText}>Paramètres</span>
-          </NavLink>
-          <button className={styles.usermenuProfile}>
-            <img src="https://avatars.githubusercontent.com/u/12610160?v=4" alt="avatar" />
-            <span className={styles.usermenuProfileText}>Profil</span>
-          </button>
+          <div className={styles.usermenuList}>
+            <button className={styles.usermenuNotif}>
+              <Notif />
+            </button>
+            <NavLink to="/settings" className={styles.usermenuSettings}>
+              <Gear />
+            </NavLink>
+            <button className={styles.usermenuProfile}>
+              <img src="https://avatars.githubusercontent.com/u/12610160?v=4" alt="avatar" />
+            </button>
+          </div>
         </div>
       </div>
     </aside>
