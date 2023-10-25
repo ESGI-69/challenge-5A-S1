@@ -7,6 +7,29 @@
     padding: 32px;
 }
 
+.shrinked {
+    align-items: center;
+    .expand {
+        margin-left: 0;
+    }
+    .navMenuItem {
+        &LinkText {
+            display: none;
+        }
+    }
+    .usermenu {
+        align-items: center;
+        &Profile {
+            padding-left: 0;
+            padding-right: 0;
+            border-color: transparent;
+        }
+        &NotifText, &SettingsText, &ProfileText {
+            display: none;
+        }
+    }
+}
+
 .expand {
     all: unset;
     cursor: pointer;
@@ -15,6 +38,7 @@
     align-items: center;
     width: 32px;
     height: 32px;
+    margin-left: 12px;
 
     svg {
         width: 32px;
@@ -52,18 +76,16 @@
                 text-decoration: none;
                 font-weight: 500;
 
-                &Svg svg {
+                &Svg {
                     width: 32px;
                     height: 32px;
-
-                    path {
-                        fill: var(--color-text-regular);
+                    svg {
+                        width: 32px;
+                        height: 32px;
+                        path {
+                            fill: var(--color-text-regular);
+                        }
                     }
-
-                }
-
-                &Text {
-                    display: inline;
                 }
 
                 &Active {
@@ -90,13 +112,14 @@
         align-items: center;
         font-weight: 500;
         gap: 8px;
+        line-height: 1rem;
         cursor: pointer;
     }
 
     &Profile {
         border: var(--border-light-gray);
         border-radius: var(--border-radius-m);
-        padding: 4px 8px;
+        padding: 4px 10px;
         cursor: pointer;
 
         img {

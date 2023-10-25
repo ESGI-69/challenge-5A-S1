@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './Sidemenu.module.scss';
@@ -20,10 +21,11 @@ SidemenuLink.propTypes = {
 };
 
 export default function Sidemenu({ ...delegated }) {
+  const [ isExpanded, setIsExpanded ] = useState(false);
   return (
     <aside {...delegated}>
-      <div className={styles.sidemenu}>
-        <button className={styles.expand}>
+      <div className={`${styles.sidemenu} ${isExpanded ? '' : styles.shrinked}`}>
+        <button className={styles.expand} onClick={() => setIsExpanded(!isExpanded)}>
           <Expand />
         </button>
         <nav className={styles.nav}>
@@ -42,15 +44,15 @@ export default function Sidemenu({ ...delegated }) {
         <div className={styles.usermenu}>
           <button className={styles.usermenuNotif}>
             <Notif />
-            <span>Notifications</span>
+            <span className={styles.usermenuNotifText}>Notifications</span>
           </button>
           <NavLink to="/settings" className={styles.usermenuSettings}>
             <Gear />
-            <span>Paramètres</span>
+            <span className={styles.usermenuSettingsText}>Paramètres</span>
           </NavLink>
           <button className={styles.usermenuProfile}>
             <img src="https://avatars.githubusercontent.com/u/12610160?v=4" alt="avatar" />
-            <span>Profil</span>
+            <span className={styles.usermenuProfileText}>Profil</span>
           </button>
         </div>
       </div>
