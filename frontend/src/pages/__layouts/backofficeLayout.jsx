@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
+import { Outlet } from 'react-router-dom';
 
-export default function BackofficeLayout({ children }) {
+export default function BackofficeLayout() {
   return (
     <>
       <aside>
@@ -22,7 +23,7 @@ export default function BackofficeLayout({ children }) {
         <h1>Backoffice</h1>
       </header>
       <main>
-        {children}
+        <Outlet />
       </main>
     </>
   );

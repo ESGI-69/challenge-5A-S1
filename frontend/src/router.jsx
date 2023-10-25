@@ -9,13 +9,27 @@ import Library from '@/pages/Library';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <WebsiteLayout><Home /></WebsiteLayout>,
+    element: <WebsiteLayout />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+        errorElement: <ErrorPage />,
+      },
+    ],
   },
   {
     path: '/backoffice',
-    element: <BackofficeLayout><Dashboard /></BackofficeLayout>,
+    element: <BackofficeLayout />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+        errorElement: <ErrorPage />,
+      },
+    ],
   },
   {
     path: '/library',
