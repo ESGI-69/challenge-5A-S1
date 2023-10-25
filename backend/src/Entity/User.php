@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
-        new Get(normalizationContext: ['groups' => ['read-user']]),
+        new Get(normalizationContext: ['groups' => ['read-user', 'read-company']]),
 //        new Get(uriTemplate: '/users/{id}/infos', normalizationContext: ['groups' => ['read-user', 'read-user-as-admin']], security: 'is_granted("ROLE_ADMIN")'),
         new Post(denormalizationContext: ['groups' => ['create-user']]),
         new Patch(denormalizationContext: ['groups' => ['update-user']]),
@@ -37,15 +37,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[Assert\Email()]
-    #[Groups(['read-user-as-admin', 'create-user'])]
+    #[Groups(['read-user', 'read-user-as-admin', 'create-user'])]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Groups(['read-user'])]
     private array $roles = [];
 
     #[Assert\NotBlank()]
-    #[Groups(['read-user', 'create-user', 'update-user', 'read-post'])]
+    #[Groups(['read-user', 'create-user', 'update-user'])]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
@@ -63,6 +64,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'validatedBy', targetEntity: Service::class)]
     private Collection $validatedServices;
+    #[ORM\Column(length: 50)]
+    #[Groups(['create-user', 'update-user'])]
+    private ?string $lastname = null;
+
+    #[Groups(['read-user', 'create-user', 'update-user'])]
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Company $company = null;
+
+    #[ORM\Column(length: 12)]
+    #[Groups(['read-user', 'create-user', 'update-user'])]
+    private ?string $phonenumber = null;
 
     public function __construct()
     {
@@ -228,5 +240,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
 
+    public function setLastname(string $lastname): static
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getPhonenumber(): ?string
+    {
+        return $this->phonenumber;
+    }
+
+    public function setPhonenumber(string $phonenumber): static
+    {
+        $this->phonenumber = $phonenumber;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): static
+    {
+        $this->company = $company;
+
+        return $this;
+    }
 }

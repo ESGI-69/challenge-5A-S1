@@ -73,9 +73,13 @@ class Company
     #[ORM\OneToMany(mappedBy: 'companyId', targetEntity: Employee::class, orphanRemoval: true)]
     private Collection $employees;
 
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: User::class, orphanRemoval: true)]
+    private Collection $users;
+
     public function __construct()
     {
         $this->establishments = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->employees = new ArrayCollection();
     }
 
@@ -170,6 +174,24 @@ class Company
             $this->establishments->add($establishment);
             $establishment->setCompany($this);
         }
+    
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setCompany($this);
+        }
 
         return $this;
     }
@@ -180,6 +202,18 @@ class Company
             // set the owning side to null (unless already changed)
             if ($establishment->getCompany() === $this) {
                 $establishment->setCompany(null);
+            }
+        }
+        
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getCompany() === $this) {
+                $user->setCompany(null);
             }
         }
 
