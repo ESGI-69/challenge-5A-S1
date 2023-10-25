@@ -1,31 +1,25 @@
 .button{
-  
+  cursor: pointer;
+  padding: var(--size-1) var(--size-2);
+  border: var(--border-size-1) solid var(--color-border-regular);
+  border-radius: var(--radius-2);
+  color: var(--color-text-white);
+
   &--primary { 
-    background-color: white;
-    color: #000;
-    padding:7px;
-    border-radius: 10px;
+    background-color: var(--color-white);
+    color: var(--color-text-regular);
   }
 
   &--success {
-    background-color: green;
-    color: white;
-    padding:10px;
-    border-radius: 10px;
+    background-color: var(--green-8);
   }
 
   &--danger {
-      background-color: red;
-      color: white;
-      border-radius: 10px;
-      padding:7px;
+    background-color: var(--red-8);
   }
 
   &--warning {
-      background-color: rgb(255, 174, 0);
-      color: black;
-      border-radius: 10px;
-      padding:7px;
+    background-color: var(--yellow-8);
   }
 
 }

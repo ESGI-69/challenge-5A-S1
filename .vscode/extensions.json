@@ -4,6 +4,8 @@
     "thenouillet.symfony-vscode",
     "phproberto.vscode-php-getters-setters",
     "bmewburn.vscode-intelephense-client",
-    "jasonnutter.vscode-codeowners"
+    "jasonnutter.vscode-codeowners",
+    "phoenisx.cssvar",
+    "dbaeumer.vscode-eslint"
   ]
 }

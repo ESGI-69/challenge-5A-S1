@@ -14,7 +14,7 @@ const Button = React.forwardRef(function Button(
   };
   const Element = href ? 'a' : 'button';
   return (
-    <Element ref={ref} href={href} className={styles[variantClasses[variant]]} {...delegated}>
+    <Element ref={ref} href={href} className={`${styles.button} ${styles[variantClasses[variant]]}`} {...delegated}>
       {children}
     </Element>
   );
@@ -28,7 +28,7 @@ Button.propTypes = {
     'success',
     'danger',
     'warning',
-  ]).isRequired,
+  ]),
   style: PropTypes.object,
 };
 

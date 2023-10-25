@@ -1,8 +1,8 @@
-import { useState, createContext, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import tabsStyles, { tabs } from '@/components/lib/Tabs/tabs.module.scss';
-import tabStyles, { tab, count as countClass } from '@/components/lib/Tabs/tab.module.scss';
+import tabStyles, { count as countClass, tab } from '@/components/lib/Tabs/tab.module.scss';
 
 const TabsContext = createContext();
 
