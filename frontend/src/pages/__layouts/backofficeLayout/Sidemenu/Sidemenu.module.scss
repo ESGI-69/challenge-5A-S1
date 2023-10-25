@@ -1,155 +1,156 @@
 .sidemenu {
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas: 
-        'expand'
-        'nav'
-        'usermenu';
-    align-items: flex-start;
-    height: 100%;
-    padding: var(--size-3);
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    'expand'
+    'nav'
+    'usermenu';
+  align-items: flex-start;
+  height: 100%;
+  padding: var(--size-3);
 }
 
 .shrinked {
+  .navMenuItem {
+
+    &Link,
+    &LinkActive {
+      &Text {
+        display: none;
+      }
+    }
+  }
+
+  .usermenu {
     align-items: center;
 
-    .expand {
-        margin-left: 0;
+    &Profile {
+      padding-left: 0;
+      padding-right: 0;
+      border-color: transparent;
+      width: auto;
+    }
+    
+    &Notif, &Settings {
+      padding-left: 0;
     }
 
-    .navMenuItem {
-
-        &Link,
-        &LinkActive {
-            &Text {
-                display: none;
-            }
-        }
+    &NotifText,
+    &SettingsText,
+    &ProfileText {
+      display: none;
     }
-
-    .usermenu {
-        align-items: center;
-
-        &Profile {
-            padding-left: 0;
-            padding-right: 0;
-            border-color: transparent;
-        }
-
-        &NotifText,
-        &SettingsText,
-        &ProfileText {
-            display: none;
-        }
-    }
+  }
 }
 
 .expand {
-    all: unset;
-    grid-area: expand;
-    align-self: flex-start;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: var(--size-7);
-    height: var(--size-7);
-    margin-left: var(--size-2);
-    cursor: pointer;
+  all: unset;
+  grid-area: expand;
+  align-self: flex-start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--size-7);
+  height: var(--size-7);
+  cursor: pointer;
 
-    svg {
-        width: var(--size-5);
-        height: var(--size-5);
+  svg {
+    width: var(--size-5);
+    height: var(--size-5);
 
-        path {
-            stroke: var(--color-text-regular);
-            stroke-width: 1.5;
-        }
+    path {
+      stroke: var(--color-text-regular);
+      stroke-width: 1.5;
     }
+  }
 }
 
 .nav {
-    grid-area: nav;
-    &Menu {
-        all: unset;
-        align-self: center;
+  grid-area: nav;
+
+  &Menu {
+    all: unset;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--size-3);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &Item {
+      width: 100%;
+
+      &Link,
+      &LinkActive {
         display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        gap: var(--size-3);
-        list-style: none;
-        padding: 0;
-        margin: 0;
+        align-items: center;
+        gap: var(--size-2);
+        padding: var(--size-2);
+        border-radius: var(--size-2);
+        color: var(--color-text-regular);
+        text-decoration: none;
+        font-weight: var(--font-weight-5);
 
-        &Item {
-            width: 100%;
+        &Svg {
+          width: var(--size-5);
+          height: var(--size-5);
 
-            &Link,
-            &LinkActive {
-                display: flex;
-                align-items: center;
-                gap: var(--size-2);
-                padding: var(--size-2);
-                border-radius: var(--size-2);
-                color: var(--color-text-regular);
-                text-decoration: none;
-                font-weight: var(--font-weight-5);
+          svg {
+            width: var(--size-5);
+            height: var(--size-5);
 
-                &Svg {
-                    width: var(--size-5);
-                    height: var(--size-5);
-
-                    svg {
-                        width: var(--size-5);
-                        height: var(--size-5);
-
-                        path {
-                            fill: var(--color-text-regular);
-                        }
-                    }
-                }
-
-                &Active {
-                    background: var(--color-primary);
-                }
+            path {
+              fill: var(--color-text-regular);
             }
+          }
         }
+
+        &Active {
+          background: var(--color-primary);
+        }
+      }
     }
+  }
 }
 
 .usermenu {
-    grid-area: usermenu;
-    align-self: flex-end;
+  grid-area: usermenu;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--size-3);
+
+  &Notif,
+  &Settings,
+  &Profile {
+    all: unset;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
+    font-weight: var(--font-weight-5);
     gap: var(--size-2);
+    line-height: var(--size-3);
+    cursor: pointer;
+  }
+  
+  &Profile {
+    align-items: center;
+    border: var(--border-size-1) solid var(--color-border);
+    border-radius: var(--radius-2);
+    padding: var(--size-1) var(--size-2);
+    width: 100%;
+    cursor: pointer;
 
-    &Notif,
-    &Settings,
-    &Profile {
-        all: unset;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        font-weight: var(--font-weight-5);
-        gap: var(--size-2);
-        line-height: var(--size-3);
-        cursor: pointer;
+    img {
+      width: var(--size-7);
+      height: var(--size-7);
+      border-radius: var(--radius-round);
     }
-
-    &Profile {
-        border: var(--border-light-gray);
-        border-radius: var(--radius-2);
-        padding: var(--size-1) var(--size-2);
-        cursor: pointer;
-
-        img {
-            width: var(--size-7);
-            height: var(--size-7);
-            border-radius: var(--radius-round);
-        }
-    }
+  }
 }
