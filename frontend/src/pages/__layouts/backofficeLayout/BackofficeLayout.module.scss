@@ -5,10 +5,13 @@
     grid-template-areas: 
         'sidemenu header'
         'sidemenu main';
+    height: 100vh;
+    max-height: 100vh;
 }
 
 .sidemenu {
     grid-area: sidemenu;
+    height: 100%;
 }
 
 .header {
@@ -17,4 +20,5 @@
 
 .main {
     grid-area: main;
+    overflow: scroll;
 }
