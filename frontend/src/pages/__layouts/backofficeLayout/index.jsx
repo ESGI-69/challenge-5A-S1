@@ -7,9 +7,6 @@ export default function BackofficeLayout() {
   return (
     <div className={styles.backoffice}>
       <Sidemenu className={styles.sidemenu}/>
-      <header className={styles.header}>
-        <h1>Backoffice</h1>
-      </header>
       <main className={styles.main}>
         <Outlet />
       </main>
