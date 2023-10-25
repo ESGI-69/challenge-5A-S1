@@ -1,0 +1,20 @@
+.backoffice {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+        'sidemenu header'
+        'sidemenu main';
+}
+
+.sidemenu {
+    grid-area: sidemenu;
+}
+
+.header {
+    grid-area: header;
+}
+
+.main {
+    grid-area: main;
+}

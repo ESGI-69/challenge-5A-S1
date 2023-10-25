@@ -1,0 +1,26 @@
+.sidemenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.nav {
+    &Menu {
+        all:unset;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        &Item {
+            &Link, &LinkActive {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+                &Active {
+                    background: var(--color-primary);
+                }
+            }
+        }
+    } 
+}
