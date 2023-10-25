@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './Sidemenu.module.scss';
-import { Expand, Stats, Users, Shop, Notif, Gear } from '@/components/lib/Icons';
+import { Expand, Gear, Notif, Shop, Stats, Users } from '@/components/lib/Icons';
 
 function SidemenuLink({ children, to, svgJsx }) {
   return (
