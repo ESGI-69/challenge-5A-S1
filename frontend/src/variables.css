@@ -3,6 +3,11 @@
 :root {
   --white: #fff;
   --black: #000;
+  
+  --color-primary: var(--yellow-5);
+  --color-danger: var(--red-7);
+  --color-warning: var(--orange-5);
+  --color-success: var(--green-6);
 
   /* Color */
   --color-primary: var(--yellow-5);

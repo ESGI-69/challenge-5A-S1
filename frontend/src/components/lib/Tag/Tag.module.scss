@@ -1,0 +1,32 @@
+@import "open-props/colors-hsl";
+
+.tag{
+    padding: var(--size-1) var(--size-2);
+    border: var(--border-size-1) solid var(--color-border-regular);
+    border-radius: var(--radius-2);
+    cursor: pointer;
+
+    &Primary {
+        background-color: hsl(var(--yellow-5-hsl) / 30%);
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+    }
+
+    &Success {
+        background-color: hsl(var(--green-6-hsl) / 30%);
+        border-color: var(--color-success);
+        color: var(--color-success);
+    }
+
+    &Danger {
+        background-color: hsl(var(--red-7-hsl) / 30%);
+        border-color: var(--color-danger);
+        color: var(--color-danger);
+    }
+
+    &Warning {
+        background-color: hsl(var(--orange-5-hsl) / 30%);
+        border-color: var(--color-warning);
+        color: var(--color-warning);
+    }
+}

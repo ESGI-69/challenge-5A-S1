@@ -1,35 +1,32 @@
 import PropTypes from 'prop-types';
-import styles from './Tag.module.css';
-import React from 'react';
+import styles from './Tag.module.scss';
 
-const Tag = React.forwardRef(function Tag(
+const Tag = function Tag(
   { children, variant = 'primary', ...delegated },
-  ref,
 ) {
   const variantClasses = {
-    primary: 'tag--primary',
-    success: 'tag--success',
-    danger: 'tag--danger',
-    warning: 'tag--warning',
+    primary: 'tagPrimary',
+    success: 'tagSuccess',
+    danger: 'tagDanger',
+    warning: 'tagWarning',
   };
 
   return (
     <span
       className={`${styles.tag} ${styles[variantClasses[variant]]}`}
-      ref={ref}
       {...delegated}
     >
       {children}
     </span>
   );
-});
+};
 
 Tag.propTypes = {
   children: PropTypes.node.isRequired,
   variant: PropTypes.oneOf([
-    'primary', 
-    'success', 
-    'danger', 
+    'primary',
+    'success',
+    'danger',
     'warning',
   ]),
   styles: PropTypes.object,

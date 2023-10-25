@@ -1,6 +1,7 @@
 import Button from '@/components/lib/Button';
 import Input from '@/components/lib/Input';
 import { Link } from 'react-router-dom';
+import Tag from '@/components/lib/Tag';
 import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
 import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/components/lib/Dropdown';
 import GlobalNotation from '@/components/Notation/GlobalNotation';
@@ -94,6 +95,15 @@ export default function Library() {
 
       <h2>Notation/Note</h2>
       <Note value={4.2} />
+      <h2>Tag</h2>
+      <h3>Primary</h3>
+      <Tag variant="primary">Primary</Tag>
+      <h3>Success</h3>
+      <Tag variant="success">Success</Tag>
+      <h3>Danger</h3>
+      <Tag variant="danger">Danger</Tag>
+      <h3>Warning</h3>
+      <Tag variant="warning">Warning</Tag>
     </main>
   );
 }
