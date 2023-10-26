@@ -24,7 +24,7 @@ SidemenuLink.propTypes = {
 };
 
 export default function Sidemenu({ ...delegated }) {
-  const { t } = useTranslation('backoffice');
+  const { t } = useTranslation('backofficeSidebar');
   const [ isExpanded, setIsExpanded ] = useState(false);
   return (
     <aside {...delegated}>
@@ -35,13 +35,13 @@ export default function Sidemenu({ ...delegated }) {
         <nav className={styles.nav}>
           <ul className={styles.navMenu}>
             <SidemenuLink to="/backoffice" svgJsx={<Stats />}>
-              {t('layout.sidemenu.stats')}
+              {t('menu.stats')}
             </SidemenuLink>
             <SidemenuLink to="/backoffice/employees" svgJsx={<Users />}>
-              {t('layout.sidemenu.employees')}
+              {t('menu.employees')}
             </SidemenuLink>
             <SidemenuLink to="/backoffice/employees" svgJsx={<Shop />}>
-              {t('layout.sidemenu.establishments')}
+              {t('menu.establishments')}
             </SidemenuLink>
           </ul>
         </nav>

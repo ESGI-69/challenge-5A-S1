@@ -1,0 +1,9 @@
+{
+  "menu": {
+    "stats": "Statistiques",
+    "employees": "Employés",
+    "establishments": "Etablissements",
+    "notifs": "Notifications",
+    "settings": "Paramètres"
+  }
+}
