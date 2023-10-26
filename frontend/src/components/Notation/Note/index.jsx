@@ -1,6 +1,7 @@
 import style from './Note.module.scss';
 import Star from '@/components/lib/Icons/Star';
 import PropTypes from 'prop-types';
+import { addDigit } from '@/utils/formater/note';
 
 function Note({
   value,
@@ -8,7 +9,7 @@ function Note({
 }) {
   return (
     <span className={style.Note} {...delegated}>
-      {value.toString().replace('.', ',')} <Star />
+      {addDigit(value)} <Star />
     </span>
   );
 }

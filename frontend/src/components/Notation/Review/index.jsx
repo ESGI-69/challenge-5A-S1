@@ -1,23 +1,37 @@
 import style from './Review.module.scss';
 import Note from '@/components/Notation/Note';
+import PropsType from 'prop-types';
+import { dayMonthYearNumber } from '@/utils/formater/date';
 
-function Review() {
+function Review({
+  authorName,
+  note,
+  date,
+  content,
+}) {
   return (
-    <div className={style.SingleNotation}>
-      <div className={style.SingleNotationHeader}>
-        <span className={style.SingleNotationHeaderAuthor}>
-          Jean
+    <div className={style.Review}>
+      <div className={style.ReviewHeader}>
+        <Note value={note} />
+        <span className={style.ReviewHeaderAuthor}>
+          - {authorName}
         </span>
-        <Note value={4} />
       </div>
-      <div className={style.SingleNotationContent}>
-        Blibla blou
+      <div className={style.ReviewContent}>
+        {content}
       </div>
-      <span className={style.SingleNotationDate}>
-        12/12/2021
+      <span className={style.ReviewDate}>
+        {dayMonthYearNumber(date)}
       </span>
     </div>
   );
 }
+
+Review.propTypes = {
+  authorName: PropsType.string.isRequired,
+  date: PropsType.string.isRequired,
+  content: PropsType.string,
+  note: PropsType.number.isRequired,
+};
 
 export default Review;

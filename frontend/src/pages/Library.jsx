@@ -85,7 +85,12 @@ export default function Library() {
       <GlobalNotation />
 
       <h2>Notation/Review</h2>
-      <Review />
+      <Review
+        authorName="Jean"
+        content="Monique et son équipe sont tres avenantes, très à l'écoute. Très fortes de conseils. Bravo à Monique qui pilote son bateau."
+        date={new Date().toLocaleDateString()}
+        note={5}
+      />
 
       <h2>Notation/Note</h2>
       <Note value={4.2} />
