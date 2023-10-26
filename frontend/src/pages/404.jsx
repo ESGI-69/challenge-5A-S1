@@ -5,8 +5,8 @@ export default function ErrorPage() {
   return (
     <main>
       <h1>An error occured</h1>
-      <h2>{error.statusText}</h2>
-      <p>{error.message}</p>
+      <h2>{error?.statusText || 'error'}</h2>
+      <p>{error?.message || 'message'}</p>
     </main>
   );
 }

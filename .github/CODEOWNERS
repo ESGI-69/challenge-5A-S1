@@ -1,3 +1,5 @@
 *.yaml @mrpinkcat
 *.yml @mrpinkcat
 *.jsx @SebGrd
+*.scss @mrpinkcat
+*.css @mrpinkcat

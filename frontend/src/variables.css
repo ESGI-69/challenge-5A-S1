@@ -10,15 +10,18 @@
   /* Text */
   --color-text-regular: var(--gray-9);
   --color-text-secondary: var(--gray-8);
-  --color-text-light: var(--gray-4);
+  --color-text-light: var(--gray-7);
   --color-text-white: var(--white);
 
   /* Background */
   --color-white: var(--gray-0);
   --color-hover: var(--gray-1);
-  --color-dark: var(--gray-12);
+  --color-dark: var(--gray-10);
 
   /* Border */
   --color-border-regular: var(--color-text-regular);
-  --color-border: var(--gray-2);
+  --color-border: var(--gray-4);
+
+  /* Font size */
+  --font-size-01: .90rem;
 }

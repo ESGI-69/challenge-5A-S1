@@ -1,0 +1,23 @@
+.Review {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2);
+  
+  &Header {
+    display: flex;
+    gap: var(--size-2);
+
+    &Author {
+      color: var(--color-text-secondary);
+      font-weight: var(--font-weight-3);
+    }
+  }
+  &Content {
+    padding-left: var(--size-2);
+  }
+  &Date {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-01);
+    font-weight: var(--font-weight-3);
+  }
+}

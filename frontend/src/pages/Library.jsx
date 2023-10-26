@@ -2,7 +2,10 @@ import Button from '@/components/lib/Button';
 import Input from '@/components/lib/Input';
 import { Link } from 'react-router-dom';
 import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
-import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '../components/lib/Dropdown';
+import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/components/lib/Dropdown';
+import GlobalNotation from '@/components/Notation/GlobalNotation';
+import Review from '@/components/Notation/Review';
+import Note from '@/components/Notation/Note';
 
 export default function Library() {
   return (
@@ -77,6 +80,20 @@ export default function Library() {
           <DropdownItem>Item 3</DropdownItem>
         </DropdownList>
       </Dropdown>
+
+      <h2>Notation/GlobalNotation</h2>
+      <GlobalNotation />
+
+      <h2>Notation/Review</h2>
+      <Review
+        authorName="Jean"
+        content="Monique et son équipe sont tres avenantes, très à l'écoute. Très fortes de conseils. Bravo à Monique qui pilote son bateau."
+        date={new Date().toLocaleDateString()}
+        note={5}
+      />
+
+      <h2>Notation/Note</h2>
+      <Note value={4.2} />
     </main>
   );
 }
