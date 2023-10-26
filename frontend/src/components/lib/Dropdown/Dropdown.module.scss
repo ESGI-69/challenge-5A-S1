@@ -1,11 +1,24 @@
 .dropdown {
   position: relative;
   &Button {
-
   }
   &List {
     position: absolute;
-    &Item { 
+    top: 100%;
+    left: 0;
+    z-index: var(--layer-5);
+    padding: var(--size-2) 0;
+    background: var(--white);
+    box-shadow: var(--shadow-2);
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--size-2);
+    cursor: pointer;
+    &Item {
+      padding: var(--size-2);
+      &:hover {
+        background: var(--gray-1);
+      }
     }
   }
 }

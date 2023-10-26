@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
+import styles from './Dropdown.module.scss';
 
 const DropdownContext = createContext();
 
@@ -16,12 +17,13 @@ function useDropdown() {
 function DropdownButton({ children, ...rest }) {
   const { toggleDropdown } = useDropdown();
   return (
-    <button
+    <div
+      className={styles.dropdownButton}
       onClick={toggleDropdown}
       {...rest}
     >
       {children}
-    </button>
+    </div>
   );
 }
 DropdownButton.propTypes = {
@@ -29,10 +31,14 @@ DropdownButton.propTypes = {
 };
 
 function DropdownItem({ children, ...rest }) {
+  const { toggleDropdown } = useDropdown();
+  const handleClick = () => {
+    toggleDropdown();
+  };
   return (
-    <a className="dropdown-item" {...rest}>
+    <div className={styles.dropdownListItem} onClick={() => handleClick()} {...rest}>
       {children}
-    </a>
+    </div>
   );
 }
 DropdownItem.propTypes = {
@@ -43,7 +49,7 @@ function DropdownList({ children, ...rest }) {
   const { isOpened } = useDropdown();
   if (!isOpened) return null;
   return (
-    <div className="dropdown" {...rest}>
+    <div className={styles.dropdownList} {...rest}>
       {children}
     </div>
   );
@@ -76,7 +82,7 @@ function Dropdown({ children }) {
       isOpened,
       toggleDropdown: () => setIsOpened(!isOpened),
     }}>
-      <div ref={ref}>
+      <div ref={ref} className={styles.dropdown}>
         {children}
       </div>
     </DropdownContext.Provider>

@@ -1,5 +1,6 @@
 import Button from '@/components/lib/Button';
 import Input from '@/components/lib/Input';
+import { Link } from 'react-router-dom';
 import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
 import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '../components/lib/Dropdown';
 
@@ -43,15 +44,30 @@ export default function Library() {
 
       <h2>Dropdown</h2>
       <Dropdown>
-        <DropdownButton>Dropdown</DropdownButton>
+        <DropdownButton>
+          <Button>Dropdown</Button>
+        </DropdownButton>
         <DropdownList>
-          <DropdownItem>Item 1</DropdownItem>
-          <DropdownItem>Item 2</DropdownItem>
-          <DropdownItem>Item 3</DropdownItem>
+          {/* Link */}
+          <DropdownItem>
+            <Link to="/">Home</Link>
+          </DropdownItem>
+          {/* Overloading style */}
+          <DropdownItem style={{
+            backgroundColor: 'var(--red-5)',
+          }}>
+            Custom style
+          </DropdownItem>
+          {/* Free text */}
+          <DropdownItem>
+            <span style={{
+              color: 'var(--red-5)',
+            }}>Delete</span>
+          </DropdownItem>
         </DropdownList>
       </Dropdown>
       <Dropdown>
-        <DropdownButton>Dropdown</DropdownButton>
+        <DropdownButton>Dropdown ▼</DropdownButton>
         <DropdownList>
           <DropdownItem>Item 1</DropdownItem>
           <DropdownItem>Item 2</DropdownItem>
