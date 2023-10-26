@@ -1,0 +1,24 @@
+.backoffice {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+        'sidemenu header'
+        'sidemenu main';
+    height: 100%;
+    max-height: 100%;
+}
+
+.sidemenu {
+    grid-area: sidemenu;
+    height: 100%;
+}
+
+.header {
+    grid-area: header;
+}
+
+.main {
+    grid-area: main;
+    overflow: scroll;
+}

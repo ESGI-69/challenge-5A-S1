@@ -1,0 +1,122 @@
+.sidemenu {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    'expand'
+    'nav'
+    'usermenu';
+  align-items: flex-start;
+  height: 100%;
+  padding: var(--size-3);
+}
+
+.shrinked {
+  .navMenuItem {
+
+    &Link,
+    &LinkActive {
+      &Text {
+        display: none;
+      }
+    }
+  }
+}
+
+.expand {
+  all: unset;
+  grid-area: expand;
+  align-self: flex-start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--size-7);
+  height: var(--size-7);
+  cursor: pointer;
+
+  svg {
+    width: var(--size-5);
+    height: var(--size-5);
+
+    path {
+      stroke: var(--color-text-regular);
+      stroke-width: 1.5;
+    }
+  }
+}
+
+.nav {
+  grid-area: nav;
+
+  &Menu {
+    all: unset;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--size-3);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &Item {
+      width: 100%;
+
+      &Link,
+      &LinkActive {
+        display: flex;
+        align-items: center;
+        gap: var(--size-2);
+        padding: var(--size-2);
+        border-radius: var(--size-2);
+        color: var(--color-text-regular);
+        text-decoration: none;
+        font-weight: var(--font-weight-5);
+
+        &Svg {
+          width: var(--size-5);
+          height: var(--size-5);
+
+          svg {
+            width: var(--size-5);
+            height: var(--size-5);
+
+            path {
+              fill: var(--color-text-regular);
+            }
+          }
+        }
+
+        &Active {
+          background: var(--color-primary);
+        }
+      }
+    }
+  }
+}
+
+.usermenu {
+  grid-area: usermenu;
+  align-self: flex-end;
+  justify-self: flex-start;
+
+  &List {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--size-3);
+  }
+
+  &Item {
+    all: unset;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: var(--font-weight-5);
+    gap: var(--size-2);
+    line-height: var(--size-3);
+    cursor: pointer;
+  }
+}

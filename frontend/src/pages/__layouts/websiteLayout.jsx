@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import LanguageSwticher from '@/components/LanguageSwitcher';
 import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
 
-export default function WebsiteLayout({ children }) {
+export default function WebsiteLayout() {
   return (
     <>
       <header>
@@ -11,7 +12,7 @@ export default function WebsiteLayout({ children }) {
       </header>
       <div>
         <Suspense fallback="Loading...">
-          {children}
+          <Outlet />
         </Suspense>
       </div>
       <footer>Footer</footer>

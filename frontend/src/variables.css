@@ -4,6 +4,9 @@
   --white: #fff;
   --black: #000;
 
+  /* Color */
+  --color-primary: var(--yellow-5);
+
   /* Text */
   --color-text-regular: var(--gray-9);
   --color-text-secondary: var(--gray-8);
