@@ -1,4 +1,4 @@
-.navbar {
+.Navbar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -6,8 +6,8 @@
   padding: var(--size-3) var(--size-7);
   border-bottom: var(--border-size-1) solid var(--color-border);
 
-  &__home {
-    &__link {
+  &Home {
+    &Link {
       text-transform: uppercase;
       font-size: var(--font-size-4);
       text-decoration: none;
@@ -15,7 +15,7 @@
       color: var(--color-text-regular);
     }
 
-    &__link:after {
+    &Link:after {
       background: none repeat scroll 0 0 transparent;
       bottom: 0;
       content: "";
@@ -27,29 +27,29 @@
       width: 0;
     }
 
-    &__link:hover:after {
+    &Link:hover:after {
       width: 100%; 
       left: 0; 
     }
 
-    &__link:visited {
+    &Link:visited {
       color: initial;
     }
   }
 
-  &__menu {
+  &Menu {
     display: flex;
     flex-direction: row;
     gap: var(--size-3);
     align-items: center;
     
-    &__link {
+    &Link {
       text-decoration: none;
       position: relative;
       padding: var(--size-2) 0;
     }
 
-    &__link:after {
+    &Link:after {
       background: none repeat scroll 0 0 transparent;
       bottom: 0;
       content: "";
@@ -62,12 +62,12 @@
       position: absolute;
     }
 
-    &__link:hover:after {
+    &Link:hover:after {
       width: 100%; 
       left: 0; 
     }
 
-    &__link:visited {
+    &Link:visited {
       color: initial;
     }
   }

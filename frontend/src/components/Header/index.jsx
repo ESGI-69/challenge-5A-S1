@@ -7,13 +7,13 @@ import { Link } from 'react-router-dom';
 export default function Header() {
   const { t } = useTranslation('header');
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.navbar__home}>
-        <Link className={styles.navbar__home__link} to="/">Platiny</Link>
+    <nav className={styles.Navbar}>
+      <div className={styles.NavbarHome}>
+        <Link className={styles.NavbarHomeLink} to="/">Platiny</Link>
       </div>
-      <div className={styles.navbar__menu}>
+      <div className={styles.NavbarMenu}>
         <LanguageSwticher />
-        <Link to="/register" className={styles.navbar__menu__link}>{t('menu.register')}</Link>
+        <Link to="/register" className={styles.NavbarMenuLink}>{t('menu.register')}</Link>
         <Button href="/login" variant="primary">{t('menu.login')}</Button>
       </div>
     </nav>
