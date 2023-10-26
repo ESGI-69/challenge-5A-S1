@@ -14,13 +14,13 @@ function useDropdown() {
   return dropdownContext;
 }
 
-function DropdownButton({ children, ...rest }) {
+function DropdownButton({ children, ...delegated }) {
   const { toggleDropdown } = useDropdown();
   return (
     <div
       className={styles.dropdownButton}
       onClick={toggleDropdown}
-      {...rest}
+      {...delegated}
     >
       {children}
     </div>
@@ -30,13 +30,13 @@ DropdownButton.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-function DropdownItem({ children, ...rest }) {
+function DropdownItem({ children, ...delegated }) {
   const { toggleDropdown } = useDropdown();
   const handleClick = () => {
     toggleDropdown();
   };
   return (
-    <div className={styles.dropdownListItem} onClick={() => handleClick()} {...rest}>
+    <div className={styles.dropdownListItem} onClick={() => handleClick()} {...delegated}>
       {children}
     </div>
   );
@@ -45,11 +45,11 @@ DropdownItem.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-function DropdownList({ children, ...rest }) {
+function DropdownList({ children, ...delegated }) {
   const { isOpened } = useDropdown();
   if (!isOpened) return null;
   return (
-    <div className={styles.dropdownList} {...rest}>
+    <div className={styles.dropdownList} {...delegated}>
       {children}
     </div>
   );
