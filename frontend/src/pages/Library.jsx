@@ -1,6 +1,7 @@
 import Button from '@/components/lib/Button';
 import Input from '@/components/lib/Input';
 import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
+import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '../components/lib/Dropdown';
 
 export default function Library() {
   return (
@@ -8,17 +9,10 @@ export default function Library() {
       <h1>Library</h1>
 
       <h2>Button</h2>
-      <h3>Primary</h3>
-      <Button variant="primary">Button</Button>
-
-      <h3>Success</h3>
-      <Button variant="success">Button</Button>
-
-      <h3>Danger</h3>
-      <Button variant="danger">Button</Button>
-
-      <h3>Warning</h3>
-      <Button variant="warning">Button</Button>
+      <Button variant="primary">Primary</Button>
+      <Button variant="success">Success</Button>
+      <Button variant="danger">Danger</Button>
+      <Button variant="warning">Warning</Button>
 
       <h2>Input</h2>
       <Input placeholder="Placeholder" />
@@ -46,6 +40,24 @@ export default function Library() {
           </p>
         </TabContent>
       </Tabs >
+
+      <h2>Dropdown</h2>
+      <Dropdown>
+        <DropdownButton>Dropdown</DropdownButton>
+        <DropdownList>
+          <DropdownItem>Item 1</DropdownItem>
+          <DropdownItem>Item 2</DropdownItem>
+          <DropdownItem>Item 3</DropdownItem>
+        </DropdownList>
+      </Dropdown>
+      <Dropdown>
+        <DropdownButton>Dropdown</DropdownButton>
+        <DropdownList>
+          <DropdownItem>Item 1</DropdownItem>
+          <DropdownItem>Item 2</DropdownItem>
+          <DropdownItem>Item 3</DropdownItem>
+        </DropdownList>
+      </Dropdown>
     </main>
   );
 }

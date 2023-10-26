@@ -17,7 +17,7 @@ const Input = forwardRef(function InputComponent({
   };
 
   Input.propTypes = {
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
     placeholder: PropTypes.string,
     type: PropTypes.string,
     onChange: PropTypes.func,
