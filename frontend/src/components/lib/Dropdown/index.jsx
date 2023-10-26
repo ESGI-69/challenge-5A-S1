@@ -58,7 +58,7 @@ DropdownList.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-function Dropdown({ children, direction = 'tl' }) {
+function Dropdown({ children, direction = 'br' }) {
   const [ isOpened, setIsOpened ] = useState(false);
   const ref = useRef();
 
@@ -97,6 +97,12 @@ function Dropdown({ children, direction = 'tl' }) {
 }
 Dropdown.propTypes = {
   children: PropTypes.node.isRequired,
+  direction: PropTypes.oneOf([
+    'tl',
+    'tr',
+    'bl',
+    'br',
+  ]),
 };
 
 export {
