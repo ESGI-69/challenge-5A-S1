@@ -7,21 +7,24 @@ const Gallery = React.forwardRef(function Gallery(
   ref,
 ) {
   const pictures = React.Children.toArray(children);
+  const gridClassArray = [
+    'GalleryMain',
+    'GalleryFirst',
+    'GallerySecond',
+    'GalleryThird',
+    'GalleryMore',
+  ];
 
   return (
-    <div ref={ref} className={styles.gallery} {...delegated}>
-      <div className={styles.gallery}>
-        <div className={styles.leftPicture}>{pictures[0]}</div>
-        <div className={styles.rightPictures}>
-          {pictures.slice(1).map((picture, index) => (
-            index > 3 ? null :
-              <div key={index} className={styles.imgcontainer}>
-                {picture}
-              </div>
-          ))}
-        </div>
+    <div ref={ref} className={styles.Gallery} {...delegated}>
 
-      </div>
+      {pictures.map((picture, index) => (
+        index > 4 ? null :
+          <div key={index} className={styles[gridClassArray[index]]}>
+            {picture}
+          </div>
+      ))}
+
     </div>
   );
 });
