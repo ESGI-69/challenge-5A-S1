@@ -2,10 +2,10 @@ import Button from '@/components/lib/Button';
 import Input from '@/components/lib/Input';
 import { Link } from 'react-router-dom';
 import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
-import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '../components/lib/Dropdown';
+import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/components/lib/Dropdown';
 import GlobalNotation from '@/components/Notation/GlobalNotation';
-import Review from '../components/Notation/Review';
-import Note from '../components/Notation/Note';
+import Review from '@/components/Notation/Review';
+import Note from '@/components/Notation/Note';
 
 export default function Library() {
   return (
