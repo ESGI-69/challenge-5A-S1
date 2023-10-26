@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import LanguageSwticher from '@/components/LanguageSwitcher';
 import Button from '@/components/lib/Button';
 import styles from './Header.module.scss';
@@ -12,14 +11,10 @@ export default function Header() {
         <a className={styles.navbar__home__link} href='/'>Platiny</a>
       </div>
       <div className={styles.navbar__menu}>
-        <a href="/register">{t('register')}</a>
-        <Button href="/login" variant="primary">{t('login')}</Button>
         <LanguageSwticher />
+        <a href="/register" className={styles.navbar__menu__link}>{t('register')}</a>
+        <Button href="/login" variant="primary">{t('login')}</Button>
       </div>
     </nav>
   );
 }
-
-Header.propTypes = {
-  children: PropTypes.node,
-};
