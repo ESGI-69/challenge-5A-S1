@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import styles from './Sidemenu.module.scss';
 import { Expand, Gear, Shop, Stats, Users } from '@/components/lib/Icons';
 import ProfileButton from '@/components/ProfileButton';
-import NotificationsButton from '../../../../components/NotificationsButton';
+import NotificationsButton from '@/components/NotificationsButton';
 
 function SidemenuLink({ children, to, svgJsx }) {
   return (
@@ -23,6 +24,7 @@ SidemenuLink.propTypes = {
 };
 
 export default function Sidemenu({ ...delegated }) {
+  const { t } = useTranslation('backoffice');
   const [ isExpanded, setIsExpanded ] = useState(false);
   return (
     <aside {...delegated}>
@@ -33,13 +35,13 @@ export default function Sidemenu({ ...delegated }) {
         <nav className={styles.nav}>
           <ul className={styles.navMenu}>
             <SidemenuLink to="/backoffice" svgJsx={<Stats />}>
-              Statistiques
+              {t('layout.sidemenu.stats')}
             </SidemenuLink>
             <SidemenuLink to="/backoffice/employees" svgJsx={<Users />}>
-              Employés
+              {t('layout.sidemenu.employees')}
             </SidemenuLink>
             <SidemenuLink to="/backoffice/employees" svgJsx={<Shop />}>
-              Etablissements
+              {t('layout.sidemenu.establishments')}
             </SidemenuLink>
           </ul>
         </nav>
