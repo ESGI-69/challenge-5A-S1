@@ -6,7 +6,10 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '../compone
 
 export default function Library() {
   return (
-    <main>
+    <main style={{
+      margin: '0 auto',
+      maxWidth: '90vw',
+    }}>
       <h1>Library</h1>
 
       <h2>Button</h2>
@@ -66,8 +69,8 @@ export default function Library() {
           </DropdownItem>
         </DropdownList>
       </Dropdown>
-      <Dropdown>
-        <DropdownButton>Dropdown ▼</DropdownButton>
+      <Dropdown direction='bl'>
+        <DropdownButton>Another dropdown ▼</DropdownButton>
         <DropdownList>
           <DropdownItem>Item 1</DropdownItem>
           <DropdownItem>Item 2</DropdownItem>

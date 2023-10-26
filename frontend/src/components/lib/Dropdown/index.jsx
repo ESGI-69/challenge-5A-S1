@@ -58,9 +58,16 @@ DropdownList.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-function Dropdown({ children }) {
+function Dropdown({ children, direction = 'tl' }) {
   const [ isOpened, setIsOpened ] = useState(false);
   const ref = useRef();
+
+  const directionStyle = {
+    tl: styles.dropdownTopLeft,
+    tr: styles.dropdownTopRight,
+    bl: styles.dropdownBottomLeft,
+    br: styles.dropdownBottomRight,
+  };
 
   // Clicking outside the dropdown mechanics
   useEffect(() => {
@@ -82,7 +89,7 @@ function Dropdown({ children }) {
       isOpened,
       toggleDropdown: () => setIsOpened(!isOpened),
     }}>
-      <div ref={ref} className={styles.dropdown}>
+      <div ref={ref} className={`${styles.dropdown} ${directionStyle[direction]}`}>
         {children}
       </div>
     </DropdownContext.Provider>
