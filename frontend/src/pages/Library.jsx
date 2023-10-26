@@ -3,7 +3,7 @@ import Input from '@/components/lib/Input';
 import { Link } from 'react-router-dom';
 import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
 import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '../components/lib/Dropdown';
-import GlobalNotation from '@/components/GlobalNotation';
+import GlobalNotation from '@/components/Notation/GlobalNotation';
 
 export default function Library() {
   return (
@@ -79,7 +79,7 @@ export default function Library() {
         </DropdownList>
       </Dropdown>
 
-      <h2>GlobalNotation</h2>
+      <h2>Notation/GlobalNotation</h2>
       <GlobalNotation />
     </main>
   );
