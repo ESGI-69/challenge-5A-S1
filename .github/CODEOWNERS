@@ -2,4 +2,4 @@
 *.yml @mrpinkcat
 *.jsx @SebGrd
 *.scss @mrpinkcat
-$.css @mrpinkcat
+*.css @mrpinkcat
