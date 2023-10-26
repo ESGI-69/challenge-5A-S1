@@ -1,4 +1,5 @@
 import style from './GlobalNotation.module.scss';
+import Note from '@/components/Notation/Note';
 
 function GlobalNotation() {
   return (
@@ -8,28 +9,20 @@ function GlobalNotation() {
       </div>
       <div className={style.GlobalNotationDetail}>
         <span className={style.GlobalNotationDetailItem}>
-            Accueil
-          <span className={style.GlobalNotationDetailItemAverage}>
-            4,2
-          </span>
+          Accueil
+          <Note value={4} className={style.GlobalNotationDetailItemAverage} />
         </span>
         <span className={style.GlobalNotationDetailItem}>
-            Propreté
-          <span className={style.GlobalNotationDetailItemAverage}>
-            4,2
-          </span>
+          Propreté
+          <Note value={4} className={style.GlobalNotationDetailItemAverage} />
         </span>
         <span className={style.GlobalNotationDetailItem}>
-            Cadre & Ambiance
-          <span className={style.GlobalNotationDetailItemAverage}>
-            4,2
-          </span>
+          Cadre & Ambiance
+          <Note value={4} className={style.GlobalNotationDetailItemAverage} />
         </span>
         <span className={style.GlobalNotationDetailItem}>
-            Qualité de la prestation
-          <span className={style.GlobalNotationDetailItemAverage}>
-            4,2
-          </span>
+          Qualité de la prestation
+          <Note value={4} className={style.GlobalNotationDetailItemAverage} />
         </span>
         <span className={style.GlobalNotationCount}>
           315 clients ont donné leur avis

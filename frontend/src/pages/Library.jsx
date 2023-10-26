@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
 import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '../components/lib/Dropdown';
 import GlobalNotation from '@/components/Notation/GlobalNotation';
+import Review from '../components/Notation/Review';
+import Note from '../components/Notation/Note';
 
 export default function Library() {
   return (
@@ -81,6 +83,12 @@ export default function Library() {
 
       <h2>Notation/GlobalNotation</h2>
       <GlobalNotation />
+
+      <h2>Notation/Review</h2>
+      <Review />
+
+      <h2>Notation/Note</h2>
+      <Note value={4.2} />
     </main>
   );
 }
