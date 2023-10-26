@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\EstablishmentRepository;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Delete;
@@ -19,10 +20,25 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: EstablishmentRepository::class)]
 #[ApiResource(
     operations: [
-        new Get(normalizationContext: ['groups' => ['read-establishment', 'read-company']]),
-        new Post(denormalizationContext: ['groups' => ['create-establishment']]),
-        new Patch(denormalizationContext: ['groups' => ['update-establishment']]),
-        new Delete(),
+        new GetCollection(
+            normalizationContext: ['groups' => ['read-establishment', 'read-company']],
+        ),
+        new Get(
+            normalizationContext: ['groups' => ['read-establishment', 'read-company']]
+        ),
+        new Post(
+            denormalizationContext: ['groups' => ['create-establishment']],
+            security: 'is_granted("ROLE_PRESTA") and object.getCompany() == user.getCompany()',
+            securityMessage: 'You can only create an establishment for your company',
+        ),
+        new Patch(
+            denormalizationContext: ['groups' => ['update-establishment']],
+            security: 'is_granted("ROLE_PRESTA") and object.getCompany() == user.getCompany()',
+            securityMessage: 'You can only update an establishment for your company',
+        ),
+        new Delete(
+            security: 'is_granted("ROLE_ADMIN")',
+        ),
     ],
     
 )]
