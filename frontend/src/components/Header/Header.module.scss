@@ -33,7 +33,7 @@
     }
 
     &Link:visited {
-      color: initial;
+      color: var(--color-text-regular);
     }
   }
 
@@ -69,7 +69,7 @@
     }
 
     &Link:visited {
-      color: initial;
+      color: var(--color-text-regular);
     }
   }
 }
