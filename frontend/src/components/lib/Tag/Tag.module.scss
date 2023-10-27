@@ -5,6 +5,7 @@
     border: var(--border-size-1) solid var(--color-border-regular);
     border-radius: var(--radius-2);
     cursor: pointer;
+    font-size: var(--font-size-0);
 
     &Primary {
         background-color: hsl(var(--yellow-5-hsl) / 30%);
