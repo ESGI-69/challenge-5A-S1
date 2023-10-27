@@ -28,13 +28,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
         ),
         new Post(
             denormalizationContext: ['groups' => ['create-establishment']],
-            security: 'is_granted("ROLE_PRESTA") and object.getCompany() == user.getCompany()',
+            securityPostDenormalize: 'is_granted("ROLE_PRESTA") and object.getCompany() == user.getCompany()',
             securityMessage: 'You can only create an establishment for your company',
+            securityPostDenormalizeMessage: 'You can only create an establishment for your company',
         ),
         new Patch(
             denormalizationContext: ['groups' => ['update-establishment']],
-            security: 'is_granted("ROLE_PRESTA") and object.getCompany() == user.getCompany()',
+            securityPostDenormalize: 'is_granted("ROLE_PRESTA") and object.getCompany() == user.getCompany()',
             securityMessage: 'You can only update an establishment for your company',
+            securityPostDenormalizeMessage: 'You can only update an establishment for your company',
         ),
         new Delete(
             security: 'is_granted("ROLE_ADMIN")',
