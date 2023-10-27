@@ -14,7 +14,7 @@ export default function Header() {
       <div className={styles.NavbarMenu}>
         <LanguageSwticher />
         <Link to="/register" className={styles.NavbarMenuLink}>{t('menu.register')}</Link>
-        <Button href="/login" variant="primary">{t('menu.login')}</Button>
+        <Button href="/login" variant="dark">{t('menu.login')}</Button>
       </div>
     </nav>
   );
