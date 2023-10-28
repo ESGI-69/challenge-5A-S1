@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './gallery.module.scss';
+import Button from '../Button';
 
 const Gallery = React.forwardRef(function Gallery(
   { children, ...delegated },
@@ -22,6 +23,7 @@ const Gallery = React.forwardRef(function Gallery(
         index > 4 ? null :
           <div key={index} className={styles[gridClassArray[index]]}>
             {picture}
+            {index === 4 ? <Button href="javascript:void" className={styles.GalleryMoreBtn}>voir les {pictures.length} photos</Button> : null}
           </div>
       ))}
 

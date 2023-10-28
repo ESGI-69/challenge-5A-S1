@@ -12,13 +12,19 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 15px;
+    }
+
+
+    &Main, &First, &Second, &Third, &More {
+        img{
+            border-radius: 15px;
+            background-color: black;
+        }
     }
 
     &Main {
         grid-area: main;
         object-fit: cover;
-
     }
 
     &First {
@@ -35,7 +41,19 @@
 
     &More {
         grid-area: more;
-        filter: blur(5px);
+        overflow: hidden;
+        border-radius: 15px;
+        text-align: center;
+        img{
+            filter: blur(10px)brightness(0.9);
+        }
+
+        &Btn{
+            position: relative;
+            bottom: 55%;
+            z-index: 3;
+            color: white;
+        }
     }
 }
 
@@ -45,13 +63,15 @@
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
             "main main main first"
-            "main main main second";
+            "main main main more";
 
-        &Second {
-            filter: blur(5px);
+        &More {
+            img{
+                filter: blur(10px)brightness(0.9);
+            }
         }
 
-        &Third, &More {
+        &Third, &Second {
             display: none;
         }
     }
