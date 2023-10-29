@@ -1,8 +1,8 @@
 .Gallery {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 180px 180px;
-    gap: 15px 15px;
+    grid-template-rows: var(--size-13) var(--size-13);
+    gap: var(--size-4) var(--size-4);
     grid-template-areas:
         "main main first second"
         "main main third more";
@@ -17,7 +17,7 @@
 
     &Main, &First, &Second, &Third, &More {
         img{
-            border-radius: 15px;
+            border-radius: var(--radius-3);
             background-color: black;
         }
     }
@@ -42,7 +42,7 @@
     &More {
         grid-area: more;
         overflow: hidden;
-        border-radius: 15px;
+        border-radius: var(--radius-3);
         text-align: center;
         img{
             filter: blur(10px)brightness(0.9);
@@ -58,6 +58,13 @@
     }
 }
 
+@media only screen and (max-width: 1440px) {
+    .Gallery {
+        grid-template-rows: var(--size-12) var(--size-12);
+    }
+
+}
+
 
 @media only screen and (max-width: 1024px) {
     .Gallery {
@@ -65,7 +72,7 @@
         grid-template-areas:
             "main main main first"
             "main main main more";
-
+        grid-template-rows: var(--size-12) var(--size-12);
         &More {
             img{
                 filter: blur(10px)brightness(0.9);
