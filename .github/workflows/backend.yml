@@ -1,0 +1,24 @@
+name: Backend tests
+run-name: ${{ github.actor }} launching backend tests for pull request ${{ github.event.number }}
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths: [ 'backend/**', '.github/workflows/backend.yml', '!backend/deployment-back.yaml' ]
+
+env:
+  DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/challenge-5a-s1-backend
+    
+jobs:
+  docker_build:
+    runs-on: ubuntu-latest
+    name: Build image (backend)
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v3
+      - name: Copiyng .env file
+        run: cp .env.prod.example .env
+      - name: Build
+        run: docker build .
