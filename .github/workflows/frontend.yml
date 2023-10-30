@@ -4,10 +4,10 @@ run-name: ${{ github.actor }} launching frontend tests
 on:
   push:
     branches: [ main ]
-    paths: [ 'frontend/**', '.github/**' ]
+    paths: [ 'frontend/**', '.github/**', '!frontend/deployment-front.yaml' ]
   pull_request:
     branches: [ main ]
-    paths: [ 'frontend/**', '.github/**' ]
+    paths: [ 'frontend/**', '.github/**', '!frontend/deployment-front.yaml' ]
 
 env:
   DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/challenge-5a-s1-frontend
