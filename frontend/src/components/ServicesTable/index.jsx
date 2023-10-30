@@ -1,7 +1,7 @@
 import style from './ServicesTable.module.scss';
 import PropTypes from 'prop-types';
 import Button from '../lib/Button';
-import { numberToDuration } from '@/utils/formater/duration';
+import { minToDuration } from '@/utils/formater/time';
 
 function ServicesTable({
   type,
@@ -21,7 +21,7 @@ function ServicesTable({
               <span>{service.description}</span>
             </div>
             <div className={style.ServicesTableRowInfos}>
-              <span>{numberToDuration(service.duration)}</span>
+              <span>{minToDuration(service.duration)}</span>
               <span>•</span>
               <span>{service.price} €</span>
             </div>
