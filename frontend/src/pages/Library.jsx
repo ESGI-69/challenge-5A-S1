@@ -7,6 +7,7 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/componen
 import GlobalNotation from '@/components/Notation/GlobalNotation';
 import Review from '@/components/Notation/Review';
 import Note from '@/components/Notation/Note';
+import ServicesTable from '@/components/ServicesTable';
 
 export default function Library() {
   return (
@@ -104,6 +105,42 @@ export default function Library() {
       <Tag variant="danger">Danger</Tag>
       <h3>Warning</h3>
       <Tag variant="warning">Warning</Tag>
+
+      <h2>Services Table</h2>
+      <ServicesTable
+        type="Coiffures"
+        description="Retrouvez toutes nos coiffures ici, les coiffures pour tout les styles blo bli blou, ahaha !!"
+        services={[
+          {
+            id: 1,
+            name: 'Coiffure 1',
+            description: 'Description de la coiffure 1',
+            icon: '👩‍🦰',
+            duration: 30,
+          },
+          {
+            id: 2,
+            name: 'Coiffure 2',
+            description: 'Description de la coiffure 2',
+            icon: '👩‍🦳',
+            duration: 60,
+          },
+          {
+            id: 3,
+            name: 'Coiffure 3',
+            description: 'Description de la coiffure 3',
+            icon: '👩‍🦱',
+            duration: 90,
+          },
+          {
+            id: 4,
+            name: 'Coiffure 4',
+            description: 'Description de la coiffure 4',
+            icon: '👩‍🦲',
+            duration: 120,
+          },
+        ]}
+      />
     </main>
   );
 }
