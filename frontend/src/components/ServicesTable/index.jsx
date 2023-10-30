@@ -1,5 +1,7 @@
 import style from './ServicesTable.module.scss';
 import PropTypes from 'prop-types';
+import Button from '../lib/Button';
+import { numberToDuration } from '@/utils/formater/duration';
 
 function ServicesTable({
   type,
@@ -8,19 +10,26 @@ function ServicesTable({
 }) {
 
   return (
-    <div className={style}>
-      <p>{type}</p>
-      <p>{description}</p>
-      <ul>
+    <div className={style.Services}>
+      <h3 className={style.ServicesType}>{type}</h3>
+      <p className={style.ServicesDesc}>{description}</p>
+      <div className={style.ServicesTable}>
         {services?.map((service) => (
-          <li key={service.id}>
-            <p>{service.name}</p>
-            <p>{service.description}</p>
-            <p>{service.icon}</p>
-            <p>{service.duration}</p>
-          </li>
+          <div className={style.ServicesTableRow} key={service.id}>
+            <div className={style.ServicesTableRowDesc}>
+              <span>{service.name}</span>
+              <span>{service.description}</span>
+            </div>
+            <div className={style.ServicesTableRowInfos}>
+              <span>{numberToDuration(service.duration)}</span>
+              <span>•</span>
+              <span>{service.price} €</span>
+            </div>
+
+            <Button variant="dark">Choisir</Button>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
@@ -34,6 +43,7 @@ ServicesTable.propTypes = {
       name: PropTypes.string,
       description: PropTypes.string,
       icon: PropTypes.string,
+      price: PropTypes.number,
       duration: PropTypes.number,
     }),
   ),

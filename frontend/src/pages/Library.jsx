@@ -117,6 +117,7 @@ export default function Library() {
             description: 'Description de la coiffure 1',
             icon: '👩‍🦰',
             duration: 30,
+            price: 30,
           },
           {
             id: 2,
@@ -124,6 +125,7 @@ export default function Library() {
             description: 'Description de la coiffure 2',
             icon: '👩‍🦳',
             duration: 60,
+            price: 60,
           },
           {
             id: 3,
@@ -131,6 +133,7 @@ export default function Library() {
             description: 'Description de la coiffure 3',
             icon: '👩‍🦱',
             duration: 90,
+            price: 90,
           },
           {
             id: 4,
@@ -138,6 +141,7 @@ export default function Library() {
             description: 'Description de la coiffure 4',
             icon: '👩‍🦲',
             duration: 120,
+            price: 120,
           },
         ]}
       />
