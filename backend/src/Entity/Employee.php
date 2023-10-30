@@ -17,26 +17,26 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     operations: [
         new GetCollection(
-            security: 'is_granted("ROLE_PRESTA")',
+            security: 'is_granted("ROLE_ADMIN")',
             normalizationContext: ['groups' => ['employee-getall']]
         ),
         new Get(
-            security: 'is_granted("ROLE_PRESTA")',
+            security: 'is_granted("ADMIN")',
             normalizationContext: ['groups' => ['employee-get']]),
         new Post(
-            security: 'is_granted("ROLE_PRESTA")',
+            security: 'is_granted("ADMIN")',
             normalizationContext: ['groups' => ['employee-post']],
             denormalizationContext: ['groups' => ['employee-post']],
         ),
         new Patch(
-            security: 'is_granted("ROLE_PRESTA")',
+            security: 'is_granted("ADMIN")',
             normalizationContext: ['groups' => ['employee-patch']],
             denormalizationContext: ['groups' => ['employee-patch']],
         ),
         new Delete(
-            security: 'is_granted("ROLE_PRESTA")',
+            security: 'is_granted("ADMIN")',
             normalizationContext: ['groups' => ['employee-get']]
-        )
+        ),
     ]
 )]
 class Employee
@@ -44,7 +44,7 @@ class Employee
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['employee-get', 'employee-getall'])]
+    #[Groups(['employee-get', 'employee-getall', 'read-company-employees'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'employees')]
@@ -54,19 +54,19 @@ class Employee
     private ?Company $companyId = null;
 
     #[ORM\ManyToOne(inversedBy: 'employees')]
-    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall'])]
+    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall','read-company-employees'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Establishment $preferedEstablishment = null;
 
-    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall'])]
+    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall','read-company-employees'])]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
-    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall'])]
+    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall','read-company-employees'])]
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
-    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall'])]
+    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall','read-company-employees'])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
 
