@@ -34,6 +34,5 @@ spec:
     app: react
   ports:
   - protocol: TCP
-    port : 8888
+    port : 8080
     targetPort: 8080
-    nodePort: 30000
