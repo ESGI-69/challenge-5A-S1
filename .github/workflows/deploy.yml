@@ -1,0 +1,78 @@
+name: Deploy to VPS
+run-name: ${{ github.actor }} deployed app to VPS (${{ github.sha }})
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  DOCKERHUB_REPO_BACKEND: ${{ secrets.DOCKERHUB_USERNAME }}/challenge-5a-s1-backend
+  DOCKERHUB_REPO_FRONTEND: ${{ secrets.DOCKERHUB_USERNAME }}/challenge-5a-s1-frontend
+
+jobs:
+  publish_backend:
+    # Backend path has change
+    if: contains(github.event.head_commit.modified, 'backend') || contains(github.event.head_commit.modified, '.github/workflows/deploy.yml')
+    runs-on: ubuntu-latest
+    name: Publish backend image
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Copiyng .env file
+        run: cp .env.prod.example .env
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: "./backend"
+          push: true
+          tags: ${{ env.DOCKERHUB_REPO_BACKEND }}:latest, ${{ env.DOCKERHUB_REPO_BACKEND }}:${{ github.sha }}
+
+  publish_frontend:
+    if: contains(github.event.head_commit.modified, 'frontend') || contains(github.event.head_commit.modified, '.github/workflows/deploy.yml')
+    runs-on: ubuntu-latest
+    name: Publish frontend image
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: "./frontend"
+          push: true
+          tags: ${{ env.DOCKERHUB_REPO_FRONTEND }}:latest, ${{ env.DOCKERHUB_REPO_FRONTEND }}:${{ github.sha }}
+
+  deploy_frontend:
+    runs-on: ubuntu-latest
+    name: Deploy frontend
+    needs:
+      - publish_frontend
+    environment:
+      name: production
+      url: ${{ vars.URL }}
+    concurrency: deploy
+    steps:
+      - uses: actions/checkout@v3
+      - name: Redeploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          script: |
+            kubectl set image deployment/frontend-deployment front=${{ env.DOCKERHUB_REPO_FRONTEND }}:${{ github.sha }} -n challenge-5a-s1
+            kubectl rollout status deployment/frontend-deployment -n challenge-5a-s1
