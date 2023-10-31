@@ -1,0 +1,22 @@
+.Services {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+
+  &Type {
+    margin: 0;
+  }
+  
+  &Desc {
+    margin: 0;
+  }
+
+  &Table {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-white);
+    border-radius: var(--radius-3);
+    box-shadow: var(--shadow-regular);
+    padding: 0 var(--size-7);
+  }
+}

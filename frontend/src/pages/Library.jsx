@@ -7,7 +7,7 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/componen
 import GlobalNotation from '@/components/Notation/GlobalNotation';
 import Review from '@/components/Notation/Review';
 import Note from '@/components/Notation/Note';
-import ServicesTable from '@/components/ServicesTable';
+import ServicesTable from '@/components/Services/ServicesTable';
 
 export default function Library() {
   return (
@@ -114,7 +114,7 @@ export default function Library() {
           {
             id: 1,
             name: 'Coiffure 1',
-            description: 'Description de la coiffure 1',
+            description: 'Description de la coiffure 1 Description de la coiffure 1 Description de la coiffure 1 Description de la coiffure 1 Description de la coiffure 1',
             icon: '👩‍🦰',
             duration: 30,
             price: 30,

@@ -1,0 +1,55 @@
+.Services {
+  &Row {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+    align-items: center;
+    justify-items: flex-start;
+    padding: var(--size-5) 0;
+    border-bottom: var(--border-size-1) solid var(--color-border);
+    gap: var(--size-2);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &Desc {
+      display: flex;
+      flex-direction: column;
+      
+      &Detail {
+        box-sizing: border-box;
+      }
+
+      .Collapsed {
+        position: relative;
+        max-height: var(--size-4);
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      .Expanded {
+        position: initial;
+        max-height: none;
+      }
+
+      &ShowMore {
+        width: fit-content;
+      }
+
+    }
+
+    &Infos {
+      display: flex;
+      flex-direction: row;
+      gap: var(--size-2);
+      color: var( --color-text-light);
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    &Btn {
+      margin-left: auto;
+    }
+    
+  }
+}
