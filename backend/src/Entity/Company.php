@@ -8,8 +8,8 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\GetCollection;
-use App\Controller\Company\UpdateCompanyController;
 use App\Repository\CompanyRepository;
+use App\Controller\Company\CreateCompanyController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -27,20 +27,20 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             normalizationContext: ['groups' => ['company-getall']]
         ),
         new Get(
-            security: 'is_granted("ROLE_USER")',
+            securityPostDenormalize: 'is_granted("ROLE_USER") and object == user.getCompany()',
             normalizationContext: ['groups' => ['company-read']]
         ),
         new Post(
-            security: 'is_granted("ROLE_USER")',
-            denormalizationContext: ['groups' => ['company-create']], inputFormats: ['multipart' => ['multipart/form-data']]
+            securityPostDenormalize: 'is_granted("ROLE_USER")',
+            denormalizationContext: ['groups' => ['company-create']], inputFormats: ['multipart' => ['multipart/form-data']],
+            controller: CreateCompanyController::class
         ),
         new Patch(
-            security: 'is_granted("ROLE_USER")',
-            denormalizationContext: ['groups' => ['company-update']], inputFormats: ['multipart' => ['multipart/form-data']],
-            controller: UpdateCompanyController::class
+            securityPostDenormalize: 'is_granted("ROLE_USER") and object == user.getCompany()',
+            denormalizationContext: ['groups' => ['company-update']],
         ),
         new Delete(
-            security: 'is_granted("ROLE_ADMIN")'
+            security: 'is_granted("ROLE_ADMIN") or object == user.getCompany()'
         ),
     ],
     normalizationContext: ['groups' => ['company-read', 'read-company-mutation']]
@@ -59,7 +59,7 @@ class Company
     private ?string $name = null;
 
     #[Vich\UploadableField(mapping: 'company_kbis', fileNameProperty:'pathKbis')]
-    #[Groups(['company-create', 'company-update', 'company-getall'])]
+    #[Groups(['company-create', 'company-getall'])]
     public ?File $fileKbis = null;
 
     #[Groups(['company-read', 'company-getall'])]
@@ -80,7 +80,7 @@ class Company
     private ?string $rejectedReason = null;
 
     #[Vich\UploadableField(mapping: 'company_logo', fileNameProperty:'logoPath')]
-    #[Groups(['company-create', 'company-update', 'company-getall'])]
+    #[Groups(['company-create', 'company-getall'])]
     public ?File $fileLogo = null;
 
     #[Groups(['company-read', 'company-getall'])]

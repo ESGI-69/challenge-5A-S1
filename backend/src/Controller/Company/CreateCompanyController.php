@@ -3,13 +3,11 @@
 namespace App\Controller\Company;
 
 use App\Entity\Company;
-use App\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Attribute\AsController;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 #[AsController]
-class UpdateCompanyController
+class CreateCompanyController
 {
     public function __construct(
         protected Security $security,
@@ -17,8 +15,13 @@ class UpdateCompanyController
 
     public function __invoke(Company $company): Company
     {
-        if ($this->security->getUser()->getCompany()->getId() !== $company->getId()) {
-            throw new AccessDeniedHttpException('Vous n\'avez pas la permission de mettre à jour cette entreprise.');
+
+        $user = $this->security->getUser();
+        $company->addUser($user);
+
+        // If the user is an admin, the company is automatically validated
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            $company->setValidatedAt(new \DateTimeImmutable());
         }
         return $company;
     }
