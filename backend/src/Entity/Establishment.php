@@ -105,9 +105,13 @@ class Establishment
     #[ORM\OneToMany(mappedBy: 'preferedEstablishment', targetEntity: Employee::class)]
     private Collection $employees;
 
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Appointment::class, orphanRemoval: true)]
+    private Collection $appointments;
+
     public function __construct()
     {
         $this->employees = new ArrayCollection();
+        $this->appointments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -247,6 +251,36 @@ class Establishment
             // set the owning side to null (unless already changed)
             if ($employee->getPreferedEstablishment() === $this) {
                 $employee->setPreferedEstablishment(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Appointment>
+     */
+    public function getAppointments(): Collection
+    {
+        return $this->appointments;
+    }
+
+    public function addAppointment(Appointment $appointment): static
+    {
+        if (!$this->appointments->contains($appointment)) {
+            $this->appointments->add($appointment);
+            $appointment->setEstablishment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAppointment(Appointment $appointment): static
+    {
+        if ($this->appointments->removeElement($appointment)) {
+            // set the owning side to null (unless already changed)
+            if ($appointment->getEstablishment() === $this) {
+                $appointment->setEstablishment(null);
             }
         }
 

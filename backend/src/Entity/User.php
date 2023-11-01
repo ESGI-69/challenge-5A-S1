@@ -76,10 +76,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['read-user', 'create-user', 'update-user'])]
     private ?string $phonenumber = null;
 
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Appointment::class, orphanRemoval: true)]
+    private Collection $appointments;
+
     public function __construct()
     {
         $this->authoredServices = new ArrayCollection();
         $this->validatedServices = new ArrayCollection();
+        $this->appointments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -272,6 +276,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCompany(?Company $company): static
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Appointment>
+     */
+    public function getAppointments(): Collection
+    {
+        return $this->appointments;
+    }
+
+    public function addAppointment(Appointment $appointment): static
+    {
+        if (!$this->appointments->contains($appointment)) {
+            $this->appointments->add($appointment);
+            $appointment->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAppointment(Appointment $appointment): static
+    {
+        if ($this->appointments->removeElement($appointment)) {
+            // set the owning side to null (unless already changed)
+            if ($appointment->getClient() === $this) {
+                $appointment->setClient(null);
+            }
+        }
 
         return $this;
     }
