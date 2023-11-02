@@ -1,8 +1,8 @@
 .Gallery {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: var(--size-13) var(--size-13);
-    gap: var(--size-4) var(--size-4);
+    grid-template-rows: var(--size-13);
+    gap: var(--size-4);
     grid-template-areas:
         "main main first second"
         "main main third more";
@@ -44,16 +44,17 @@
         overflow: hidden;
         border-radius: var(--radius-3);
         text-align: center;
-        img{
-            filter: blur(10px)brightness(0.9);
-        }
 
         &Btn{
             position: relative;
             bottom: 55%;
             z-index: 3;
             color: white;
-            display: inherit;
+            display: inherit;    
+        }
+
+        img:has(+ &Btn) {
+            filter: blur(10px) brightness(0.9);
         }
     }
 }
