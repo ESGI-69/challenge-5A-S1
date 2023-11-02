@@ -1,4 +1,4 @@
 {
-    "viewPhotos": "View more Photo",
-    "viewPhotos_other": "View {{count}} Photos"
+    "viewPhotos": "View more photos",
+    "viewPhotos_other": "View all {{count}} photos"
 }

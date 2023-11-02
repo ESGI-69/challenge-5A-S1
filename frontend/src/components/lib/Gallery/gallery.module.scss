@@ -1,7 +1,7 @@
 .Gallery {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: var(--size-13);
+    grid-auto-rows:  1fr 1fr;
     gap: var(--size-4);
     grid-template-areas:
         "main main first second"
