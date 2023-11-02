@@ -146,6 +146,7 @@ export default function Library() {
           },
         ]}
       />
+      <h2>Gallery</h2>
       <Gallery>
         <img src="https://picsum.photos/seed/1/534/300" alt="random" />
         <img src="https://picsum.photos/seed/2/534/300" alt="random" />
