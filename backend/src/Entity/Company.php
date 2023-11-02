@@ -6,7 +6,10 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\CompanyRepository;
+use App\Controller\Company\CreateCompanyController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -19,51 +22,68 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 #[ApiResource(
     operations: [
-        new Get(normalizationContext: ['groups' => ['read-company']]),
-        new Post(denormalizationContext: ['groups' => ['create-company']], inputFormats: ['multipart' => ['multipart/form-data']]),
-        new Patch(denormalizationContext: ['groups' => ['update-company']], inputFormats: ['multipart' => ['multipart/form-data']]),
+        new GetCollection(
+            security: 'is_granted("ROLE_ADMIN")',
+            normalizationContext: ['groups' => ['company-getall']]
+        ),
+        new Get(
+            securityPostDenormalize: 'is_granted("ROLE_USER") and object == user.getCompany()',
+            normalizationContext: ['groups' => ['company-read']]
+        ),
+        new Post(
+            securityPostDenormalize: 'is_granted("ROLE_USER")',
+            denormalizationContext: ['groups' => ['company-create']], inputFormats: ['multipart' => ['multipart/form-data']],
+            controller: CreateCompanyController::class
+        ),
+        new Patch(
+            securityPostDenormalize: 'is_granted("ROLE_USER") and object == user.getCompany()',
+            denormalizationContext: ['groups' => ['company-update']],
+        ),
+        new Delete(
+            security: 'is_granted("ROLE_ADMIN") or object == user.getCompany()'
+        ),
     ],
-    normalizationContext: ['groups' => ['read-company', 'read-company-mutation']]
+    normalizationContext: ['groups' => ['company-read', 'read-company-mutation']]
 )]
 #[Vich\Uploadable]
 class Company
 {
-    #[Groups(['read-company-mutation'])]
+    #[Groups(['read-company-mutation', 'company-getall'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['read-company', 'create-company', 'update-company'])]
+    #[Groups(['company-read', 'company-create', 'company-update', 'company-getall'])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
     #[Vich\UploadableField(mapping: 'company_kbis', fileNameProperty:'pathKbis')]
-    #[Groups(['create-company', 'update-company'])]
+    #[Groups(['company-create', 'company-getall'])]
     public ?File $fileKbis = null;
 
-    #[Groups(['read-company'])]
+    #[Groups(['company-read', 'company-getall'])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $pathKbis = null;
 
     #[Assert\Email()]
-    #[Groups(['read-company', 'create-company', 'update-company'])]
+    #[Groups(['company-read', 'company-create', 'company-update', 'company-getall'])]
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
-    #[Groups(['read-company-as-admin'])]
+    #[Groups(['read-company-as-admin', 'company-getall'])]
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $validatedAt = null;
 
-    #[Groups(['read-company-as-admin'])]
+    #[Groups(['read-company-as-admin', 'company-getall'])]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $rejectedReason = null;
 
     #[Vich\UploadableField(mapping: 'company_logo', fileNameProperty:'logoPath')]
-    #[Groups(['create-company', 'update-company'])]
+    #[Groups(['company-create', 'company-getall'])]
     public ?File $fileLogo = null;
 
-    #[Groups(['read-company'])]
+    #[Groups(['company-read', 'company-getall'])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $logoPath = null;
 
