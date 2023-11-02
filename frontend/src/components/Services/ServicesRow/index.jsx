@@ -12,7 +12,7 @@ function ServicesRow({
   return (
     <div className={style.ServicesRow}>
       <div className={style.ServicesRowDesc}>
-        <span>{name}</span>
+        <span className={style.ServicesRowDescName}>{name}</span>
         <div className={style.ServicesRowDescDetail}>
           <span>
             {description}

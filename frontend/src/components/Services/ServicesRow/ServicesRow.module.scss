@@ -15,6 +15,11 @@
     &Desc {
       display: flex;
       flex-direction: column;
+
+      &Name {
+        font-weight: var(--font-weight-5);
+        margin-bottom: var(--size-1);
+      }
       
       &Detail {
         box-sizing: border-box;
