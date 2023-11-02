@@ -19,23 +19,6 @@
       &Detail {
         box-sizing: border-box;
       }
-
-      .Collapsed {
-        position: relative;
-        max-height: var(--size-4);
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      
-      .Expanded {
-        position: initial;
-        max-height: none;
-      }
-
-      &ShowMore {
-        width: fit-content;
-      }
-
     }
 
     &Infos {
