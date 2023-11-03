@@ -31,12 +31,11 @@
       flex-direction: row;
       gap: var(--size-2);
       color: var( --color-text-light);
-      margin-right: auto;
-      margin-left: auto;
+      justify-self: center;
     }
 
     &Btn {
-      margin-left: auto;
+      justify-self: flex-end;
     }
     
   }

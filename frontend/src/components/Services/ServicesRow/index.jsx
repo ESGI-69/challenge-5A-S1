@@ -2,6 +2,7 @@ import style from './ServicesRow.module.scss';
 import PropTypes from 'prop-types';
 import Button from '../../lib/Button';
 import { minToDuration } from '@/utils/formater/time';
+import { useTranslation } from 'react-i18next';
 
 function ServicesRow({
   name,
@@ -9,6 +10,7 @@ function ServicesRow({
   price,
   duration,
 }) {
+  const { t } = useTranslation('servicesTable');
   return (
     <div className={style.ServicesRow}>
       <div className={style.ServicesRowDesc}>
@@ -24,7 +26,10 @@ function ServicesRow({
         <span>•</span>
         <span>{price} €</span>
       </div>
-      <Button className={style.ServicesRowBtn} variant="dark">Choisir</Button>
+      <div className={style.ServicesRowBtn}>
+        {/* should be dark variant */}
+        <Button variant="primary">{t('choose')}</Button>
+      </div>
     </div>
   );
 }
