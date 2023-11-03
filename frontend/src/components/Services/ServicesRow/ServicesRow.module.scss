@@ -1,0 +1,42 @@
+.Services {
+  &Row {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+    align-items: center;
+    justify-items: flex-start;
+    padding: var(--size-5) 0;
+    border-bottom: var(--border-size-1) solid var(--color-border);
+    gap: var(--size-2);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &Desc {
+      display: flex;
+      flex-direction: column;
+
+      &Name {
+        font-weight: var(--font-weight-5);
+        margin-bottom: var(--size-1);
+      }
+      
+      &Detail {
+        box-sizing: border-box;
+      }
+    }
+
+    &Infos {
+      display: flex;
+      flex-direction: row;
+      gap: var(--size-2);
+      color: var( --color-text-light);
+      justify-self: center;
+    }
+
+    &Btn {
+      justify-self: flex-end;
+    }
+    
+  }
+}
