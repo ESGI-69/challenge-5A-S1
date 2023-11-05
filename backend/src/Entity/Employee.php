@@ -12,6 +12,8 @@ use App\Repository\EmployeeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use App\Controller\Employee\CreateEmployeeOfCompanyController;
+use App\Controller\Employee\PatchEmployeeOfCompanyController;
+use App\Controller\Employee\DeleteEmployeeOfCompanyController;
 
 // @todo : Adapt this entity to block other Company to get others Company data
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
@@ -43,9 +45,24 @@ use App\Controller\Employee\CreateEmployeeOfCompanyController;
             normalizationContext: ['groups' => ['employee-patch']],
             denormalizationContext: ['groups' => ['employee-patch']],
         ),
+        //new custom patch
+        new Patch(
+            name: 'patch-employee-of-company',
+            uriTemplate: '/companies/employees/{id}',
+            normalizationContext: ['groups' => ['employee-patch']],
+            denormalizationContext: ['groups' => ['employee-patch']],
+            controller: PatchEmployeeOfCompanyController::class,
+        ),
         new Delete(
             security: 'is_granted("ADMIN")',
             normalizationContext: ['groups' => ['employee-get']]
+        ),
+        //new custom delete
+        new Delete(
+            name: 'delete-employee-of-company',
+            uriTemplate: '/companies/employees/{id}',
+            normalizationContext: ['groups' => ['employee-get']],
+            controller: DeleteEmployeeOfCompanyController::class,
         ),
     ]
 )]
