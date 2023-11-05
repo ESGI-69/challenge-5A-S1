@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Post;
 use App\Repository\EmployeeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use App\Controller\Employee\CreateEmployeeOfCompanyController;
 
 // @todo : Adapt this entity to block other Company to get others Company data
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
@@ -27,6 +28,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
             security: 'is_granted("ADMIN")',
             normalizationContext: ['groups' => ['employee-post']],
             denormalizationContext: ['groups' => ['employee-post']],
+        ),
+        //new custom post using company id
+        new Post(
+            name: 'create-employee-of-company',
+            uriTemplate: '/companies/employees',
+            normalizationContext: ['groups' => ['employee-post']],
+            denormalizationContext: ['groups' => ['employee-post']],
+            controller: CreateEmployeeOfCompanyController::class,
+            read: false,
         ),
         new Patch(
             security: 'is_granted("ADMIN")',
