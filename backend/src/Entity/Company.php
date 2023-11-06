@@ -43,12 +43,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             security: 'is_granted("ROLE_ADMIN") or object == user.getCompany()'
         ),
     ],
-    normalizationContext: ['groups' => ['company-read', 'read-company-mutation']]
+    normalizationContext: ['groups' => ['read-company']]
 )]
 #[Vich\Uploadable]
 class Company
 {
-    #[Groups(['read-company-mutation', 'company-getall'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
