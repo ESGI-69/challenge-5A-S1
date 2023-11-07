@@ -1,8 +1,5 @@
 FROM node:lts-alpine
 
-ARG VITE_API
-ENV VITE_API=$VITE_API
-
 # install git
 RUN apk update && apk upgrade && \
     apk add --no-cache bash git openssh

@@ -42,12 +42,11 @@ jobs:
     concurrency: deploy
     steps:
       - uses: actions/checkout@v3
+      - name: Set up kubectl
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
       - name: Redeploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          password: ${{ secrets.VPS_PASSWORD }}
-          script: |
-            kubectl set image deployment/frontend-deployment front=${{ env.DOCKERHUB_REPO_FRONTEND }}:${{ github.sha }} -n challenge-5a-s1
-            kubectl rollout status deployment/frontend-deployment -n challenge-5a-s1
+        run: |
+          kubectl set image deployment/frontend-deployment front=${{ env.DOCKERHUB_REPO_FRONTEND }}:${{ github.sha }} -n challenge-5a-s1
+          kubectl rollout status deployment/frontend-deployment -n challenge-5a-s1
