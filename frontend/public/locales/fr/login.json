@@ -1,0 +1,11 @@
+{
+  "title": "Vous avez déjà utilisé Platiny ?",
+  "form": {
+    "email": "Email",
+    "password": "Mot de passe",
+    "forgottenPassword": "Mot de passe oublié ?",
+    "login": "Se connecter"
+  },
+  "registerTitle": "Nouveau sur Platiny ?",
+  "createAccount": "Créer mon compte"
+}

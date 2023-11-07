@@ -4,8 +4,10 @@ import { useContext, useState } from 'react';
 import styles from './LoginForm.module.scss';
 import Button from '@/components/lib/Button';
 import { ProfileContext } from '@/contexts/ProfileContext';
+import { useTranslation } from 'react-i18next';
 
 export default function LoginForm() {
+  const { t } = useTranslation('login');
   const { login } = useContext(ProfileContext);
   const [ emailInput, setEmailInput ] = useState({
     id: crypto.randomUUID(),
@@ -45,27 +47,27 @@ export default function LoginForm() {
   return (
     <form className={styles.Form} onSubmit={handleFormSubmit}>
       <div className={styles.FormField}>
-        <label className={styles.FormFieldLabel} htmlFor={emailInput.id}>Email *</label>
+        <label className={styles.FormFieldLabel} htmlFor={emailInput.id}>{t('form.email')} *</label>
         <Input
           id={emailInput.id}
           name={emailInput.name}
-          placeholder="Email"
+          placeholder={t('form.email')}
           value={emailInput.value}
           onInput={handleEmailInputChange}
         />
       </div>
       <div className={styles.FormField}>
-        <label className={styles.FormFieldLabel} htmlFor={passwordInput.id}>Mot de passe *</label>
+        <label className={styles.FormFieldLabel} htmlFor={passwordInput.id}>{t('form.password')} *</label>
         <Input
           id={passwordInput.id}
           name={passwordInput.name}
-          placeholder="Mot de passe"
+          placeholder={t('form.password')}
           type="password"
           value={passwordInput.value}
           onInput={handlePasswordInputChange} />
       </div>
-      <Link className={styles.FormLink} to="/forgot-password">Mot de passe oublié ?</Link>
-      <Button variant="black">Se connecter</Button>
+      <Link className={styles.FormLink} to="/forgot-password">{t('form.forgottenPassword')}</Link>
+      <Button variant="black">{t('form.login')}</Button>
     </form>
   );
 }

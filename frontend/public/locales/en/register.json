@@ -1,0 +1,13 @@
+{
+  "title": "Are you new on Platiny?",
+  "form": {
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "phone": "Phone",
+    "email": "Email",
+    "password": "Password",
+    "register": "Create my account"
+  },
+  "loginTitle": "Already a member ?",
+  "login": "Login"
+}
