@@ -11,9 +11,6 @@ use ApiPlatform\Metadata\Post;
 use App\Repository\EmployeeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-use App\Controller\Employee\CreateEmployeeOfCompanyController;
-use App\Controller\Employee\PatchEmployeeOfCompanyController;
-use App\Controller\Employee\DeleteEmployeeOfCompanyController;
 
 // @todo : Adapt this entity to block other Company to get others Company data
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
@@ -31,13 +28,21 @@ use App\Controller\Employee\DeleteEmployeeOfCompanyController;
             normalizationContext: ['groups' => ['employee-post']],
             denormalizationContext: ['groups' => ['employee-post']],
         ),
-        //new custom post using company id
+        new Get(
+            name: 'read-company-employees',
+            uriTemplate: '/companies/employees/{id}',
+            normalizationContext: ['groups' => ['employee-getall']],
+            denormalizationContext: ['groups' => ['employee-getall']],
+            securityPostDenormalize: 'is_granted("ROLE_PRESTA") and object.getCompanyId() == user.getCompany()',
+            securityPostDenormalizeMessage: 'You can only get employees of your company'
+        ),
         new Post(
             name: 'create-employee-of-company',
             uriTemplate: '/companies/employees',
             normalizationContext: ['groups' => ['employee-post']],
             denormalizationContext: ['groups' => ['employee-post']],
-            controller: CreateEmployeeOfCompanyController::class,
+            securityPostDenormalize: 'is_granted("ROLE_PRESTA") and object.getCompanyId() == user.getCompany()',
+            securityPostDenormalizeMessage: 'You can only create employees for your company',
             read: false,
         ),
         new Patch(
@@ -45,24 +50,25 @@ use App\Controller\Employee\DeleteEmployeeOfCompanyController;
             normalizationContext: ['groups' => ['employee-patch']],
             denormalizationContext: ['groups' => ['employee-patch']],
         ),
-        //new custom patch
         new Patch(
             name: 'patch-employee-of-company',
             uriTemplate: '/companies/employees/{id}',
             normalizationContext: ['groups' => ['employee-patch']],
             denormalizationContext: ['groups' => ['employee-patch']],
-            controller: PatchEmployeeOfCompanyController::class,
+            securityPostDenormalize: 'is_granted("ROLE_PRESTA") and object.getCompanyId() == user.getCompany()',
+            securityPostDenormalizeMessage: 'You can only patch employees of your company',
         ),
         new Delete(
             security: 'is_granted("ADMIN")',
             normalizationContext: ['groups' => ['employee-get']]
         ),
-        //new custom delete
         new Delete(
             name: 'delete-employee-of-company',
             uriTemplate: '/companies/employees/{id}',
             normalizationContext: ['groups' => ['employee-get']],
-            controller: DeleteEmployeeOfCompanyController::class,
+            denormalizationContext: ['groups' => ['employee-get']],
+            securityPostDenormalize: 'is_granted("ROLE_PRESTA") and object.getCompanyId() == user.getCompany()',
+            securityPostDenormalizeMessage: 'You can only delete employees of your company',
         ),
     ]
 )]

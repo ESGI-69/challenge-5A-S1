@@ -19,7 +19,6 @@ class GetEmployeesOfCompanyController
 
     public function __invoke(Company $company): Company
     {
-            // $employees = $company->getEmployees();
             return $company;
     }
 
