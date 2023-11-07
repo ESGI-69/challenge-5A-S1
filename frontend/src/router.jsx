@@ -5,6 +5,7 @@ import Dashboard from '@/pages/backoffice/Dashboard/';
 import Library from '@/pages/Library';
 import ErrorPage from '@/pages/404.jsx';
 import Home from '@/pages/website/Home';
+import Login from '@/pages/website/Login';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: '/library',
         element: <Library />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
       {
         path: '*',
