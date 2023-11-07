@@ -71,7 +71,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     #[Assert\NotBlank()]
-    #[Groups(['read-user', 'create-user', 'update-user', 'read-me'])]
+    #[Groups(['read-user', 'create-user', 'update-user', 'read-me', 'appointment-read'])]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
@@ -91,7 +91,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $validatedServices;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['create-user', 'update-user', 'read-me'])]
+    #[Groups(['create-user', 'update-user', 'read-me', 'appointment-read'])]
     private ?string $lastname = null;
 
     #[Groups(['read-user', 'create-user', 'read-me'])]
@@ -99,7 +99,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?Company $company = null;
 
     #[ORM\Column(length: 12)]
-    #[Groups(['read-user', 'create-user', 'update-user', 'read-me'])]
+    #[Groups(['read-user', 'create-user', 'update-user', 'read-me', 'appointment-read'])]
     private ?string $phonenumber = null;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Appointment::class, orphanRemoval: true)]

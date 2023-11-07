@@ -50,8 +50,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
         new Patch(name: 'edition-admin', security: 'is_granted("ROLE_ADMIN")'),
         new Delete(security: 'is_granted("ROLE_ADMIN")'),
     ],
-    denormalizationContext: ['groups' => ['create-service']],
-    normalizationContext: ['groups' => ['read-service']],
+    // denormalizationContext: ['groups' => ['create-service']],
+    // normalizationContext: ['groups' => ['read-service']],
 )]
 class Service
 {
@@ -61,17 +61,17 @@ class Service
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['create-service', 'read-service', 'read-service-all'])]
+    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read'])]
     #[Assert\NotBlank]
     #[Assert\NotNull]
     #[ORM\Column(length: 50, unique: true)]
     private ?string $name = null;
     
-    #[Groups(['create-service', 'read-service'])]
+    #[Groups(['create-service', 'read-service', 'appointment-read'])]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
     
-    #[Groups(['create-service', 'read-service', 'read-service-all'])]
+    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read'])]
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $icon = null;
     
