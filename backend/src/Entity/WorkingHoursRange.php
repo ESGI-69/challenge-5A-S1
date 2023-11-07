@@ -40,6 +40,10 @@ class WorkingHoursRange
     #[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'workingHoursRanges')]
     private Collection $services;
 
+    #[ORM\ManyToOne(inversedBy: 'workingHoursRanges')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Employee $Employee = null;
+
     public function __construct()
     {
         $this->services = new ArrayCollection();
@@ -94,6 +98,18 @@ class WorkingHoursRange
     public function removeService(Service $service): static
     {
         $this->services->removeElement($service);
+
+        return $this;
+    }
+
+    public function getEmployee(): ?Employee
+    {
+        return $this->Employee;
+    }
+
+    public function setEmployee(?Employee $Employee): static
+    {
+        $this->Employee = $Employee;
 
         return $this;
     }
