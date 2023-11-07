@@ -3,3 +3,4 @@
 *.jsx @SebGrd
 *.scss @mrpinkcat
 *.css @mrpinkcat
+backend/migrations/*.php @sguenier
