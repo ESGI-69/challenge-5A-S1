@@ -10,6 +10,7 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\GetCollection;
 use App\Repository\CompanyRepository;
 use App\Controller\Company\CreateCompanyController;
+use App\Controller\Company\CreateEmployeeOfCompanyController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -29,6 +30,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         new Get(
             securityPostDenormalize: 'is_granted("ROLE_USER") and object == user.getCompany()',
             normalizationContext: ['groups' => ['company-read']]
+        ),
+        new Get(
+            name: 'get-company-employees',
+            uriTemplate: '/companies/{id}/employees',
+            normalizationContext: ['groups' => ['company-getall','read-company-employees']],
         ),
         new Post(
             securityPostDenormalize: 'is_granted("ROLE_USER")',
@@ -89,6 +95,7 @@ class Company
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Establishment::class, orphanRemoval: true)]
     private Collection $establishments;
 
+    #[Groups(['company-read','read-company-employees'])]
     #[ORM\OneToMany(mappedBy: 'companyId', targetEntity: Employee::class, orphanRemoval: true)]
     private Collection $employees;
 
