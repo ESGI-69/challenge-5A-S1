@@ -108,9 +108,13 @@ class Employee
     #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Appointment::class, orphanRemoval: true)]
     private Collection $appointments;
 
+    #[ORM\OneToMany(mappedBy: 'Employee', targetEntity: WorkingHoursRange::class, orphanRemoval: true)]
+    private Collection $workingHoursRanges;
+
     public function __construct()
     {
         $this->appointments = new ArrayCollection();
+        $this->workingHoursRanges = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -208,6 +212,36 @@ class Employee
             // set the owning side to null (unless already changed)
             if ($appointment->getEmployee() === $this) {
                 $appointment->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, WorkingHoursRange>
+     */
+    public function getWorkingHoursRanges(): Collection
+    {
+        return $this->workingHoursRanges;
+    }
+
+    public function addWorkingHoursRange(WorkingHoursRange $workingHoursRange): static
+    {
+        if (!$this->workingHoursRanges->contains($workingHoursRange)) {
+            $this->workingHoursRanges->add($workingHoursRange);
+            $workingHoursRange->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkingHoursRange(WorkingHoursRange $workingHoursRange): static
+    {
+        if ($this->workingHoursRanges->removeElement($workingHoursRange)) {
+            // set the owning side to null (unless already changed)
+            if ($workingHoursRange->getEmployee() === $this) {
+                $workingHoursRange->setEmployee(null);
             }
         }
 
