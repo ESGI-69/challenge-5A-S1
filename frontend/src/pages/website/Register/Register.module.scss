@@ -11,29 +11,6 @@
     margin-bottom: var(--size-5);
   }
 
-  &Form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-3);
-
-    &Field {
-      display: flex;
-      flex-direction: column;
-      gap: var(--size-1);
-      width: 100%;
-
-      &Label {
-        font-size: calc(var(--size-3) - var(--size-1));
-        font-weight: var(--font-weight-5);
-      }
-    }
-    &Link {
-      font-size: calc(var(--size-3) - var(--size-1));
-      font-weight: var(--font-weight-5);
-      color: var(--color-text-regular);
-    }
-  }
-
   &Separator {
     margin: var(--size-8) 0;
   }

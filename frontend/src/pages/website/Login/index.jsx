@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from '@/components/lib/Button';
 import styles from './Login.module.scss';
 import { useState } from 'react';
+import apiCall from '@/axios';
 
 export default function Login() {
   const [ emailInput, setEmailInput ] = useState({
