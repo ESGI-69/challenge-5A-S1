@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/components/lib/Dropdown';
+import style from './LanguageSelector.module.scss';
 
 const languages  = {
   en: { label: 'English', icon: '🇺🇸' },
@@ -12,8 +13,8 @@ function LanguageSwticher() {
   return (
     <div>
       <Dropdown>
-        <DropdownButton>
-          {languages[i18n.resolvedLanguage || 'en'].icon} {i18n.resolvedLanguage}
+        <DropdownButton className={style.LanguageSelectorButton}>
+          {languages[i18n.resolvedLanguage || 'en'].icon}
         </DropdownButton>
         <DropdownList>
           {Object.keys(languages).map((language) => (
