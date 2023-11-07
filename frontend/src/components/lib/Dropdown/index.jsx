@@ -30,10 +30,11 @@ DropdownButton.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-function DropdownItem({ children, ...delegated }) {
+function DropdownItem({ children, onClick, ...delegated }) {
   const { toggleDropdown } = useDropdown();
   const handleClick = () => {
     toggleDropdown();
+    onClick();
   };
   return (
     <div className={styles.dropdownListItem} onClick={() => handleClick()} {...delegated}>
@@ -43,6 +44,7 @@ function DropdownItem({ children, ...delegated }) {
 }
 DropdownItem.propTypes = {
   children: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
 };
 
 function DropdownList({ children, ...delegated }) {

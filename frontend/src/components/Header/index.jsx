@@ -1,4 +1,4 @@
-import LanguageSwticher from '@/components/LanguageSwitcher';
+import LanguageSelector from '@/components/LanguageSelector';
 import Button from '@/components/lib/Button';
 import styles from './Header.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +12,7 @@ export default function Header() {
         <Link className={styles.NavbarHomeLink} to="/">Platiny</Link>
       </div>
       <div className={styles.NavbarMenu}>
-        <LanguageSwticher />
+        <LanguageSelector />
         <Link to="/register" className={styles.NavbarMenuLink}>{t('menu.register')}</Link>
         {/* should be dark variant */}
         <Button href="/login" variant="primary">{t('menu.login')}</Button>
