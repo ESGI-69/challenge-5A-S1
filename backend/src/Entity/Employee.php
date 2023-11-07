@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Repository\EmployeeRepository;
+use App\Controller\Employee\GetWorkingHoursRangesOfEmployeeController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,6 +22,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
         new GetCollection(
             security: 'is_granted("ROLE_ADMIN")',
             normalizationContext: ['groups' => ['employee-getall']]
+        ),
+        new Get(
+            uriTemplate: '/employees/{id}/working_hours_ranges',
+            controller: GetWorkingHoursRangesOfEmployeeController::class,
         ),
         new Get(
             security: 'is_granted("ADMIN")',
