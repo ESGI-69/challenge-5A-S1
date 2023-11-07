@@ -5,6 +5,7 @@ import styles from './Input.module.scss';
 const Input = forwardRef(function InputComponent({
   onChange,
   variant = 'default',
+  disabled = false,
   ...delegated
 }, ref) {
   const [ value, setValue ] = useState('');
@@ -28,6 +29,7 @@ const Input = forwardRef(function InputComponent({
       value={value}
       onChange={handleChange}
       type="text"
+      disabled={disabled}
       ref={ref}
       {...delegated}
     />
@@ -40,6 +42,7 @@ Input.propTypes = {
   type: PropTypes.string,
   onChange: PropTypes.func,
   variant: PropTypes.oneOf([ 'default', 'no-border' ]),
+  disabled: PropTypes.bool,
 };
 
 export default Input;

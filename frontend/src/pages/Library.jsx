@@ -28,9 +28,13 @@ export default function Library() {
 
       <h2>Input</h2>
       <h3>default</h3>
-      <Input variant="default" placeholder="Placeholder" />
+      <Input placeholder="Placeholder" />
       <h3>no-border</h3>
       <Input variant="no-border" placeholder="Placeholder" />
+      <h3>default disabled</h3>
+      <Input placeholder="Placeholder" disabled />
+      <h3>no-border disabled</h3>
+      <Input variant="no-border" placeholder="Placeholder" disabled />
 
       <h2>Tabs</h2>
       <Tabs defaultTab="tab1">

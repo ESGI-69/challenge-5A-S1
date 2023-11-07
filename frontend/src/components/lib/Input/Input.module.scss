@@ -7,16 +7,31 @@
   transition-timing-function: ease-in-out;
   outline: none;
   background-clip: padding-box;
+  background-color: var(--white);
 
-  &:hover {
+  &:hover, &:focus {
     border-color: var(--color-dark);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-hover);
+
+    &:hover {
+      border-color: var(--color-border);
+    }
   }
 
   &NoBorder {
     border: none;
     
-    &:hover {
+    &:hover, &:focus {
       border: none;
+      background-color: var(--color-hover);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
       background-color: var(--color-hover);
     }
   }
