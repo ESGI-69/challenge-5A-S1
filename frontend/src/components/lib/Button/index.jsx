@@ -3,7 +3,13 @@ import styles from './Button.module.scss';
 import React from 'react';
 
 const Button = React.forwardRef(function Button(
-  { children, href, variant = 'primary', ...delegated },
+  {
+    children,
+    href,
+    variant = 'primary',
+    size = 'default',
+    ...delegated
+  },
   ref,
 ) {
   const variantClasses = {
@@ -16,7 +22,7 @@ const Button = React.forwardRef(function Button(
   };
   const Element = href ? 'a' : 'button';
   return (
-    <Element ref={ref} href={href} className={`${styles.Button} ${variantClasses[variant]}`} {...delegated}>
+    <Element ref={ref} href={href} className={`${styles.Button} ${variantClasses[variant]} ${size === 'large' && styles.ButtonLarge}`} {...delegated}>
       {children}
     </Element>
   );
@@ -33,6 +39,7 @@ Button.propTypes = {
     'warning',
     'black',
   ]),
+  size: PropTypes.oneOf([ 'default', 'large' ]),
   style: PropTypes.object,
 };
 

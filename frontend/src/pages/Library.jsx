@@ -19,12 +19,21 @@ export default function Library() {
       <h1>Library</h1>
 
       <h2>Button</h2>
+      <h3>Size=default</h3>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="black">Black</Button>
       <Button variant="success">Button</Button>
       <Button variant="danger">Danger</Button>
       <Button variant="warning">Warning</Button>
+
+      <h3>Size=large</h3>
+      <Button size="large" variant="primary">Primary</Button>
+      <Button size="large" variant="secondary">Secondary</Button>
+      <Button size="large" variant="black">Black</Button>
+      <Button size="large" variant="success">Button</Button>
+      <Button size="large" variant="danger">Danger</Button>
+      <Button size="large" variant="warning">Warning</Button>
 
       <h2>Input</h2>
       <h3>default</h3>
