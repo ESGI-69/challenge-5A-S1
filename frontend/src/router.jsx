@@ -6,6 +6,7 @@ import Library from '@/pages/Library';
 import ErrorPage from '@/pages/404.jsx';
 import Home from '@/pages/website/Home';
 import Login from '@/pages/website/Login';
+import Register from '@/pages/website/Register';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/register',
+        element: <Register />,
       },
       {
         path: '*',
