@@ -76,6 +76,10 @@ export default function ProfileProvider({ children }) {
   const logout = () => {
     Cookies.remove('token');
     apiCall.defaults.headers.common.Authorization = '';
+    dispatch({
+      type: 'profile',
+      payload: null,
+    });
   };
 
   return (
