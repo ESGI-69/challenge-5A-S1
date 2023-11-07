@@ -8,9 +8,11 @@ const Button = React.forwardRef(function Button(
 ) {
   const variantClasses = {
     primary: 'button--primary',
+    secondary: 'button--secondary',
     success: 'button--success',
     danger: 'button--danger',
     warning: 'button--warning',
+    black: 'button--black',
   };
   const Element = href ? 'a' : 'button';
   return (
@@ -25,9 +27,11 @@ Button.propTypes = {
   href: PropTypes.string,
   variant: PropTypes.oneOf([
     'primary',
+    'secondary',
     'success',
     'danger',
     'warning',
+    'black',
   ]),
   style: PropTypes.object,
 };

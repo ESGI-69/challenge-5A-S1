@@ -1,17 +1,27 @@
 .button{
   cursor: pointer;
-  padding: var(--size-1) var(--size-2);
-  border: var(--border-size-1) solid var(--color-border-regular);
+  padding: var(--size-2) var(--size-3);
+  border: none;
   border-radius: var(--radius-2);
   color: var(--color-text-white);
+
+  font-size: var(--size-3);
+  font-weight: var(--font-weight-5);
+  font-family: Inter;
+  font-style: normal; 
 
   &--primary { 
     background-color: var(--color-white);
     color: var(--color-text-regular);
   }
 
+  &--secondary {
+    background-color: var(--gray-2);
+    color: var(--color-text-regular);
+  }
+
   &--success {
-    background-color: var(--green-8);
+    background-color: var(--green-7);
   }
 
   &--danger {
@@ -19,7 +29,11 @@
   }
 
   &--warning {
-    background-color: var(--yellow-8);
+    background-color: var(--yellow-5);
+  }
+
+  &--black {
+    background-color: var(--gray-9);
   }
 
 }
