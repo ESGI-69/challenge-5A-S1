@@ -20,7 +20,9 @@ export default function Library() {
 
       <h2>Button</h2>
       <Button variant="primary">Primary</Button>
-      <Button variant="success">Success</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="black">Black</Button>
+      <Button variant="success">Button</Button>
       <Button variant="danger">Danger</Button>
       <Button variant="warning">Warning</Button>
 
