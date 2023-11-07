@@ -4,6 +4,7 @@ import styles from './Input.module.scss';
 
 const Input = forwardRef(function InputComponent({
   onChange,
+  variant = 'default',
   ...delegated
 }, ref) {
   const [ value, setValue ] = useState('');
@@ -16,16 +17,14 @@ const Input = forwardRef(function InputComponent({
     }
   };
 
-  Input.propTypes = {
-    id: PropTypes.string,
-    placeholder: PropTypes.string,
-    type: PropTypes.string,
-    onChange: PropTypes.func,
+  const classNameVariant = {
+    default: styles.Input,
+    'no-border': `${styles.InputNoBorder} ${styles.Input}`,
   };
 
   return (
     <input
-      className={styles.Input}
+      className={classNameVariant[variant]}
       value={value}
       onChange={handleChange}
       type="text"
@@ -34,5 +33,13 @@ const Input = forwardRef(function InputComponent({
     />
   );
 });
+
+Input.propTypes = {
+  id: PropTypes.string,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  onChange: PropTypes.func,
+  variant: PropTypes.oneOf([ 'default', 'no-border' ]),
+};
 
 export default Input;

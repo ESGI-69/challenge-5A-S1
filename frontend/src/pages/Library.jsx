@@ -27,7 +27,10 @@ export default function Library() {
       <Button variant="warning">Warning</Button>
 
       <h2>Input</h2>
-      <Input placeholder="Placeholder" />
+      <h3>default</h3>
+      <Input variant="default" placeholder="Placeholder" />
+      <h3>no-border</h3>
+      <Input variant="no-border" placeholder="Placeholder" />
 
       <h2>Tabs</h2>
       <Tabs defaultTab="tab1">
