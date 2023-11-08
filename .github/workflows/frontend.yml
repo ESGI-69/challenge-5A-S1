@@ -45,6 +45,7 @@ jobs:
   build:
     needs:
       - eslint
+      - stylelint
     runs-on: ubuntu-latest
     name: Build (frontend)
     defaults:
