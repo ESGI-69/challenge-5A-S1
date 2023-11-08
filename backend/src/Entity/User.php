@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Repository\UserRepository;
+use App\Controller\User\GetUserMeController;
+use App\Controller\User\PatchUserMeController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,8 +21,33 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
-        new Get(normalizationContext: ['groups' => ['read-user', 'read-company']]),
-//        new Get(uriTemplate: '/users/{id}/infos', normalizationContext: ['groups' => ['read-user', 'read-user-as-admin']], security: 'is_granted("ROLE_ADMIN")'),
+        // new Get(
+        //     uriTemplate: '/users/{id}/infos',
+        //     normalizationContext: ['groups' => ['read-user', 'read-user-as-admin']],
+        //     security: 'is_granted("ROLE_ADMIN")'
+        // ),
+        new Get(
+            security: 'is_granted("ROLE_USER")',
+            uriTemplate: '/users/me',
+            normalizationContext: ['groups' => ['read-me', 'company-read']],
+            controller: GetUserMeController::class
+        ),
+        new Patch(
+            security: 'is_granted("ROLE_USER")',
+            uriTemplate: '/users/me',
+            denormalizationContext: ['groups' => ['update-user', 'company-read']],
+            controller: PatchUserMeController::class
+        ),
+        // Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2OTk0MzYzMzIsImV4cCI6MTY5OTQzOTkzMiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXNlckBleGFtcGxlLmNvbSJ9.BjurA22Z-gQBR4uS3ls0jIiOsynBNbnY7BWB-cYNPqBIYikm9Ih7L3N3DFB1G5lK4a3cRYScbuxh9lyNp2t9zJmbFit3bYz6SxA7f5uQrtHrnoyPuOMk3WpnBmj7F3j8qls5Qq9u5V21vJ66LofHmfM6h870xpTaPjc9iiTPaGHPao4VrC2CyAL_VY48WC03K03RX0k0F0PtyFa4w51-V_4vqlGXvAyu0yOr85mTfX4KxBX1J8GinZlsm7DaFKb_DlDNBAuWJQm7F_W8b2Ar_sPJUF65f4qKhEdIX27UYpnixY_X77Ki4n0KjDoICRXEiqNPy9bd-UmWFL1U2AqEcA
+        new Get(
+            security: 'is_granted("ROLE_ADMIN")',
+            normalizationContext: ['groups' => ['read-user', 'read-company-as-admin']]
+        ),
+        new GetCollection(
+            security: 'is_granted("ROLE_ADMIN")',
+            normalizationContext: ['groups' => ['read-user', 'read-company-as-admin']]
+        ),
+
         new Post(denormalizationContext: ['groups' => ['create-user']]),
         new Patch(denormalizationContext: ['groups' => ['update-user']]),
     ],
@@ -37,7 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[Assert\Email()]
-    #[Groups(['read-user', 'read-user-as-admin', 'create-user'])]
+    #[Groups(['read-user', 'read-user-as-admin', 'create-user', 'read-me'])]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
@@ -46,7 +74,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     #[Assert\NotBlank()]
-    #[Groups(['read-user', 'create-user', 'update-user'])]
+    #[Groups(['read-user', 'create-user', 'update-user', 'read-me'])]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
@@ -64,16 +92,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'validatedBy', targetEntity: Service::class)]
     private Collection $validatedServices;
+
     #[ORM\Column(length: 50)]
-    #[Groups(['create-user', 'update-user'])]
+    #[Groups(['create-user', 'update-user', 'read-me'])]
     private ?string $lastname = null;
 
-    #[Groups(['read-user', 'create-user', 'update-user'])]
+    #[Groups(['read-user', 'create-user', 'update-user', 'read-me'])]
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Company $company = null;
 
     #[ORM\Column(length: 12)]
-    #[Groups(['read-user', 'create-user', 'update-user'])]
+    #[Groups(['read-user', 'create-user', 'update-user', 'read-me'])]
     private ?string $phonenumber = null;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Appointment::class, orphanRemoval: true)]
