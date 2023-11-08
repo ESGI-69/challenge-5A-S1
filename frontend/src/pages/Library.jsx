@@ -10,6 +10,7 @@ import Note from '@/components/Notation/Note';
 import ServicesTable from '@/components/Services/ServicesTable';
 import Gallery from '@/components/lib/Gallery';
 import SearchBar from '@/components/SearchBar';
+import OpeningHours from '@/components/OpeningHours';
 
 export default function Library() {
   return (
@@ -185,6 +186,22 @@ export default function Library() {
 
       <h2>SearchBar</h2>
       <SearchBar />
+
+      <h2>OpeningHour</h2>
+      <OpeningHours>
+        {JSON.stringify([
+          { startTime: '2023-11-07T15:37:45+01:00', endTime: '2023-11-07T16:37:45+01:00' },
+          { startTime: '2023-11-07T13:37:45+01:00', endTime: '2023-11-07T14:37:45+01:00' },
+          { startTime: '2023-11-08T13:37:45+01:00', endTime: '2023-11-08T14:37:45+01:00' },
+          { startTime: '2023-11-08T15:37:45+01:00', endTime: '2023-11-08T16:37:45+01:00' },
+          { startTime: '2023-11-09T13:37:45+01:00', endTime: '2023-11-09T14:37:45+01:00' },
+          { startTime: '2023-11-09T15:37:45+01:00', endTime: '2023-11-09T16:37:45+01:00' },
+          { startTime: '2023-11-10T13:37:45+01:00', endTime: '2023-11-10T14:37:45+01:00' },
+          { startTime: '2023-11-10T15:37:45+01:00', endTime: '2023-11-10T16:37:45+01:00' },
+          { startTime: '2023-11-11T13:37:45+01:00', endTime: '2023-11-11T14:37:45+01:00' },
+          { startTime: '2023-11-11T15:37:45+01:00', endTime: '2023-11-11T16:37:45+01:00' },
+        ])}
+      </OpeningHours>
 
     </main>
   );

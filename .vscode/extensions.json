@@ -7,6 +7,6 @@
     "jasonnutter.vscode-codeowners",
     "phoenisx.cssvar",
     "dbaeumer.vscode-eslint",
-    "stylelint.vscode-stylelint",
+    "stylelint.vscode-stylelint"
   ]
 }
