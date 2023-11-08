@@ -21,11 +21,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
-        // new Get(
-        //     uriTemplate: '/users/{id}/infos',
-        //     normalizationContext: ['groups' => ['read-user', 'read-user-as-admin']],
-        //     security: 'is_granted("ROLE_ADMIN")'
-        // ),
         new Get(
             security: 'is_granted("ROLE_USER")',
             uriTemplate: '/users/me',
@@ -38,7 +33,6 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: ['groups' => ['update-user', 'company-read']],
             controller: PatchUserMeController::class
         ),
-        // Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2OTk0MzYzMzIsImV4cCI6MTY5OTQzOTkzMiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXNlckBleGFtcGxlLmNvbSJ9.BjurA22Z-gQBR4uS3ls0jIiOsynBNbnY7BWB-cYNPqBIYikm9Ih7L3N3DFB1G5lK4a3cRYScbuxh9lyNp2t9zJmbFit3bYz6SxA7f5uQrtHrnoyPuOMk3WpnBmj7F3j8qls5Qq9u5V21vJ66LofHmfM6h870xpTaPjc9iiTPaGHPao4VrC2CyAL_VY48WC03K03RX0k0F0PtyFa4w51-V_4vqlGXvAyu0yOr85mTfX4KxBX1J8GinZlsm7DaFKb_DlDNBAuWJQm7F_W8b2Ar_sPJUF65f4qKhEdIX27UYpnixY_X77Ki4n0KjDoICRXEiqNPy9bd-UmWFL1U2AqEcA
         new Get(
             security: 'is_granted("ROLE_ADMIN")',
             normalizationContext: ['groups' => ['read-user', 'read-company-as-admin']]
@@ -49,7 +43,10 @@ use Symfony\Component\Validator\Constraints as Assert;
         ),
 
         new Post(denormalizationContext: ['groups' => ['create-user']]),
-        new Patch(denormalizationContext: ['groups' => ['update-user']]),
+        new Patch(
+            security: 'is_granted("ROLE_ADMIN")',
+            denormalizationContext: ['groups' => ['update-user']]
+        ),
     ],
     normalizationContext: ['groups' => ['read-user', 'read-user-mutation']],
 )]
@@ -70,7 +67,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-    #[Groups(['read-user'])]
+    #[Groups(['read-company-as-admin'])]
     private array $roles = [];
 
     #[Assert\NotBlank()]
