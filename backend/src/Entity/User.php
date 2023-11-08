@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Patch(
             security: 'is_granted("ROLE_USER")',
             uriTemplate: '/users/me',
-            denormalizationContext: ['groups' => ['update-user', 'company-read']],
+            denormalizationContext: ['groups' => ['update-user-self', 'update-user', 'company-read']],
             controller: PatchUserMeController::class
         ),
         new Get(
@@ -81,7 +81,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[Groups(['create-user', 'update-user'])]
+    #[Groups(['create-user'])]
     private string $plainPassword = '';
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Service::class)]
@@ -104,6 +104,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Appointment::class, orphanRemoval: true)]
     private Collection $appointments;
+
+    #[Groups(['update-user-self'])]
+    private $currentPassword;
+
+    #[Groups(['update-user-self'])]
+    private $newPassword;
 
     public function __construct()
     {
@@ -332,6 +338,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $appointment->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCurrentPassword(): ?string
+    {
+        return $this->currentPassword;
+    }
+
+    public function setCurrentPassword(string $currentPassword): self
+    {
+        $this->currentPassword = $currentPassword;
+
+        return $this;
+    }
+
+    public function getNewPassword(): ?string
+    {
+        return $this->newPassword;
+    }
+
+    public function setNewPassword(string $newPassword): self
+    {
+        $this->newPassword = $newPassword;
 
         return $this;
     }
