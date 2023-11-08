@@ -15,7 +15,7 @@ export default function Header() {
         <LanguageSelector />
         <Link to="/register" className={styles.NavbarMenuLink}>{t('menu.register')}</Link>
         {/* should be dark variant */}
-        <Button href="/login" variant="primary">{t('menu.login')}</Button>
+        <Button to="/login" variant="primary">{t('menu.login')}</Button>
       </div>
     </nav>
   );

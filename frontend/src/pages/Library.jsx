@@ -19,7 +19,6 @@ export default function Library() {
       <h1>Library</h1>
 
       <h2>Button</h2>
-      <h3>Size=default</h3>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="black">Black</Button>
@@ -27,7 +26,15 @@ export default function Library() {
       <Button variant="danger">Danger</Button>
       <Button variant="warning">Warning</Button>
 
-      <h3>Size=large</h3>
+      <h3>isPlain</h3>
+      <Button isPlain variant="primary">Primary</Button>
+      <Button isPlain variant="secondary">Secondary</Button>
+      <Button isPlain variant="black">Black</Button>
+      <Button isPlain variant="success">Button</Button>
+      <Button isPlain variant="danger">Danger</Button>
+      <Button isPlain variant="warning">Warning</Button>
+
+      <h3>size=large</h3>
       <Button size="large" variant="primary">Primary</Button>
       <Button size="large" variant="secondary">Secondary</Button>
       <Button size="large" variant="black">Black</Button>
@@ -173,7 +180,6 @@ export default function Library() {
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
-
       </Gallery>
 
     </main>
