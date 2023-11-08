@@ -1,7 +1,7 @@
 .Input {
   border-radius: var(--radius-2);
-  border: var(--border-size-1) solid var(--color-border-regular);
-  padding: var(--size-1) var(--size-2);
+  border: var(--border-size-1) solid var(--color-border);
+  padding: var(--size-2-5);
   transition-property: border-color, background-color;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
