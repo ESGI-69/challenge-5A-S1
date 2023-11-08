@@ -1,34 +1,6 @@
-.dropdown {
+.Dropdown {
   position: relative;
   display: inline-block;
-
-  &TopLeft {
-    .dropdownList {
-      bottom: 100%;
-      left: 0;
-    }
-  }
-
-  &TopRight {
-    .dropdownList {
-      bottom: 100%;
-      right: 0;
-    }
-  }
-
-  &BottomLeft {
-    .dropdownList {
-      top: 100%;
-      left: 0;
-    }
-  }
-
-  &BottomRight {
-    .dropdownList {
-      top: 100%;
-      right: 0;
-    }
-  }
 
   &List {
     position: absolute;
@@ -48,6 +20,34 @@
       &:hover {
         background: var(--color-hover);
       }
+    }
+  }
+
+  &TopLeft {
+    .DropdownList {
+      bottom: 100%;
+      left: 0;
+    }
+  }
+
+  &TopRight {
+    .DropdownList {
+      bottom: 100%;
+      right: 0;
+    }
+  }
+
+  &BottomLeft {
+    .DropdownList {
+      top: 100%;
+      left: 0;
+    }
+  }
+
+  &BottomRight {
+    .DropdownList {
+      top: 100%;
+      right: 0;
     }
   }
 }

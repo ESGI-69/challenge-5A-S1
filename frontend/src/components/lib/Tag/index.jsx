@@ -5,15 +5,15 @@ const Tag = function Tag(
   { children, variant = 'primary', ...delegated },
 ) {
   const variantClasses = {
-    primary: 'tagPrimary',
-    success: 'tagSuccess',
-    danger: 'tagDanger',
-    warning: 'tagWarning',
+    primary: 'TagPrimary',
+    success: 'TagSuccess',
+    danger: 'TagDanger',
+    warning: 'TagWarning',
   };
 
   return (
     <span
-      className={`${styles.tag} ${styles[variantClasses[variant]]}`}
+      className={`${styles.Tag} ${styles[variantClasses[variant]]}`}
       {...delegated}
     >
       {children}

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './gallery.module.scss';
+import styles from './Gallery.module.scss';
 import Button from '../Button';
 import { useTranslation } from 'react-i18next';
 

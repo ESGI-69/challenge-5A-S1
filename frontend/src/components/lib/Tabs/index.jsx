@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import tabsStyles, { tabs } from '@/components/lib/Tabs/tabs.module.scss';
-import tabStyles, { count as countClass, tab } from '@/components/lib/Tabs/tab.module.scss';
+import tabsStyles from './Tabs.module.scss';
+import tabStyles from './Tab.module.scss';
 
 const TabsContext = createContext();
 
@@ -26,7 +26,7 @@ function Tabs({
   };
 
   return (
-    <div className={tabs}>
+    <div className={tabsStyles.Tabs}>
       <TabsContext.Provider
         value={{
           currentTab,
@@ -50,7 +50,7 @@ function Tab({
   count,
 }) {
   const { currentTab, switchTab } = useTabs();
-  const tabClasses = `${tab} ${currentTab === value ? tabStyles['tab--active'] : ''}`;
+  const tabClasses = `${tabStyles.Tab} ${currentTab === value ? tabStyles.TabActive : ''}`;
   const handleClick = () => {
     switchTab(value);
   };
@@ -61,7 +61,7 @@ function Tab({
     >
       {children}
       {count && (
-        <span className={countClass}>
+        <span className={tabStyles.TabCount}>
           {count}
         </span>
       )}
@@ -82,7 +82,7 @@ function TabContent({
   const { currentTab } = useTabs();
 
   if (currentTab === value) {
-    return <div className={tabsStyles['tabs__content']}>{children}</div>;
+    return <div className={tabsStyles.TabsContent}>{children}</div>;
   }
   return null;
 }
@@ -96,7 +96,7 @@ function TabsList({
   children,
 }) {
   return (
-    <div className={tabsStyles['tabs__items']}>
+    <div className={tabsStyles.TabsItems}>
       {children}
     </div>
   );

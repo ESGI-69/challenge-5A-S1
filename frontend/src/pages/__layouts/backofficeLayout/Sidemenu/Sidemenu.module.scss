@@ -1,4 +1,4 @@
-.sidemenu {
+.Sidemenu {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 1fr 1fr 1fr;
@@ -11,41 +11,7 @@
   padding: var(--size-3);
 }
 
-.shrinked {
-  .navMenuItem {
-
-    &Link,
-    &LinkActive {
-      &Text {
-        display: none;
-      }
-    }
-  }
-}
-
-.expand {
-  all: unset;
-  grid-area: expand;
-  align-self: flex-start;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: var(--size-7);
-  height: var(--size-7);
-  cursor: pointer;
-
-  svg {
-    width: var(--size-5);
-    height: var(--size-5);
-
-    path {
-      stroke: var(--color-text-regular);
-      stroke-width: 1.5;
-    }
-  }
-}
-
-.nav {
+.Nav {
   grid-area: nav;
 
   &Menu {
@@ -96,7 +62,40 @@
   }
 }
 
-.usermenu {
+.Shrinked {
+  .NavMenuItem {
+    &Link,
+    &LinkActive {
+      &Text {
+        display: none;
+      }
+    }
+  }
+}
+
+.Expand {
+  all: unset;
+  grid-area: expand;
+  align-self: flex-start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--size-7);
+  height: var(--size-7);
+  cursor: pointer;
+
+  svg {
+    width: var(--size-5);
+    height: var(--size-5);
+
+    path {
+      stroke: var(--color-text-regular);
+      stroke-width: 1.5;
+    }
+  }
+}
+
+.Usermenu {
   grid-area: usermenu;
   align-self: flex-end;
   justify-self: flex-start;

@@ -6,6 +6,7 @@
     "bmewburn.vscode-intelephense-client",
     "jasonnutter.vscode-codeowners",
     "phoenisx.cssvar",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
   ]
 }

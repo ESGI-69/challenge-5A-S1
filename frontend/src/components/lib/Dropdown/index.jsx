@@ -18,7 +18,7 @@ function DropdownButton({ children, ...delegated }) {
   const { toggleDropdown } = useDropdown();
   return (
     <div
-      className={styles.dropdownButton}
+      className={styles.DropdownButton}
       onClick={toggleDropdown}
       {...delegated}
     >
@@ -37,7 +37,7 @@ function DropdownItem({ children, onClick, ...delegated }) {
     onClick();
   };
   return (
-    <div className={styles.dropdownListItem} onClick={() => handleClick()} {...delegated}>
+    <div className={styles.DropdownListItem} onClick={() => handleClick()} {...delegated}>
       {children}
     </div>
   );
@@ -51,7 +51,7 @@ function DropdownList({ children, ...delegated }) {
   const { isOpened } = useDropdown();
   if (!isOpened) return null;
   return (
-    <div className={styles.dropdownList} {...delegated}>
+    <div className={styles.DropdownList} {...delegated}>
       {children}
     </div>
   );
@@ -65,10 +65,10 @@ function Dropdown({ children, direction = 'br' }) {
   const ref = useRef();
 
   const directionStyle = {
-    tl: styles.dropdownTopLeft,
-    tr: styles.dropdownTopRight,
-    bl: styles.dropdownBottomLeft,
-    br: styles.dropdownBottomRight,
+    tl: styles.DropdownTopLeft,
+    tr: styles.DropdownTopRight,
+    bl: styles.DropdownBottomLeft,
+    br: styles.DropdownBottomRight,
   };
 
   // Clicking outside the dropdown mechanics
@@ -91,7 +91,7 @@ function Dropdown({ children, direction = 'br' }) {
       isOpened,
       toggleDropdown: () => setIsOpened(!isOpened),
     }}>
-      <div ref={ref} className={`${styles.dropdown} ${directionStyle[direction]}`}>
+      <div ref={ref} className={`${styles.Dropdown} ${directionStyle[direction]}`}>
         {children}
       </div>
     </DropdownContext.Provider>

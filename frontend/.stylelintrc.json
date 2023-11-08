@@ -1,0 +1,16 @@
+{
+  "plugins": ["stylelint-scss"],
+  "extends": ["stylelint-config-standard", "stylelint-config-recommended-scss"],
+  "rules": {
+    "selector-class-pattern": [
+      "^[A-Z][a-z]+(?:[A-Z][a-z]+)*$",
+      {
+        "message": "Selector should be written in PascalCase",
+        "resolveNestedSelectors": true
+      }
+    ],
+    "declaration-block-no-redundant-longhand-properties": null,
+    "font-family-no-missing-generic-family-keyword": null
+  },
+  "defaultExtension": ".scss"
+}

@@ -6,9 +6,9 @@ import { Suspense } from 'react';
 
 export default function BackofficeLayout() {
   return (
-    <div className={styles.backoffice}>
-      <Sidemenu className={styles.sidemenu} />
-      <main className={styles.main}>
+    <div className={styles.Backoffice}>
+      <Sidemenu className={styles.BackofficeSidemenu} />
+      <main className={styles.BackofficeMain}>
         <Suspense fallback="Loading...">
           <Outlet />
         </Suspense>

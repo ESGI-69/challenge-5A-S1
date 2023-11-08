@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { forwardRef, useState } from 'react';
-import styles from './Input.module.css';
+import styles from './Input.module.scss';
 
 const Input = forwardRef(function InputComponent({
   onChange,
@@ -25,7 +25,7 @@ const Input = forwardRef(function InputComponent({
 
   return (
     <input
-      className={styles.input}
+      className={styles.Input}
       value={value}
       onChange={handleChange}
       type="text"

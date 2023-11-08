@@ -7,16 +7,16 @@ const Button = React.forwardRef(function Button(
   ref,
 ) {
   const variantClasses = {
-    primary: 'button--primary',
-    secondary: 'button--secondary',
-    success: 'button--success',
-    danger: 'button--danger',
-    warning: 'button--warning',
-    black: 'button--black',
+    primary: 'ButtonPrimary',
+    secondary: 'ButtonSecondary',
+    success: 'ButtonSuccess',
+    danger: 'ButtonDanger',
+    warning: 'ButtonWarning',
+    black: 'ButtonBlack',
   };
   const Element = href ? 'a' : 'button';
   return (
-    <Element ref={ref} href={href} className={`${styles.button} ${styles[variantClasses[variant]]}`} {...delegated}>
+    <Element ref={ref} href={href} className={`${styles.Button} ${styles[variantClasses[variant]]}`} {...delegated}>
       {children}
     </Element>
   );
