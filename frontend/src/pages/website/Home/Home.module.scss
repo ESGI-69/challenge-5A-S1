@@ -1,5 +1,6 @@
 .Home {
   position: relative;
+
   &BackgroundImage {
     z-index: -1;
     position: absolute;
@@ -11,7 +12,7 @@
     object-position: center;
     filter: grayscale(1);
 
-    @media screen and (max-width: 1024px) {
+    @media screen and (width <= 1024px) {
       right: unset;
       width: 100%;
     }
@@ -35,7 +36,7 @@
   gap: var(--size-2);
   padding: var(--size-7);
   color: var(--color-text-white);
-  text-shadow: 0 4px 8px rgba(26,27,31,.08);
+  text-shadow: 0 4px 8px rgb(26 27 31 / 8%);
 
   &Title {
     margin: 0;
@@ -43,7 +44,7 @@
     font-weight: var(--font-weight-3);
     text-align: center;
 
-    @media (min-width: 768px) {
+    @media (width >= 768px) {
       font-size: var(--font-size-7);
     }
   }
@@ -51,7 +52,7 @@
   &SearchBar {
     width: 50rem;
 
-    @media screen and (max-width: 1024px) {
+    @media screen and (width <= 1024px) {
       width: 100%;
     }
   }

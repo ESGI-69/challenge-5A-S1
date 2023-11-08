@@ -8,24 +8,34 @@
   font-family: Inter;
   font-style: normal;
 
-  // For each variant
   $variants: Primary, Secondary, Success, Danger, Warning, Black;
+
   @each $variant in $variants {
     $variant-color-name: primary;
+
     @if $variant == Secondary {
       $variant-color-name: --;
-    } @else if $variant == Black {
+    }
+    
+    @else if $variant == Black {
       $variant-color-name: dark;
-    } @else if $variant == Success {
+    }
+    
+    @else if $variant == Success {
       $variant-color-name: success;
-    } @else if $variant == Danger {
+    }
+    
+    @else if $variant == Danger {
       $variant-color-name: danger;
-    } @else if $variant == Warning {
+    }
+    
+    @else if $variant == Warning {
       $variant-color-name: warning;
     }
 
     &#{$variant} {
       $color-text: var(--color-text-white);
+      
       @if($variant == Primary or $variant == Secondary) {
         $color-text: var(--color-text-regular);
       }
