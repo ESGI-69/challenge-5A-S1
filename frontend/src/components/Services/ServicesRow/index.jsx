@@ -27,8 +27,7 @@ function ServicesRow({
         <span>{price} €</span>
       </div>
       <div className={style.ServicesRowBtn}>
-        {/* should be dark variant */}
-        <Button variant="primary">{t('choose')}</Button>
+        <Button variant="black">{t('choose')}</Button>
       </div>
     </div>
   );
