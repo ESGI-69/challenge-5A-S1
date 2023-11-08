@@ -5,6 +5,7 @@ namespace App\Controller\Company;
 use App\Entity\Company;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 #[AsController]
 class ValidateCompanyController
@@ -16,6 +17,9 @@ class ValidateCompanyController
     public function __invoke(Company $company): Company
     {
 
+        if ($company->getValidatedAt() !== null) {
+            throw new BadRequestException('Company already validated');
+        }
 
         $company->setRejectedReason(null);
         $companyUsers = $company->getUsers();
