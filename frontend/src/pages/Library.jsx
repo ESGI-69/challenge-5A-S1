@@ -9,6 +9,7 @@ import Review from '@/components/Notation/Review';
 import Note from '@/components/Notation/Note';
 import ServicesTable from '@/components/Services/ServicesTable';
 import Gallery from '@/components/lib/Gallery';
+import SearchBar from '@/components/SearchBar';
 
 export default function Library() {
   return (
@@ -181,6 +182,9 @@ export default function Library() {
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
       </Gallery>
+
+      <h2>SearchBar</h2>
+      <SearchBar />
 
     </main>
   );
