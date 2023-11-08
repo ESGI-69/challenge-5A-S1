@@ -1,6 +1,6 @@
-@import "open-props/colors-hsl";
+@import url("open-props/colors-hsl");
 
-.tag{
+.Tag{
     padding: var(--size-1) var(--size-2);
     border: var(--border-size-1) solid var(--color-border-regular);
     border-radius: var(--radius-2);

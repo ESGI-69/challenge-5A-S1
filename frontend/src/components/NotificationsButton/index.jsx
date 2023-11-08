@@ -3,7 +3,7 @@ import { Notif } from '@/components/lib/Icons';
 
 export default function NotificationsButton() {
   return (
-    <button className={styles.notificationsbutton}>
+    <button className={styles.NotificationsButton}>
       <Notif />
     </button>
   );

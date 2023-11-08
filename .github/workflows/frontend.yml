@@ -26,9 +26,26 @@ jobs:
       - name: Launch eslint
         run: npm run lint
 
+  stylelint:
+    name: Stylelint
+    defaults:
+      run:
+        working-directory: frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install stylelint
+        run: npm install stylelint
+      - name: Launch stylelint
+        run: npm run lint:style
+
   build:
     needs:
       - eslint
+      - stylelint
     runs-on: ubuntu-latest
     name: Build (frontend)
     defaults:

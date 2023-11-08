@@ -9,10 +9,10 @@ import NotificationsButton from '@/components/NotificationsButton';
 
 function SidemenuLink({ children, to, svgJsx }) {
   return (
-    <li className={styles.navMenuItem}>
-      <NavLink to={to} className={({ isActive }) => (isActive ? styles.navMenuItemLinkActive : styles.navMenuItemLink)}>
-        <span className={styles.navMenuItemLinkSvg}>{svgJsx}</span>
-        <span className={styles.navMenuItemLinkText}>{children}</span>
+    <li className={styles.NavMenuItem}>
+      <NavLink to={to} className={({ isActive }) => (isActive ? styles.NavMenuItemLinkActive : styles.NavMenuItemLink)}>
+        <span className={styles.NavMenuItemLinkSvg}>{svgJsx}</span>
+        <span className={styles.NavMenuItemLinkText}>{children}</span>
       </NavLink>
     </li>
   );
@@ -28,12 +28,12 @@ export default function Sidemenu({ ...delegated }) {
   const [ isExpanded, setIsExpanded ] = useState(false);
   return (
     <aside {...delegated}>
-      <div className={`${styles.sidemenu} ${isExpanded ? '' : styles.shrinked}`}>
-        <button className={styles.expand} onClick={() => setIsExpanded(!isExpanded)}>
+      <div className={`${styles.Sidemenu} ${isExpanded ? '' : styles.Shrinked}`}>
+        <button className={styles.Expand} onClick={() => setIsExpanded(!isExpanded)}>
           <Expand />
         </button>
-        <nav className={styles.nav}>
-          <ul className={styles.navMenu}>
+        <nav className={styles.Nav}>
+          <ul className={styles.NavMenu}>
             <SidemenuLink to="/backoffice" svgJsx={<Stats />}>
               {t('menu.stats')}
             </SidemenuLink>
@@ -45,10 +45,10 @@ export default function Sidemenu({ ...delegated }) {
             </SidemenuLink>
           </ul>
         </nav>
-        <div className={styles.usermenu}>
-          <div className={styles.usermenuList}>
+        <div className={styles.Usermenu}>
+          <div className={styles.UsermenuList}>
             <NotificationsButton />
-            <NavLink to="/settings" className={styles.usermenuItem}>
+            <NavLink to="/settings" className={styles.UsermenuItem}>
               <Gear />
             </NavLink>
             <ProfileButton />

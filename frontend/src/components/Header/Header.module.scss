@@ -15,8 +15,7 @@
       color: var(--color-text-regular);
     }
 
-    &Link:after {
-      background: none repeat scroll 0 0 transparent;
+    &Link::after {
       bottom: 0;
       content: "";
       display: block;
@@ -27,7 +26,7 @@
       width: 0;
     }
 
-    &Link:hover:after {
+    &Link:hover::after {
       width: 100%; 
       left: 0; 
     }
@@ -50,8 +49,7 @@
       color: var(--color-text-regular);
     }
 
-    &Link:after {
-      background: none repeat scroll 0 0 transparent;
+    &Link::after {
       bottom: 0;
       content: "";
       display: block;
@@ -63,7 +61,7 @@
       position: absolute;
     }
 
-    &Link:hover:after {
+    &Link:hover::after {
       width: 100%; 
       left: 0; 
     }

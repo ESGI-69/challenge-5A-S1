@@ -1,11 +1,10 @@
-@import "open-props/style";
-@import "open-props/colors-hsl";
+@import url("open-props/style");
+@import url("open-props/colors-hsl");
 
 
 :root {
   --white: #fff;
   --black: #000;
-  
   --color-primary: var(--yellow-5);
   --color-primary-light: hsl(var(--yellow-5-hsl) / 30%);
   --color-danger: var(--red-7);
@@ -14,9 +13,6 @@
   --color-warning-light: hsl(var(--orange-5-hsl) / 30%);
   --color-success: var(--green-6);
   --color-success-light: hsl(var(--green-6-hsl) / 30%);
-
-  /* Color */
-  --color-primary: var(--yellow-5);
 
   /* Text */
   --color-text-regular: var(--gray-9);

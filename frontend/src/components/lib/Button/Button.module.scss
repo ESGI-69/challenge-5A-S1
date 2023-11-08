@@ -1,38 +1,37 @@
-.button{
+.Button{
   cursor: pointer;
   padding: var(--size-2) var(--size-3);
   border: none;
   border-radius: var(--radius-2);
   color: var(--color-text-white);
-
   font-size: var(--size-3);
   font-weight: var(--font-weight-5);
   font-family: Inter;
   font-style: normal; 
 
-  &--primary { 
+  &Primary { 
     background-color: var(--color-white);
     color: var(--color-text-regular);
   }
 
-  &--secondary {
+  &Secondary {
     background-color: var(--gray-2);
     color: var(--color-text-regular);
   }
 
-  &--success {
+  &Success {
     background-color: var(--green-7);
   }
 
-  &--danger {
+  &Danger {
     background-color: var(--red-8);
   }
 
-  &--warning {
+  &Warning {
     background-color: var(--yellow-5);
   }
 
-  &--black {
+  &Black {
     background-color: var(--gray-9);
   }
 

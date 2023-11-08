@@ -1,10 +1,10 @@
-.tabs {
+.Tabs {
   display: flex;
   flex-direction: column;
   gap: var(--size-2);
   width: 100%;
 
-  &__items {
+  &Items {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
