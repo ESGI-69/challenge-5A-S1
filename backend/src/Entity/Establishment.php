@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\EstablishmentRepository;
-use App\Controller\Establishment\GetEmployeesOfEstablishmentController;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
@@ -26,7 +25,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         ),
         new GetCollection(
             uriTemplate: '/establishments/{id}/employees',
-            controller: GetEmployeesOfEstablishmentController::class,
+            normalizationContext: ['groups' => ['read-establishment-employees']],
         ),
         new Get(
             normalizationContext: ['groups' => ['read-establishment', 'read-company']]
@@ -108,6 +107,7 @@ class Establishment
     private ?Company $company = null;
 
     #[ORM\OneToMany(mappedBy: 'preferedEstablishment', targetEntity: Employee::class)]
+    #[Groups(['read-establishment-employees'])]
     private Collection $employees;
 
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Appointment::class, orphanRemoval: true)]
