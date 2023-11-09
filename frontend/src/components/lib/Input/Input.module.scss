@@ -1,5 +1,38 @@
 .Input {
   border-radius: var(--radius-2);
-  border: var(--border-size-1) solid var(--color-border-regular);
-  padding: var(--size-1) var(--size-2);
+  border: var(--border-size-1) solid var(--color-border);
+  padding: var(--size-2-5);
+  transition-property: border-color, background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  outline: none;
+  background-clip: padding-box;
+  background-color: var(--white);
+
+  &:hover, &:focus {
+    border-color: var(--color-dark);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-hover);
+
+    &:hover {
+      border-color: var(--color-border);
+    }
+  }
+
+  &NoBorder {
+    border: none;
+    
+    &:hover, &:focus {
+      border: none;
+      background-color: var(--color-hover);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: var(--color-hover);
+    }
+  }
 }

@@ -1,0 +1,9 @@
+{
+  "name": {
+    "placeholder": "Search your barber"
+  },
+  "location": {
+    "placeholder": "Find one in your city"
+  },
+  "search": "Search"
+}

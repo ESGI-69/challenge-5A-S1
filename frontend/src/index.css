@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+a {
+  all: unset;
+}
+
 #root, html, body {
   height: 100%;
 }

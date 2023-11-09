@@ -1,38 +1,67 @@
 .Button{
   cursor: pointer;
   padding: var(--size-2) var(--size-3);
-  border: none;
   border-radius: var(--radius-2);
   color: var(--color-text-white);
+  text-align: center;
   font-size: var(--size-3);
-  font-weight: var(--font-weight-5);
   font-family: Inter;
-  font-style: normal; 
+  font-style: normal;
 
-  &Primary { 
-    background-color: var(--color-white);
-    color: var(--color-text-regular);
+  $variants: Primary, Secondary, Success, Danger, Warning, Black;
+
+  @each $variant in $variants {
+    $variant-color-name: primary;
+
+    @if $variant == Secondary {
+      $variant-color-name: --;
+    }
+    
+    @else if $variant == Black {
+      $variant-color-name: dark;
+    }
+    
+    @else if $variant == Success {
+      $variant-color-name: success;
+    }
+    
+    @else if $variant == Danger {
+      $variant-color-name: danger;
+    }
+    
+    @else if $variant == Warning {
+      $variant-color-name: warning;
+    }
+
+    &#{$variant} {
+      $color-text: var(--color-text-white);
+      
+      @if($variant == Primary or $variant == Secondary) {
+        $color-text: var(--color-text-regular);
+      }
+      
+      background-color: var(--color-#{$variant-color-name});
+      border: var(--border-size-1) solid var(--color-#{$variant-color-name});
+      color: $color-text;
+      
+
+      &:hover {
+        background-color: var(--color-#{$variant-color-name}-light);
+      }
+
+      &Plain {
+        background-color: transparent;
+        color: var(--color-#{$variant-color-name});
+
+        &:hover {
+          background-color: var(--color-#{$variant-color-name});
+          color: $color-text;
+        }
+      }
+    }
   }
 
-  &Secondary {
-    background-color: var(--gray-2);
-    color: var(--color-text-regular);
+  &Large {
+    padding: var(--size-3);
   }
-
-  &Success {
-    background-color: var(--green-7);
-  }
-
-  &Danger {
-    background-color: var(--red-8);
-  }
-
-  &Warning {
-    background-color: var(--yellow-5);
-  }
-
-  &Black {
-    background-color: var(--gray-9);
-  }
-
 }

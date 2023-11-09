@@ -9,6 +9,7 @@ import Review from '@/components/Notation/Review';
 import Note from '@/components/Notation/Note';
 import ServicesTable from '@/components/Services/ServicesTable';
 import Gallery from '@/components/lib/Gallery';
+import SearchBar from '@/components/SearchBar';
 
 export default function Library() {
   return (
@@ -26,8 +27,31 @@ export default function Library() {
       <Button variant="danger">Danger</Button>
       <Button variant="warning">Warning</Button>
 
+      <h3>isPlain</h3>
+      <Button isPlain variant="primary">Primary</Button>
+      <Button isPlain variant="secondary">Secondary</Button>
+      <Button isPlain variant="black">Black</Button>
+      <Button isPlain variant="success">Button</Button>
+      <Button isPlain variant="danger">Danger</Button>
+      <Button isPlain variant="warning">Warning</Button>
+
+      <h3>size=large</h3>
+      <Button size="large" variant="primary">Primary</Button>
+      <Button size="large" variant="secondary">Secondary</Button>
+      <Button size="large" variant="black">Black</Button>
+      <Button size="large" variant="success">Button</Button>
+      <Button size="large" variant="danger">Danger</Button>
+      <Button size="large" variant="warning">Warning</Button>
+
       <h2>Input</h2>
+      <h3>default</h3>
       <Input placeholder="Placeholder" />
+      <h3>no-border</h3>
+      <Input variant="no-border" placeholder="Placeholder" />
+      <h3>default disabled</h3>
+      <Input placeholder="Placeholder" disabled />
+      <h3>no-border disabled</h3>
+      <Input variant="no-border" placeholder="Placeholder" disabled />
 
       <h2>Tabs</h2>
       <Tabs defaultTab="tab1">
@@ -157,8 +181,10 @@ export default function Library() {
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
-
       </Gallery>
+
+      <h2>SearchBar</h2>
+      <SearchBar />
 
     </main>
   );

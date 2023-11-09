@@ -1,0 +1,9 @@
+{
+  "name": {
+    "placeholder": "Recherchez votre coiffeur"
+  },
+  "location": {
+    "placeholder": "Trouvez en un dans votre ville"
+  },
+  "search": "Recherchez"
+}

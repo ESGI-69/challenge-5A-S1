@@ -6,13 +6,21 @@
   --white: #fff;
   --black: #000;
   --color-primary: var(--yellow-5);
-  --color-primary-light: hsl(var(--yellow-5-hsl) / 30%);
+  --color-primary-light: hsl(var(--yellow-5-hsl) / 80%);
+  --color-primary-lighter: hsl(var(--yellow-5-hsl) / 50%);
+  --color-primary-lightest: hsl(var(--yellow-5-hsl) / 30%);
   --color-danger: var(--red-7);
-  --color-danger-light: hsl(var(--red-7-hsl) / 30%);
+  --color-danger-light: hsl(var(--red-7-hsl) / 80%);
+  --color-danger-lighter: hsl(var(--red-7-hsl) / 50%);
+  --color-danger-lightest: hsl(var(--red-7-hsl) / 30%);
   --color-warning: var(--orange-5);
-  --color-warning-light: hsl(var(--orange-5-hsl) / 30%);
+  --color-warning-light: hsl(var(--orange-5-hsl) / 80%);
+  --color-warning-lighter: hsl(var(--orange-5-hsl) / 50%);
+  --color-warning-lightest: hsl(var(--orange-5-hsl) / 30%);
   --color-success: var(--green-6);
-  --color-success-light: hsl(var(--green-6-hsl) / 30%);
+  --color-success-light: hsl(var(--green-6-hsl) / 80%);
+  --color-success-lighter: hsl(var(--green-6-hsl) / 50%);
+  --color-success-lightest: hsl(var(--green-6-hsl) / 30%);
 
   /* Text */
   --color-text-regular: var(--gray-9);
@@ -24,6 +32,9 @@
   --color-white: var(--gray-0);
   --color-hover: var(--gray-2);
   --color-dark: var(--gray-10);
+  --color-dark-light: hsl(var(--gray-10-hsl) / 80%);
+  --color-dark-lighter: hsl(var(--gray-10-hsl) / 50%);
+  --color-dark-lightest: hsl(var(--gray-10-hsl) / 30%);
 
   /* Border */
   --color-border-regular: var(--color-text-regular);
@@ -31,4 +42,7 @@
 
   /* Font size */
   --font-size-01: .90rem;
+
+  /* Size */
+  --size-2-5: .75rem;
 }

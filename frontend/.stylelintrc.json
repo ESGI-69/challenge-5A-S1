@@ -10,7 +10,15 @@
       }
     ],
     "declaration-block-no-redundant-longhand-properties": null,
-    "font-family-no-missing-generic-family-keyword": null
+    "font-family-no-missing-generic-family-keyword": null,
+    "value-keyword-case": [
+      "lower",
+      {
+        "ignoreProperties": [
+          "/^\\$.+/"
+        ]
+      }
+    ]
   },
   "defaultExtension": ".scss"
 }
