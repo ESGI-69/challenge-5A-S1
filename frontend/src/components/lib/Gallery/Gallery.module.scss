@@ -16,7 +16,7 @@
 
 
     &Main, &First, &Second, &Third, &More {
-        img{
+        img {
             border-radius: var(--radius-3);
             background-color: black;
         }
@@ -45,12 +45,12 @@
         border-radius: var(--radius-3);
         text-align: center;
 
-        &Btn{
+        &Btn {
             position: relative;
             bottom: 55%;
             z-index: 3;
             color: white;
-            display: inherit;    
+            display: inherit;
         }
 
         img:has(+ &Btn) {
@@ -76,7 +76,7 @@
         grid-template-rows: var(--size-12) var(--size-12);
 
         &More {
-            img{
+            img {
                 filter: blur(10px)brightness(0.9);
             }
         }

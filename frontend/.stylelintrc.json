@@ -18,7 +18,11 @@
           "/^\\$.+/"
         ]
       }
-    ]
+    ],
+    "block-opening-brace-space-before": "always",
+    "block-closing-brace-newline-after": "always",
+    "block-opening-brace-newline-after": "always-multi-line",
+    "block-closing-brace-newline-before": "always-multi-line"
   },
   "defaultExtension": ".scss"
 }
