@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 #[AsController]
 class PatchUserMeController
@@ -35,7 +36,7 @@ class PatchUserMeController
  
      // Check if the current password is correct
      if (!isset($data['currentPassword']) || !$this->passwordEncoder->isPasswordValid($user, $data['currentPassword'])) {
-         throw new \Exception('Invalid current password');
+         throw new BadRequestException('Invalid current password');
      }
  
      // If a new password is provided, update it
