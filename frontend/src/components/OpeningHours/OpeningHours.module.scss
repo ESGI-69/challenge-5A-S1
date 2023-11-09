@@ -20,6 +20,11 @@
 
     &:last-child {
         border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    &:first-child {
+        padding-top: 0;
     }
 }
 

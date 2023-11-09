@@ -3,7 +3,7 @@ import styles from './OpeningHours.module.scss';
 import { useTranslation } from 'react-i18next';
 
 const OpeningHours = function OpeningHours({
-  children,
+  value,
 },
 ) {
   const { t } = useTranslation('openingHours');
@@ -19,19 +19,18 @@ const OpeningHours = function OpeningHours({
   };
 
   const dayNumberToString = {
-    0: t('sunday'),
-    1: t('monday'),
-    2: t('tuesday'),
-    3: t('wenesday'),
-    4: t('thursday'),
-    5: t('friday'),
-    6: t('saturday'),
+    0: t('weekDays.sunday', { ns: 'base' }),
+    1: t('weekDays.monday', { ns: 'base' }),
+    2: t('weekDays.tuesday', { ns: 'base' }),
+    3: t('weekDays.wednesday', { ns: 'base' }),
+    4: t('weekDays.thursday', { ns: 'base' }),
+    5: t('weekDays.friday', { ns: 'base' }),
+    6: t('weekDays.saturday', { ns: 'base' }),
   };
 
-  let tmpJson = JSON.parse(children);
   let currentDay = new Date().getDay();
 
-  const dateTab = tmpJson.map(({ startTime, endTime })=>({
+  const dateTab = value.map(({ startTime, endTime })=>({
     startTime: new Date(startTime),
     endTime: new Date(endTime),
   }));
@@ -66,7 +65,7 @@ const OpeningHours = function OpeningHours({
 };
 
 OpeningHours.propTypes = {
-  children: PropTypes.node.isRequired,
+  value: PropTypes.array.isRequired,
 };
 
 export default OpeningHours;
