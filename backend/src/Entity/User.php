@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Repository\UserRepository;
+use App\Controller\User\GetUserMeController;
+use App\Controller\User\PatchUserMeController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,10 +21,32 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
-        new Get(normalizationContext: ['groups' => ['read-user', 'read-company']]),
-//        new Get(uriTemplate: '/users/{id}/infos', normalizationContext: ['groups' => ['read-user', 'read-user-as-admin']], security: 'is_granted("ROLE_ADMIN")'),
+        new Get(
+            security: 'is_granted("ROLE_USER")',
+            uriTemplate: '/users/me',
+            normalizationContext: ['groups' => ['read-me', 'company-read']],
+            controller: GetUserMeController::class
+        ),
+        new Patch(
+            security: 'is_granted("ROLE_USER")',
+            uriTemplate: '/users/me',
+            denormalizationContext: ['groups' => ['update-user-self', 'update-user']],
+            controller: PatchUserMeController::class
+        ),
+        new Get(
+            security: 'is_granted("ROLE_ADMIN")',
+            normalizationContext: ['groups' => ['read-user', 'read-company-as-admin']]
+        ),
+        new GetCollection(
+            security: 'is_granted("ROLE_ADMIN")',
+            normalizationContext: ['groups' => ['read-user', 'read-company-as-admin']]
+        ),
+
         new Post(denormalizationContext: ['groups' => ['create-user']]),
-        new Patch(denormalizationContext: ['groups' => ['update-user']]),
+        new Patch(
+            security: 'is_granted("ROLE_ADMIN")',
+            denormalizationContext: ['groups' => ['update-user']]
+        ),
     ],
     normalizationContext: ['groups' => ['read-user', 'read-user-mutation']],
 )]
@@ -37,16 +62,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[Assert\Email()]
-    #[Groups(['read-user', 'read-user-as-admin', 'create-user'])]
+    #[Groups(['read-user', 'read-user-as-admin', 'create-user', 'read-me', 'update-user'])]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column]
-    #[Groups(['read-user'])]
+    #[Groups(['read-company-as-admin'])]
     private array $roles = [];
 
     #[Assert\NotBlank()]
-    #[Groups(['read-user', 'create-user', 'update-user'])]
+    #[Groups(['read-user', 'create-user', 'update-user', 'read-me'])]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
@@ -56,7 +81,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[Groups(['create-user', 'update-user'])]
+    #[Groups(['create-user'])]
     private string $plainPassword = '';
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Service::class)]
@@ -64,20 +89,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'validatedBy', targetEntity: Service::class)]
     private Collection $validatedServices;
+
     #[ORM\Column(length: 50)]
-    #[Groups(['create-user', 'update-user'])]
+    #[Groups(['create-user', 'update-user', 'read-me'])]
     private ?string $lastname = null;
 
-    #[Groups(['read-user', 'create-user', 'update-user'])]
+    #[Groups(['read-user', 'create-user', 'read-me'])]
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Company $company = null;
 
     #[ORM\Column(length: 12)]
-    #[Groups(['read-user', 'create-user', 'update-user'])]
+    #[Groups(['read-user', 'create-user', 'update-user', 'read-me'])]
     private ?string $phonenumber = null;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Appointment::class, orphanRemoval: true)]
     private Collection $appointments;
+
+    #[Groups(['update-user-self'])]
+    private $currentPassword;
+
+    #[Groups(['update-user-self'])]
+    private $newPassword;
 
     public function __construct()
     {
@@ -306,6 +338,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $appointment->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCurrentPassword(): ?string
+    {
+        return $this->currentPassword;
+    }
+
+    public function setCurrentPassword(string $currentPassword): self
+    {
+        $this->currentPassword = $currentPassword;
+
+        return $this;
+    }
+
+    public function getNewPassword(): ?string
+    {
+        return $this->newPassword;
+    }
+
+    public function setNewPassword(?string $newPassword): self
+    {
+        $this->newPassword = $newPassword;
 
         return $this;
     }
