@@ -18,7 +18,10 @@ export default function Home() {
       <p className="read-the-docs">
         {t('subtitle')}
       </p>
-      <SearchBar className={ styles.HomeSearchBar }/>
+      <SearchBar
+        className={ styles.HomeSearchBar }
+        onSearch={() => {}}
+      />
     </main>
   );
 }
