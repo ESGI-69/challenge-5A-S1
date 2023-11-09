@@ -1,20 +1,21 @@
 .OpeningHours {
-    border: solid 1px var(--gray-4);
-    border-radius: 5px;
-    background-color: var(--gray-0);
-    padding: 2vh 3vw;
+    border: var(--border-size-1) solid var(--color-border-light);
+    border-radius: var(--radius-3);
+    background-color: var(--white);
+    padding: var(--size-7);
+    box-shadow: var(--shadow-2);
 }
 
 .RowDay {
     display: flex;
     flex-direction: row;
-    border-bottom: solid 1px var(--gray-4);
-    padding: 1vh 0;
+    border-bottom: var(--border-size-1) solid var(--color-border-light);
+    padding: var(--size-3) 0;
     flex-wrap: wrap;
     justify-content: space-between;
 
     &CurrentDay {
-        font-weight: bold;
+        font-weight: var(--font-weight-6);
     }
 
     &:last-child {
@@ -24,24 +25,24 @@
 
 .DayArea {
     display: flex;
-    color: var(--gray-6);
+    color: var(--color-text-light);
 
     &CurrentDay {
-        color: var(--gray-12);
+        color: var(--color-text-regular);
     }
 }
 
 .HoursArea {
-    color: var(--gray-7);
+    color: var(--color-text-regular);
     display: flex;
     flex-direction: column;
 
     &CurrentDay {
-        color: var(--gray-12);
+        color: var(--color-text-regular);
     }
 
     &Closed {
-        color: var(--gray-6);
+        color: var(--color-text-light);
     }
     
 }

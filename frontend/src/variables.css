@@ -39,6 +39,7 @@
   /* Border */
   --color-border-regular: var(--color-text-regular);
   --color-border: var(--gray-4);
+  --color-border-light: var(--gray-2);
 
   /* Font size */
   --font-size-01: .90rem;
