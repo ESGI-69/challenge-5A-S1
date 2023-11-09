@@ -6,7 +6,6 @@ const Input = forwardRef(function InputComponent({
   onChange,
   variant = 'default',
   disabled = false,
-  onEnterPressed,
   ...delegated
 }, ref) {
   const [ value, setValue ] = useState('');
@@ -16,12 +15,6 @@ const Input = forwardRef(function InputComponent({
     setValue(newValue);
     if (onChange) {
       onChange(newValue);
-    }
-  };
-
-  const handleKeyPress = (event) => {
-    if (event. keyCode === 13 && onEnterPressed) {
-      onEnterPressed();
     }
   };
 
@@ -38,7 +31,6 @@ const Input = forwardRef(function InputComponent({
       type="text"
       disabled={disabled}
       ref={ref}
-      onKeyUp={handleKeyPress}
       {...delegated}
     />
   );
@@ -51,7 +43,6 @@ Input.propTypes = {
   onChange: PropTypes.func,
   variant: PropTypes.oneOf([ 'default', 'no-border' ]),
   disabled: PropTypes.bool,
-  onEnterPressed: PropTypes.func,
 };
 
 export default Input;
