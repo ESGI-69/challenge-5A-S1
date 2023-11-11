@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Repository\CompanyRepository;
 use App\Controller\Company\CreateCompanyController;
 use App\Controller\Company\CreateEmployeeOfCompanyController;
+use App\Controller\Company\ValidateCompanyController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -44,6 +45,17 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         new Patch(
             securityPostDenormalize: 'is_granted("ROLE_USER") and object == user.getCompany()',
             denormalizationContext: ['groups' => ['company-update']],
+        ),
+        new Patch(
+            uriTemplate: '/companies/{id}/validate',
+            securityPostDenormalize: 'is_granted("ROLE_ADMIN")',
+            denormalizationContext: ['groups' => ['company-validate']],
+            controller: ValidateCompanyController::class
+        ),
+        new Patch(
+            uriTemplate: '/companies/{id}/reject',
+            securityPostDenormalize: 'is_granted("ROLE_ADMIN")',
+            denormalizationContext: ['groups' => ['company-reject']],
         ),
         new Delete(
             security: 'is_granted("ROLE_ADMIN") or object == user.getCompany()'
@@ -80,7 +92,7 @@ class Company
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $validatedAt = null;
 
-    #[Groups(['read-company-as-admin', 'company-getall'])]
+    #[Groups(['read-company-as-admin', 'company-getall', 'company-reject'])]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $rejectedReason = null;
 
