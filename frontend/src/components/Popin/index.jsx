@@ -11,7 +11,7 @@ const Popin = React.forwardRef(function Popin(
     <div ref={ref} className={styles.Popin} {...delegated}>
       <div className={styles.PopinContent}>
         <div className={styles.PopinClose}>
-          <Button variant="primary" onClick={onClose}>X</Button>
+          <Button variant="danger" onClick={onClose}>X</Button>
         </div>
         {children}
       </div>
