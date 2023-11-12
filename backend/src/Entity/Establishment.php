@@ -9,6 +9,10 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;  
+use App\Filter\IsOpenFilter; 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -48,6 +52,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
     ],
     
 )]
+#[ApiFilter(IsOpenFilter::class, properties: ['isOpen'])]
+#[ApiFilter(SearchFilter::class, properties: ['city' => 'partial','zipCode' => 'start','company.name' => 'partial'])]
 class Establishment
 {
     #[ORM\Id]
