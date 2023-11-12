@@ -52,6 +52,7 @@ export default function ProfileProvider({ children }) {
     try {
       const { data } = await apiCall.post('/login', payload);
       apiCall.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+      Cookies.set('token', data.token);
       // @todo get user profile with /users/me
       // If /me Not Authorized then call logout()
       dispatch({
