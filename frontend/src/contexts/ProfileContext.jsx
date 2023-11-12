@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import apiCall from '@/axios';
 import Cookies from 'js-cookie';
@@ -29,20 +29,72 @@ const reducer = (state, action) => {
 
 export default function ProfileProvider({ children }) {
   const [ state, dispatch ] = useReducer(reducer, initialState, (initialState) => {
-    // @todo get /me
     const token = Cookies.get('token');
     if (!token) {
       return initialState;
     }
-    // Mocking profile until /me is implemented
+    apiCall.defaults.headers.common.Authorization = `Bearer ${token}`;
     return {
       ...initialState,
-      profile: {
-        firstname: 'Toto',
-      },
+      isLoggingIn: true,
     };
   },
   );
+
+  useEffect(() => {
+    verifyToken(Cookies.get('token'));
+  }, []);
+
+  /**
+   * Verify token and set user data in state if token is valid
+   * @param {string} token
+   * @returns {void}
+  **/
+  const verifyToken = async (token) => {
+    if (!token) {
+      return resetProfileState();
+    }
+    apiCall.defaults.headers.common.Authorization = `Bearer ${token}`;
+    getAndSetUserData();
+  };
+
+  /**
+   * Get user data and set it in state
+   * @returns {void}
+   */
+  const getAndSetUserData = async () => {
+    dispatch({
+      type: 'isLoggingIn',
+      payload: true,
+    });
+    try {
+      const { data } = await apiCall.get('/users/me');
+      dispatch({
+        type: 'profile',
+        payload: data,
+      });
+    } catch (error) {
+      resetProfileState();
+    } finally {
+      dispatch({
+        type: 'isLoggingIn',
+        payload: false,
+      });
+    }
+  };
+
+  /**
+   * Reset profile state & remove token from cookies
+   * @returns {void}
+   */
+  const resetProfileState = () => {
+    Cookies.remove('token');
+    apiCall.defaults.headers.common.Authorization = '';
+    dispatch({
+      type: 'profile',
+      payload: null,
+    });
+  };
 
   const login = async (payload) => {
     dispatch({
@@ -51,21 +103,10 @@ export default function ProfileProvider({ children }) {
     });
     try {
       const { data } = await apiCall.post('/login', payload);
-      apiCall.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+      verifyToken(data.token);
       Cookies.set('token', data.token);
-      // @todo get user profile with /users/me
-      // If /me Not Authorized then call logout()
-      dispatch({
-        type: 'profile',
-        payload: {
-          firstname: 'Toto',
-        },
-      });
     } catch (error) {
-      dispatch({
-        type: 'profile',
-        payload: null,
-      });
+      resetProfileState();
     } finally {
       dispatch({
         type: 'isLoggingIn',
@@ -75,12 +116,9 @@ export default function ProfileProvider({ children }) {
   };
 
   const logout = () => {
-    Cookies.remove('token');
-    apiCall.defaults.headers.common.Authorization = '';
-    dispatch({
-      type: 'profile',
-      payload: null,
-    });
+    resetProfileState();
+    // This seems counter intuitive but user prefers being "hard" redirected to home page
+    window.location.href = '/';
   };
 
   return (

@@ -11,7 +11,6 @@ if (import.meta.env.VITE_API_TIMEOUT && parseInt(import.meta.env.VITE_API_TIMEOU
 
 const apiCall = axios.create(axiosConfig);
 const token = Cookies.get('token') || undefined;
-console.log('token', Cookies.get('token'));
 apiCall.defaults.headers.common.Authorization = token ? `Bearer ${token}` : '';
 
 apiCall.defaults.headers.post['Content-Type'] = 'application/json';
