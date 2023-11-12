@@ -58,32 +58,34 @@
         }
     }
 
-    &Popin{
+    &Popin {
         display: grid;
         width: 80%;
         margin: var(--size-8) auto;
         grid-template-columns: 1fr 1fr;
         gap: var(--size-4);
 
-        &Img{
-            img{
+        &Img {
+            img {
                 border-radius: var(--radius-3);
                 cursor: pointer;
             }
         }
     }
 
-    &Slideshow{
+    &Slideshow {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100%;
         width: 100%;
-        img{
+
+        img {
             height: unset;
             width: 100%;
         }
-        &Arrow{
+
+        &Arrow {
             font-size: var(--size-8);
             margin: var(--size-4);
         }
@@ -116,7 +118,7 @@
             display: none;
         }
 
-        &Popin{
+        &Popin {
             grid-template-columns: 1fr;
             grid-template-rows: 1fr 1fr;
             gap: var(--size-4);

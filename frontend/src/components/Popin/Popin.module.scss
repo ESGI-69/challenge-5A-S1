@@ -9,13 +9,13 @@
     color: var(--color-text-white);
     overflow: scroll;
 
-    &Close{
+    &Close {
         position: fixed;
         top: var(--size-2);
         right: var(--size-5);
     }
 
-    &Content{
+    &Content {
         height: 100%;
     }
 
