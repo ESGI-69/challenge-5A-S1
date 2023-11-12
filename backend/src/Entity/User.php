@@ -67,7 +67,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-    #[Groups(['read-company-as-admin'])]
+    #[Groups(['read-company-as-admin', 'read-me'])]
     private array $roles = [];
 
     #[Assert\NotBlank()]
