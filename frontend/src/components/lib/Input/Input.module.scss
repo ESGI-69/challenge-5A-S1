@@ -9,7 +9,8 @@
   background-clip: padding-box;
   background-color: var(--white);
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     border-color: var(--color-dark);
   }
 
@@ -24,8 +25,9 @@
 
   &NoBorder {
     border: none;
-    
-    &:hover, &:focus {
+
+    &:hover,
+    &:focus {
       border: none;
       background-color: var(--color-hover);
     }
