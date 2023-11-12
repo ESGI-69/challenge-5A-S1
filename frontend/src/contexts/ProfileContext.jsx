@@ -43,6 +43,7 @@ export default function ProfileProvider({ children }) {
 
   useEffect(() => {
     verifyToken(Cookies.get('token'));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**

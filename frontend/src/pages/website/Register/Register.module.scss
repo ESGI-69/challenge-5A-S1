@@ -1,11 +1,12 @@
 .Page {
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   &Image {
     object-fit: cover;
     filter: grayscale(1);
     background-size: cover;
-    background-position: center;    
+    background-position: center;
   }
 }
 

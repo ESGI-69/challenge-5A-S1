@@ -1,11 +1,12 @@
 .Page {
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   &Image {
     object-fit: cover;
     filter: grayscale(1);
     background-size: cover;
-    background-position: center;    
+    background-position: center;
   }
 }
 
@@ -40,6 +41,7 @@
         font-weight: var(--font-weight-5);
       }
     }
+
     &Link {
       font-size: calc(var(--size-3) - var(--size-1));
       font-weight: var(--font-weight-5);
