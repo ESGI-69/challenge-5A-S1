@@ -1,7 +1,21 @@
+.Page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  &Image {
+    object-fit: cover;
+    filter: grayscale(1);
+    background-size: cover;
+    background-position: center;    
+  }
+}
+
+
 .Login {
-  padding: var(--size-8) var(--size-3);
-  max-width: var(--size-content-2);
+  max-width: 400px;
+  width: 100%;
   margin: 0 auto;
+  align-self: center;
+  padding: var(--size-10) var(--size-3);
 
   &Title {
     font-size: var(--size-4);
