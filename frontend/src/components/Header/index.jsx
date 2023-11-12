@@ -11,23 +11,25 @@ export default function Header() {
   const { t } = useTranslation('header');
   return (
     <nav className={styles.Navbar}>
-      <div className={styles.NavbarHome}>
-        <Link className={styles.NavbarHomeLink} to="/">Platiny</Link>
-      </div>
-      <div className={styles.NavbarMenu}>
-        <LanguageSelector />
-        {profile && (
-          <>
-            <Button variant="danger" onClick={() => logout()}>Logout</Button>
-            <Button href="/profile" variant="black">{profile.firstname}</Button>
-          </>
-        )}
-        {!profile && (
-          <>
-            <Link to="/register" className={styles.NavbarMenuLink}>{t('menu.register')}</Link>
-            <Button to="/login" variant="black">{t('menu.login')}</Button>
-          </>
-        )}
+      <div className={styles.NavbarContent}>
+        <div className={styles.NavbarContentHome}>
+          <Link className={styles.NavbarContentHomeLink} to="/">Platiny</Link>
+        </div>
+        <div className={styles.NavbarContentMenu}>
+          <LanguageSelector />
+          {profile && (
+            <>
+              <Button variant="danger" onClick={() => logout()}>Logout</Button>
+              <Button href="/profile" variant="black">{profile.firstname}</Button>
+            </>
+          )}
+          {!profile && (
+            <>
+              <Link to="/register" className={styles.NavbarContentMenuLink}>{t('menu.register')}</Link>
+              <Button to="/login" variant="black">{t('menu.login')}</Button>
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );

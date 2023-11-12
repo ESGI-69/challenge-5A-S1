@@ -2,4 +2,11 @@
   height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
+
+  &Content {
+    width: 100%;
+    max-width: var(--size-app);
+    margin: var(--size-3) auto;
+    padding: 0 var(--size-3);
+  }
 }

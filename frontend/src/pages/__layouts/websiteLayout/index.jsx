@@ -9,7 +9,9 @@ export default function WebsiteLayout() {
     <div className={ styles.WebsiteLayout }>
       <Suspense fallback="Loading...">
         <Header />
-        <Outlet />
+        <div className={styles.WebsiteLayoutContent}>
+          <Outlet />
+        </div>
         <footer>Footer</footer>
       </Suspense>
     </div>

@@ -1,74 +1,79 @@
 .Navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--size-3) var(--size-7);
   border-bottom: var(--border-size-1) solid var(--color-border);
 
-  &Home {
-    &Link {
-      text-transform: uppercase;
-      font-size: var(--font-size-4);
-      text-decoration: none;
-      font-weight: var(--font-weight-7);
-      color: var(--color-text-regular);
-      letter-spacing: var(--size-1);
-    }
-
-    &Link::after {
-      bottom: 0;
-      content: "";
-      display: block;
-      height: 2px;
-      left: 50%;
-      background: var(--color-text-regular);
-      transition: width 0.3s ease 0s, left 0.3s ease 0s;
-      width: 0;
-    }
-
-    &Link:hover::after {
-      width: 100%; 
-      left: 0;
-    }
-
-    &Link:visited {
-      color: var(--color-text-regular);
-    }
-  }
-
-  &Menu {
+  &Content {
+    padding: var(--size-3) var(--size-7);
     display: flex;
     flex-direction: row;
-    gap: var(--size-3);
+    justify-content: space-between;
     align-items: center;
-    
-    &Link {
-      text-decoration: none;
-      position: relative;
-      padding: var(--size-2) 0;
-      color: var(--color-text-regular);
+    max-width: var(--size-app);
+    margin: 0 auto;
+
+    &Home {
+      &Link {
+        text-transform: uppercase;
+        font-size: var(--font-size-4);
+        text-decoration: none;
+        font-weight: var(--font-weight-7);
+        color: var(--color-text-regular);
+        letter-spacing: var(--size-1);
+      }
+
+      &Link::after {
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 2px;
+        left: 50%;
+        background: var(--color-text-regular);
+        transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        width: 0;
+      }
+
+      &Link:hover::after {
+        width: 100%; 
+        left: 0;
+      }
+
+      &Link:visited {
+        color: var(--color-text-regular);
+      }
     }
 
-    &Link::after {
-      bottom: 0;
-      content: "";
-      display: block;
-      height: 2px;
-      left: 50%;
-      background: var(--black);
-      transition: width 0.3s ease 0s, left 0.3s ease 0s;
-      width: 0;
-      position: absolute;
-    }
+    &Menu {
+      display: flex;
+      flex-direction: row;
+      gap: var(--size-3);
+      align-items: center;
+      
+      &Link {
+        text-decoration: none;
+        position: relative;
+        padding: var(--size-2) 0;
+        color: var(--color-text-regular);
+      }
 
-    &Link:hover::after {
-      width: 100%; 
-      left: 0;
-    }
+      &Link::after {
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 2px;
+        left: 50%;
+        background: var(--black);
+        transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        width: 0;
+        position: absolute;
+      }
 
-    &Link:visited {
-      color: var(--color-text-regular);
+      &Link:hover::after {
+        width: 100%; 
+        left: 0;
+      }
+
+      &Link:visited {
+        color: var(--color-text-regular);
+      }
     }
   }
 }
