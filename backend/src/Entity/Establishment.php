@@ -113,10 +113,15 @@ class Establishment
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Appointment::class, orphanRemoval: true)]
     private Collection $appointments;
 
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: OpeningHour::class, orphanRemoval: true)]
+    #[Groups(['read-establishment'])]
+    private Collection $openingHours;
+
     public function __construct()
     {
         $this->employees = new ArrayCollection();
         $this->appointments = new ArrayCollection();
+        $this->openingHours = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -286,6 +291,36 @@ class Establishment
             // set the owning side to null (unless already changed)
             if ($appointment->getEstablishment() === $this) {
                 $appointment->setEstablishment(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OpeningHour>
+     */
+    public function getOpeningHours(): Collection
+    {
+        return $this->openingHours;
+    }
+
+    public function addOpeningHour(OpeningHour $openingHour): static
+    {
+        if (!$this->openingHours->contains($openingHour)) {
+            $this->openingHours->add($openingHour);
+            $openingHour->setEstablishment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOpeningHour(OpeningHour $openingHour): static
+    {
+        if ($this->openingHours->removeElement($openingHour)) {
+            // set the owning side to null (unless already changed)
+            if ($openingHour->getEstablishment() === $this) {
+                $openingHour->setEstablishment(null);
             }
         }
 

@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "lint:style": "stylelint src/**/*.css src/**/*.scss",
+    "lint:style:fix": "stylelint --fix src/**/*.css src/**/*.scss",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -1,0 +1,53 @@
+.OpeningHours {
+    border: var(--border-size-1) solid var(--color-border-light);
+    border-radius: var(--radius-3);
+    background-color: var(--white);
+    padding: var(--size-7);
+    box-shadow: var(--shadow-2);
+}
+
+.RowDay {
+    display: flex;
+    flex-direction: row;
+    border-bottom: var(--border-size-1) solid var(--color-border-light);
+    padding: var(--size-3) 0;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &CurrentDay {
+        font-weight: var(--font-weight-6);
+    }
+
+    &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    &:first-child {
+        padding-top: 0;
+    }
+}
+
+.DayArea {
+    display: flex;
+    color: var(--color-text-light);
+
+    &CurrentDay {
+        color: var(--color-text-regular);
+    }
+}
+
+.HoursArea {
+    color: var(--color-text-regular);
+    display: flex;
+    flex-direction: column;
+
+    &CurrentDay {
+        color: var(--color-text-regular);
+    }
+
+    &Closed {
+        color: var(--color-text-light);
+    }
+    
+}
