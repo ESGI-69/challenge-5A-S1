@@ -9,6 +9,14 @@
     background-size: cover;
     background-position: center;
   }
+
+  @media screen and (width <= 1024px) {
+    grid-template-columns: 1fr;
+
+    &Image {
+      display: none;
+    }
+  }
 }
 
 
