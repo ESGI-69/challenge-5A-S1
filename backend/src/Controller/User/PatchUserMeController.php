@@ -48,7 +48,7 @@ class PatchUserMeController
      unset($data['currentPassword'], $data['newPassword']);
  
      // Update the user
-     $this->serializer->deserialize(json_encode($data), User::class, 'json', ['object_to_populate' => $user, 'ignored_attributes' => ['roles', 'plainPassword']]);
+     $this->serializer->deserialize(json_encode($data), User::class, 'json', ['object_to_populate' => $user, 'ignored_attributes' => ['roles', 'plainPassword', 'company']]);
  
      $this->entityManager->persist($user);
      $this->entityManager->flush();

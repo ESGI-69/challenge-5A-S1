@@ -25,13 +25,14 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: 'is_granted("ROLE_USER")',
             uriTemplate: '/users/me',
             normalizationContext: ['groups' => ['read-me', 'company-read']],
-            controller: GetUserMeController::class
+            controller: GetUserMeController::class,
+            read: false
         ),
         new Patch(
             security: 'is_granted("ROLE_USER")',
             uriTemplate: '/users/me',
             denormalizationContext: ['groups' => ['update-user-self', 'update-user']],
-            controller: PatchUserMeController::class
+            controller: PatchUserMeController::class,
         ),
         new Get(
             security: 'is_granted("ROLE_ADMIN")',
@@ -94,7 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['create-user', 'update-user', 'read-me', 'appointment-read'])]
     private ?string $lastname = null;
 
-    #[Groups(['read-user', 'create-user', 'read-me'])]
+    #[Groups(['read-user', 'read-me'])]
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Company $company = null;
 
