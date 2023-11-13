@@ -9,4 +9,13 @@
     margin: var(--size-3) auto;
     padding: 0 var(--size-3);
   }
+
+  &FullPage {
+    .WebsiteLayoutContent {
+      height: 100%;
+      max-width: unset;
+      margin: unset;
+      padding: unset;
+    }
+  }
 }
