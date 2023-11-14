@@ -11,6 +11,7 @@ import ServicesTable from '@/components/Services/ServicesTable';
 import Gallery from '@/components/lib/Gallery';
 import SearchBar from '@/components/SearchBar';
 import OpeningHours from '@/components/OpeningHours';
+import Checkbox from '@/components/lib/Checkbox';
 
 export default function Library() {
   return (
@@ -53,6 +54,9 @@ export default function Library() {
       <Input placeholder="Placeholder" disabled />
       <h3>no-border disabled</h3>
       <Input variant="no-border" placeholder="Placeholder" disabled />
+
+      <h2>Checkbox</h2>
+      <Checkbox />
 
       <h2>Tabs</h2>
       <Tabs defaultTab="tab1">
