@@ -5,7 +5,8 @@ namespace App\Controller\User;
 use App\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Attribute\AsController;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+
 
 #[AsController]
 class GetUserMeController
@@ -20,7 +21,7 @@ class GetUserMeController
     $user = $this->security->getUser();
 
     if(!$user) {
-        throw new BadRequestException('Not authenticated');
+        throw new AuthenticationException('JWT Token not found');
     }
 
     return $user;
