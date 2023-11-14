@@ -11,6 +11,7 @@ import ServicesTable from '@/components/Services/ServicesTable';
 import Gallery from '@/components/Gallery';
 import SearchBar from '@/components/SearchBar';
 import OpeningHours from '@/components/OpeningHours';
+import PTable from '@/components/lib/PTable';
 import Checkbox from '@/components/lib/Checkbox';
 import Popin from '@/components/Popin';
 import Map from '@/components/Map';
@@ -34,7 +35,8 @@ export default function Library() {
       maxWidth: '90vw',
     }}>
       <h1>Library</h1>
-
+      <h2>Table</h2>
+      <PTable selectable></PTable>
       <h2>Button</h2>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>

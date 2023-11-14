@@ -1,0 +1,31 @@
+.Table {
+  min-width: 100%;
+  overflow-x: scroll;
+
+  &Header {
+    display: flex;
+    align-items: center;
+    border-bottom: var(--border-size-2) solid var(--color-border-light);
+
+    &Cell {
+      width: 200px;
+      min-width: 200px;
+      padding: 0.5rem;
+      font-weight: bold;
+    }
+  }
+
+  &Body {
+    &Row {
+      display: flex;
+      align-items: center;
+      border-bottom: var(--border-size-1) solid var(--color-border-light);
+
+      &Cell {
+        width: 200px;
+        min-width: 200px;
+        padding: 0.5rem;
+      }
+    }
+  }
+}
