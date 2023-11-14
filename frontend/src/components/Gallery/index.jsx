@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Gallery.module.scss';
-import Button from '../Button';
+import Button from '@/components/lib/Button';
 import { useTranslation } from 'react-i18next';
-import Popin from '../../Popin';
+import Popin from '@/components/Popin';
 
 const Gallery = React.forwardRef(function Gallery(
   { children, ...delegated },
@@ -48,7 +48,7 @@ const Gallery = React.forwardRef(function Gallery(
         index > 4 ? null :
           <div key={index} className={styles[gridClassArray[index]]}>
             {picture}
-            {index === 4 && pictures.length > 5 ? <Button href="javascript:void" onClick={openGallery} className={styles.GalleryMoreBtn}>{t('viewPhotos', { count: pictures.length })}</Button> : null}
+            {index === 4 && pictures.length > 5 ? <Button variant="secondary"  onClick={openGallery} className={styles.GalleryMoreBtn}>{t('viewPhotos', { count: pictures.length })}</Button> : null}
           </div>
       ))}
 

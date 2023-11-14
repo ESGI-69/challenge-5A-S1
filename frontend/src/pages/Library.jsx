@@ -8,7 +8,7 @@ import GlobalNotation from '@/components/Notation/GlobalNotation';
 import Review from '@/components/Notation/Review';
 import Note from '@/components/Notation/Note';
 import ServicesTable from '@/components/Services/ServicesTable';
-import Gallery from '@/components/lib/Gallery';
+import Gallery from '@/components/Gallery';
 import SearchBar from '@/components/SearchBar';
 import OpeningHours from '@/components/OpeningHours';
 import Checkbox from '@/components/lib/Checkbox';
