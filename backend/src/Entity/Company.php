@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Patch;
@@ -62,6 +64,13 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         ),
     ],
     normalizationContext: ['groups' => ['read-company']]
+)]
+#[ApiFilter(
+  SearchFilter::class,
+  properties: [
+    'name' => 'partial',
+    'email' => 'partial',
+  ]
 )]
 #[Vich\Uploadable]
 class Company
