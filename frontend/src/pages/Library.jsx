@@ -18,6 +18,78 @@ import Map from '@/components/Map';
 import EstablishmentCard from '@/components/Search/EstablishmentCard';
 import { useState } from 'react';
 
+const DATA_TEMPLATE = {
+  properties: {
+    id: {
+      name: '#',
+      readOnly: true,
+      type: 'integer',
+      width: '50px',
+    },
+    employee: {
+      name: 'Employé',
+      type: 'string',
+      format: 'iri-reference',
+    },
+    startDate: {
+      name: 'Date début',
+      type: 'string',
+      format: 'date-time',
+    },
+    endDate: {
+      name: 'Date fin',
+      type: 'string',
+      format: 'date-time',
+    },
+    comment: {
+      name: 'Commentaire',
+      type: 'string',
+      nullable: true,
+    },
+    price: {
+      name: 'Prix',
+      type: 'number',
+      nullable: true,
+    },
+  },
+};
+
+const DATA2_TEMPLATE = {
+  properties: {
+    id: {
+      name: '#',
+      readOnly: true,
+      type: 'integer',
+      width: '50px',
+    },
+    email: {
+      name: 'Email',
+      type: 'string',
+      component: Button,
+    },
+    firstname: {
+      name: 'Prénom',
+      type: 'string',
+      width: '120px',
+    },
+    lastname: {
+      name: 'Nom',
+      type: 'string',
+      width: '120px',
+    },
+    phonenumber: {
+      name: 'Téléphone',
+      type: 'string',
+      nullable: true,
+      width: '130px',
+    },
+    roles: {
+      name: 'Rôles',
+      type: 'array',
+    },
+  },
+};
+
 const DATA = [
   {
     id: 1,
@@ -45,6 +117,32 @@ const DATA = [
   },
 ];
 
+const DATA2 = [
+  {
+    id: 1,
+    email: 'admin@gmail.com',
+    roles: [ 'ROLE_ADMIN', 'ROLE_USER' ],
+    firstname: 'Toto',
+    lastname: 'Titi',
+    phonenumber: '0123456789',
+  },
+  {
+    id: 2,
+    email: 'user@gmail.com',
+    roles: [ 'ROLE_USER' ],
+    firstname: 'Tutu',
+    lastname: 'Tata',
+    phonenumber: '0123456789',
+  },
+  {
+    id: 3,
+    email: 'user2@gmail.com',
+    roles: [ 'ROLE_USER' ],
+    firstname: 'Tete',
+    lastname: 'Toto',
+    phonenumber: '0123456789',
+  },
+];
 export default function Library() {
   const [ popinIsOpen, setPopinIsOpen ] = useState(false);
 
@@ -63,7 +161,8 @@ export default function Library() {
     }}>
       <h1>Library</h1>
       <h2>Table</h2>
-      <PTable selectable data={DATA}></PTable>
+      <PTable selectable template={DATA_TEMPLATE} data={DATA}></PTable>
+      <PTable selectable template={DATA2_TEMPLATE} data={DATA2}></PTable>
       <h2>Button</h2>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>

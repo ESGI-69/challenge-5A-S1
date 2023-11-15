@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './PTable.module.scss';
 import Checkbox from '@/components/lib/Checkbox';
@@ -6,7 +6,7 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/componen
 import { Chevron, Dots } from '@/components/lib/Icons';
 import Button from '../Button';
 
-export default function PTable({ selectable, onSelect, data }) {
+export default function PTable({ template, data, selectable }) {
   const [ selected, setSelected ] = useState(new Set());
   const selectAllState = useMemo(() => {
     if (selected.size === 0) {
@@ -25,6 +25,8 @@ export default function PTable({ selectable, onSelect, data }) {
       setSelected(new Set(data.map((item) => item.id)));
     }
   };
+
+  const customValueComponent = (Component) => <Component />;
 
   const filters = [
     {
@@ -72,63 +74,6 @@ export default function PTable({ selectable, onSelect, data }) {
     },
   ];
 
-  const template = {
-    properties: {
-      id: {
-        name: '#',
-        readOnly: true,
-        type: 'integer',
-        width: '50px',
-      },
-      employee: {
-        name: 'Employé',
-        type: 'string',
-        format: 'iri-reference',
-      },
-      establishment: {
-        name: 'Établissement',
-        type: 'string',
-        format: 'iri-reference',
-      },
-      service: {
-        name: 'Service',
-        type: 'string',
-        format: 'iri-reference',
-      },
-      client: {
-        name: 'Client',
-        type: 'string',
-        format: 'iri-reference',
-      },
-      startDate: {
-        name: 'Date début',
-        type: 'string',
-        format: 'date-time',
-      },
-      endDate: {
-        name: 'Date fin',
-        type: 'string',
-        format: 'date-time',
-      },
-      comment: {
-        name: 'Commentaire',
-        type: 'string',
-        nullable: true,
-      },
-      cancelledAt: {
-        name: 'Annulé le',
-        type: 'string',
-        format: 'date-time',
-        nullable: true,
-      },
-      price: {
-        name: 'Prix',
-        type: 'number',
-        nullable: true,
-      },
-    },
-  };
-
   return (
     <div className={styles.Table}>
       <div className={styles.TableWrapper}>
@@ -139,15 +84,15 @@ export default function PTable({ selectable, onSelect, data }) {
                 <Checkbox value={selectAllState} onChange={handleSelectAllChange} />
               </div>
             )}
-            {Object.keys(template.properties).map((propKey) => (
+            {Object.keys(template?.properties).map((propKey) => (
               <div
                 key={propKey}
                 className={styles.TableHeaderCell}
                 style={{
-                  width: template.properties[propKey].width,
+                  width: template?.properties[propKey].width,
                 }}
               >
-                <span>{template.properties[propKey].name ?? propKey}</span>
+                <span>{template?.properties[propKey].name ?? propKey}</span>
               </div>
             ))}
             <div className={styles.TableBodyRowActions}></div>
@@ -163,15 +108,22 @@ export default function PTable({ selectable, onSelect, data }) {
                     })} />
                   </div>
                 )}
-                {Object.keys(template.properties).map((propKey) => (
+                {Object.keys(template?.properties).map((propKey) => (
                   <div
                     key={propKey}
                     className={styles.TableBodyRowCell}
                     style={{
-                      width: template.properties[propKey].width,
+                      width: template?.properties[propKey].width,
                     }}
                   >
-                    <span>{item[propKey]}</span>
+                    {template?.properties[propKey].component && React.createElement(
+                      template?.properties[propKey].component,
+                      {
+                        value: item[propKey],
+                      },
+                      item[propKey],
+                    )}
+                    {!template?.properties[propKey].component && <span>{item[propKey]}</span>}
                   </div>
                 ))}
                 <div className={styles.TableBodyRowActions}>
@@ -226,6 +178,7 @@ export default function PTable({ selectable, onSelect, data }) {
 
 PTable.propTypes = {
   selectable: PropTypes.bool,
+  template: PropTypes.object.isRequired,
   onSelect: PropTypes.func,
   data: PropTypes.arrayOf(PropTypes.object),
 };
