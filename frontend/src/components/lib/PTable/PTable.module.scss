@@ -1,16 +1,28 @@
 .Table {
-  min-width: 100%;
-  overflow-x: scroll;
+  max-width: 100%;
+  background: var(--white);
+  padding: var(--size-3) 0 var(--size-3) var(--size-3);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-1);
+  border:  var(--border-size-1) solid var(--color-border-light);
+
+  &Wrapper {
+    overflow-x: scroll;
+  }
+
+  &Scroller {
+    width: max-content;
+    color: var(--color-dark);
+  }
 
   &Header {
     display: flex;
     align-items: center;
-    border-bottom: var(--border-size-2) solid var(--color-border-light);
+    border-bottom: var(--border-size-1) solid var(--color-border-light);
 
     &Cell {
       width: 200px;
-      min-width: 200px;
-      padding: 0.5rem;
+      padding: var(--size-2);
       font-weight: bold;
     }
   }
@@ -23,8 +35,52 @@
 
       &Cell {
         width: 200px;
-        min-width: 200px;
-        padding: 0.5rem;
+        padding: var(--size-2);
+      }
+
+      &Actions {
+        position: sticky;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        right: 0;
+        padding: var(--size-2);
+        background: var(--white);
+        z-index: 1;
+
+        &Button {
+          padding: var(--size-2);
+        }
+      }
+    }
+  }
+
+  &Footer {
+    display: flex;
+    justify-content: space-between;
+    padding-right: var(--size-3);
+
+    &Result {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: var(--size-1);
+      padding-top: var(--size-3);
+
+      &Number {
+        font-weight: bold;
+      }
+    }
+
+    &Pagination {
+      display: flex;
+      align-items: center;
+      padding-top: var(--size-3);
+      gap: var(--size-1);
+
+      &Button {
+        padding: var(--size-2);
       }
     }
   }

@@ -1,8 +1,30 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 import styles from './PTable.module.scss';
+import Checkbox from '@/components/lib/Checkbox';
+import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/components/lib/Dropdown';
+import { Chevron, Dots } from '@/components/lib/Icons';
+import Button from '../Button';
 
-export default function PTable({ selectable, onSelect }) {
-  const [ selected, setSelected ] = useState([]);
+export default function PTable({ selectable, onSelect, data }) {
+  const [ selected, setSelected ] = useState(new Set());
+  const selectAllState = useMemo(() => {
+    if (selected.size === 0) {
+      return 0;
+    }
+    if (selected.size === data.length) {
+      return 1;
+    }
+    return 2;
+  }, [ selected, data ]);
+
+  const handleSelectAllChange = () => {
+    if (selected.size === data.length) {
+      setSelected(new Set());
+    } else {
+      setSelected(new Set(data.map((item) => item.id)));
+    }
+  };
 
   const filters = [
     {
@@ -53,106 +75,157 @@ export default function PTable({ selectable, onSelect }) {
   const template = {
     properties: {
       id: {
+        name: '#',
         readOnly: true,
         type: 'integer',
+        width: '50px',
       },
       employee: {
+        name: 'Employé',
         type: 'string',
         format: 'iri-reference',
       },
       establishment: {
+        name: 'Établissement',
         type: 'string',
         format: 'iri-reference',
       },
       service: {
+        name: 'Service',
         type: 'string',
         format: 'iri-reference',
       },
       client: {
+        name: 'Client',
         type: 'string',
         format: 'iri-reference',
       },
       startDate: {
+        name: 'Date début',
         type: 'string',
         format: 'date-time',
       },
       endDate: {
+        name: 'Date fin',
         type: 'string',
         format: 'date-time',
       },
       comment: {
+        name: 'Commentaire',
         type: 'string',
         nullable: true,
       },
       cancelledAt: {
+        name: 'Annulé le',
         type: 'string',
         format: 'date-time',
         nullable: true,
       },
       price: {
+        name: 'Prix',
         type: 'number',
         nullable: true,
       },
     },
   };
 
-  const data = [
-    {
-      id: 1,
-      employee: '/api/employees/1',
-      establishment: '/api/establishments/1',
-      service: '/api/services/1',
-      client: '/api/clients/1',
-      startDate: '2021-06-22T14:00:00+02:00',
-      endDate: '2021-06-22T14:30:00+02:00',
-      comment: 'Commentaire',
-      cancelledAt: null,
-      price: 30,
-    },
-    {
-      id: 2,
-      employee: '/api/employees/2',
-      establishment: '/api/establishments/1',
-      service: '/api/services/2',
-      client: '/api/clients/2',
-      startDate: '2021-06-22T14:00:00+02:00',
-      endDate: '2021-06-22T14:30:00+02:00',
-      comment: 'Commentaire',
-      cancelledAt: null,
-      price: 30,
-    },
-  ];
-
   return (
     <div className={styles.Table}>
-      <div className={styles.TableHeader}>
-        {selectable && (
-          <div>
-            <input type="checkbox" />
-          </div>
-        )}
-        {Object.keys(template.properties).map((propKey) => (
-          <div className={styles.TableHeaderCell} key={propKey}>
-            <span>{propKey}</span>
-          </div>
-        ))}
-      </div>
-      <div className={styles.TableBody}>
-        {data.map((item) => (
-          <div className={styles.TableBodyRow} key={item.id}>
+      <div className={styles.TableWrapper}>
+        <div className={styles.TableScroller}>
+          <div className={styles.TableHeader}>
             {selectable && (
               <div>
-                <input type="checkbox" />
+                <Checkbox value={selectAllState} onChange={handleSelectAllChange} />
               </div>
             )}
             {Object.keys(template.properties).map((propKey) => (
-              <div className={styles.TableBodyRowCell} key={propKey}>
-                <span>{item[propKey]}</span>
+              <div
+                key={propKey}
+                className={styles.TableHeaderCell}
+                style={{
+                  width: template.properties[propKey].width,
+                }}
+              >
+                <span>{template.properties[propKey].name ?? propKey}</span>
+              </div>
+            ))}
+            <div className={styles.TableBodyRowActions}></div>
+          </div>
+          <div className={styles.TableBody}>
+            {data.map((item) => (
+              <div className={styles.TableBodyRow} key={item.id}>
+                {selectable && (
+                  <div className={styles.TableBodySelector}>
+                    <Checkbox value={selected.has(item.id)} onChange={(checked) => setSelected((set) => {
+                      checked ? set.add(item.id) : set.delete(item.id);
+                      return new Set(set);
+                    })} />
+                  </div>
+                )}
+                {Object.keys(template.properties).map((propKey) => (
+                  <div
+                    key={propKey}
+                    className={styles.TableBodyRowCell}
+                    style={{
+                      width: template.properties[propKey].width,
+                    }}
+                  >
+                    <span>{item[propKey]}</span>
+                  </div>
+                ))}
+                <div className={styles.TableBodyRowActions}>
+                  <Dropdown direction='br'>
+                    <DropdownButton>
+                      <div className={styles.TableBodyRowActionsButton}>
+                        <Dots />
+                      </div>
+                    </DropdownButton>
+                    <DropdownList style={{
+                      top: 0,
+                      right: 'calc(100% + 8px)',
+                    }}>
+                      <DropdownItem>Modifier</DropdownItem>
+                      <DropdownItem>Supprimer</DropdownItem>
+                    </DropdownList>
+                  </Dropdown>
+                </div>
               </div>
             ))}
           </div>
-        ))}
+        </div>
+      </div>
+      <div className={styles.TableFooter}>
+        <span className={styles.TableFooterResult}>
+          <span className={styles.TableFooterResultNumber}>23</span>
+          <span>résultats</span>
+        </span>
+        <div className={styles.TableFooterPagination}>
+          <Button variant="secondary" size="small">
+            <Chevron style={{
+              transform: 'rotate(90deg)',
+              height: '10px',
+            }} />
+            <span>Précédent</span>
+          </Button>
+          <Button variant="secondary" size="small">1</Button>
+          <Button variant="black" size="small">2</Button>
+          <Button variant="secondary" size="small">3</Button>
+          <Button variant="secondary" size="small">
+            <span>Suivant</span>
+            <Chevron style={{
+              transform: 'rotate(-90deg)',
+              height: '10px',
+            }} />
+          </Button>
+        </div>
       </div>
     </div>
   );
 }
+
+PTable.propTypes = {
+  selectable: PropTypes.bool,
+  onSelect: PropTypes.func,
+  data: PropTypes.arrayOf(PropTypes.object),
+};

@@ -1,3 +1,5 @@
+import Chevron from './Chevron';
+import Dots from './Dots';
 import Expand from './Expand';
 import Gear from './Gear';
 import Notif from './Notif';
@@ -7,6 +9,8 @@ import Stats from './Stats';
 import Users from './Users';
 
 export {
+  Chevron,
+  Dots,
   Expand,
   Gear,
   Notif,

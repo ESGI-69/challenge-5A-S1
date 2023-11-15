@@ -18,6 +18,33 @@ import Map from '@/components/Map';
 import EstablishmentCard from '@/components/Search/EstablishmentCard';
 import { useState } from 'react';
 
+const DATA = [
+  {
+    id: 1,
+    employee: '/api/employees/1',
+    establishment: '/api/establishments/1',
+    service: '/api/services/1',
+    client: '/api/clients/1',
+    startDate: '2021-06-22T14:00:00+02:00',
+    endDate: '2021-06-22T14:30:00+02:00',
+    comment: 'Commentaire',
+    cancelledAt: null,
+    price: 30,
+  },
+  {
+    id: 2,
+    employee: '/api/employees/2',
+    establishment: '/api/establishments/1',
+    service: '/api/services/2',
+    client: '/api/clients/2',
+    startDate: '2021-06-22T14:00:00+02:00',
+    endDate: '2021-06-22T14:30:00+02:00',
+    comment: 'Commentaire',
+    cancelledAt: null,
+    price: 30,
+  },
+];
+
 export default function Library() {
   const [ popinIsOpen, setPopinIsOpen ] = useState(false);
 
@@ -36,7 +63,7 @@ export default function Library() {
     }}>
       <h1>Library</h1>
       <h2>Table</h2>
-      <PTable selectable></PTable>
+      <PTable selectable data={DATA}></PTable>
       <h2>Button</h2>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>

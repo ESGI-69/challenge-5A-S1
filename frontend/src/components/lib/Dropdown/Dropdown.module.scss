@@ -2,6 +2,10 @@
   position: relative;
   display: inline-block;
 
+  &Button {
+    cursor: pointer;
+  }
+
   &List {
     position: absolute;
     z-index: var(--layer-5);
