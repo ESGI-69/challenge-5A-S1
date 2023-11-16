@@ -18,6 +18,7 @@ function Establishment() {
 
   useEffect(() => {
     getById(id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return isEstablishmentLoading ?

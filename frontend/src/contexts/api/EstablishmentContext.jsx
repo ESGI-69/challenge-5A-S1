@@ -36,7 +36,6 @@ export default function EstablishmentProvider({ children }) {
     });
     try {
       const { data } = await apiCall.get(`/establishments/${id}`);
-      console.log(data);
       dispatch({
         type: 'establishment',
         payload: data,
