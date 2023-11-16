@@ -11,7 +11,7 @@
   }
 
   &Scroller {
-    width: max-content;
+    width: 100%;
     color: var(--color-dark);
   }
 
@@ -19,11 +19,13 @@
     display: flex;
     align-items: center;
     border-bottom: var(--border-size-1) solid var(--color-border-light);
+    min-width: 100%;
 
     &Cell {
       width: 200px;
       padding: var(--size-2);
       font-weight: bold;
+      flex-shrink: 0;
     }
   }
 
@@ -32,6 +34,7 @@
       display: flex;
       align-items: center;
       border-bottom: var(--border-size-1) solid var(--color-border-light);
+      min-width: 100%;
 
       &_Selected {
         background: var(--gray-1);
@@ -40,6 +43,7 @@
       &Cell {
         width: 200px;
         padding: var(--size-2);
+        flex-shrink: 0;
       }
 
       &Actions {
