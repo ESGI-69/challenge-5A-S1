@@ -5,9 +5,12 @@ import styles from './LoginForm.module.scss';
 import Button from '@/components/lib/Button';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
   const { t } = useTranslation('login');
+  const navigate = useNavigate();
+
   const { login } = useContext(ProfileContext);
   const [ emailInput, setEmailInput ] = useState({
     id: crypto.randomUUID(),
@@ -34,14 +37,15 @@ export default function LoginForm() {
     }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = {
       email: formData.get('email'),
       password: formData.get('password'),
     };
-    login(data);
+    await login(data);
+    navigate('/');
   };
 
   return (
