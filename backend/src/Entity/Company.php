@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Repository\CompanyRepository;
 use App\Controller\Company\CreateCompanyController;
 use App\Controller\Company\CreateEmployeeOfCompanyController;
+use App\Controller\Company\GetEstablishmentsCompanyController;
 use App\Controller\Company\ValidateCompanyController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -24,6 +25,12 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 #[ApiResource(
     operations: [
+        new GetCollection(
+            security: 'is_granted("ROLE_ADMIN")',
+            uriTemplate: '/companies/{id}/establisments',
+            controller: GetEstablishmentsCompanyController::class,
+            normalizationContext: ['groups' => ['company-read', 'read-establishment']]
+        ),
         new GetCollection(
             security: 'is_granted("ROLE_ADMIN")',
             normalizationContext: ['groups' => ['company-getall']]
