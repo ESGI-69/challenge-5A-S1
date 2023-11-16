@@ -6,7 +6,7 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/componen
 import { Chevron, Dots } from '@/components/lib/Icons';
 import Button from '../Button';
 
-export default function PTable({ template, data, selectable }) {
+export default function PTable({ template, data, selectable, onModify, onDelete }) {
   const [ selected, setSelected ] = useState(new Set());
   const selectAllState = useMemo(() => {
     if (selected.size === 0) {
@@ -25,8 +25,6 @@ export default function PTable({ template, data, selectable }) {
       setSelected(new Set(data.map((item) => item.id)));
     }
   };
-
-  const customValueComponent = (Component) => <Component />;
 
   const filters = [
     {
@@ -90,6 +88,8 @@ export default function PTable({ template, data, selectable }) {
                 className={styles.TableHeaderCell}
                 style={{
                   width: template?.properties[propKey].width,
+                  minWidth: template?.properties[propKey].width,
+                  maxWidth: template?.properties[propKey].width,
                 }}
               >
                 <span>{template?.properties[propKey].name ?? propKey}</span>
@@ -99,7 +99,10 @@ export default function PTable({ template, data, selectable }) {
           </div>
           <div className={styles.TableBody}>
             {data.map((item) => (
-              <div className={styles.TableBodyRow} key={item.id}>
+              <div
+                className={`${styles.TableBodyRow} ${selected.has(item.id) ? styles.TableBodyRow_Selected : ''}`}
+                key={item.id}
+              >
                 {selectable && (
                   <div className={styles.TableBodySelector}>
                     <Checkbox value={selected.has(item.id)} onChange={(checked) => setSelected((set) => {

@@ -1,7 +1,7 @@
 .Table {
   max-width: 100%;
   background: var(--white);
-  padding: var(--size-3) 0 var(--size-3) var(--size-3);
+  padding: var(--size-3);
   border-radius: var(--radius-3);
   box-shadow: var(--shadow-1);
   border:  var(--border-size-1) solid var(--color-border-light);
@@ -33,6 +33,10 @@
       align-items: center;
       border-bottom: var(--border-size-1) solid var(--color-border-light);
 
+      &_Selected {
+        background: var(--gray-1);
+      }
+
       &Cell {
         width: 200px;
         padding: var(--size-2);
@@ -41,16 +45,16 @@
       &Actions {
         position: sticky;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
+        flex-grow: 1;
         width: 24px;
         right: 0;
-        padding: var(--size-2);
-        background: var(--white);
         z-index: 1;
 
         &Button {
           padding: var(--size-2);
+          background: white;
         }
       }
     }

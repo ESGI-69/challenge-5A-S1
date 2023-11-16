@@ -18,43 +18,11 @@ import Map from '@/components/Map';
 import EstablishmentCard from '@/components/Search/EstablishmentCard';
 import { useState } from 'react';
 
-const DATA_TEMPLATE = {
-  properties: {
-    id: {
-      name: '#',
-      readOnly: true,
-      type: 'integer',
-      width: '50px',
-    },
-    employee: {
-      name: 'Employé',
-      type: 'string',
-      format: 'iri-reference',
-    },
-    startDate: {
-      name: 'Date début',
-      type: 'string',
-      format: 'date-time',
-    },
-    endDate: {
-      name: 'Date fin',
-      type: 'string',
-      format: 'date-time',
-    },
-    comment: {
-      name: 'Commentaire',
-      type: 'string',
-      nullable: true,
-    },
-    price: {
-      name: 'Prix',
-      type: 'number',
-      nullable: true,
-    },
-  },
-};
+const clickableEmail = ({ value }) => (
+  <a href={`mailto:${value}`} style={{ textDecoration: 'underline' }}>{value}</a>
+);
 
-const DATA2_TEMPLATE = {
+const DATA_TEMPLATE = {
   properties: {
     id: {
       name: '#',
@@ -65,7 +33,7 @@ const DATA2_TEMPLATE = {
     email: {
       name: 'Email',
       type: 'string',
-      component: Button,
+      component: clickableEmail,
     },
     firstname: {
       name: 'Prénom',
@@ -91,33 +59,6 @@ const DATA2_TEMPLATE = {
 };
 
 const DATA = [
-  {
-    id: 1,
-    employee: '/api/employees/1',
-    establishment: '/api/establishments/1',
-    service: '/api/services/1',
-    client: '/api/clients/1',
-    startDate: '2021-06-22T14:00:00+02:00',
-    endDate: '2021-06-22T14:30:00+02:00',
-    comment: 'Commentaire',
-    cancelledAt: null,
-    price: 30,
-  },
-  {
-    id: 2,
-    employee: '/api/employees/2',
-    establishment: '/api/establishments/1',
-    service: '/api/services/2',
-    client: '/api/clients/2',
-    startDate: '2021-06-22T14:00:00+02:00',
-    endDate: '2021-06-22T14:30:00+02:00',
-    comment: 'Commentaire',
-    cancelledAt: null,
-    price: 30,
-  },
-];
-
-const DATA2 = [
   {
     id: 1,
     email: 'admin@gmail.com',
@@ -162,7 +103,6 @@ export default function Library() {
       <h1>Library</h1>
       <h2>Table</h2>
       <PTable selectable template={DATA_TEMPLATE} data={DATA}></PTable>
-      <PTable selectable template={DATA2_TEMPLATE} data={DATA2}></PTable>
       <h2>Button</h2>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
