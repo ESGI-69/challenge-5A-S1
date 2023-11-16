@@ -7,6 +7,8 @@ import ErrorPage from '@/pages/404.jsx';
 import Home from '@/pages/website/Home';
 import Login from '@/pages/website/Login';
 import Register from '@/pages/website/Register';
+import Establishment from '@/pages/website/Establishment';
+import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register />,
+      },
+      {
+        path: '/establishment/:id',
+        element: <EstablishmentProvider><Establishment /></EstablishmentProvider>,
       },
       {
         path: '*',

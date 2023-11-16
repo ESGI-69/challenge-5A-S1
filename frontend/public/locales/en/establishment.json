@@ -1,0 +1,14 @@
+{
+  "description": "Book an appointment online at {{establishmentName}}",
+  "advantages": "24h/24 - Payment on site - Immediate confirmation - Free cancellation",
+  "makeAnAppointment": "Make an appointment",
+  "myApointments": {
+    "title": "My appointments"
+  },
+  "services": {
+    "title": "Prestations choices"
+  },
+  "openingHours": {
+    "title": "Openning hours"
+  }
+}

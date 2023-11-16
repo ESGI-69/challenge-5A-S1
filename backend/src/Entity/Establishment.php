@@ -53,6 +53,7 @@ class Establishment
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read-establishment'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 55)]

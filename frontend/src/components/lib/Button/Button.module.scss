@@ -1,12 +1,12 @@
 .Button {
   cursor: pointer;
-  padding: var(--size-2) var(--size-3);
-  border-radius: var(--radius-2);
+  padding: var(--size-2) var(--size-2-5);
+  border-radius: var(--radius-2-5);
   color: var(--color-text-white);
   text-align: center;
-  font-size: var(--size-3);
   font-family: Inter;
   font-style: normal;
+  font-size: var(--font-size-01);
 
   $variants: Primary, Secondary, Success, Danger, Warning, Black;
 

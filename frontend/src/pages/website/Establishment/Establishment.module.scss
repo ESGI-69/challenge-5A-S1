@@ -1,0 +1,99 @@
+.Establishment {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "left left right";
+  grid-auto-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: var(--size-3);
+  column-gap: var(--size-6);
+  color: var(--color-text-regular);
+
+  &Title {
+    margin: 0;
+    font-weight: var(--font-weight-5);
+    font-size: var(--font-size-4);
+  }
+
+  &Subtitle {
+    margin: 0;
+    font-weight: var(--font-weight-5);
+    font-size: var(--font-size-3);
+  }
+
+  &Header {
+    grid-area: header;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-7);
+    margin-bottom: var(--size-7);
+
+    &Name {
+      display: flex;
+      justify-content: space-between;
+
+      &Left, &Right {
+        display: flex;
+        flex-direction: column;
+      }
+  
+      &Left {
+        &Address {
+          color: var(--color-text-light);
+          font-weight: var(--font-weight-3);
+        }
+      }
+  
+      &Right {
+        justify-content: flex-end;
+      }
+      
+    }
+
+    &Description {
+      p {
+        margin: var(--size-2) 0 0 0;
+        color: var(--color-text-light);
+        font-weight: var(--font-weight-3);
+      }
+    }
+  }
+
+  &Left, &Right {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &Left {
+    grid-area: left;
+    gap: var(--size-8);
+
+    &ApointmentsSection {
+      display: flex;
+      flex-direction: column;
+      gap: var(--size-2);
+
+      &Apointments {
+        display: flex;
+        gap: var(--size-5);
+      }
+    }
+
+    &ServicesSection {
+      display: flex;
+      flex-direction: column;
+      gap: var(--size-6);
+    }
+  }
+
+  &Right {
+    grid-area: right;
+    gap: var(--size-5);
+
+    &OpeningHoursSection {
+      display: flex;
+      flex-direction: column;
+      gap: var(--size-2);
+    }
+  }
+}
