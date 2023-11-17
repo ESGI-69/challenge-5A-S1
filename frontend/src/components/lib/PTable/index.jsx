@@ -6,7 +6,7 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/componen
 import { Chevron, Dots } from '@/components/lib/Icons';
 import Button from '../Button';
 
-export default function PTable({ template, data, selectable, onSelect, onModify, onDelete }) {
+export default function PTable({ template, data, selectable, onSelect, onModify, onDelete, loading }) {
   const [ selected, setSelected ] = useState(new Set());
   const selectAllState = useMemo(() => {
     if (selected.size === 0) {
@@ -80,6 +80,7 @@ export default function PTable({ template, data, selectable, onSelect, onModify,
 
   return (
     <div className={styles.Table}>
+      {loading && <div className={styles.TableLoader}><div className={styles.TableLoaderSpinner}></div></div>}
       <div className={styles.TableWrapper}>
         <div className={styles.TableScroller}>
           <div className={styles.TableHeader}>
@@ -104,7 +105,8 @@ export default function PTable({ template, data, selectable, onSelect, onModify,
             <div className={styles.TableBodyRowActions}></div>
           </div>
           <div className={styles.TableBody}>
-            {data.map((item) => (
+            {!data.length && <div className={styles.TableBodyNoresult}>Pas de résultats</div>}
+            {data.length > 0 && data.map((item) => (
               <div
                 className={`${styles.TableBodyRow} ${selected.has(item.id) ? styles.TableBodyRow_Selected : ''}`}
                 key={item.id}
@@ -191,5 +193,6 @@ PTable.propTypes = {
   onSelect: PropTypes.func,
   onModify: PropTypes.func,
   onDelete: PropTypes.func,
+  loading: PropTypes.bool,
   data: PropTypes.arrayOf(PropTypes.object),
 };

@@ -102,7 +102,7 @@ export default function Library() {
     }}>
       <h1>Library</h1>
       <h2>Table</h2>
-      <PTable selectable template={DATA_TEMPLATE} data={DATA}></PTable>
+      <PTable selectable template={DATA_TEMPLATE} data={[]}></PTable>
       <h2>Button</h2>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
