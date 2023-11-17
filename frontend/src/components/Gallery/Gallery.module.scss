@@ -47,7 +47,7 @@
 
         &Btn {
             position: relative;
-            bottom: 55%;
+            bottom: 60%;
             z-index: 3;
             color: white;
             display: inherit;
@@ -86,8 +86,8 @@
         }
 
         &Arrow {
-            font-size: var(--size-8);
             margin: var(--size-4);
+            padding: var(--size-2);
         }
     }
 }
