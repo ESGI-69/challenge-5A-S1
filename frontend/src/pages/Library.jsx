@@ -17,6 +17,8 @@ import Popin from '@/components/Popin';
 import Map from '@/components/Map';
 import EstablishmentCard from '@/components/Search/EstablishmentCard';
 import { useState } from 'react';
+import EntityTable, { EntityTableFooter } from '@/components/lib/EntityTable';
+import UserProvider, { UserContext } from '@/contexts/api/UserContext';
 
 const clickableEmail = ({ value }) => (
   <a href={`mailto:${value}`} style={{ textDecoration: 'underline' }}>{value}</a>
@@ -102,7 +104,14 @@ export default function Library() {
     }}>
       <h1>Library</h1>
       <h2>Table</h2>
-      <PTable selectable template={DATA_TEMPLATE} data={[]}></PTable>
+      <h3>PTable</h3>
+      <PTable template={DATA_TEMPLATE} data={DATA}></PTable>
+      <h3>Entity Table (auto managed)</h3>
+      <UserProvider>
+        <EntityTable entity="User" entityContext={UserContext}>
+          <EntityTableFooter></EntityTableFooter>
+        </EntityTable>
+      </UserProvider>
       <h2>Button</h2>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>

@@ -6,13 +6,23 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/componen
 import { Chevron, Dots } from '@/components/lib/Icons';
 import Button from '../Button';
 
-export default function PTable({ template, data, selectable, onSelect, onModify, onDelete, loading }) {
+export default function PTable({
+  template,
+  data,
+  selectable = false,
+  pagination = false,
+  onSelect,
+  onModify,
+  onDelete,
+  onPageNext,
+  onPagePrevious,
+  loading }) {
   const [ selected, setSelected ] = useState(new Set());
   const selectAllState = useMemo(() => {
     if (selected.size === 0) {
       return 0;
     }
-    if (selected.size === data.length) {
+    if (selected.size === data?.length) {
       return 1;
     }
     return 2;
@@ -25,7 +35,7 @@ export default function PTable({ template, data, selectable, onSelect, onModify,
   }, [ selected, onSelect ]);
 
   const handleSelectAllChange = () => {
-    if (selected.size === data.length) {
+    if (selected.size === data?.length) {
       setSelected(new Set());
     } else {
       setSelected(new Set(data.map((item) => item.id)));
@@ -105,11 +115,11 @@ export default function PTable({ template, data, selectable, onSelect, onModify,
             <div className={styles.TableBodyRowActions}></div>
           </div>
           <div className={styles.TableBody}>
-            {!data.length && <div className={styles.TableBodyNoresult}>Pas de résultats</div>}
-            {data.length > 0 && data.map((item) => (
+            {!data?.length && <div className={styles.TableBodyNoresult}>Pas de résultats</div>}
+            {data?.length > 0 && data.map((item) => (
               <div
                 className={`${styles.TableBodyRow} ${selected.has(item.id) ? styles.TableBodyRow_Selected : ''}`}
-                key={item.id}
+                key={item.id || crypto.randomUUID()}
               >
                 {selectable && (
                   <div className={styles.TableBodySelector}>
@@ -160,28 +170,30 @@ export default function PTable({ template, data, selectable, onSelect, onModify,
       </div>
       <div className={styles.TableFooter}>
         <span className={styles.TableFooterResult}>
-          <span className={styles.TableFooterResultNumber}>{data.length}</span>
+          <span className={styles.TableFooterResultNumber}>{data?.length || 0}</span>
           <span>résultats</span>
         </span>
-        <div className={styles.TableFooterPagination}>
-          <Button variant="secondary" size="small">
-            <Chevron style={{
-              transform: 'rotate(90deg)',
-              height: '10px',
-            }} />
-            <span>Précédent</span>
-          </Button>
-          <Button variant="secondary" size="small">1</Button>
-          <Button variant="black" size="small">2</Button>
-          <Button variant="secondary" size="small">3</Button>
-          <Button variant="secondary" size="small">
-            <span>Suivant</span>
-            <Chevron style={{
-              transform: 'rotate(-90deg)',
-              height: '10px',
-            }} />
-          </Button>
-        </div>
+        {pagination && (
+          <div className={styles.TableFooterPagination}>
+            <Button variant="secondary" size="small" onClick={() => onPagePrevious()}>
+              <Chevron style={{
+                transform: 'rotate(90deg)',
+                height: '10px',
+              }} />
+              <span>Précédent</span>
+            </Button>
+            <Button variant="secondary" size="small">1</Button>
+            <Button variant="black" size="small">2</Button>
+            <Button variant="secondary" size="small">3</Button>
+            <Button variant="secondary" size="small" onClick={() => onPageNext()}>
+              <span>Suivant</span>
+              <Chevron style={{
+                transform: 'rotate(-90deg)',
+                height: '10px',
+              }} />
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -189,6 +201,7 @@ export default function PTable({ template, data, selectable, onSelect, onModify,
 
 PTable.propTypes = {
   selectable: PropTypes.bool,
+  pagination: PropTypes.bool,
   template: PropTypes.object.isRequired,
   onSelect: PropTypes.func,
   onModify: PropTypes.func,
