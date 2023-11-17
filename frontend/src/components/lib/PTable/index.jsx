@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './PTable.module.scss';
 import Checkbox from '@/components/lib/Checkbox';
@@ -6,7 +6,7 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/componen
 import { Chevron, Dots } from '@/components/lib/Icons';
 import Button from '../Button';
 
-export default function PTable({ template, data, selectable, onModify, onDelete }) {
+export default function PTable({ template, data, selectable, onSelect, onModify, onDelete }) {
   const [ selected, setSelected ] = useState(new Set());
   const selectAllState = useMemo(() => {
     if (selected.size === 0) {
@@ -17,6 +17,12 @@ export default function PTable({ template, data, selectable, onModify, onDelete 
     }
     return 2;
   }, [ selected, data ]);
+
+  useEffect(() => {
+    if (onSelect) {
+      onSelect(selected);
+    }
+  }, [ selected, onSelect ]);
 
   const handleSelectAllChange = () => {
     if (selected.size === data.length) {
@@ -140,8 +146,8 @@ export default function PTable({ template, data, selectable, onModify, onDelete 
                       top: 0,
                       right: 'calc(100% + 8px)',
                     }}>
-                      <DropdownItem>Modifier</DropdownItem>
-                      <DropdownItem>Supprimer</DropdownItem>
+                      <DropdownItem onClick={() => onModify(item.id)}>Modifier</DropdownItem>
+                      <DropdownItem onClick={() => onDelete(item.id)}>Supprimer</DropdownItem>
                     </DropdownList>
                   </Dropdown>
                 </div>
@@ -152,7 +158,7 @@ export default function PTable({ template, data, selectable, onModify, onDelete 
       </div>
       <div className={styles.TableFooter}>
         <span className={styles.TableFooterResult}>
-          <span className={styles.TableFooterResultNumber}>23</span>
+          <span className={styles.TableFooterResultNumber}>{data.length}</span>
           <span>résultats</span>
         </span>
         <div className={styles.TableFooterPagination}>
@@ -183,5 +189,7 @@ PTable.propTypes = {
   selectable: PropTypes.bool,
   template: PropTypes.object.isRequired,
   onSelect: PropTypes.func,
+  onModify: PropTypes.func,
+  onDelete: PropTypes.func,
   data: PropTypes.arrayOf(PropTypes.object),
 };
