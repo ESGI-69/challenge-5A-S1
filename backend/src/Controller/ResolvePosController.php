@@ -24,21 +24,40 @@ class ResolvePosController
 
     public function __invoke(Request $request): JsonResponse
     {
-        $address = $request->request->get('address');
+        $getParameters = $request->query->all();
+        $address = $getParameters['address'];
 
+        if(empty($address)){
+            return new JsonResponse(['error' => 'Address not found'], 404);
+        }
+    
         $url = sprintf('https://nominatim.openstreetmap.org/search?q=%s&format=json', urlencode($address));
-        $response = file_get_contents($url);
+    
+        //On doit ajouter un user agent pour que l'api d'openstreetmap accepte
+        $options = [
+            'http' => [
+                'header' => 'User-Agent: YourAppName/1.0',
+            ],
+        ];
+        $context = stream_context_create($options);
+        $response = file_get_contents($url, false, $context);
+    
+        if ($response === false) {
+            return new JsonResponse(['error' => 'Access denied'], 403);
+        }
+    
         $data = json_decode($response, true);
-
+    
         if (empty($data)) {
             return new JsonResponse(['error' => 'Address not found'], 404);
         }
-
+    
         $result = [
             'latitude' => $data[0]['lat'],
             'longitude' => $data[0]['lon'],
         ];
-
+    
         return new JsonResponse($result);
     }
+    
 }
