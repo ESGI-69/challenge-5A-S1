@@ -1,8 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import tabsStyles from './Tabs.module.scss';
-import tabStyles from './Tab.module.scss';
+import styles from './Tabs.module.scss';
 
 const TabsContext = createContext();
 
@@ -19,6 +18,7 @@ function useTabs() {
 function Tabs({
   children,
   defaultTab,
+  variant = 'default',
 }) {
   const [ currentTab, setCurrentTab ] = useState(defaultTab);
   const switchTab = (tab) => {
@@ -26,11 +26,12 @@ function Tabs({
   };
 
   return (
-    <div className={tabsStyles.Tabs}>
+    <div className={`${styles.Tabs} ${variant === 'big' ? styles.Tabs_Big : ''}`}>
       <TabsContext.Provider
         value={{
           currentTab,
           switchTab,
+          variant,
         }}
       >
         {children}
@@ -42,6 +43,7 @@ function Tabs({
 Tabs.propTypes = {
   children: PropTypes.node.isRequired,
   defaultTab: PropTypes.string.isRequired,
+  variant: PropTypes.oneOf([ 'default', 'big' ]),
 };
 
 function Tab({
@@ -49,8 +51,8 @@ function Tab({
   value,
   count,
 }) {
-  const { currentTab, switchTab } = useTabs();
-  const tabClasses = `${tabStyles.Tab} ${currentTab === value ? tabStyles.TabActive : ''}`;
+  const { currentTab, switchTab, variant } = useTabs();
+  const tabClasses = `${styles.TabsTab} ${currentTab === value ? styles.TabsTab_Active : ''} ${variant === 'big' ? styles.TabsTab_Big : ''}`;
   const handleClick = () => {
     switchTab(value);
   };
@@ -61,7 +63,7 @@ function Tab({
     >
       {children}
       {count && (
-        <span className={tabStyles.TabCount}>
+        <span className={styles.TabsTabCount}>
           {count}
         </span>
       )}
@@ -79,10 +81,14 @@ function TabContent({
   children,
   value,
 }) {
-  const { currentTab } = useTabs();
+  const { currentTab, variant } = useTabs();
 
   if (currentTab === value) {
-    return <div className={tabsStyles.TabsContent}>{children}</div>;
+    return (
+      <div className={`${styles.TabsContent} ${variant === 'big' ? styles.TabsContent_Big : ''}`}>
+        {children}
+      </div>
+    );
   }
   return null;
 }
@@ -95,8 +101,9 @@ TabContent.propTypes = {
 function TabsList({
   children,
 }) {
+  const { variant } = useTabs();
   return (
-    <div className={tabsStyles.TabsItems}>
+    <div className={`${styles.TabsItems} ${variant === 'big' ? styles.TabsItems_Big : ''}`}>
       {children}
     </div>
   );

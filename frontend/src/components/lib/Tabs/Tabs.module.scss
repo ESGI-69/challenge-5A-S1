@@ -4,11 +4,93 @@
   gap: var(--size-2);
   width: 100%;
 
+  &_Big {
+    overflow: hidden;
+    background: var(--white);
+    border-radius: var(--radius-2-5);
+    box-shadow: var(--shadow-2);
+    border: var(--border-size-1) solid var(--color-border-light);
+    gap: unset;
+  }
+
   &Items {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
     width: fit-content;
     gap: var(--size-2);
+
+    &_Big {
+      width: unset;
+      gap: unset;
+    }
+  }
+  
+  &Tab {
+    all: unset;
+    cursor: pointer;
+    padding: var(--size-1) var(--size-4);
+    border-radius: var(--radius-2);
+    font-weight: var(--font-weight-6);
+    color: var(--text-color-regular);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--size-1);
+    grid-row: 1;
+  
+    &Count {
+      font-size: var(--font-size-0);
+      padding: .1rem var(--size-2);
+      border-radius: var(--radius-round);
+      background: var(--color-dark);
+      color: var(--color-white);
+    }
+  
+    &_Active {
+      background: var(--color-dark);
+      color: var(--color-white);
+    
+      .TabCount {
+        background: var(--white);
+        color: var(--color-text-regular)
+      }
+    }
+  
+    &:hover {
+      &:not(.TabsTab_Active) {
+        background: var(--color-hover);
+      }
+    }
+
+    &_Big {
+      border-radius: unset;
+      padding: var(--size-3);
+      color: var(--color-text-light);
+      border-bottom: var(--border-size-2) solid var(--color-border);
+      font-weight: 500;
+      font-size: var(--font-size-01);
+
+      &.TabsTab_Active {
+        color: var(--color-text-regular);
+        background: var(--white);
+        border-bottom: var(--border-size-2) solid var(--color-dark);
+      }
+
+      &:hover {
+        background: var(--white);
+        color: var(--color-text-regular);
+
+        &:not(.TabsTab_Active) {
+          background: var(--white);
+        }
+      }
+    }
+  }
+
+  &Content {
+    &_Big {
+      padding: var(--size-5);
+    }
   }
 }

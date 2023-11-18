@@ -59,6 +59,7 @@ export default function Library() {
       <Checkbox />
 
       <h2>Tabs</h2>
+      <h3>default</h3>
       <Tabs defaultTab="tab1">
         <TabsList>
           <Tab value="tab1">Premiere Tab</Tab>
@@ -66,19 +67,43 @@ export default function Library() {
           <Tab value="tab3">Troisième Tab</Tab>
         </TabsList>
         <TabContent value="tab1">
-          <p>
+          <span>
             Tab 1 content
-          </p>
+          </span>
         </TabContent>
         <TabContent value="tab2">
-          <p>
+          <span>
             Tab 2 content
-          </p>
+          </span>
         </TabContent>
         <TabContent value="tab3">
-          <p>
+          <span>
             Tab 3 content
-          </p>
+          </span>
+        </TabContent>
+      </Tabs >
+
+      <h3>big</h3>
+      <Tabs defaultTab="tab1" variant="big">
+        <TabsList>
+          <Tab value="tab1">Premiere Tab</Tab>
+          <Tab value="tab2" count={2}>Deuxieme Tab</Tab>
+          <Tab value="tab3">Troisième Tab</Tab>
+        </TabsList>
+        <TabContent value="tab1">
+          <span>
+            Tab 1 content
+          </span>
+        </TabContent>
+        <TabContent value="tab2">
+          <span>
+            Tab 2 content
+          </span>
+        </TabContent>
+        <TabContent value="tab3">
+          <span>
+            Tab 3 content
+          </span>
         </TabContent>
       </Tabs >
 
