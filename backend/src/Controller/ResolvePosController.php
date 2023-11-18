@@ -36,7 +36,7 @@ class ResolvePosController
         //On doit ajouter un user agent pour que l'api d'openstreetmap accepte
         $options = [
             'http' => [
-                'header' => 'User-Agent: YourAppName/1.0',
+                'header' => 'User-Agent: Platiny/1.0',
             ],
         ];
         $context = stream_context_create($options);
