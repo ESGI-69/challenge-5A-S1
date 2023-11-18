@@ -41,6 +41,9 @@
   --color-border: var(--gray-4);
   --color-border-light: var(--gray-2);
 
+  /* Raduis */
+  --radius-2-5: 0.75rem;
+
   /* Font size */
   --font-size-01: .90rem;
 

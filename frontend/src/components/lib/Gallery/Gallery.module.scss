@@ -17,7 +17,7 @@
 
     &Main, &First, &Second, &Third, &More {
         img {
-            border-radius: var(--radius-3);
+            border-radius: var(--radius-2-5);
             background-color: black;
         }
     }
@@ -42,7 +42,7 @@
     &More {
         grid-area: more;
         overflow: hidden;
-        border-radius: var(--radius-3);
+        border-radius: var(--radius-2-5);
         text-align: center;
 
         &Btn {
