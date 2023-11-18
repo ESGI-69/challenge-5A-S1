@@ -20,5 +20,23 @@
     padding: 0 var(--size-7);
     box-shadow: var(--shadow-2);
     border-bottom: var(--border-size-1) solid var(--border-color-light);
+
+    &ViewMore {
+      font-size: var(--font-size-0-5);
+      margin: var(--size-4) 0;
+      color: var(--indigo-9);
+      text-decoration: underline;
+      width: fit-content;
+
+      &:hover {
+        cursor: pointer;
+        color: var(--violet-6) ;
+      }
+
+      &:active,
+      &:focus {
+        color: var(--violet-6) ;
+      }
+    }
   }
 }

@@ -175,6 +175,22 @@ export default function Library() {
             duration: 120,
             price: 120,
           },
+          {
+            id: 5,
+            name: 'Coiffure 5',
+            description: 'Description de la coiffure 5',
+            icon: '👩‍🦰',
+            duration: 150,
+            price: 150,
+          },
+          {
+            id: 6,
+            name: 'Coiffure 6',
+            description: 'Description de la coiffure 6',
+            icon: '👩‍🦳',
+            duration: 180,
+            price: 180,
+          },
         ]}
       />
       <h2>Gallery</h2>

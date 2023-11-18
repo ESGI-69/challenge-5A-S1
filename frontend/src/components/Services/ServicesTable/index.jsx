@@ -1,18 +1,23 @@
+import { useState } from 'react';
 import style from './ServicesTable.module.scss';
 import PropTypes from 'prop-types';
 import ServicesRow from '../ServicesRow';
+import { useTranslation } from 'react-i18next';
 
 function ServicesTable({
   type,
   description,
   services,
 }) {
+  const [ isExpanded, setIsExpanded ] = useState(false);
+  const { t } = useTranslation('servicesTable');
+
   return (
     <div className={style.Services}>
       <h3 className={style.ServicesType}>{type}</h3>
       <p className={style.ServicesDesc}>{description}</p>
       <div className={style.ServicesTable}>
-        {services?.map((service) => (
+        {(services && (isExpanded ? services : services.slice(0, 5))).map((service) => (
           <ServicesRow
             key={service.id}
             name={service.name}
@@ -21,6 +26,9 @@ function ServicesTable({
             duration={service.duration}
           />
         ))}
+        <a className={style.ServicesTableViewMore} onClick={() => setIsExpanded(!isExpanded)}>
+          {isExpanded ? t('less') : t('more')}
+        </a>
       </div>
     </div>
   );
