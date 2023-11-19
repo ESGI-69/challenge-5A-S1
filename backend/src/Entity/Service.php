@@ -91,6 +91,10 @@ class Service
     #[ORM\ManyToMany(targetEntity: WorkingHoursRange::class, mappedBy: 'services')]
     private Collection $workingHoursRanges;
 
+    #[ORM\ManyToOne(inversedBy: 'services')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Establishment $establishment = null;
+
     public function __construct()
     {
         $this->workingHoursRanges = new ArrayCollection();
@@ -196,6 +200,18 @@ class Service
         if ($this->workingHoursRanges->removeElement($workingHoursRange)) {
             $workingHoursRange->removeService($this);
         }
+
+        return $this;
+    }
+
+    public function getEstablishment(): ?Establishment
+    {
+        return $this->establishment;
+    }
+
+    public function setEstablishment(?Establishment $establishment): static
+    {
+        $this->establishment = $establishment;
 
         return $this;
     }
