@@ -95,6 +95,10 @@ class Service
     #[ORM\JoinColumn(nullable: false)]
     private ?Establishment $establishment = null;
 
+    #[ORM\ManyToOne(inversedBy: 'services')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ServiceType $type = null;
+
     public function __construct()
     {
         $this->workingHoursRanges = new ArrayCollection();
@@ -212,6 +216,18 @@ class Service
     public function setEstablishment(?Establishment $establishment): static
     {
         $this->establishment = $establishment;
+
+        return $this;
+    }
+
+    public function getType(): ?ServiceType
+    {
+        return $this->type;
+    }
+
+    public function setType(?ServiceType $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }
