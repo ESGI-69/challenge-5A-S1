@@ -1,3 +1,5 @@
+@use "src/breakpoints" as *;
+
 .Gallery {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -100,7 +102,7 @@
 }
 
 
-@media only screen and (width <= 1024px) {
+@media only screen and (width <= $breakpoint-desktop) {
     .Gallery {
         grid-template-columns: 1fr 1fr;
         grid-template-areas:

@@ -1,3 +1,5 @@
+@use "src/breakpoints" as *;
+
 .Page {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -10,7 +12,7 @@
     background-position: center;
   }
 
-  @media screen and (width <= 1024px) {
+  @media screen and (width <= $breakpoint-desktop) {
     grid-template-columns: 1fr;
 
     &Image {
