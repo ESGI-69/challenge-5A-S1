@@ -10,5 +10,9 @@
   },
   "openingHours": {
     "title": "Openning hours"
+  },
+  "tabs": {
+    "globalNotation": "Global notation",
+    "reviews": "Reveiws"
   }
 }

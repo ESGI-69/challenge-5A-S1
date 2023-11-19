@@ -9,6 +9,8 @@ import ServicesTable from '@/components/Services/ServicesTable';
 import GlobalNotation from '@/components/Notation/GlobalNotation';
 import OpeningHours from '@/components/OpeningHours';
 import { useTranslation } from 'react-i18next';
+import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
+import Review from '@/components/Notation/Review';
 
 function Establishment() {
   const { t } = useTranslation('establishment');
@@ -106,7 +108,24 @@ function Establishment() {
         </div>
       </div>
       <div className={styles.EstablishmentRight}>
-        <GlobalNotation />
+
+        <Tabs defaultTab="global-notation" variant="big">
+          <TabsList>
+            <Tab value="global-notation">{t('tabs.globalNotation')}</Tab>
+            <Tab value="tab2">{t('tabs.reviews')}</Tab>
+          </TabsList>
+          <TabContent value="global-notation">
+            <GlobalNotation />
+          </TabContent>
+          <TabContent value="tab2">
+            <Review
+              authorName='John Doe'
+              note={5}
+              content='Super coiffeur, je recommande !'
+              date={new Date()}
+            />
+          </TabContent>
+        </Tabs >
         <div className={styles.EstablishmentRightOpeningHoursSection}>
           <h3 className={styles.EstablishmentSubtitle}>
             {t('openingHours.title')}
