@@ -71,10 +71,6 @@ class Service
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
     
-    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read'])]
-    #[ORM\Column(length: 30, nullable: true)]
-    private ?string $icon = null;
-    
     #[Groups(['admin-read-service'])]
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $validatedAt = null;
