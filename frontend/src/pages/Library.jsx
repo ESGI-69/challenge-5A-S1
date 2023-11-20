@@ -8,12 +8,24 @@ import GlobalNotation from '@/components/Notation/GlobalNotation';
 import Review from '@/components/Notation/Review';
 import Note from '@/components/Notation/Note';
 import ServicesTable from '@/components/Services/ServicesTable';
-import Gallery from '@/components/lib/Gallery';
+import Gallery from '@/components/Gallery';
 import SearchBar from '@/components/SearchBar';
 import OpeningHours from '@/components/OpeningHours';
 import Checkbox from '@/components/lib/Checkbox';
+import Popin from '@/components/Popin';
+import { useState } from 'react';
 
 export default function Library() {
+  const [ popinIsOpen, setPopinIsOpen ] = useState(false);
+
+  const openPopin = () => {
+    setPopinIsOpen(true);
+  };
+
+  const closePopin = () => {
+    setPopinIsOpen(false);
+  };
+
   return (
     <main style={{
       margin: '0 auto',
@@ -223,14 +235,22 @@ export default function Library() {
         <img src="https://picsum.photos/seed/1/534/300" alt="random" />
         <img src="https://picsum.photos/seed/2/534/300" alt="random" />
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
+        <img src="https://picsum.photos/seed/5/534/300" alt="random" />
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
-        <img src="https://picsum.photos/seed/3/534/300" alt="random" />
-        <img src="https://picsum.photos/seed/3/534/300" alt="random" />
+        <img src="https://picsum.photos/seed/4/534/300" alt="random" />
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
       </Gallery>
 
       <h2>SearchBar</h2>
       <SearchBar />
+      <h2>Popin</h2>
+      <Button variant="black" onClick={openPopin}>Ouvrir la popin</Button>
+      {popinIsOpen && (
+        <Popin onClose={closePopin}>
+          <h2>popin</h2>
+          <p>Contenu de la popin </p>
+        </Popin>
+      )}
 
       <h2>OpeningHour</h2>
       <OpeningHours value={[

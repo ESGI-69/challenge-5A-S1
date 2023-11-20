@@ -47,7 +47,7 @@
 
         &Btn {
             position: relative;
-            bottom: 55%;
+            bottom: 60%;
             z-index: 3;
             color: white;
             display: inherit;
@@ -55,6 +55,39 @@
 
         img:has(+ &Btn) {
             filter: blur(10px) brightness(0.9);
+        }
+    }
+
+    &Popin {
+        display: grid;
+        width: 80%;
+        margin: var(--size-8) auto;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--size-4);
+
+        &Img {
+            img {
+                border-radius: var(--radius-3);
+                cursor: pointer;
+            }
+        }
+    }
+
+    &Slideshow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+
+        img {
+            height: unset;
+            width: 100%;
+        }
+
+        &Arrow {
+            margin: var(--size-4);
+            padding: var(--size-2);
         }
     }
 }
@@ -83,6 +116,12 @@
 
         &Third, &Second {
             display: none;
+        }
+
+        &Popin {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: var(--size-4);
         }
     }
 }
