@@ -96,6 +96,14 @@ class Service
     #[ORM\JoinColumn(nullable: false)]
     private ?ServiceType $type = null;
 
+    #[Groups(['read-establishment'])]
+    #[ORM\Column]
+    private ?int $duration = null;
+
+    #[Groups(['read-establishment'])]
+    #[ORM\Column]
+    private ?float $price = null;
+
     public function __construct()
     {
         $this->workingHoursRanges = new ArrayCollection();
@@ -225,6 +233,30 @@ class Service
     public function setType(?ServiceType $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): static
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): static
+    {
+        $this->price = $price;
 
         return $this;
     }
