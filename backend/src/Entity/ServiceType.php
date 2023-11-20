@@ -28,6 +28,7 @@ class ServiceType
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[Groups(['read-establishment'])]
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Service::class)]
     private Collection $services;
 

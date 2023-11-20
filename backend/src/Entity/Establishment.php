@@ -118,10 +118,10 @@ class Establishment
     #[Groups(['read-establishment'])]
     private Collection $openingHours;
 
-    #[Groups(['read-establishment'])]
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Service::class, orphanRemoval: true)]
     private Collection $services;
 
+    #[Groups(['read-establishment'])]
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: ServiceType::class, orphanRemoval: true)]
     private Collection $serviceTypes;
 
