@@ -55,19 +55,19 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 )]
 class Service
 {
-    #[Groups(['read-service', 'read-service-all'])]
+    #[Groups(['read-service', 'read-service-all', 'read-establishment'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read'])]
+    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read', 'read-establishment'])]
     #[Assert\NotBlank]
     #[Assert\NotNull]
     #[ORM\Column(length: 50, unique: true)]
     private ?string $name = null;
     
-    #[Groups(['create-service', 'read-service', 'appointment-read'])]
+    #[Groups(['create-service', 'read-service', 'appointment-read', 'read-establishment'])]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
     
@@ -91,6 +91,7 @@ class Service
     #[ORM\JoinColumn(nullable: false)]
     private ?Establishment $establishment = null;
 
+    #[Groups(['read-establishment'])]
     #[ORM\ManyToOne(inversedBy: 'services')]
     #[ORM\JoinColumn(nullable: false)]
     private ?ServiceType $type = null;

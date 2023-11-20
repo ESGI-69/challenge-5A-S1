@@ -118,8 +118,12 @@ class Establishment
     #[Groups(['read-establishment'])]
     private Collection $openingHours;
 
+    #[Groups(['read-establishment'])]
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Service::class, orphanRemoval: true)]
     private Collection $services;
+
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: ServiceType::class, orphanRemoval: true)]
+    private Collection $serviceTypes;
 
     public function __construct()
     {
@@ -127,6 +131,7 @@ class Establishment
         $this->appointments = new ArrayCollection();
         $this->openingHours = new ArrayCollection();
         $this->services = new ArrayCollection();
+        $this->serviceTypes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -356,6 +361,36 @@ class Establishment
             // set the owning side to null (unless already changed)
             if ($service->getEstablishment() === $this) {
                 $service->setEstablishment(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ServiceType>
+     */
+    public function getServiceTypes(): Collection
+    {
+        return $this->serviceTypes;
+    }
+
+    public function addServiceType(ServiceType $serviceType): static
+    {
+        if (!$this->serviceTypes->contains($serviceType)) {
+            $this->serviceTypes->add($serviceType);
+            $serviceType->setEstablishment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeServiceType(ServiceType $serviceType): static
+    {
+        if ($this->serviceTypes->removeElement($serviceType)) {
+            // set the owning side to null (unless already changed)
+            if ($serviceType->getEstablishment() === $this) {
+                $serviceType->setEstablishment(null);
             }
         }
 

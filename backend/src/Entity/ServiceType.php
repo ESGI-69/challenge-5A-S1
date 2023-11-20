@@ -8,24 +8,32 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ServiceTypeRepository::class)]
 #[ApiResource]
 class ServiceType
 {
+    #[Groups(['read-establishment'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups(['read-establishment'])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[Groups(['read-establishment'])]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Service::class)]
     private Collection $services;
+
+    #[ORM\ManyToOne(inversedBy: 'serviceTypes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Establishment $establishment = null;
 
     public function __construct()
     {
@@ -87,6 +95,18 @@ class ServiceType
                 $service->setType(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEstablishment(): ?Establishment
+    {
+        return $this->establishment;
+    }
+
+    public function setEstablishment(?Establishment $establishment): static
+    {
+        $this->establishment = $establishment;
 
         return $this;
     }
