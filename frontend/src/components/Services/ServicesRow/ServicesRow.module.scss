@@ -32,6 +32,10 @@
       gap: var(--size-2);
       color: var( --color-text-light);
       justify-self: center;
+
+      span {
+        text-wrap: nowrap;
+      }
     }
 
     &Btn {
