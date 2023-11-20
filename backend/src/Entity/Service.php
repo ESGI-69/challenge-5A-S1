@@ -138,18 +138,6 @@ class Service
         return $this;
     }
 
-    public function getIcon(): ?string
-    {
-        return $this->icon;
-    }
-
-    public function setIcon(?string $icon): static
-    {
-        $this->icon = $icon;
-
-        return $this;
-    }
-
     public function getValidatedAt(): ?\DateTimeImmutable
     {
         return $this->validatedAt;
