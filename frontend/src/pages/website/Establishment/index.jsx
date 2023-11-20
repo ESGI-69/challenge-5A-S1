@@ -3,7 +3,7 @@ import { ProfileContext } from '@/contexts/ProfileContext';
 import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './Establishment.module.scss';
-import Gallery from '@/components/lib/Gallery';
+import Gallery from '@/components/Gallery';
 import Button from '@/components/lib/Button';
 import ServicesTable from '@/components/Services/ServicesTable';
 import GlobalNotation from '@/components/Notation/GlobalNotation';
