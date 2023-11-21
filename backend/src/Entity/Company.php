@@ -78,7 +78,7 @@ class Company
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['company-read', 'company-create', 'company-update', 'company-getall'])]
+    #[Groups(['company-read', 'company-create', 'company-update', 'company-getall', 'read-establishment'])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 

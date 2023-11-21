@@ -1,8 +1,10 @@
+@use "src/breakpoints" as *;
+
 .Gallery {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-auto-rows:  1fr 1fr;
-    gap: var(--size-4);
+    gap: var(--size-2-5);
     grid-template-areas:
         "main main first second"
         "main main third more";
@@ -100,7 +102,7 @@
 }
 
 
-@media only screen and (width <= 1024px) {
+@media only screen and (width <= $breakpoint-desktop) {
     .Gallery {
         grid-template-columns: 1fr 1fr;
         grid-template-areas:

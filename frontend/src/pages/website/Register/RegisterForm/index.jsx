@@ -4,9 +4,11 @@ import Input from '@/components/lib/Input';
 import styles from './RegisterForm.module.scss';
 import Button from '@/components/lib/Button';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterForm() {
   const { t } = useTranslation('register');
+  const navigate = useNavigate();
   const User = useContext(UserContext);
 
   const [ firstnameInput, setFirstnameInput ] = useState({
@@ -73,7 +75,7 @@ export default function RegisterForm() {
     }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = {
@@ -83,7 +85,8 @@ export default function RegisterForm() {
       email: formData.get('email'),
       plainPassword: formData.get('password'),
     };
-    User.post(data);
+    await User.post(data);
+    navigate('/login');
   };
 
   return (

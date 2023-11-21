@@ -1,5 +1,8 @@
+@use "src/breakpoints" as *;
+
 .Home {
   position: relative;
+  height: 100%;
 
   &BackgroundImage {
     z-index: -1;
@@ -12,7 +15,7 @@
     object-position: center;
     filter: grayscale(1);
 
-    @media screen and (width <= 1024px) {
+    @media screen and (width <= $breakpoint-desktop) {
       right: unset;
       width: 100%;
     }
@@ -52,7 +55,7 @@
   &SearchBar {
     width: 50rem;
 
-    @media screen and (width <= 1024px) {
+    @media screen and (width <= $breakpoint-desktop) {
       width: 100%;
     }
   }

@@ -15,7 +15,7 @@ function ServicesTable({
   return (
     <div className={style.Services}>
       <h3 className={style.ServicesType}>{type}</h3>
-      <p className={style.ServicesDesc}>{description}</p>
+      {description && <p className={style.ServicesDesc}>{description}</p>}
       <div className={style.ServicesTable}>
         {(services && (isExpanded ? services : services.slice(0, 5))).map((service) => (
           <ServicesRow

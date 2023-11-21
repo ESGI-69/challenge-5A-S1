@@ -2,4 +2,20 @@
   height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
+
+  &Content {
+    width: 100%;
+    max-width: var(--size-app);
+    margin: var(--size-7) auto;
+    padding: 0 var(--size-3);
+  }
+
+  &FullPage {
+    .WebsiteLayoutContent {
+      height: 100%;
+      max-width: unset;
+      margin: unset;
+      padding: unset;
+    }
+  }
 }
