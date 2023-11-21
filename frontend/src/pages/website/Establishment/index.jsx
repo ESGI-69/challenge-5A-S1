@@ -68,43 +68,14 @@ function Establishment() {
           <h3 className={styles.EstablishmentTitle}>
             {t('services.title')}
           </h3>
-          <ServicesTable
-            type="Coiffures"
-            services={[
-              {
-                id: 1,
-                name: 'Coiffure 1',
-                description: 'Description de la coiffure 1 Description de la coiffure 1 Description de la coiffure 1 Description de la coiffure 1 Description de la coiffure 1',
-                icon: '👩‍🦰',
-                duration: 30,
-                price: 30,
-              },
-              {
-                id: 2,
-                name: 'Coiffure 2',
-                description: 'Description de la coiffure 2',
-                icon: '👩‍🦳',
-                duration: 60,
-                price: 60,
-              },
-              {
-                id: 3,
-                name: 'Coiffure 3',
-                description: 'Description de la coiffure 3',
-                icon: '👩‍🦱',
-                duration: 90,
-                price: 90,
-              },
-              {
-                id: 4,
-                name: 'Coiffure 4',
-                description: 'Description de la coiffure 4',
-                icon: '👩‍🦲',
-                duration: 120,
-                price: 120,
-              },
-            ]}
-          />
+          {establishment?.serviceTypes.map(type => (
+            <ServicesTable
+              key={type.id}
+              type={type.name}
+              description={type.description}
+              services={type.services}
+            />
+          ))}
         </div>
       </div>
       <div className={styles.EstablishmentRight}>

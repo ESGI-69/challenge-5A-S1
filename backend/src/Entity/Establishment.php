@@ -56,11 +56,6 @@ class Establishment
     #[Groups(['read-establishment'])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 55)]
-    #[Assert\Length(min: 2, max: 50)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read'])]
-    private ?string $name = null;
-
     #[Assert\Email()]
     #[Groups(['create-establishment', 'update-establishment', 'appointment-read'])]
     #[ORM\Column(length: 55)]
@@ -118,28 +113,29 @@ class Establishment
     #[Groups(['read-establishment'])]
     private Collection $openingHours;
 
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Service::class, orphanRemoval: true)]
+    private Collection $services;
+
+    #[Groups(['read-establishment'])]
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: ServiceType::class, orphanRemoval: true)]
+    private Collection $serviceTypes;
+
+    #[ORM\ManyToOne(inversedBy: 'establishments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?EstablishmentType $type = null;
+
     public function __construct()
     {
         $this->employees = new ArrayCollection();
         $this->appointments = new ArrayCollection();
         $this->openingHours = new ArrayCollection();
+        $this->services = new ArrayCollection();
+        $this->serviceTypes = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -324,6 +320,78 @@ class Establishment
                 $openingHour->setEstablishment(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): static
+    {
+        if (!$this->services->contains($service)) {
+            $this->services->add($service);
+            $service->setEstablishment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): static
+    {
+        if ($this->services->removeElement($service)) {
+            // set the owning side to null (unless already changed)
+            if ($service->getEstablishment() === $this) {
+                $service->setEstablishment(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ServiceType>
+     */
+    public function getServiceTypes(): Collection
+    {
+        return $this->serviceTypes;
+    }
+
+    public function addServiceType(ServiceType $serviceType): static
+    {
+        if (!$this->serviceTypes->contains($serviceType)) {
+            $this->serviceTypes->add($serviceType);
+            $serviceType->setEstablishment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeServiceType(ServiceType $serviceType): static
+    {
+        if ($this->serviceTypes->removeElement($serviceType)) {
+            // set the owning side to null (unless already changed)
+            if ($serviceType->getEstablishment() === $this) {
+                $serviceType->setEstablishment(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getType(): ?EstablishmentType
+    {
+        return $this->type;
+    }
+
+    public function setType(?EstablishmentType $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }

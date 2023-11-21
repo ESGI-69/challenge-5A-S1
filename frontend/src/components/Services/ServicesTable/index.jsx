@@ -26,9 +26,11 @@ function ServicesTable({
             duration={service.duration}
           />
         ))}
-        <a className={style.ServicesTableViewMore} onClick={() => setIsExpanded(!isExpanded)}>
-          {isExpanded ? t('less') : t('more')}
-        </a>
+        {services.length > 5 && (
+          <a className={style.ServicesTableViewMore} onClick={() => setIsExpanded(!isExpanded)}>
+            {isExpanded ? t('less') : t('more')}
+          </a>
+        )}
       </div>
     </div>
   );

@@ -55,25 +55,21 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 )]
 class Service
 {
-    #[Groups(['read-service', 'read-service-all'])]
+    #[Groups(['read-service', 'read-service-all', 'read-establishment'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read'])]
+    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read', 'read-establishment'])]
     #[Assert\NotBlank]
     #[Assert\NotNull]
     #[ORM\Column(length: 50, unique: true)]
     private ?string $name = null;
     
-    #[Groups(['create-service', 'read-service', 'appointment-read'])]
+    #[Groups(['create-service', 'read-service', 'appointment-read', 'read-establishment'])]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
-    
-    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read'])]
-    #[ORM\Column(length: 30, nullable: true)]
-    private ?string $icon = null;
     
     #[Groups(['admin-read-service'])]
     #[ORM\Column(nullable: true)]
@@ -90,6 +86,23 @@ class Service
 
     #[ORM\ManyToMany(targetEntity: WorkingHoursRange::class, mappedBy: 'services')]
     private Collection $workingHoursRanges;
+
+    #[ORM\ManyToOne(inversedBy: 'services')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Establishment $establishment = null;
+
+    #[Groups(['read-establishment'])]
+    #[ORM\ManyToOne(inversedBy: 'services')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ServiceType $type = null;
+
+    #[Groups(['read-establishment'])]
+    #[ORM\Column]
+    private ?int $duration = null;
+
+    #[Groups(['read-establishment'])]
+    #[ORM\Column]
+    private ?float $price = null;
 
     public function __construct()
     {
@@ -121,18 +134,6 @@ class Service
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getIcon(): ?string
-    {
-        return $this->icon;
-    }
-
-    public function setIcon(?string $icon): static
-    {
-        $this->icon = $icon;
 
         return $this;
     }
@@ -196,6 +197,54 @@ class Service
         if ($this->workingHoursRanges->removeElement($workingHoursRange)) {
             $workingHoursRange->removeService($this);
         }
+
+        return $this;
+    }
+
+    public function getEstablishment(): ?Establishment
+    {
+        return $this->establishment;
+    }
+
+    public function setEstablishment(?Establishment $establishment): static
+    {
+        $this->establishment = $establishment;
+
+        return $this;
+    }
+
+    public function getType(): ?ServiceType
+    {
+        return $this->type;
+    }
+
+    public function setType(?ServiceType $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): static
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): static
+    {
+        $this->price = $price;
 
         return $this;
     }
