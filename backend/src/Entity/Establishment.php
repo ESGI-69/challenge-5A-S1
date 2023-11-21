@@ -56,11 +56,6 @@ class Establishment
     #[Groups(['read-establishment'])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 55)]
-    #[Assert\Length(min: 2, max: 50)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read'])]
-    private ?string $name = null;
-
     #[Assert\Email()]
     #[Groups(['create-establishment', 'update-establishment', 'appointment-read'])]
     #[ORM\Column(length: 55)]
@@ -125,6 +120,10 @@ class Establishment
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: ServiceType::class, orphanRemoval: true)]
     private Collection $serviceTypes;
 
+    #[ORM\ManyToOne(inversedBy: 'establishments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?EstablishmentType $type = null;
+
     public function __construct()
     {
         $this->employees = new ArrayCollection();
@@ -137,18 +136,6 @@ class Establishment
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -393,6 +380,18 @@ class Establishment
                 $serviceType->setEstablishment(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getType(): ?EstablishmentType
+    {
+        return $this->type;
+    }
+
+    public function setType(?EstablishmentType $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }
