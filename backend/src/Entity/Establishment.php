@@ -57,20 +57,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
     IsOpenFilter::class,
     properties: ['isOpen'],
 )]
+//add a filter to search for the services in the establishement (should be a search filter partial) and returns the establishement concerned
+
 #[ApiFilter(
     SearchFilter::class,
     properties: [
         'city' => 'partial',
         'zipCode' => 'start',
         'company.name' => 'partial',
+        'services.id' => 'exact',
     ],
 )]
-#[ApiFilter(
-    EstablishementServicesFilter::class,
-    properties: [
-        'services' => 'partial',
-    ],
-)]
+
 class Establishment
 {
     #[ORM\Id]
