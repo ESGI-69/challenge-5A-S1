@@ -102,6 +102,11 @@ migration: | $(SF_CONSOLE_DEPS)  ## Create new migration
 	@$(PRINT_COLOR) "$(LOG_START) Creation migration $(LOG_END)"
 	$(SF_CONSOLE_CMD) make:migration -n --env=$(env)
 
+.PHONY: openapi
+openapi: | $(SF_CONSOLE_DEPS)  ## Create new migration
+	@$(PRINT_COLOR) "$(LOG_START) Generating OpenAPI JSON file $(LOG_END)"
+	$(SF_CONSOLE_CMD) api:openapi:export --output=resources/swagger.json
+
 .PHONY: fixtures
 fixtures: | $(SF_CONSOLE_DEPS) ## Load Alice fixtures and post process some data
 	@$(PRINT_COLOR) "$(LOG_START) Add fixtures $(LOG_END)"
