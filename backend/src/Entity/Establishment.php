@@ -13,6 +13,7 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;  
 use App\Filter\IsOpenFilter; 
+use App\Filter\EstablishementServicesFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -52,8 +53,24 @@ use Symfony\Component\Serializer\Annotation\Groups;
     ],
     
 )]
-#[ApiFilter(IsOpenFilter::class, properties: ['isOpen'])]
-#[ApiFilter(SearchFilter::class, properties: ['city' => 'partial','zipCode' => 'start','company.name' => 'partial'])]
+#[ApiFilter(
+    IsOpenFilter::class,
+    properties: ['isOpen'],
+)]
+#[ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'city' => 'partial',
+        'zipCode' => 'start',
+        'company.name' => 'partial',
+    ],
+)]
+#[ApiFilter(
+    EstablishementServicesFilter::class,
+    properties: [
+        'services' => 'partial',
+    ],
+)]
 class Establishment
 {
     #[ORM\Id]
