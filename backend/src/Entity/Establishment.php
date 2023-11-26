@@ -57,8 +57,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
     IsOpenFilter::class,
     properties: ['isOpen'],
 )]
-//add a filter to search for the services in the establishement (should be a search filter partial) and returns the establishement concerned
-
 #[ApiFilter(
     SearchFilter::class,
     properties: [
