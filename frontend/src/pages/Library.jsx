@@ -13,6 +13,7 @@ import SearchBar from '@/components/SearchBar';
 import OpeningHours from '@/components/OpeningHours';
 import Checkbox from '@/components/lib/Checkbox';
 import Popin from '@/components/Popin';
+import Map from '@/components/Map';
 import { useState } from 'react';
 
 export default function Library() {
@@ -259,6 +260,24 @@ export default function Library() {
         { startTime: '2023-11-11T13:37:45+01:00', endTime: '2023-11-11T14:37:45+01:00' },
         { startTime: '2023-11-11T15:37:45+01:00', endTime: '2023-11-11T16:37:45+01:00' },
       ]} />
+
+      <h2>Map</h2>
+      <Map position={[ 48.8665, 2.3335 ]} markers={[
+        {
+          position: [ 48.867119, 2.376592 ],
+          popup: 'Popup 1',
+        },
+        {
+          position: [ 48.850178, 2.32784 ],
+          popup: 'Popup 2',
+        },
+        {
+          position: [ 48.846789,  2.375905 ],
+          popup: 'Popup 3',
+        },
+      ]}
+      zoomLevel={13}
+      />
 
     </main>
   );
