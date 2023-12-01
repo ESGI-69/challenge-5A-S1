@@ -80,18 +80,21 @@ function Establishment() {
         </div>
 
         <div className={styles.EstablishmentLeftServicesSection}>
-          <h2 className={styles.EstablishmentTitle}>
+          <h3 className={styles.EstablishmentSubtitle}>
             {t('establishementLocation')}
-          </h2>
+          </h3>
+          <span className={styles.EstablishmentAddress}>
+            {establishment?.street}, {establishment?.zipCode} {establishment?.city}
+          </span>
+          <Map position={[ 48.8665, 2.3335 ]} markers={[
+            {
+              position: [ 48.8665, 2.3335 ],
+              popup: 'Popup 1',
+            },
+          ]}
+          zoomLevel={13}
+          />
         </div>
-        <Map position={[ 48.8665, 2.3335 ]} markers={[
-          {
-            position: [ 48.8665, 2.3335 ],
-            popup: 'Popup 1',
-          },
-        ]}
-        zoomLevel={13}
-        />
 
       </div>
       <div className={styles.EstablishmentRight}>

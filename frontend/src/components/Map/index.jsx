@@ -9,28 +9,26 @@ const Map = React.forwardRef(function Map(
   ref,
 ) {
   return (
-    <div>
-      <MapContainer
-        center={position}
-        zoom={zoomLevel}
-        scrollWheelZoom={false}
-        className={styles.Map}
-        ref={ref}
-        {...delegated}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+    <MapContainer
+      center={position}
+      zoom={zoomLevel}
+      scrollWheelZoom={false}
+      className={styles.Map}
+      ref={ref}
+      {...delegated}
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
 
-        {markers.map((marker, index) => (
-          <Marker key={index} position={marker.position}>
-            <Popup>{marker.popup}</Popup>
-          </Marker>
-        ))}
+      {markers.map((marker, index) => (
+        <Marker key={index} position={marker.position}>
+          <Popup>{marker.popup}</Popup>
+        </Marker>
+      ))}
 
-      </MapContainer>
-    </div>
+    </MapContainer>
   );
 });
 
