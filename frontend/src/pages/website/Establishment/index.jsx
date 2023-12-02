@@ -11,6 +11,7 @@ import OpeningHours from '@/components/OpeningHours';
 import { useTranslation } from 'react-i18next';
 import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
 import Review from '@/components/Notation/Review';
+import Map from '@/components/Map';
 
 function Establishment() {
   const { t } = useTranslation('establishment');
@@ -77,6 +78,24 @@ function Establishment() {
             />
           ))}
         </div>
+
+        <div className={styles.EstablishmentLeftServicesSection}>
+          <h3 className={styles.EstablishmentSubtitle}>
+            {t('establishementLocation')}
+          </h3>
+          <span className={styles.EstablishmentAddress}>
+            {establishment?.street}, {establishment?.zipCode} {establishment?.city}
+          </span>
+          <Map position={[ 48.8665, 2.3335 ]} markers={[
+            {
+              position: [ 48.8665, 2.3335 ],
+              popup: 'Popup 1',
+            },
+          ]}
+          zoomLevel={13}
+          />
+        </div>
+
       </div>
       <div className={styles.EstablishmentRight}>
 
