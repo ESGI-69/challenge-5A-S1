@@ -16,6 +16,7 @@ import Checkbox from '@/components/lib/Checkbox';
 import Popin from '@/components/Popin';
 import Map from '@/components/Map';
 import EstablishmentCard from '@/components/Search/EstablishmentCard';
+import Appointment from '@/components/Appointment';
 import { useState } from 'react';
 import EntityTable, { EntityTableFooter } from '@/components/lib/EntityTable';
 import UserProvider, { UserContext } from '@/contexts/api/UserContext';
@@ -355,6 +356,27 @@ export default function Library() {
         },
       ]}
       zoomLevel={13}
+      />
+      <h2>Appointment</h2>
+      <Appointment
+        date="2023-11-07T15:37:45+01:00"
+        service="Coiffure 1"
+        duration={30}
+        price={30}
+        variant='normal'
+      />
+
+      <Appointment
+        date="2023-11-07T15:37:45+01:00"
+        service="Coiffure 1"
+        duration={30}
+        price={30}
+        picturePath='https://picsum.photos/seed/2/534/300'
+        variant='big'
+        companyName='Jean Claude Coiffure'
+        address='1 rue TrucMachin'
+        zipCode='75000'
+        city='Paris'
       />
 
       <h2>EstablishmentCard</h2>
