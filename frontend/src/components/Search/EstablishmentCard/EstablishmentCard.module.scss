@@ -1,0 +1,48 @@
+.Card {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    height: 200px;
+    gap: var(--size-3);
+    padding: var(--size-2);
+    border-bottom: solid 1px var(--color-border-light);
+
+    &:hover {
+        background-color: var(--gray-1);
+    }
+
+    &Picture {
+        margin: auto 0;
+        width: 100%;
+        border-radius: var(--size-2);
+        object-fit: cover;
+    }
+
+    &Content {
+        margin: var(--size-1) var(--size-2);
+
+        &:first-child {
+            margin-bottom: var(--size-5);
+        }
+
+        & > * {
+            margin-bottom: var(--size-2);
+        }
+
+        &Name {
+            font-weight: var(--font-weight-5);
+            font-size: var(--size-5);
+        }
+
+        &Adress {
+            margin-left: var(--size-1);
+            color: var(--color-text-secondary);
+            font-size: var(--size-3);
+        }
+
+        &Review {
+            margin-left: var(--size-1);
+            color: var(--color-text-secondary);
+            font-size: var(--size-3);
+        }
+    }
+}

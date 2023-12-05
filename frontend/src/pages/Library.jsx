@@ -14,6 +14,7 @@ import OpeningHours from '@/components/OpeningHours';
 import Checkbox from '@/components/lib/Checkbox';
 import Popin from '@/components/Popin';
 import Map from '@/components/Map';
+import EstablishmentCard from '@/components/Search/EstablishmentCard';
 import { useState } from 'react';
 
 export default function Library() {
@@ -277,6 +278,17 @@ export default function Library() {
         },
       ]}
       zoomLevel={13}
+      />
+
+      <h2>EstablishmentCard</h2>
+      <EstablishmentCard
+        picturePath="https://picsum.photos/seed/1/534/300"
+        name="Monique Coiffure"
+        adress="12 rue de la paix"
+        city="Paris"
+        zipCode="75000"
+        reviewsNumber={2}
+        globalReview={3}
       />
 
     </main>

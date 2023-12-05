@@ -3,9 +3,15 @@ import backgroundImage from '@/assets/home-background.png';
 import styles from './Home.module.scss';
 import SearchBar from '@/components/SearchBar';
 import CompanyProvider from '@/contexts/api/CompanyContext';
+import { useNavigate } from 'react-router-dom';
+import queryBuilder from '@/utils/queryBuilder';
 
 export default function Home() {
   const { t } = useTranslation('home');
+  const navigate = useNavigate();
+  const navToSearchPage = (searchData) => {
+    navigate(`/search${queryBuilder(searchData)}`);
+  };
   return (
     <main
       className={styles.Home}
@@ -22,7 +28,7 @@ export default function Home() {
       <CompanyProvider>
         <SearchBar
           className={ styles.HomeSearchBar }
-          onSearch={() => {}}
+          onSearch={navToSearchPage}
         />
       </CompanyProvider>
     </main>

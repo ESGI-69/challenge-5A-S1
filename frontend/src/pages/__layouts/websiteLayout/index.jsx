@@ -11,6 +11,7 @@ export default function WebsiteLayout() {
     '/',
     '/login',
     '/register',
+    '/search',
   ];
 
   const isFullPage = fullPagePaths.includes(pathname) ? styles.WebsiteLayoutFullPage : '';
