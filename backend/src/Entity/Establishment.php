@@ -64,6 +64,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'zipCode' => 'start',
         'company.name' => 'partial',
         'services.id' => 'exact',
+        'company.id' => 'exact',
     ],
 )]
 
