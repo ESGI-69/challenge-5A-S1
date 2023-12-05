@@ -13,7 +13,6 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    filter: grayscale(1);
 
     @media screen and (width <= $breakpoint-desktop) {
       right: unset;

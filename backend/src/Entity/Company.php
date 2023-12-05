@@ -21,6 +21,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 #[ApiResource(
@@ -32,12 +34,16 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             normalizationContext: ['groups' => ['company-read', 'read-establishment']]
         ),
         new GetCollection(
+            uriTemplate: '/admin/companies',
             security: 'is_granted("ROLE_ADMIN")',
-            normalizationContext: ['groups' => ['company-getall']]
+            normalizationContext: ['groups' => ['company-getall', 'read-company-as-admin']]
+        ),
+        new GetCollection(
+            normalizationContext: ['groups' => ['company-getall', 'read-establishment']]
         ),
         new Get(
             securityPostDenormalize: 'is_granted("ROLE_USER") and object == user.getCompany()',
-            normalizationContext: ['groups' => ['company-read']]
+            normalizationContext: ['groups' => ['company-read', 'read-establishment']]
         ),
         new Get(
             name: 'get-company-employees',
@@ -70,12 +76,21 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     ],
     normalizationContext: ['groups' => ['read-company']]
 )]
+
+#[ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'name' => 'partial',
+    ],
+)]
+
 #[Vich\Uploadable]
 class Company
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['company-read', 'company-create', 'company-update', 'company-getall', 'read-establishment'])]
     private ?int $id = null;
 
     #[Groups(['company-read', 'company-create', 'company-update', 'company-getall', 'read-establishment'])]
@@ -83,23 +98,23 @@ class Company
     private ?string $name = null;
 
     #[Vich\UploadableField(mapping: 'company_kbis', fileNameProperty:'pathKbis')]
-    #[Groups(['company-create', 'company-getall'])]
+    #[Groups(['company-create', 'read-company-as-admin'])]
     public ?File $fileKbis = null;
 
-    #[Groups(['company-read', 'company-getall'])]
+    #[Groups(['company-read', 'read-company-as-admin'])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $pathKbis = null;
 
     #[Assert\Email()]
-    #[Groups(['company-read', 'company-create', 'company-update', 'company-getall'])]
+    #[Groups(['company-read', 'company-create', 'company-update', 'company-getall', 'read-company-as-admin'])]
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
-    #[Groups(['read-company-as-admin', 'company-getall'])]
+    #[Groups(['read-company-as-admin'])]
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $validatedAt = null;
 
-    #[Groups(['read-company-as-admin', 'company-getall', 'company-reject'])]
+    #[Groups(['read-company-as-admin', 'company-reject'])]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $rejectedReason = null;
 
@@ -111,6 +126,7 @@ class Company
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $logoPath = null;
 
+    #[Groups(['company-getall'])]
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Establishment::class, orphanRemoval: true)]
     private Collection $establishments;
 
