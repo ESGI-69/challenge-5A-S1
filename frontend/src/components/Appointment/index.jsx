@@ -61,7 +61,7 @@ function Appointment({
             <span>{price} €</span>
           </div>
         </div>
-        <div><Button variant={'black'}>Reprendre RDV</Button></div>
+        <div><Button variant={'black'}>{t('reschedule')}</Button></div>
       </div>
     </div>
   );
