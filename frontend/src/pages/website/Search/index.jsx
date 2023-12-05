@@ -1,6 +1,5 @@
 import { useContext, useEffect } from 'react';
 import styles from './Search.module.scss';
-import { useTranslation } from 'react-i18next';
 import Map from '@/components/Map';
 import EstablishmentCard from '@/components/Search/EstablishmentCard';
 import { CompanyContext } from '@/contexts/api/CompanyContext';
@@ -8,7 +7,6 @@ import { useLocation } from 'react-router-dom';
 
 export default function Search() {
   const { companyEstablishments, getCompanyEstablishments } = useContext(CompanyContext);
-  const { t } = useTranslation('search');
   const location = useLocation();
 
   const getQueryParams = () => {
@@ -16,14 +14,16 @@ export default function Search() {
     const searchData = {
       name: query.get('name'),
       location: query.get('location'),
+      companyId: query.get('companyId'),
     };
     return searchData;
   };
-  console.log(getQueryParams());
-  console.log(companyEstablishments);
 
   useEffect(() => {
-    getCompanyEstablishments({ establishmentId: 1 });
+    const queryParams = getQueryParams();
+    if (queryParams.companyId) {
+      getCompanyEstablishments({ establishmentId: queryParams.companyId });
+    }
   }, []);
 
   return (

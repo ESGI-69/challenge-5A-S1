@@ -21,7 +21,7 @@ const EstablishmentCard = function EstablishmentCard({
       <img src={picturePath} className={styles.CardPicture}/>
       <div className={styles.CardContent}>
         <div className={styles.CardContentName}>
-          {name}
+          {name} - {city}
         </div>
         <div className={styles.CardContentAdress}>
           <Shop />
