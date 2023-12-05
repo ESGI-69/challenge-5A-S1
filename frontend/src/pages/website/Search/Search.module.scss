@@ -9,18 +9,15 @@
     grid-template-columns: 1fr;
   }
 
-  &Left {
-  }
-
   &Right {
     background-color: var(--gray-2);
   }
 
   &Map {
-  @media (width <= $breakpoint-tablet) {
-    display: none;
-  }
-
     height: 100%;
+    
+    @media (width <= $breakpoint-tablet) {
+      display: none;
+    }
   }
 }
