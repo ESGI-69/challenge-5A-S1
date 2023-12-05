@@ -39,11 +39,11 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
             normalizationContext: ['groups' => ['company-getall', 'read-company-as-admin']]
         ),
         new GetCollection(
-            normalizationContext: ['groups' => ['company-getall']]
+            normalizationContext: ['groups' => ['company-getall', 'read-establishment']]
         ),
         new Get(
             securityPostDenormalize: 'is_granted("ROLE_USER") and object == user.getCompany()',
-            normalizationContext: ['groups' => ['company-read']]
+            normalizationContext: ['groups' => ['company-read', 'read-establishment']]
         ),
         new Get(
             name: 'get-company-employees',
@@ -126,6 +126,7 @@ class Company
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $logoPath = null;
 
+    #[Groups(['company-getall'])]
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Establishment::class, orphanRemoval: true)]
     private Collection $establishments;
 
