@@ -86,14 +86,16 @@ function Establishment() {
           <span className={styles.EstablishmentAddress}>
             {establishment?.street}, {establishment?.zipCode} {establishment?.city}
           </span>
-          <Map position={[ 48.8665, 2.3335 ]} markers={[
-            {
-              position: [ 48.8665, 2.3335 ],
-              popup: 'Popup 1',
-            },
-          ]}
-          zoomLevel={13}
-          />
+          {establishment && (
+            <Map position={[ establishment?.lat, establishment?.long ]} markers={[
+              {
+                position: [ establishment?.lat, establishment?.long ],
+                popup: 'Popup 1',
+              },
+            ]}
+            zoomLevel={13}
+            />
+          )};
         </div>
 
       </div>

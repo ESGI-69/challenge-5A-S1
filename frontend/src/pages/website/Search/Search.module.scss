@@ -1,0 +1,23 @@
+@use "src/breakpoints" as *;
+
+.Search {
+  display: grid;
+  grid-template-columns: 800px 1fr;
+  height: 100%;
+
+  @media (width <= $breakpoint-tablet) {
+    grid-template-columns: 1fr;
+  }
+
+  &Right {
+    background-color: var(--gray-2);
+  }
+
+  &Map {
+    height: 100%;
+    
+    @media (width <= $breakpoint-tablet) {
+      display: none;
+    }
+  }
+}

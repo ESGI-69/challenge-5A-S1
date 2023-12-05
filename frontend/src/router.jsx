@@ -9,6 +9,8 @@ import Login from '@/pages/website/Login';
 import Register from '@/pages/website/Register';
 import Establishment from '@/pages/website/Establishment';
 import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
+import Search from '@/pages/website/Search';
+import CompanyContext from '@/contexts/api/CompanyContext';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: '/establishment/:id',
         element: <EstablishmentProvider><Establishment /></EstablishmentProvider>,
+      },
+      {
+        path: '/search',
+        element: <CompanyContext><Search /></CompanyContext>,
       },
       {
         path: '*',

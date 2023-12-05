@@ -28,8 +28,7 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 #[ApiResource(
     operations: [
         new GetCollection(
-            security: 'is_granted("ROLE_ADMIN")',
-            uriTemplate: '/companies/{id}/establisments',
+            uriTemplate: '/companies/{id}/establishments',
             controller: GetEstablishmentsCompanyController::class,
             normalizationContext: ['groups' => ['company-read', 'read-establishment']]
         ),
