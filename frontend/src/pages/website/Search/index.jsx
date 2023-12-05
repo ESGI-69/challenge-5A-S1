@@ -24,6 +24,7 @@ export default function Search() {
     if (queryParams.companyId) {
       getCompanyEstablishments({ establishmentId: queryParams.companyId });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
