@@ -20,6 +20,7 @@ import Home from '@/pages/website/Home';
 import Login from '@/pages/website/Login';
 import Register from '@/pages/website/Register';
 import Search from '@/pages/website/Search';
+import Reservation from '@/pages/website/Reservation';
 
 import CompanyProvider from '@/contexts/api/CompanyContext';
 import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: '/company-register',
         element: <CompanyRegister />,
+      },
+      {
+        path: '/:establishementSlug/reservation',
+        element: <Reservation/>,
       },
       {
         path: '*',
