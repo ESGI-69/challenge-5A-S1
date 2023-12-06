@@ -21,8 +21,8 @@
     }
 
     &Picture {
-        width: var(--size-11);
-        height: var(--size-11);
+        width: var(--size-12);
+        height: var(--size-12);
         border-radius: var(--radius-2-5);
         display: flex;
         object-fit: cover;
@@ -33,6 +33,8 @@
         flex-direction: column;
 
         &Address {
+            display: flex;
+            align-items: center;
             text-decoration: underline;
         }
 
@@ -52,6 +54,11 @@
             align-items: center;
             margin-bottom: var(--size-5);
             gap: var(--size-2);
+
+            &Info {
+                display: flex;
+                align-items: center;
+            }
         }
     }
 }

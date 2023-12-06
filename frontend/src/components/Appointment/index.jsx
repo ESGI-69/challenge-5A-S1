@@ -1,6 +1,9 @@
 import PropsType from 'prop-types';
 import style from './Appointment.module.scss';
 import Button from '@/components/lib/Button';
+import Shop from '@/components/lib/Icons/Shop';
+import DollarBill from '@/components/lib/Icons/DollarBill';
+import Chrono from '@/components/lib/Icons/Chrono';
 import { useTranslation } from 'react-i18next';
 
 function Appointment({
@@ -53,12 +56,12 @@ function Appointment({
         <div className={style.AppointmentDescDate}>{`${day} ${tmpDate.getDate()} ${month} ${String(tmpDate.getHours()).padStart(2, '0')}:${String(tmpDate.getMinutes()).padStart(2, '0')}`}</div>
         {variant === 'big' && <div className={style.AppointmentDescCompany}>{companyName}</div>}
         <div className={style.AppointmentDescDetail}>
-          {variant === 'big' && <div className={style.AppointmentDescAddress}>{`${address}, ${zipCode} ${city}`}</div>}
+          {variant === 'big' && <div className={style.AppointmentDescAddress}><Shop className={style.AppointmentDescDetailIcon}/>{`${address}, ${zipCode} ${city}`}</div>}
           <div className={style.AppointmentDescService}>{service}</div>
           <div className={style.AppointmentDescLastRow}>
-            <span>{duration} min</span>
+            <span className={style.AppointmentDescLastRowInfo}><Chrono />{duration} min</span>
             <span>•</span>
-            <span>{price} €</span>
+            <span className={style.AppointmentDescLastRowInfo}><DollarBill/>&nbsp;{price} €</span>
           </div>
         </div>
         <div><Button variant={'black'}>{t('reschedule')}</Button></div>
