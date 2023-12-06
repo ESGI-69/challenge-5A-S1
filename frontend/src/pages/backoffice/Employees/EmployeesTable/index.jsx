@@ -1,6 +1,19 @@
 import PTable from '@/components/lib/PTable';
+import Tag from '@/components/lib/Tag';
 import { UserContext } from '@/contexts/api/UserContext';
 import { useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
+function RolesTag({ value }) {
+  return (
+    <>
+      {value.map((role) => <Tag variant="primary" key={role}>{role}</Tag>)}
+    </>
+  );
+}
+RolesTag.propTypes = {
+  value: PropTypes.arrayOf(PropTypes.string),
+};
 
 export default function EmployeesTable() {
   const { users, get: getUsers, isUsersLoading } = useContext(UserContext);
@@ -29,6 +42,7 @@ export default function EmployeesTable() {
       },
       roles: {
         name: 'Rôles',
+        component: RolesTag,
       },
     },
   };
