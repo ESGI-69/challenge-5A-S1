@@ -31,7 +31,9 @@ const Button = React.forwardRef(function Button(
       to={to}
       className={`
         ${styles.Button}
-        ${variantClassesSelector()} ${size === 'large' && styles.ButtonLarge}
+        ${variantClassesSelector()}
+        ${size === 'large' && styles.ButtonLarge}
+        ${size === 'small' && styles.ButtonSmall}
       `}
       {...delegated}
     >

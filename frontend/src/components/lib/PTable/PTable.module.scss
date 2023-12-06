@@ -1,0 +1,126 @@
+.Table {
+  position: relative;
+  max-width: 100%;
+  background: var(--white);
+  padding: var(--size-3);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-1);
+  border:  var(--border-size-1) solid var(--color-border-light);
+
+  &Wrapper {
+    overflow-x: scroll;
+  }
+
+  &Scroller {
+    width: 100%;
+    color: var(--color-dark);
+  }
+
+  &Loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(255 255 255 / 70%);
+
+    &Spinner {
+      width: 64px;
+      height: 64px;
+      border: 5px solid var(--color-dark);
+      border-left-style: double;
+      border-right-style: solid;
+      border-bottom-style: solid;
+      border-top-style: solid;
+      border-radius: 50%;
+      animation: var(--animation-spin) forwards;
+    }
+  }
+
+  &Header {
+    display: flex;
+    align-items: center;
+    border-bottom: var(--border-size-1) solid var(--color-border-light);
+    min-width: 100%;
+
+    &Cell {
+      width: 200px;
+      padding: var(--size-2);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+  }
+
+  &Body {
+    &Row {
+      display: flex;
+      align-items: center;
+      border-bottom: var(--border-size-1) solid var(--color-border-light);
+      min-width: 100%;
+
+      &_Selected {
+        background: var(--gray-1);
+      }
+
+      &Cell {
+        width: 200px;
+        padding: var(--size-2);
+        flex-shrink: 0;
+      }
+
+      &Actions {
+        position: sticky;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-grow: 1;
+        width: 24px;
+        right: 0;
+        z-index: 1;
+
+        &Button {
+          padding: var(--size-2);
+          background: white;
+        }
+      }
+    }
+
+    &Noresult {
+      width: 100%;
+      padding: var(--size-5);
+      text-align: center;
+    }
+  }
+
+  &Footer {
+    display: flex;
+    justify-content: space-between;
+    padding-right: var(--size-3);
+
+    &Result {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: var(--size-1);
+      padding-top: var(--size-3);
+
+      &Number {
+        font-weight: bold;
+      }
+    }
+
+    &Pagination {
+      display: flex;
+      align-items: center;
+      padding-top: var(--size-3);
+      gap: var(--size-1);
+
+      &Button {
+        padding: var(--size-2);
+      }
+    }
+  }
+}

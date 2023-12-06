@@ -5,6 +5,7 @@
     border: var(--border-size-1) solid var(--color-border);
     background: var(--white);
     border-radius: var(--radius-1);
+    cursor: pointer;
 
     &_Checked {
       &::after {

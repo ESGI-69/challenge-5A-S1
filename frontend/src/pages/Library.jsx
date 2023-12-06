@@ -11,12 +11,81 @@ import ServicesTable from '@/components/Services/ServicesTable';
 import Gallery from '@/components/Gallery';
 import SearchBar from '@/components/SearchBar';
 import OpeningHours from '@/components/OpeningHours';
+import PTable from '@/components/lib/PTable';
 import Checkbox from '@/components/lib/Checkbox';
 import Popin from '@/components/Popin';
 import Map from '@/components/Map';
 import EstablishmentCard from '@/components/Search/EstablishmentCard';
 import { useState } from 'react';
+import EntityTable, { EntityTableFooter } from '@/components/lib/EntityTable';
+import UserProvider, { UserContext } from '@/contexts/api/UserContext';
 
+const clickableEmail = ({ value }) => (
+  <a href={`mailto:${value}`} style={{ textDecoration: 'underline' }}>{value}</a>
+);
+
+const DATA_TEMPLATE = {
+  properties: {
+    id: {
+      name: '#',
+      readOnly: true,
+      type: 'integer',
+      width: '50px',
+    },
+    email: {
+      name: 'Email',
+      type: 'string',
+      component: clickableEmail,
+    },
+    firstname: {
+      name: 'Prénom',
+      type: 'string',
+      width: '120px',
+    },
+    lastname: {
+      name: 'Nom',
+      type: 'string',
+      width: '120px',
+    },
+    phonenumber: {
+      name: 'Téléphone',
+      type: 'string',
+      nullable: true,
+      width: '130px',
+    },
+    roles: {
+      name: 'Rôles',
+      type: 'array',
+    },
+  },
+};
+
+const DATA = [
+  {
+    id: 1,
+    email: 'admin@gmail.com',
+    roles: [ 'ROLE_ADMIN', 'ROLE_USER' ],
+    firstname: 'Toto',
+    lastname: 'Titi',
+    phonenumber: '0123456789',
+  },
+  {
+    id: 2,
+    email: 'user@gmail.com',
+    roles: [ 'ROLE_USER' ],
+    firstname: 'Tutu',
+    lastname: 'Tata',
+    phonenumber: '0123456789',
+  },
+  {
+    id: 3,
+    email: 'user2@gmail.com',
+    roles: [ 'ROLE_USER' ],
+    firstname: 'Tete',
+    lastname: 'Toto',
+    phonenumber: '0123456789',
+  },
+];
 export default function Library() {
   const [ popinIsOpen, setPopinIsOpen ] = useState(false);
 
@@ -34,7 +103,15 @@ export default function Library() {
       maxWidth: '90vw',
     }}>
       <h1>Library</h1>
-
+      <h2>Table</h2>
+      <h3>PTable</h3>
+      <PTable template={DATA_TEMPLATE} data={DATA}></PTable>
+      <h3>Entity Table (auto managed)</h3>
+      <UserProvider>
+        <EntityTable entity="User" entityContext={UserContext}>
+          <EntityTableFooter></EntityTableFooter>
+        </EntityTable>
+      </UserProvider>
       <h2>Button</h2>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
