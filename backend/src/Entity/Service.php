@@ -61,7 +61,7 @@ class Service
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read', 'read-establishment'])]
+    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read', 'read-establishment', 'read-establishment-appointments'])]
     #[Assert\NotBlank]
     #[Assert\NotNull]
     #[ORM\Column(length: 50, unique: true)]

@@ -12,13 +12,13 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;  
 use App\Filter\IsOpenFilter;
-use ApiPlatform\Serializer\Filter\PropertyFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
+use App\Controller\Establishment\GetLastAppointmentsController;
 
 
 #[ORM\Entity(repositoryClass: EstablishmentRepository::class)]
@@ -30,6 +30,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
         new GetCollection(
             uriTemplate: '/establishments/{id}/employees',
             normalizationContext: ['groups' => ['read-establishment-employees']],
+        ),
+        new GetCollection(
+            uriTemplate: '/establishments/{id}/lastappointments',
+            normalizationContext: ['groups' => ['read-establishment-appointments']],
+            controller: GetLastAppointmentsController::class,
         ),
         new Get(
             normalizationContext: ['groups' => ['read-establishment', 'read-company']]
@@ -131,6 +136,7 @@ class Establishment
     private Collection $employees;
 
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Appointment::class, orphanRemoval: true)]
+    #[Groups(['read-establishment-appointments'])]
     private Collection $appointments;
 
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: OpeningHour::class, orphanRemoval: true)]

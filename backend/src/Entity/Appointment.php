@@ -58,7 +58,7 @@ class Appointment
     #[ORM\JoinColumn(nullable: false)]
     private ?Establishment $establishment = null;
 
-    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read'])]
+    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'read-establishment-appointments'])]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Service $service = null;
@@ -68,25 +68,25 @@ class Appointment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
 
-    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read'])]
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $startDate = null;
-
-    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read'])]
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $endDate = null;
-
     #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-update'])]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $comment = null;
 
-    #[Groups(['appointment-getall', 'appointment-read', 'appointment-update'])]
-    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $cancelledAt = null;
-
     #[Groups(['appointment-getall', 'appointment-read'])]
     #[ORM\Column(nullable: true)]
     private ?float $price = null;
+
+    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'read-establishment-appointments'])]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $startDate = null;
+
+    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'read-establishment-appointments'])]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $endDate = null;
+
+    #[Groups(['appointment-getall', 'appointment-read', 'appointment-update'])]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $cancelledAt = null;
 
     public function getId(): ?int
     {
@@ -141,6 +141,30 @@ class Appointment
         return $this;
     }
 
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): static
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?float $price): static
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
     public function getStartDate(): ?\DateTimeInterface
     {
         return $this->startDate;
@@ -165,18 +189,6 @@ class Appointment
         return $this;
     }
 
-    public function getComment(): ?string
-    {
-        return $this->comment;
-    }
-
-    public function setComment(?string $comment): static
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
     public function getCancelledAt(): ?\DateTimeInterface
     {
         return $this->cancelledAt;
@@ -185,18 +197,6 @@ class Appointment
     public function setCancelledAt(?\DateTimeInterface $cancelledAt): static
     {
         $this->cancelledAt = $cancelledAt;
-
-        return $this;
-    }
-
-    public function getPrice(): ?float
-    {
-        return $this->price;
-    }
-
-    public function setPrice(?float $price): static
-    {
-        $this->price = $price;
 
         return $this;
     }
