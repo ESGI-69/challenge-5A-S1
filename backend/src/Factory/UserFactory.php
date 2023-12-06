@@ -30,45 +30,45 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 final class UserFactory extends ModelFactory
 {
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
-     *
-     * @todo inject services if required
-     */
-    public function __construct(private UserPasswordHasherInterface $passwordEncoder)
-    {
-        parent::__construct();
-    }
+  /**
+   * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
+   *
+   * @todo inject services if required
+   */
+  public function __construct(private UserPasswordHasherInterface $passwordEncoder)
+  {
+    parent::__construct();
+  }
 
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
-     *
-     * @todo add your default values here
-     */
-    protected function getDefaults(): array
-    {
-        return [
-            'email' => self::faker()->email(),
-            'firstname' => self::faker()->firstName(),
-            'lastname' => self::faker()->lastName(),
-            'password' => password_hash('password', PASSWORD_BCRYPT),
-            'phonenumber' => self::faker()->e164PhoneNumber(),
-            'roles' => ['ROLE_USER'],
-        ];
-    }
+  /**
+   * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
+   *
+   * @todo add your default values here
+   */
+  protected function getDefaults(): array
+  {
+    return [
+      'email' => self::faker()->email(),
+      'firstname' => self::faker()->firstName(),
+      'lastname' => self::faker()->lastName(),
+      'password' => password_hash('password', PASSWORD_BCRYPT),
+      'phonenumber' => self::faker()->e164PhoneNumber(),
+      'roles' => ['ROLE_USER'],
+    ];
+  }
 
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
-     */
-    protected function initialize(): self
-    {
-        return $this
-            // ->afterInstantiate(function(User $user): void {})
-        ;
-    }
+  /**
+   * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
+   */
+  protected function initialize(): self
+  {
+    return $this
+      // ->afterInstantiate(function(User $user): void {})
+    ;
+  }
 
-    protected static function getClass(): string
-    {
-        return User::class;
-    }
+  protected static function getClass(): string
+  {
+    return User::class;
+  }
 }

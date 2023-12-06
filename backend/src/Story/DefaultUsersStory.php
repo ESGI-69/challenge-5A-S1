@@ -15,6 +15,7 @@ final class DefaultUsersStory extends Story
         UserFactory::createMany(20);
         UserFactory::createMany(15, [
           'company' => lazy(fn() => CompanyFactory::createOne()),
+          'roles' => ['ROLE_USER', 'ROLE_PRESTA']
         ]);
         UserFactory::createOne([
           'email' => 'admin@platiny.com',
