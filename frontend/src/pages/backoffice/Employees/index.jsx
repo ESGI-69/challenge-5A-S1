@@ -1,5 +1,4 @@
 import BackofficeHeader from '@/components/BackofficeHeader';
-import PTable from '@/components/lib/PTable';
 import EmployeesTable from './EmployeesTable';
 import UserProvider from '@/contexts/api/UserContext';
 
