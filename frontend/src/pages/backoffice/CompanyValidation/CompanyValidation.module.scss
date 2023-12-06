@@ -1,0 +1,61 @@
+.CompanyValidation {
+  &Modal {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    justify-items   : center;
+    gap: var(--size-3);
+
+    &Title {
+      margin: 0;
+      font-weight: var(--font-weight-5);
+      font-size: var(--font-size-4);
+    }
+
+    &Viewer {
+      height: 100%;
+    }
+
+    &Infos {
+      display: flex;
+      gap: var(--size-7);
+
+      &Info {
+        display: flex;
+        gap: var(--size-3);
+
+        &Label {
+          font-weight: bold;
+        }
+      }
+    }
+
+    &Buttons {
+      display: flex;
+      gap: var(--size-3);
+    }
+  }
+
+  &RejectedModal {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    justify-items: center;
+    gap: var(--size-3);
+
+    &Title {
+      margin: 0;
+      font-weight: var(--font-weight-5);
+      font-size: var(--font-size-4);
+    }
+
+    &Textarea {
+      width: 100%;
+    }
+    
+    &Buttons {
+      display: flex;
+      gap: var(--size-3);
+    }
+  }
+}

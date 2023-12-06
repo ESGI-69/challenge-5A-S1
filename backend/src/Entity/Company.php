@@ -13,6 +13,7 @@ use App\Controller\Company\CreateCompanyController;
 use App\Controller\Company\ValidateCompanyController;
 use App\Controller\Company\GetKbisFileController;
 Use App\Controller\Company\GetLogoFileController;
+use App\Controller\Company\RejectCompanyController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -26,6 +27,7 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
 
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 #[ApiResource(
     operations: [
@@ -36,6 +38,11 @@ use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
         ),
         new GetCollection(
             normalizationContext: ['groups' => ['company-getall', 'read-establishment']]
+        ),
+        new Get(
+            uriTemplate: '/admin/companies/{id}',
+            security: 'is_granted("ROLE_ADMIN")',
+            normalizationContext: ['groups' => ['company-read', 'read-company-as-admin', 'read-establishment']]
         ),
         new Get(
             securityPostDenormalize: 'is_granted("ROLE_USER") and object == user.getCompany()',
@@ -68,15 +75,16 @@ use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
             denormalizationContext: ['groups' => ['company-update']],
         ),
         new Patch(
-            uriTemplate: '/companies/{id}/validate',
+            uriTemplate: '/admin/companies/{id}/validate',
             securityPostDenormalize: 'is_granted("ROLE_ADMIN")',
             denormalizationContext: ['groups' => ['company-validate']],
             controller: ValidateCompanyController::class
         ),
         new Patch(
-            uriTemplate: '/companies/{id}/reject',
+            uriTemplate: '/admin/companies/{id}/reject',
             securityPostDenormalize: 'is_granted("ROLE_ADMIN")',
             denormalizationContext: ['groups' => ['company-reject']],
+            controller: RejectCompanyController::class
         ),
         new Delete(
             security: 'is_granted("ROLE_ADMIN") or object == user.getCompany()'
@@ -91,7 +99,7 @@ use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
         'name' => 'partial',
     ],
 )]
-#[ApiFilter(ExistsFilter::class, properties: ['validatedAt'])]
+#[ApiFilter(ExistsFilter::class, properties: ['validatedAt', 'rejectedReason'])]
 
 #[Vich\Uploadable]
 #[UniqueEntity(['email'])]
@@ -148,6 +156,14 @@ class Company
 
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: User::class, orphanRemoval: true)]
     private Collection $users;
+
+    #[Groups(['read-company-as-admin'])]
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[Groups(['read-company-as-admin'])]
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function __construct()
     {
@@ -319,6 +335,30 @@ class Company
                 $employee->setCompanyId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

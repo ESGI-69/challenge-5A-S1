@@ -4,6 +4,9 @@ import apiCall from '@/axios';
 import queryBuilder from '@/utils/queryBuilder';
 
 const initialState = {
+  company: null,
+  isCompanyLoading: false,
+
   companyEstablishments: [],
   isCompanyEstablishmentsLoading: false,
 
@@ -16,6 +19,16 @@ export const CompanyContext = createContext(initialState);
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'company':
+      return {
+        ...state,
+        company: action.payload,
+      };
+    case 'isCompanyLoading':
+      return {
+        ...state,
+        isCompanyLoading: action.payload,
+      };
     case 'companyEstablishments':
       return {
         ...state,
@@ -54,6 +67,27 @@ const reducer = (state, action) => {
 export default function CompanyProvider({ children }) {
   const [ state, dispatch ] = useReducer(reducer, initialState);
 
+  const adminGetById = async (id) => {
+    dispatch({
+      type: 'isCompanyLoading',
+      payload: true,
+    });
+    try {
+      const { data } = await apiCall.get(`/admin/companies/${id}`);
+      dispatch({
+        type: 'company',
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isCompanyLoading',
+        payload: false,
+      });
+    }
+  };
+
   const adminGet = async (queries) => {
     dispatch({
       type: 'isCompaniesLoading',
@@ -73,6 +107,30 @@ export default function CompanyProvider({ children }) {
         type: 'isCompaniesLoading',
         payload: false,
       });
+    }
+  };
+
+  const adminValidate = async (id) => {
+    try {
+      await apiCall.patch(`/admin/companies/${id}/validate`, {}, {
+        headers: {
+          'Content-Type': 'application/merge-patch+json',
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const adminReject = async (id, reason) => {
+    try {
+      await apiCall.patch(`/admin/companies/${id}/reject`, { reason }, {
+        headers: {
+          'Content-Type': 'application/merge-patch+json',
+        },
+      });
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -147,6 +205,13 @@ export default function CompanyProvider({ children }) {
 
   return (
     <CompanyContext.Provider value={{
+      adminValidate,
+      adminReject,
+
+      adminGetById,
+      company: state.company,
+      isCompanyLoading: state.isCompanyLoading,
+
       getCompanyEstablishments,
       companyEstablishments: state.companyEstablishments,
       isCompanyEstablishmentsLoading: state.isCompanyEstablishmentsLoading,
