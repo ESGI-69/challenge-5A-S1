@@ -86,6 +86,27 @@ export default function EstablishmentProvider({ children }) {
     }
   };
 
+  const getLastTwoAppointments = async (id) => {
+    dispatch({
+      type: 'isEstablishmentLastTwoAppointmentsLoading',
+      payload: true,
+    });
+    try {
+      const { data } = await apiCall.get(`/establishments/${id}/lastappointments`);
+      dispatch({
+        type: 'lastTwoAppointments',
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isEstablishmentLastTwoAppointmentsLoading',
+        payload: false,
+      });
+    }
+  };
+
   return (
     <EstablishmentContext.Provider value={{
       get,
@@ -95,6 +116,10 @@ export default function EstablishmentProvider({ children }) {
       getById,
       establishment: state.establishment,
       isEstablishmentLoading: state.isEstablishmentLoading,
+
+      getLastTwoAppointments,
+      lastTwoAppointments: state.lastTwoAppointments,
+      isEstablishmentLastTwoAppointmentsLoading: state.isEstablishmentLastTwoAppointmentsLoading,
     }}>
       {children}
     </EstablishmentContext.Provider>
