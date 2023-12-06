@@ -11,6 +11,8 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Repository\CompanyRepository;
 use App\Controller\Company\CreateCompanyController;
 use App\Controller\Company\ValidateCompanyController;
+use App\Controller\Company\GetKbisFileController;
+Use App\Controller\Company\GetLogoFileController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -41,6 +43,18 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
             name: 'get-company-employees',
             uriTemplate: '/companies/{id}/employees',
             normalizationContext: ['groups' => ['company-getall','read-company-employees']],
+        ),
+        new Get(
+            uriTemplate: '/companies/{id}/kbis',
+            // securityPostDenormalize: 'is_granted("ROLE_ADMIN") and object == user.getCompany()',
+            normalizationContext: ['groups' => ['company-read']],
+            controller: GetKbisFileController::class
+        ),
+        new Get(
+            uriTemplate: '/companies/{id}/logo',
+            // securityPostDenormalize: 'is_granted("ROLE_ADMIN") and object == user.getCompany()',
+            normalizationContext: ['groups' => ['company-read']],
+            controller: GetLogoFileController::class
         ),
         new Post(
             securityPostDenormalize: 'is_granted("ROLE_USER")',
@@ -89,6 +103,7 @@ class Company
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[Assert\File(mimeTypes: ['application/pdf'])]
     #[Vich\UploadableField(mapping: 'company_kbis', fileNameProperty:'pathKbis')]
     #[Groups(['company-create', 'read-company-as-admin'])]
     public ?File $fileKbis = null;
@@ -110,6 +125,7 @@ class Company
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $rejectedReason = null;
 
+    #[Assert\File(mimeTypes: ['image/svg+xml', 'image/jpeg', 'image/png'])]
     #[Vich\UploadableField(mapping: 'company_logo', fileNameProperty:'logoPath')]
     #[Groups(['company-create', 'company-getall'])]
     public ?File $fileLogo = null;
