@@ -40,7 +40,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         ),
         new GetCollection(
             security: 'is_granted("ROLE_ADMIN")',
-            normalizationContext: ['groups' => ['read-user', 'read-company-as-admin']]
+            normalizationContext: ['groups' => ['read-user', 'read-company-as-admin', 'read-user-as-admin']]
         ),
 
         new Post(denormalizationContext: ['groups' => ['create-user']]),
@@ -56,7 +56,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[Groups(['read-user-mutation'])]
+    #[Groups(['read-user-mutation', 'read-user-as-admin'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -92,7 +92,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $validatedServices;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['create-user', 'update-user', 'read-me', 'appointment-read'])]
+    #[Groups(['read-user', 'create-user', 'update-user', 'read-me', 'appointment-read'])]
     private ?string $lastname = null;
 
     #[Groups(['read-user', 'read-me'])]
