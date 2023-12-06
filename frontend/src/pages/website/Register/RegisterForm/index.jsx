@@ -152,6 +152,7 @@ export default function RegisterForm() {
           onInput={handlePasswordInputChange}
         />
       </div>
+      { User.isUserLoading }
       <Button type="submit" variant="black" disabled={User.isUserLoading}>{t('form.register')}</Button>
     </form>
   );

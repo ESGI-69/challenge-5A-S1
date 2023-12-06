@@ -8,6 +8,7 @@ const initialState = {
   isCompanyEstablishmentsLoading: false,
 
   companies: [],
+  isCompanyLoading: false,
   isCompaniesLoading: false,
 };
 
@@ -25,6 +26,11 @@ const reducer = (state, action) => {
         ...state,
         isCompanyEstablishmentsLoading: action.payload,
       };
+    case 'company':
+      return {
+        ...state,
+        company: action.payload,
+      };
     case 'companies':
       return {
         ...state,
@@ -34,6 +40,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         isCompaniesLoading: action.payload,
+      };
+    case 'isCompanyLoading':
+      return {
+        ...state,
+        isCompanyLoading: action.payload,
       };
     default:
       return state;
@@ -86,6 +97,32 @@ export default function CompanyProvider({ children }) {
     }
   };
 
+  const post = async (payload) => {
+    dispatch({
+      type: 'isCompanyLoading',
+      payload: true,
+    });
+    try {
+      const data = await apiCall.post('/companies', payload, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      dispatch({
+        type: 'company',
+        payload: data,
+      });
+    } catch (error) {
+      console.error;
+      throw error;
+    } finally {
+      dispatch({
+        type: 'isCompanyLoading',
+        payload: false,
+      });
+    }
+  };
+
   return (
     <CompanyContext.Provider value={{
       getCompanyEstablishments,
@@ -93,8 +130,10 @@ export default function CompanyProvider({ children }) {
       isCompanyEstablishmentsLoading: state.isCompanyEstablishmentsLoading,
 
       get,
+      post,
       companies: state.companies,
       isCompaniesLoading: state.isCompaniesLoading,
+      isCompanyLoading: state.isCompanyLoading,
     }}>
       {children}
     </CompanyContext.Provider>

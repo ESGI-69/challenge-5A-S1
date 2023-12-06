@@ -3,6 +3,11 @@
     "title": "Vous êtes gérant d’un établissement beauté ? Ajouter le votre dès maintenant !"
   },
   "form": {
-    "test": "Oui"
+    "name": "Nom",
+    "email": "Email",
+    "fileKbis": "Kbis",
+    "fileLogo": "Logo",
+    "submit": "Envoyer",
+    "success": "Votre demande à bien été envoyée."
   }
 }

@@ -3,6 +3,11 @@
     "title": "Are you the manager of a beauty establishment? Add yours now!"
   },
   "form": {
-    "test": "Yes"
+    "name": "Name",
+    "email": "Email",
+    "fileKbis": "Kbis",
+    "fileLogo": "Logo",
+    "submit": "Submit",
+    "success": "Your request has been sent."
   }
 }
