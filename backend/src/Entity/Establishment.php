@@ -10,10 +10,9 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\ApiFilter;
-use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;  
-use App\Filter\IsOpenFilter; 
-use App\Filter\EstablishementServicesFilter;
+use App\Filter\IsOpenFilter;
+use ApiPlatform\Serializer\Filter\PropertyFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -53,6 +52,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
     ],
     
 )]
+
+#[ApiFilter(SearchFilter::class, strategy: 'exact')]
 #[ApiFilter(
     IsOpenFilter::class,
     properties: ['isOpen'],
@@ -117,6 +118,9 @@ class Establishment
     #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read'])]
     private ?string $long = null;
 
+    #[ApiFilter(SearchFilter::class, properties: [
+        'company.id' => 'exact',
+    ])]
     #[ORM\ManyToOne(inversedBy: 'establishments')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['read-establishment', 'create-establishment', 'update-establishment'])]
