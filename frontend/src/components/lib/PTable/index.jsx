@@ -11,6 +11,7 @@ export default function PTable({
   data,
   selectable = false,
   pagination = false,
+  actions = [],
   onSelect,
   onModify,
   onDelete,
@@ -158,8 +159,15 @@ export default function PTable({
                       top: 0,
                       right: 'calc(100% + 8px)',
                     }}>
-                      <DropdownItem onClick={() => onModify(item.id)}>Modifier</DropdownItem>
-                      <DropdownItem onClick={() => onDelete(item.id)}>Supprimer</DropdownItem>
+                      {actions.length > 0 ?
+                        actions.map((action) => (
+                          <DropdownItem key={action.name} onClick={() => action.onClick(item)}>{action.name}</DropdownItem>
+                        )) : (
+                          <>
+                            <DropdownItem onClick={() => onModify(item.id)}>Modifier</DropdownItem>
+                            <DropdownItem onClick={() => onDelete(item.id)}>Supprimer</DropdownItem>
+                          </>
+                        )}
                     </DropdownList>
                   </Dropdown>
                 </div>
@@ -203,6 +211,7 @@ PTable.propTypes = {
   selectable: PropTypes.bool,
   pagination: PropTypes.bool,
   template: PropTypes.object.isRequired,
+  actions: PropTypes.arrayOf(PropTypes.object),
   onSelect: PropTypes.func,
   onModify: PropTypes.func,
   onDelete: PropTypes.func,
