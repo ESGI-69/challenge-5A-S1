@@ -10,6 +10,7 @@ import Register from '@/pages/website/Register';
 import Establishment from '@/pages/website/Establishment';
 import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
 import Search from '@/pages/website/Search';
+import Employees from '@/pages/backoffice/Employees';
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
+      },
+      {
+        path: 'employees',
+        element: <Employees />,
       },
       {
         path: '*',

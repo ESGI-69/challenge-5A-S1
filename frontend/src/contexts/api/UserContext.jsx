@@ -47,7 +47,7 @@ export default function UserProvider({ children }) {
       payload: true,
     });
     try {
-      const data = await apiCall.get('/users');
+      const { data } = await apiCall.get('/users');
       dispatch({
         type: 'users',
         payload: data,
