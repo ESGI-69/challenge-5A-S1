@@ -13,7 +13,7 @@ final class DefaultUsersStory extends Story
     {
         // TODO build your story here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#stories)
         UserFactory::createMany(20);
-        UserFactory::createMany(10, [
+        UserFactory::createMany(15, [
           'company' => lazy(fn() => CompanyFactory::createOne()),
         ]);
         UserFactory::createOne([

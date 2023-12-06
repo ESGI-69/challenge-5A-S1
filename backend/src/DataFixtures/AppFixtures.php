@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Story\DefaultCompaniesStory;
+use App\Story\DefaultEstablishmentsStory;
 use App\Story\DefaultEstablishmentTypeStory;
 use App\Story\DefaultUsersStory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -15,5 +16,6 @@ class AppFixtures extends Fixture
         DefaultUsersStory::load();
         DefaultCompaniesStory::load();
         DefaultEstablishmentTypeStory::load();
+        DefaultEstablishmentsStory::load();
     }
 }
