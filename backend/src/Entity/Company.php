@@ -24,6 +24,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 #[ApiResource(
@@ -90,6 +91,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
         'name' => 'partial',
     ],
 )]
+#[ApiFilter(ExistsFilter::class, properties: ['validatedAt'])]
 
 #[Vich\Uploadable]
 #[UniqueEntity(['email'])]

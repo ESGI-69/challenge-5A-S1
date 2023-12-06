@@ -37,6 +37,9 @@ export default function Sidemenu({ ...delegated }) {
             <SidemenuLink to="/backoffice/" svgJsx={<Stats />}>
               {t('menu.stats')}
             </SidemenuLink>
+            <SidemenuLink to="/backoffice/companies-validation" svgJsx={<Shop />}>
+              {t('menu.companiesValidation')}
+            </SidemenuLink>
             <SidemenuLink to="/backoffice/employees" svgJsx={<Users />}>
               {t('menu.employees')}
             </SidemenuLink>

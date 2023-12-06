@@ -54,7 +54,29 @@ const reducer = (state, action) => {
 export default function CompanyProvider({ children }) {
   const [ state, dispatch ] = useReducer(reducer, initialState);
 
-  const get = async ({ queries }) => {
+  const adminGet = async (queries) => {
+    dispatch({
+      type: 'isCompaniesLoading',
+      payload: true,
+    });
+    try {
+      const url = queries ? `/admin/companies${queryBuilder(queries)}` : '/admin/companies';
+      const { data } = await apiCall.get(url);
+      dispatch({
+        type: 'companies',
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isCompaniesLoading',
+        payload: false,
+      });
+    }
+  };
+
+  const get = async (queries) => {
     dispatch({
       type: 'isCompaniesLoading',
       payload: true,
@@ -131,6 +153,7 @@ export default function CompanyProvider({ children }) {
 
       get,
       post,
+      adminGet,
       companies: state.companies,
       isCompaniesLoading: state.isCompaniesLoading,
       isCompanyLoading: state.isCompanyLoading,
