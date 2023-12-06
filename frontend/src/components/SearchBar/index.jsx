@@ -44,7 +44,7 @@ function SearchBar({
         <div className={ style.SearchBarSuggestions }>
           {companies.map((company) => (
             company.establishments.length > 0 && (
-              <Link to={`/search?companyId=${company.establishments[0].id}`} key={company.id}>
+              <Link to={`/search?companyId=${company.id}`} key={company.id}>
                 {company.name}
               </Link>
             )
