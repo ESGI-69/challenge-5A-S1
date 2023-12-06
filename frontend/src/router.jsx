@@ -10,7 +10,6 @@ import Register from '@/pages/website/Register';
 import Establishment from '@/pages/website/Establishment';
 import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
 import Search from '@/pages/website/Search';
-import CompanyContext from '@/contexts/api/CompanyContext';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/search',
-        element: <CompanyContext><Search /></CompanyContext>,
+        element: <EstablishmentProvider><Search /></EstablishmentProvider>,
       },
       {
         path: '*',

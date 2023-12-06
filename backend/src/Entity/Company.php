@@ -10,8 +10,6 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\GetCollection;
 use App\Repository\CompanyRepository;
 use App\Controller\Company\CreateCompanyController;
-use App\Controller\Company\CreateEmployeeOfCompanyController;
-use App\Controller\Company\GetEstablishmentsCompanyController;
 use App\Controller\Company\ValidateCompanyController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -27,11 +25,6 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 #[ApiResource(
     operations: [
-        new GetCollection(
-            uriTemplate: '/companies/{id}/establishments',
-            controller: GetEstablishmentsCompanyController::class,
-            normalizationContext: ['groups' => ['company-read', 'read-establishment']]
-        ),
         new GetCollection(
             uriTemplate: '/admin/companies',
             security: 'is_granted("ROLE_ADMIN")',
