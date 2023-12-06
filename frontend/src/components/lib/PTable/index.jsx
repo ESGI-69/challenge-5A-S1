@@ -42,51 +42,51 @@ export default function PTable({
     }
   };
 
-  const filters = [
-    {
-      name: 'page',
-      in: 'query',
-      description: 'The collection page number',
-      required: false,
-      deprecated: false,
-      allowEmptyValue: true,
-      schema: {
-        type: 'integer',
-        default: 1,
-      },
-      style: 'form',
-      explode: false,
-      allowReserved: false,
-    },
-    {
-      name: 'name',
-      in: 'query',
-      description: '',
-      required: false,
-      deprecated: false,
-      allowEmptyValue: true,
-      schema: {
-        type: 'string',
-      },
-      style: 'form',
-      explode: false,
-      allowReserved: false,
-    },
-    {
-      name: 'email',
-      in: 'query',
-      description: '',
-      required: false,
-      deprecated: false,
-      allowEmptyValue: true,
-      schema: {
-        type: 'string',
-      },
-      style: 'form',
-      explode: false,
-      allowReserved: false,
-    },
-  ];
+  // const filters = [
+  //   {
+  //     name: 'page',
+  //     in: 'query',
+  //     description: 'The collection page number',
+  //     required: false,
+  //     deprecated: false,
+  //     allowEmptyValue: true,
+  //     schema: {
+  //       type: 'integer',
+  //       default: 1,
+  //     },
+  //     style: 'form',
+  //     explode: false,
+  //     allowReserved: false,
+  //   },
+  //   {
+  //     name: 'name',
+  //     in: 'query',
+  //     description: '',
+  //     required: false,
+  //     deprecated: false,
+  //     allowEmptyValue: true,
+  //     schema: {
+  //       type: 'string',
+  //     },
+  //     style: 'form',
+  //     explode: false,
+  //     allowReserved: false,
+  //   },
+  //   {
+  //     name: 'email',
+  //     in: 'query',
+  //     description: '',
+  //     required: false,
+  //     deprecated: false,
+  //     allowEmptyValue: true,
+  //     schema: {
+  //       type: 'string',
+  //     },
+  //     style: 'form',
+  //     explode: false,
+  //     allowReserved: false,
+  //   },
+  // ];
 
   return (
     <div className={styles.Table}>
@@ -208,4 +208,6 @@ PTable.propTypes = {
   onDelete: PropTypes.func,
   loading: PropTypes.bool,
   data: PropTypes.arrayOf(PropTypes.object),
+  onPageNext: PropTypes.func,
+  onPagePrevious: PropTypes.func,
 };

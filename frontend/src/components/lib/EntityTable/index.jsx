@@ -69,6 +69,7 @@ function getEntityDoc(entity) {
         width: '120px',
       },
     },
+    test: entity,
   };
 }
 
