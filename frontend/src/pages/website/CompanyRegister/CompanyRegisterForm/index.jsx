@@ -82,7 +82,6 @@ export default function CompanyRegisterForm() {
       await Company.post(formData);
       setError(false);
       setSuccess(true);
-      console.log('page success');
     } catch (error) {
       setSuccess(false);
       setError(true);
