@@ -3,6 +3,7 @@ import PTable from '../PTable';
 import Button from '../Button';
 import { Chevron } from '../Icons';
 import styles from '../PTable/PTable.module.scss';
+import PropTypes from 'prop-types';
 
 const EntityTableContext = createContext({});
 
@@ -94,22 +95,25 @@ function getData() {
 
 export default function EntityTable({ entity, entityContext }) {
   const entityDoc = useMemo(() => getEntityDoc(entity), [ entity ]);
-  const [ data, setData ] = useState(() => getData());
+  const [ data ] = useState(() => getData());
   const ENTITY = useContext(entityContext);
   useEffect(() => {
     ENTITY.get();
-  }, []);
-  const handleDelete = (id) => {
+  }, [ ENTITY ]);
+  const handleDelete = (id) =>
     // delete in data
-  };
-  const handleModify = (id) => {
+    id
+  ;
+  const handleModify = (id) =>
     // open dialog and save
-  };
-  const handleOnSelect = (ids) => {
+    id
+  ;
+  const handleOnSelect = (ids) =>
     // handle selection
-  };
+    ids
+  ;
   const handlePreviousPage = () => {
-    console.log(ENTITY.users);
+    // console.log(ENTITY.users);
     // previous page
   };
   const handleNextPage = () => {
@@ -133,3 +137,8 @@ export default function EntityTable({ entity, entityContext }) {
     </EntityTableContext.Provider>
   );
 }
+
+EntityTable.propTypes = {
+  entity: PropTypes.string.isRequired,
+  entityContext: PropTypes.object.isRequired,
+};
