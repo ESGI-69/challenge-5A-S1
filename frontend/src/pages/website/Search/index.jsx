@@ -24,7 +24,6 @@ export default function Search() {
     if (queryParams.companyId) {
       get({ 'company.id': queryParams.companyId });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

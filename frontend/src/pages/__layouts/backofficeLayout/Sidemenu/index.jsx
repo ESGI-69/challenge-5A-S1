@@ -34,13 +34,13 @@ export default function Sidemenu({ ...delegated }) {
         </button>
         <nav className={styles.Nav}>
           <ul className={styles.NavMenu}>
-            <SidemenuLink to="/backoffice" svgJsx={<Stats />}>
+            <SidemenuLink to="/backoffice/" svgJsx={<Stats />}>
               {t('menu.stats')}
             </SidemenuLink>
             <SidemenuLink to="/backoffice/employees" svgJsx={<Users />}>
               {t('menu.employees')}
             </SidemenuLink>
-            <SidemenuLink to="/backoffice/employees" svgJsx={<Shop />}>
+            <SidemenuLink to="/backoffice/establishments" svgJsx={<Shop />}>
               {t('menu.establishments')}
             </SidemenuLink>
           </ul>
