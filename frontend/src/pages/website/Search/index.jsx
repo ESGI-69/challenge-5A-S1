@@ -58,7 +58,7 @@ export default function Search() {
                 return acc;
               }, [])
             }
-            zoomLevel={13}
+            zoomLevel={7}
           />
         )}
       </div>
