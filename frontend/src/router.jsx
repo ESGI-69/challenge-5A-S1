@@ -10,6 +10,7 @@ import Register from '@/pages/website/Register';
 import Establishment from '@/pages/website/Establishment';
 import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
 import Search from '@/pages/website/Search';
+import Reservation from '@/pages/website/Reservation';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: '/search',
         element: <EstablishmentProvider><Search /></EstablishmentProvider>,
+      },
+      {
+        path: '/:establishementSlug/reservation',
+        element: <Reservation/>,
       },
       {
         path: '*',
