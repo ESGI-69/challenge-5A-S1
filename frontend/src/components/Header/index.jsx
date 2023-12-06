@@ -17,6 +17,7 @@ export default function Header() {
         </div>
         <div className={styles.NavbarContentMenu}>
           <LanguageSelector />
+          <Button to="/company-register" variant="primary">{t('menu.companyRegister')}</Button>
           {profile && (
             <>
               <Button variant="danger" onClick={() => logout()}>Logout</Button>
