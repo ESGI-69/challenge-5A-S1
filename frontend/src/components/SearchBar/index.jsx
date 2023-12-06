@@ -23,7 +23,6 @@ function SearchBar({
     if (debouncedName !== '') {
       getCompanies({ queries: { name: debouncedName } });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ debouncedName ]);
 
   const handleFormSubmission = (e) => {
