@@ -1,5 +1,9 @@
 import styles from './Reservation.module.scss';
 import Button from '@/components/lib/Button';
+import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/components/lib/Dropdown';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import Schedule  from '@/components/Schedule';
 
 export default function Reservation () {
 
@@ -11,6 +15,23 @@ export default function Reservation () {
       duration: 30,
     },
   ];
+
+  const persons = [
+    {
+      id: 1,
+      name: 'Personne 1',
+    },
+    {
+      id: 2,
+      name: 'Personne 2',
+    },
+    {
+      id: 3,
+      name: 'Personne 3',
+    },
+  ];
+
+  const [ person, setPerson ] = useState(persons[0]);
 
   return (
     <div className={styles.Page}>
@@ -34,10 +55,16 @@ export default function Reservation () {
               </div>
             </div>
             <div className={styles.ServicePerson}>
-              <select>
-                <option>person1</option>
-                <option>person2</option>
-              </select>
+              <Dropdown>
+                <DropdownButton>
+                  <Button variant="black" isPlain="false">{person.name}</Button>
+                </DropdownButton>
+                <DropdownList>
+                  {persons.map(person => (
+                    <DropdownItem key={person.id} onClick={() => setPerson(person)}>{person.name}</DropdownItem>
+                  ))}
+                </DropdownList>
+              </Dropdown>
             </div>
             <div className={styles.ServiceAction}>
               <a href="#" className={styles.ServiceActionDelete}>Supprimer</a>
@@ -49,6 +76,7 @@ export default function Reservation () {
       <h2 className={styles.PageTitle}>2. Choix de la date et heure</h2>
       <div className={styles.AppointementsPicked}>
         <div>Container de rendez-vous</div>
+        <Schedule/>
       </div>
 
     </div>
