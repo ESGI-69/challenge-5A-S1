@@ -1,0 +1,31 @@
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+
+  &Field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-1);
+    width: 100%;
+
+    &Label {
+      font-size: calc(var(--size-3) - var(--size-1));
+      font-weight: var(--font-weight-5);
+    }
+  }
+
+  &Error {
+    text-align: center;
+    color: var(--color-danger);
+    font-size: calc(var(--size-3) - var(--size-1));
+    font-weight: var(--font-weight-5);
+  }
+
+  &Success {
+    text-align: center;
+    color: var(--color-success);
+    font-size: calc(var(--size-3) - var(--size-1));
+    font-weight: var(--font-weight-5);
+  }
+}

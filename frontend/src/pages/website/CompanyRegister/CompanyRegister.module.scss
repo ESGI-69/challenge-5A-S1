@@ -1,0 +1,37 @@
+@use "src/breakpoints" as *;
+
+.Page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+
+  &Image {
+    object-fit: cover;
+    filter: grayscale(1);
+    background-size: cover;
+    background-position: center;
+  }
+
+  @media screen and (width <= $breakpoint-desktop) {
+    grid-template-columns: 1fr;
+
+    &Image {
+      display: none;
+    }
+  }
+
+  &CompanyRegister {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    align-self: center;
+    padding: var(--size-10) var(--size-3);
+
+    &Title {
+      font-size: var(--size-4);
+      font-weight: var(--font-weight-5);
+      text-align: center;
+      margin-bottom: var(--size-5);
+    }
+  }
+}

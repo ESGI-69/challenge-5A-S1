@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { ProfileContext } from '@/contexts/ProfileContext';
+import { Logout } from '@/components/lib/Icons';
 
 export default function Header() {
   const { profile, logout } = useContext(ProfileContext);
@@ -19,8 +20,11 @@ export default function Header() {
           <LanguageSelector />
           {profile && (
             <>
-              <Button variant="danger" onClick={() => logout()}>Logout</Button>
+              <Button to="/company-register" variant="primary">{t('menu.companyRegister')}</Button>
               <Button href="/profile" variant="black">{profile.firstname}</Button>
+              <Button variant="danger" onClick={() => logout()}>
+                <Logout/>
+              </Button>
             </>
           )}
           {!profile && (

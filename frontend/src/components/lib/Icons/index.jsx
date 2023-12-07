@@ -7,6 +7,7 @@ import Shop from './Shop';
 import Star from './Star';
 import Stats from './Stats';
 import Users from './Users';
+import Logout from './Logout';
 
 export {
   Chevron,
@@ -18,4 +19,5 @@ export {
   Star,
   Stats,
   Users,
+  Logout,
 };
