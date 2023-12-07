@@ -2,7 +2,7 @@
 
 [![Frontend tests](https://github.com/ESGI-69/challenge-5A-S1/actions/workflows/frontend.yml/badge.svg)](https://github.com/ESGI-69/challenge-5A-S1/actions/workflows/frontend.yml)
 
-## Recomennded plugins
+## Recomended plugins
 
 When you go to the extensions tab in VSCode, you will see (at the bootom left of your screen) a list of recommended extensions for this project. You can install them for a better development experience.
 
