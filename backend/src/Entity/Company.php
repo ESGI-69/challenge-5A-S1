@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 #[ApiResource(
@@ -91,6 +92,7 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 )]
 
 #[Vich\Uploadable]
+#[UniqueEntity(['email'])]
 class Company
 {
     #[ORM\Id]
@@ -109,12 +111,12 @@ class Company
     public ?File $fileKbis = null;
 
     #[Groups(['company-read', 'read-company-as-admin'])]
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: false)]
     private ?string $pathKbis = null;
 
     #[Assert\Email()]
     #[Groups(['company-read', 'company-create', 'company-update', 'company-getall', 'read-company-as-admin'])]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
 
     #[Groups(['read-company-as-admin'])]
@@ -131,7 +133,7 @@ class Company
     public ?File $fileLogo = null;
 
     #[Groups(['company-read', 'company-getall'])]
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: false)]
     private ?string $logoPath = null;
 
     #[Groups(['company-getall'])]
