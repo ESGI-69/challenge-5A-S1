@@ -64,7 +64,17 @@ export default function CompanyRegisterForm() {
     }));
   };
 
+  const resetFields = () => {
+    setNameInput(old => ({ ...old, value: '' }));
+    setEmailInput(old => ({ ...old, value: '' }));
+    setfileKbisInput(old => ({ ...old, value: '' }));
+    setfileLogo(old => ({ ...old, value: '' }));
+  };
+
   const handleSubmit = async (e) => {
+    setError(false);
+    setSuccess(false);
+
     e.preventDefault();
     const formData = new FormData();
     formData.append('name', e.target.name.value);
@@ -80,10 +90,9 @@ export default function CompanyRegisterForm() {
 
     try {
       await Company.post(formData);
-      setError(false);
       setSuccess(true);
+      resetFields();
     } catch (error) {
-      setSuccess(false);
       setError(true);
       setErrorMessage(error.message);
     }
