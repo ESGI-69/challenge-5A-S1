@@ -15,4 +15,17 @@ apiCall.defaults.headers.common.Authorization = token ? `Bearer ${token}` : '';
 
 apiCall.defaults.headers.post['Content-Type'] = 'application/json';
 
+apiCall.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      Cookies.remove('token');
+      if (window.location.pathname !== '/login') {
+        window.location = '/login';
+      }
+    }
+    return Promise.reject(error);
+  },
+);
+
 export default apiCall;

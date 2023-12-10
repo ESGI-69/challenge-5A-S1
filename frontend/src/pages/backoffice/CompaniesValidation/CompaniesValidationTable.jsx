@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import PTable from '@/components/lib/PTable';
 import { CompanyContext } from '@/contexts/api/CompanyContext';
 import { useContext, useEffect, useState } from 'react';
@@ -7,6 +8,7 @@ import { dateTime } from '@/utils/formater/date';
 import Button from '@/components/lib/Button';
 
 export default function CompanyValidation() {
+  const { t } = useTranslation('companiesValidation');
   const {
     adminGet,
     companies,
@@ -51,12 +53,12 @@ export default function CompanyValidation() {
         width: '50px',
       },
       name: {
-        name: 'name',
+        name: t('table.titles.name'),
         width: '200px',
       },
       email: {
-        name: 'email',
-        width: '200px',
+        name: t('table.titles.email'),
+        width: '300px',
       },
     },
   };

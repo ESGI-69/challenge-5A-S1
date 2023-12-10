@@ -1,0 +1,15 @@
+{
+  "title": "Companies Validation",
+  "watingForReview": "Waiting for review",
+  "rejected": "Rejected",
+  "table": {
+    "titles": {
+      "name": "Name",
+      "email": "Email",
+      "rejectedReason": "Rejected Reason"
+    },
+    "actions": {
+      "view": "View"
+    }
+  }
+}
