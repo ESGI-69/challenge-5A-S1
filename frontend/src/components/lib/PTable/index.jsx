@@ -111,7 +111,11 @@ export default function PTable({
                   maxWidth: template?.properties[propKey].width,
                 }}
               >
-                <span>{template?.properties[propKey].name ?? propKey}</span>
+                {propKey === 'id' ? (
+                  <span>#</span>
+                ) : (
+                  <span>{template?.properties[propKey].name ?? propKey}</span>
+                )}
               </div>
             ))}
             <div className={styles.TableBodyRowActions}></div>

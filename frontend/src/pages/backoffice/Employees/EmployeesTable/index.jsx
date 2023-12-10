@@ -21,7 +21,6 @@ export default function EmployeesTable() {
   const DATA_TEMPLATE = {
     properties: {
       id: {
-        name: '#',
         width: '50px',
       },
       email: {

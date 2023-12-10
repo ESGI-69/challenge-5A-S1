@@ -17,7 +17,6 @@ export default function CompanyValidation() {
   const DATA_TEMPLATE = {
     properties: {
       id: {
-        name: '#',
         width: '50px',
       },
       name: {
