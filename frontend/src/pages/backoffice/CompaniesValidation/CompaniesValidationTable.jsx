@@ -2,7 +2,7 @@ import PTable from '@/components/lib/PTable';
 import { CompanyContext } from '@/contexts/api/CompanyContext';
 import { useContext, useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import style from './CompanyValidation.module.scss';
+import style from './CompaniesValidation.module.scss';
 import { dateTime } from '@/utils/formater/date';
 import Button from '@/components/lib/Button';
 
@@ -79,19 +79,19 @@ export default function CompanyValidation() {
         {isCompanyLoading || !company ? (
           <h1>Loading...</h1>
         ) : (
-          <div className={style.CompanyValidationModal}>
-            <h1 className={style.CompanyValidationModalTitle}>{company.name}</h1>
-            <div className={style.CompanyValidationModalInfos}>
-              <div className={style.CompanyValidationModalInfosInfo}>
-                <span className={style.CompanyValidationModalInfosInfoLabel}>
+          <div className={style.CompaniesValidationModal}>
+            <h1 className={style.CompaniesValidationModalTitle}>{company.name}</h1>
+            <div className={style.CompaniesValidationModalInfos}>
+              <div className={style.CompaniesValidationModalInfosInfo}>
+                <span className={style.CompaniesValidationModalInfosInfoLabel}>
                   EmailNEEDTRAD:
                 </span>
                 <span>
                   {company.email}
                 </span>
               </div>
-              <div className={style.CompanyValidationModalInfosInfo}>
-                <span className={style.CompanyValidationModalInfosInfoLabel}>
+              <div className={style.CompaniesValidationModalInfosInfo}>
+                <span className={style.CompaniesValidationModalInfosInfoLabel}>
                   Requested atNEEDTRAD:
                 </span>
                 <span>
@@ -99,8 +99,8 @@ export default function CompanyValidation() {
                 </span>
               </div>
             </div>
-            <iframe className={style.CompanyValidationModalViewer} src="https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf" width="100%" height="500px" />
-            <div className={style.CompanyValidationModalButtons}>
+            <iframe className={style.CompaniesValidationModalViewer} src="https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf" width="100%" height="500px" />
+            <div className={style.CompaniesValidationModalButtons}>
               <Button variant="danger" onClick={() => setRejectedModalIsOpen(true) && setRejectedReason('')}>RejectNEEDTRAD</Button>
               <Button variant="success" onClick={() => validateCompany(company.id)}>ApproveNEEDTRAD</Button>
             </div>
@@ -114,10 +114,10 @@ export default function CompanyValidation() {
                 margin: 'auto',
               },
             }} ariaHideApp={false} isOpen={rejectedModalIsOpen}>
-              <div className={style.CompanyValidationRejectedModal}>
-                <h1 className={style.CompanyValidationRejectedModalTitle}>WhyNEEDTRAD</h1>
-                <textarea rows={6} className={style.CompanyValidationRejectedModalTextarea} onChange={(e) => setRejectedReason(e.target.value)} />
-                <div className={style.CompanyValidationRejectedModalButtons}>
+              <div className={style.CompaniesValidationRejectedModal}>
+                <h1 className={style.CompaniesValidationRejectedModalTitle}>WhyNEEDTRAD</h1>
+                <textarea rows={6} className={style.CompaniesValidationRejectedModalTextarea} onChange={(e) => setRejectedReason(e.target.value)} />
+                <div className={style.CompaniesValidationRejectedModalButtons}>
                   <Button variant="black" onClick={() => setRejectedModalIsOpen(false)}>CancelNEEDTRAD</Button>
                   <Button variant="danger" onClick={() => rejectCompany(company.id, rejectedReason)}>RejectNEEDTRAD</Button>
                 </div>

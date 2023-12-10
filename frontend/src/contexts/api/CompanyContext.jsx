@@ -11,7 +11,6 @@ const initialState = {
   isCompanyEstablishmentsLoading: false,
 
   companies: [],
-  isCompanyLoading: false,
   isCompaniesLoading: false,
 };
 
@@ -39,11 +38,6 @@ const reducer = (state, action) => {
         ...state,
         isCompanyEstablishmentsLoading: action.payload,
       };
-    case 'company':
-      return {
-        ...state,
-        company: action.payload,
-      };
     case 'companies':
       return {
         ...state,
@@ -53,11 +47,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         isCompaniesLoading: action.payload,
-      };
-    case 'isCompanyLoading':
-      return {
-        ...state,
-        isCompanyLoading: action.payload,
       };
     default:
       return state;

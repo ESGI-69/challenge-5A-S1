@@ -1,16 +1,16 @@
 import BackofficeHeader from '@/components/BackofficeHeader';
 import CompanyProvider from '@/contexts/api/CompanyContext';
-import CompanyValidationTable from '@/pages/backoffice/CompanyValidation/CompanyValidationTable';
-import CompanyRejectedTable from '@/pages/backoffice/CompanyValidation/CompanyRejectedTable';
+import CompaniesValidationTable from '@/pages/backoffice/CompaniesValidation/CompaniesValidationTable';
+import CompanyRejectedTable from '@/pages/backoffice/CompaniesValidation/CompaniesRejectedTable';
 
-export default function CompanyValidation() {
+export default function CompaniesValidation() {
   return (
     <>
       <BackofficeHeader>
         <h1>Company Validation</h1>
       </BackofficeHeader>
       <CompanyProvider>
-        <CompanyValidationTable />
+        <CompaniesValidationTable />
       </CompanyProvider>
       <CompanyProvider>
         <CompanyRejectedTable />
