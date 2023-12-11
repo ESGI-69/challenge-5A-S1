@@ -14,7 +14,6 @@ export default function CompanyValidation() {
 
   useEffect(() => {
     adminGet({ 'exists[rejectedReason]': true });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const DATA_TEMPLATE = {

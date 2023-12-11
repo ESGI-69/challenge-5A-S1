@@ -23,7 +23,6 @@ export default function CompanyValidation() {
 
   useEffect(() => {
     adminGet({ 'exists[validatedAt]': false, 'exists[rejectedReason]': false });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [ modalIsOpen, setIsModalOpen ] = useState(false);
