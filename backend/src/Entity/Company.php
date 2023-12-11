@@ -55,13 +55,12 @@ use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
         ),
         new Get(
             uriTemplate: '/companies/{id}/kbis',
-            // securityPostDenormalize: 'is_granted("ROLE_ADMIN") and object == user.getCompany()',
+            securityPostDenormalize: 'is_granted("ROLE_ADMIN") or object == user.getCompany()',
             normalizationContext: ['groups' => ['company-read']],
             controller: GetKbisFileController::class
         ),
         new Get(
             uriTemplate: '/companies/{id}/logo',
-            // securityPostDenormalize: 'is_granted("ROLE_ADMIN") and object == user.getCompany()',
             normalizationContext: ['groups' => ['company-read']],
             controller: GetLogoFileController::class
         ),

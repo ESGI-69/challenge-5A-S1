@@ -56,6 +56,17 @@ const reducer = (state, action) => {
 export default function CompanyProvider({ children }) {
   const [ state, dispatch ] = useReducer(reducer, initialState);
 
+  const getKbis = async (id) => {
+    try {
+      const response = await apiCall.get(`/companies/${id}/kbis`, {
+        responseType: 'blob',
+      });
+      return window.URL.createObjectURL(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const adminGetById = async (id) => {
     dispatch({
       type: 'isCompanyLoading',
@@ -208,6 +219,7 @@ export default function CompanyProvider({ children }) {
       get,
       post,
       adminGet,
+      getKbis,
       companies: state.companies,
       isCompaniesLoading: state.isCompaniesLoading,
     }}>

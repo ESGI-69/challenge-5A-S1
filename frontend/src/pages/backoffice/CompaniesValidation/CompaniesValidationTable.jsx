@@ -19,6 +19,7 @@ export default function CompanyValidation() {
     isCompanyLoading,
     adminValidate,
     adminReject,
+    getKbis,
   } = useContext(CompanyContext);
 
   useEffect(() => {
@@ -28,9 +29,11 @@ export default function CompanyValidation() {
   const [ modalIsOpen, setIsModalOpen ] = useState(false);
   const [ rejectedModalIsOpen, setRejectedModalIsOpen ] = useState(false);
   const [ rejectedReason, setRejectedReason ] = useState('');
+  const [ kbisBase64Url, setKbisBase64Url ] = useState('');
 
   const openReviewModal = async (id) => {
     adminGetById(id);
+    setKbisBase64Url(await getKbis(id));
     setIsModalOpen(true);
   };
 
@@ -106,7 +109,9 @@ export default function CompanyValidation() {
                 </span>
               </div>
             </div>
-            <iframe className={style.CompaniesValidationModalViewer} src="https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf" width="100%" height="500px" />
+            {kbisBase64Url && (
+              <iframe className={style.CompaniesValidationModalViewer} src={kbisBase64Url} width="100%" height="500px" />
+            )}
             <div className={style.CompaniesValidationModalButtons}>
               <Button variant="danger" onClick={() => setRejectedModalIsOpen(true) && setRejectedReason('')}>{t('modal.actions.reject')}</Button>
               <Button variant="success" onClick={() => validateCompany(company.id)}>{t('modal.actions.approve')}</Button>
