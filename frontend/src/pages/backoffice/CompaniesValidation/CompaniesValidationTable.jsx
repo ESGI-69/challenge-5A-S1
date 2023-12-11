@@ -32,9 +32,9 @@ export default function CompanyValidation() {
   const [ kbisBase64Url, setKbisBase64Url ] = useState('');
 
   const openReviewModal = async (id) => {
+    setIsModalOpen(true);
     adminGetById(id);
     setKbisBase64Url(await getKbis(id));
-    setIsModalOpen(true);
   };
 
   const validateCompany = async (id) => {
