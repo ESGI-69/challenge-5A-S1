@@ -6,10 +6,19 @@
     "titles": {
       "name": "Name",
       "email": "Email",
-      "rejectedReason": "Rejected Reason"
+      "rejectedReason": "Rejected Reason",
+      "requestedAt": "Requested At"
     },
     "actions": {
       "view": "View"
+    }
+  },
+  "modal": {
+    "rejectedReason": "Rejected Reason",
+    "actions": {
+      "cancel": "Cancel",
+      "reject": "Reject",
+      "approve": "Approve"
     }
   }
 }

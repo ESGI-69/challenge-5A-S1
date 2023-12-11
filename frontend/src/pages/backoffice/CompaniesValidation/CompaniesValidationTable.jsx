@@ -6,6 +6,7 @@ import Modal from 'react-modal';
 import style from './CompaniesValidation.module.scss';
 import { dateTime } from '@/utils/formater/date';
 import Button from '@/components/lib/Button';
+import { XMarkIcon } from '@heroicons/react/20/solid';
 
 export default function CompanyValidation() {
   const { t } = useTranslation('companiesValidation');
@@ -60,6 +61,11 @@ export default function CompanyValidation() {
         name: t('table.titles.email'),
         width: '300px',
       },
+      updatedAt: {
+        name: t('table.titles.requestedAt'),
+        width: '150px',
+        formatingMethod: dateTime,
+      },
     },
   };
 
@@ -81,11 +87,12 @@ export default function CompanyValidation() {
           <h1>Loading...</h1>
         ) : (
           <div className={style.CompaniesValidationModal}>
+            <XMarkIcon className={style.CompaniesValidationModalClose} onClick={() => setIsModalOpen(false)} />
             <h1 className={style.CompaniesValidationModalTitle}>{company.name}</h1>
             <div className={style.CompaniesValidationModalInfos}>
               <div className={style.CompaniesValidationModalInfosInfo}>
                 <span className={style.CompaniesValidationModalInfosInfoLabel}>
-                  EmailNEEDTRAD:
+                  {t('table.titles.email')}:
                 </span>
                 <span>
                   {company.email}
@@ -93,7 +100,7 @@ export default function CompanyValidation() {
               </div>
               <div className={style.CompaniesValidationModalInfosInfo}>
                 <span className={style.CompaniesValidationModalInfosInfoLabel}>
-                  Requested atNEEDTRAD:
+                  {t('table.titles.requestedAt')}:
                 </span>
                 <span>
                   {dateTime(company.updatedAt)}
@@ -102,8 +109,8 @@ export default function CompanyValidation() {
             </div>
             <iframe className={style.CompaniesValidationModalViewer} src="https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf" width="100%" height="500px" />
             <div className={style.CompaniesValidationModalButtons}>
-              <Button variant="danger" onClick={() => setRejectedModalIsOpen(true) && setRejectedReason('')}>RejectNEEDTRAD</Button>
-              <Button variant="success" onClick={() => validateCompany(company.id)}>ApproveNEEDTRAD</Button>
+              <Button variant="danger" onClick={() => setRejectedModalIsOpen(true) && setRejectedReason('')}>{t('modal.actions.reject')}</Button>
+              <Button variant="success" onClick={() => validateCompany(company.id)}>{t('modal.actions.approve')}</Button>
             </div>
             <Modal style={{
               overlay: {
@@ -116,11 +123,11 @@ export default function CompanyValidation() {
               },
             }} ariaHideApp={false} isOpen={rejectedModalIsOpen}>
               <div className={style.CompaniesValidationRejectedModal}>
-                <h1 className={style.CompaniesValidationRejectedModalTitle}>WhyNEEDTRAD</h1>
+                <h1 className={style.CompaniesValidationRejectedModalTitle}>{t('modal.rejectedReason')}</h1>
                 <textarea rows={6} className={style.CompaniesValidationRejectedModalTextarea} onChange={(e) => setRejectedReason(e.target.value)} />
                 <div className={style.CompaniesValidationRejectedModalButtons}>
-                  <Button variant="black" onClick={() => setRejectedModalIsOpen(false)}>CancelNEEDTRAD</Button>
-                  <Button variant="danger" onClick={() => rejectCompany(company.id, rejectedReason)}>RejectNEEDTRAD</Button>
+                  <Button variant="black" onClick={() => setRejectedModalIsOpen(false)}>{t('modal.actions.cancel')}</Button>
+                  <Button variant="danger" onClick={() => rejectCompany(company.id, rejectedReason)}>{t('modal.actions.reject')}</Button>
                 </div>
               </div>
             </Modal>

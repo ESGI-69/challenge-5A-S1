@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import PTable from '@/components/lib/PTable';
 import { CompanyContext } from '@/contexts/api/CompanyContext';
+import { dateTime } from '@/utils/formater/date';
 import { useContext, useEffect } from 'react';
 
 export default function CompanyValidation() {
@@ -29,9 +30,14 @@ export default function CompanyValidation() {
         name: t('table.titles.email'),
         width: '300px',
       },
-      rejected_reason: {
+      rejectedReason: {
         name: t('table.titles.rejectedReason'),
         width: '500px',
+      },
+      updatedAt: {
+        name: t('table.titles.requestedAt'),
+        width: '150px',
+        formatingMethod: dateTime,
       },
     },
   };

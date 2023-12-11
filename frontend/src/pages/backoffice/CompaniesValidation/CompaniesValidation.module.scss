@@ -6,6 +6,15 @@
     justify-items   : center;
     gap: var(--size-3);
 
+    &Close {
+      position: absolute;
+      top: var(--size-3);
+      right: var(--size-3);
+      height: var(--size-5);
+      width: var(--size-5);
+      cursor: pointer;
+    }
+
     &Title {
       margin: 0;
       font-weight: var(--font-weight-5);

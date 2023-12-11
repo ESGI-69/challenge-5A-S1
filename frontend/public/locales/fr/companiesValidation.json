@@ -11,5 +11,13 @@
     "actions": {
       "view": "Voir"
     }
+  },
+  "modal": {
+    "rejectedReason": "Rejected Reason",
+    "actions": {
+      "cancel": "Cancel",
+      "reject": "Rejeter",
+      "approve": "Approuver"
+    }
   }
 }

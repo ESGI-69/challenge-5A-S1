@@ -150,7 +150,8 @@ export default function PTable({
                       },
                       item[propKey],
                     )}
-                    {!template?.properties[propKey].component && <span>{item[propKey]}</span>}
+                    {template?.properties[propKey].formatingMethod && template?.properties[propKey].formatingMethod(item[propKey])}
+                    {!template?.properties[propKey].component && !template?.properties[propKey].formatingMethod && <span>{item[propKey]}</span>}
                   </div>
                 ))}
                 <div className={styles.TableBodyRowActions}>
