@@ -210,7 +210,6 @@ export default function CompanyProvider({ children }) {
       adminGet,
       companies: state.companies,
       isCompaniesLoading: state.isCompaniesLoading,
-      isCompanyLoading: state.isCompanyLoading,
     }}>
       {children}
     </CompanyContext.Provider>
