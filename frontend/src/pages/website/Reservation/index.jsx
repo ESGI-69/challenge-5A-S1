@@ -33,6 +33,250 @@ export default function Reservation () {
 
   const [ person, setPerson ] = useState(persons[0]);
 
+  const schedule = [
+    {
+      week: 1,
+      days: [
+        {
+          date: '2021-12-14',
+          times: [
+            {
+              time: '10:00',
+              available: true,
+            },
+            {
+              time: '10:30',
+              available: false,
+            },
+            {
+              time: '11:00',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+          ],
+        },
+        {
+          date: '2021-12-15',
+          times: [
+            {
+              time: '10:00',
+              available: true,
+            },
+            {
+              time: '10:30',
+              available: false,
+            },
+            {
+              time: '11:00',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+          ],
+        },
+        {
+          date: '2021-12-16',
+          times: [
+            {
+              time: '10:00',
+              available: true,
+            },
+            {
+              time: '10:30',
+              available: false,
+            },
+            {
+              time: '11:00',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+          ],
+        },
+        {
+          date: '2021-12-17',
+          times: [
+            {
+              time: '10:00',
+              available: true,
+            },
+            {
+              time: '10:30',
+              available: false,
+            },
+            {
+              time: '11:00',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+          ],
+        },
+        {
+          date: '2021-12-18',
+          times: [
+            {
+              time: '10:00',
+              available: true,
+            },
+            {
+              time: '10:30',
+              available: false,
+            },
+            {
+              time: '11:00',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+          ],
+        },
+        {
+          date: '2021-12-19',
+          times: [
+            {
+              time: '10:00',
+              available: true,
+            },
+            {
+              time: '10:30',
+              available: false,
+            },
+            {
+              time: '11:00',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      week: 2,
+      days: [
+        {
+          date: '2021-12-20',
+          times: [
+            {
+              time: '10:00',
+              available: true,
+            },
+            {
+              time: '10:30',
+              available: false,
+            },
+            {
+              time: '11:00',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+          ],
+        },
+        {
+          date: '2021-12-21',
+          times: [
+            {
+              time: '10:00',
+              available: true,
+            },
+            {
+              time: '10:30',
+              available: false,
+            },
+            {
+              time: '11:00',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+          ],
+        },
+        {
+          date: '2021-12-22',
+          times: [
+            {
+              time: '10:00',
+              available: true,
+            },
+            {
+              time: '10:30',
+              available: false,
+            },
+            {
+              time: '11:00',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+          ],
+        },
+        {
+          date: '2021-12-23',
+          times: [
+            {
+              time: '10:00',
+              available: false,
+            },
+            {
+              time: '10:30',
+              available: false,
+            },
+            {
+              time: '11:00',
+              available: false,
+            },
+            {
+              time: '11:30',
+              available: false,
+            },
+          ],
+        },
+        {
+          date: '2021-12-24',
+          times: [
+            {
+              time: '10:00',
+              available: false,
+            },
+            {
+              time: '10:30',
+              available: false,
+            },
+            {
+              time: '11:00',
+              available: false,
+            },
+            {
+              time: '11:30',
+              available: false,
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
   return (
     <div className={styles.Page}>
       <h2>Reservation</h2>
@@ -75,8 +319,7 @@ export default function Reservation () {
 
       <h2 className={styles.PageTitle}>2. Choix de la date et heure</h2>
       <div className={styles.AppointementsPicked}>
-        <div>Container de rendez-vous</div>
-        <Schedule/>
+        <Schedule schedule={schedule} />
       </div>
 
     </div>
