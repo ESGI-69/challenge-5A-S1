@@ -350,8 +350,19 @@ export default function Reservation () {
       </div>
 
       <h2 className={styles.PageTitle}>2. Choix de la date et heure</h2>
-      <div className={styles.AppointementsPicked}>
+      <div>
         <Schedule schedule={schedule} />
+        <div className={styles.AppointementPicked}>
+          <div className={styles.AppointementPickedInfo}>
+            <div className={styles.AppointementPickedSpec}>
+              <span>Mercredi 20 decembre</span>
+              <span className={styles.AppointementPickedSpecTime}>à 10:00</span>
+            </div>
+          </div>
+          <div className={styles.AppointementPickedAction}>
+            <a href="#" className={styles.AppointementPickedActionDelete}>Modifier</a>
+          </div>
+        </div>
       </div>
 
       <h2 className={styles.PageTitle}>3. Indentification</h2>

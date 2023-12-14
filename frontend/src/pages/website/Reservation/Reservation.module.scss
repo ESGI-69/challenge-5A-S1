@@ -24,6 +24,47 @@
 
 }
 
+
+.AppointementPicked {
+    width: 100%;
+    padding:32px;
+    box-shadow: var(--shadow-3);
+    background-color: var(--white);
+    margin-bottom: 12px;
+    border-radius: var(--radius-3);
+    border: 1px solid var(--grey-200);
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    align-items: center;
+    justify-items: flex-start;
+
+    &Spec {
+        &Time {
+            color: var(--gray-6);
+        }
+
+        &Time::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background-color: var(--gray-6);
+            border-radius: 100%;
+            margin-left: 8px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+    }
+
+    &Action {
+        &Delete {
+            color:var(--indigo-7);
+            text-decoration: underline;
+        }
+    }
+
+}
+
 .ServiceSpec {
     &Name {
         color: var(--gray-6);
