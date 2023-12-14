@@ -24,6 +24,10 @@
         &Right {
             cursor: pointer;
         }
+
+        &Disabled {
+            opacity: 0.4;
+        }
     }
 }
 
@@ -75,10 +79,6 @@
     }
 
 
-}
-
-.Scroll {
-    //
 }
 
 .FlexContainer {
