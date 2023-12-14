@@ -14,21 +14,11 @@ const Schedule = React.forwardRef(function Schedule(
 
   const [ currentWeek, setCurrentWeek ] = useState(0);
 
-  const fakeDivs = [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-  ];
-
   const handleArrowClick = (direction) => {
     if (direction === 'prev') {
       setCurrentWeek((prevWeek) => Math.max(prevWeek - 1, 0));
     } else if (direction === 'next') {
-      setCurrentWeek((prevWeek) => Math.min(prevWeek + 1, fakeDivs.length - 1));
+      setCurrentWeek((prevWeek) => Math.min(prevWeek + 1, schedule.length - 1));
     }
   };
 
@@ -41,43 +31,34 @@ const Schedule = React.forwardRef(function Schedule(
         </div>
         <div className={styles.ScrollContainer}>
           <div className={styles.FlexContainer} style={{ transform: `translateX(${currentWeek * -100}%)` }}>
-            <div className={styles.ColumnsContainer}>
 
-              {fakeDivs.map((div, index) => (
-                <div className={styles.Column} key={index}>
-                  <div className={styles.ColumnHeader}>
-                    <span className={styles.ColumnTitle}>Lundi</span>
-                    <span className={styles.ColumnDate}>14 dec.</span>
-                  </div>
-                  <div className={styles.ColumnBody}>
-                    <button className={styles.ColumnButton}>10:00</button>
-                    <button className={styles.ColumnButton}>10:30</button>
-                    <button className={styles.ColumnButton}>11:00</button>
-                    <button className={styles.ColumnButton}>11:30</button>
-                  </div>
+            {schedule.map((page, index) => (
+              <>
+                <div key={index}>
                 </div>
-              ))}
+                <div className={styles.ColumnsContainer}>
 
-            </div>
+                  {page.days.map((day, index) => (
+                    <div className={styles.Column} key={index}>
+                      <div className={styles.ColumnHeader}>
+                        <span className={styles.ColumnTitle}>{new Date(day.date).toLocaleDateString('fr-FR', { weekday: 'long' })}</span>
+                        <span className={styles.ColumnDate}>        {new Date(day.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}</span>
+                      </div>
+                      <div className={styles.ColumnBody}>
 
-            <div className={styles.ColumnsContainer}>
+                        {day.times.map((appointement, index) => (
+                          <button  key={index} className={styles.ColumnButton}>{appointement.time}</button>
+                        ))}
 
-              {fakeDivs.map((div, index) => (
-                <div className={styles.Column} key={index}>
-                  <div className={styles.ColumnHeader}>
-                    <span className={styles.ColumnTitle}>Lundi</span>
-                    <span className={styles.ColumnDate}>14 dec.</span>
-                  </div>
-                  <div className={styles.ColumnBody}>
-                    <button className={styles.ColumnButton}>10:00</button>
-                    <button className={styles.ColumnButton}>10:30</button>
-                    <button className={styles.ColumnButton}>11:00</button>
-                    <button className={styles.ColumnButton}>11:30</button>
-                  </div>
+                      </div>
+                    </div>
+                  ))}
+
                 </div>
-              ))}
 
-            </div>
+              </>
+
+            ))}
 
           </div>
         </div>

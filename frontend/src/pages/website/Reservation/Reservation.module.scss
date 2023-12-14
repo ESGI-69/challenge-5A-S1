@@ -48,3 +48,16 @@
     color:var(--indigo-7);
     text-decoration: underline;
 }
+
+.Identification {
+    width: 100%;
+    padding:32px;
+    box-shadow: var(--shadow-3);
+    background-color: var(--white);
+    margin-bottom: 12px;
+    border-radius: var(--radius-3);
+    border: 1px solid var(--grey-200);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}

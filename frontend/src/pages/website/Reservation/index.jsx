@@ -56,6 +56,38 @@ export default function Reservation () {
               time: '11:30',
               available: true,
             },
+            {
+              time: '11:30',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
+            {
+              time: '11:30',
+              available: true,
+            },
           ],
         },
         {
@@ -320,6 +352,14 @@ export default function Reservation () {
       <h2 className={styles.PageTitle}>2. Choix de la date et heure</h2>
       <div className={styles.AppointementsPicked}>
         <Schedule schedule={schedule} />
+      </div>
+
+      <h2 className={styles.PageTitle}>3. Indentification</h2>
+      <div className={styles.Identification}>
+        <h2 className={styles.PageTitle}>Nouveau sur platiny ?</h2>
+        <Button variant="black" isPlain="true">Créer mon compte</Button>
+        <h2 className={styles.PageTitle}>Vous avez déja utilisé platiny ?</h2>
+        <Button variant="black">Se connecter</Button>
       </div>
 
     </div>
