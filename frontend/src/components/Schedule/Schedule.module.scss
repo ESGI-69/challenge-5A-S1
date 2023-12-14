@@ -6,10 +6,25 @@
     margin-bottom: 12px;
     border-radius: var(--radius-3);
     border: 1px solid var(--grey-200);
-    // display: grid;
-    // grid-template-columns: 4fr 1fr 1fr;
-    // align-items: center;
-    // justify-items: flex-start;
+
+    &Arrows {
+        display: flex;
+        width: 104%;
+        justify-content: space-between;
+        margin-left: -2%;
+        margin-top: -40px;
+        top: 40px;
+        position: relative;
+
+        &Left {
+            transform: rotate(180deg);
+            cursor: pointer;
+        }
+
+        &Right {
+            cursor: pointer;
+        }
+    }
 }
 
 .ColumnsContainer {
@@ -18,10 +33,11 @@
     margin-left: 0;
     margin-right: 0;
     flex: 1;
-    // max-width: 876px;
     max-width: 100%;
+    min-width: 100%;
     gap: 8px;
-    justify-content: space-between
+    justify-content: space-between;
+    transition: transform 0.5s ease;
 }
 
 .Column {
@@ -59,4 +75,17 @@
     }
 
 
+}
+
+.Scroll {
+    //
+}
+
+.FlexContainer {
+    display: flex;
+    transition: transform 0.5s ease 0s;
+}
+
+.ScrollContainer {
+    overflow: hidden;
 }
