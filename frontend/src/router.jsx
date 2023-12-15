@@ -12,6 +12,7 @@ import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
 import Search from '@/pages/website/Search';
 import Employees from '@/pages/backoffice/Employees';
 import CompanyRegister from '@/pages/website/CompanyRegister';
+import CompaniesValidation from '@/pages/backoffice/CompaniesValidation';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: 'employees',
         element: <Employees />,
+      },
+      {
+        path: '/backoffice/companies-validation',
+        element: <CompaniesValidation />,
       },
       {
         path: '*',

@@ -18,6 +18,7 @@
     }
 
     &Main {
+        padding: var(--size-3) var(--size-3) var(--size-3) 0;
         grid-area: main;
         overflow: scroll;
     }

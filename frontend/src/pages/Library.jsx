@@ -27,7 +27,6 @@ const clickableEmail = ({ value }) => (
 const DATA_TEMPLATE = {
   properties: {
     id: {
-      name: '#',
       readOnly: true,
       type: 'integer',
       width: '50px',

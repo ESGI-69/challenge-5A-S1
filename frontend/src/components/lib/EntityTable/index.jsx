@@ -54,7 +54,6 @@ function getEntityDoc(entity) {
     name: 'users',
     properties: {
       id: {
-        name: '#',
         readOnly: true,
         type: 'integer',
         width: '50px',

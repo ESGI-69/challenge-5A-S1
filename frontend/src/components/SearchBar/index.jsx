@@ -21,7 +21,7 @@ function SearchBar({
 
   useEffect(() => {
     if (debouncedName !== '') {
-      getCompanies({ queries: { name: debouncedName } });
+      getCompanies({ name: debouncedName });
     }
   }, [ debouncedName ]);
 

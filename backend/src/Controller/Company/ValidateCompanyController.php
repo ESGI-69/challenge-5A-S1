@@ -29,6 +29,8 @@ class ValidateCompanyController
         }
 
         $company->setValidatedAt(new \DateTimeImmutable());
+        $company->setUpdatedAt(new \DateTimeImmutable());
+
         return $company;
     }
 }

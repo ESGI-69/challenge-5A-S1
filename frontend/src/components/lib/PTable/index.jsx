@@ -11,6 +11,8 @@ export default function PTable({
   data,
   selectable = false,
   pagination = false,
+  isActionHidden = false,
+  actions = [],
   onSelect,
   onModify,
   onDelete,
@@ -109,7 +111,11 @@ export default function PTable({
                   maxWidth: template?.properties[propKey].width,
                 }}
               >
-                <span>{template?.properties[propKey].name ?? propKey}</span>
+                {propKey === 'id' ? (
+                  <span>#</span>
+                ) : (
+                  <span>{template?.properties[propKey].name ?? propKey}</span>
+                )}
               </div>
             ))}
             <div className={styles.TableBodyRowActions}></div>
@@ -144,24 +150,34 @@ export default function PTable({
                       },
                       item[propKey],
                     )}
-                    {!template?.properties[propKey].component && <span>{item[propKey]}</span>}
+                    {template?.properties[propKey].formatingMethod && template?.properties[propKey].formatingMethod(item[propKey])}
+                    {!template?.properties[propKey].component && !template?.properties[propKey].formatingMethod && <span>{item[propKey]}</span>}
                   </div>
                 ))}
                 <div className={styles.TableBodyRowActions}>
-                  <Dropdown direction='br'>
-                    <DropdownButton>
-                      <div className={styles.TableBodyRowActionsButton}>
-                        <Dots />
-                      </div>
-                    </DropdownButton>
-                    <DropdownList style={{
-                      top: 0,
-                      right: 'calc(100% + 8px)',
-                    }}>
-                      <DropdownItem onClick={() => onModify(item.id)}>Modifier</DropdownItem>
-                      <DropdownItem onClick={() => onDelete(item.id)}>Supprimer</DropdownItem>
-                    </DropdownList>
-                  </Dropdown>
+                  {!isActionHidden && (
+                    <Dropdown direction='br'>
+                      <DropdownButton>
+                        <div className={styles.TableBodyRowActionsButton}>
+                          <Dots />
+                        </div>
+                      </DropdownButton>
+                      <DropdownList style={{
+                        top: 0,
+                        right: 'calc(100% + 8px)',
+                      }}>
+                        {actions.length > 0 ?
+                          actions.map((action) => (
+                            <DropdownItem key={action.name} onClick={() => action.onClick(item)}>{action.name}</DropdownItem>
+                          )) : (
+                            <>
+                              <DropdownItem onClick={() => onModify(item.id)}>Modifier</DropdownItem>
+                              <DropdownItem onClick={() => onDelete(item.id)}>Supprimer</DropdownItem>
+                            </>
+                          )}
+                      </DropdownList>
+                    </Dropdown>
+                  )}
                 </div>
               </div>
             ))}
@@ -203,6 +219,8 @@ PTable.propTypes = {
   selectable: PropTypes.bool,
   pagination: PropTypes.bool,
   template: PropTypes.object.isRequired,
+  isActionHidden: PropTypes.bool,
+  actions: PropTypes.arrayOf(PropTypes.object),
   onSelect: PropTypes.func,
   onModify: PropTypes.func,
   onDelete: PropTypes.func,

@@ -25,6 +25,20 @@ export default function Header() {
               <Button variant="danger" onClick={() => logout()}>
                 <Logout/>
               </Button>
+              {profile.roles?.includes('ROLE_ADMIN') && (
+                <Link to="/backoffice">
+                  <Button variant="black">
+                    Admin Pannel
+                  </Button>
+                </Link>
+              )}
+              {profile.roles?.includes('ROLE_PRESTA') && (
+                <Link to="/backoffice">
+                  <Button variant="black">
+                    Backoffice
+                  </Button>
+                </Link>
+              )}
             </>
           )}
           {!profile && (

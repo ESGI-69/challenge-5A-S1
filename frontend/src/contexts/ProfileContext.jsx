@@ -38,8 +38,7 @@ export default function ProfileProvider({ children }) {
       ...initialState,
       isLoggingIn: true,
     };
-  },
-  );
+  });
 
   useEffect(() => {
     verifyToken(Cookies.get('token'));

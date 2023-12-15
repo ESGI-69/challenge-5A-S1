@@ -1,0 +1,23 @@
+{
+  "title": "Validation d'Entreprises",
+  "watingForReview": "En attente de révision",
+  "rejected": "Rejeté",
+  "table": {
+    "titles": {
+      "name": "Nom",
+      "email": "Email",
+      "rejectedReason": "Raison du rejet"
+    },
+    "actions": {
+      "view": "Voir"
+    }
+  },
+  "modal": {
+    "rejectedReason": "Rejected Reason",
+    "actions": {
+      "cancel": "Cancel",
+      "reject": "Rejeter",
+      "approve": "Approuver"
+    }
+  }
+}

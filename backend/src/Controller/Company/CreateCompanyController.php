@@ -18,6 +18,8 @@ class CreateCompanyController
 
         $user = $this->security->getUser();
         $company->addUser($user);
+        $company->setCreatedAt(new \DateTimeImmutable());
+        $company->setUpdatedAt(new \DateTimeImmutable());
 
         // If the user is an admin, the company is automatically validated
         if ($this->security->isGranted('ROLE_ADMIN')) {
