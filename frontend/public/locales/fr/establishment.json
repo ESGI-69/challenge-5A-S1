@@ -15,5 +15,15 @@
     "globalNotation": "Note globale",
     "reviews": "Avis"
   },
-  "establishementLocation": "Où se situe le salon ?"
+  "establishementLocation": "Où se situe le salon ?",
+  "form": {
+    "email": "Email",
+    "country": "Pays",
+    "city": "Ville",
+    "zipCode": "Code postal",
+    "street": "Rue",
+    "actions": {
+      "create": "Créer"
+    }
+  }
 }

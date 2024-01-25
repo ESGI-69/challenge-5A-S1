@@ -15,5 +15,15 @@
     "globalNotation": "Global notation",
     "reviews": "Reveiws"
   },
-  "establishementLocation": "Where is the hair salon located ?"
+  "establishementLocation": "Where is the hair salon located ?",
+  "form": {
+    "email": "Email",
+    "country": "Country",
+    "city": "City",
+    "zipCode": "Zip code",
+    "street": "Street",
+    "actions": {
+      "create": "Create"
+    }
+  }
 }

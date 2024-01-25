@@ -144,6 +144,8 @@ class Establishment
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: ServiceType::class, orphanRemoval: true)]
     private Collection $serviceTypes;
 
+    #[Assert\NotBlank()]
+    #[Groups(['create-establishment', 'update-establishment'])]
     #[ORM\ManyToOne(inversedBy: 'establishments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?EstablishmentType $type = null;

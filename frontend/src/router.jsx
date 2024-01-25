@@ -1,18 +1,25 @@
 import { createBrowserRouter } from 'react-router-dom';
-import WebsiteLayout from '@/pages/__layouts/websiteLayout';
+
 import BackofficeLayout from '@/pages/__layouts/backofficeLayout';
-import Dashboard from '@/pages/backoffice/Dashboard/';
-import Library from '@/pages/Library';
+import WebsiteLayout from '@/pages/__layouts/websiteLayout';
+
 import ErrorPage from '@/pages/404.jsx';
+import Library from '@/pages/Library';
+
+import CompaniesValidation from '@/pages/backoffice/CompaniesValidation';
+import Dashboard from '@/pages/backoffice/Dashboard/';
+import Employees from '@/pages/backoffice/Employees';
+import EstablishmentCreation from '@/pages/backoffice/EstablishmentCreation';
+
+import CompanyRegister from '@/pages/website/CompanyRegister';
+import Establishment from '@/pages/website/Establishment';
 import Home from '@/pages/website/Home';
 import Login from '@/pages/website/Login';
 import Register from '@/pages/website/Register';
-import Establishment from '@/pages/website/Establishment';
-import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
 import Search from '@/pages/website/Search';
-import Employees from '@/pages/backoffice/Employees';
-import CompanyRegister from '@/pages/website/CompanyRegister';
-import CompaniesValidation from '@/pages/backoffice/CompaniesValidation';
+
+import CompanyProvider from '@/contexts/api/CompanyContext';
+import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
 
 const router = createBrowserRouter([
   {
@@ -56,7 +63,12 @@ const router = createBrowserRouter([
   },
   {
     path: '/backoffice',
-    element: <BackofficeLayout />,
+    element:
+      <CompanyProvider>
+        <EstablishmentProvider>
+          <BackofficeLayout />
+        </EstablishmentProvider>
+      </CompanyProvider>,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -66,6 +78,14 @@ const router = createBrowserRouter([
       {
         path: 'employees',
         element: <Employees />,
+      },
+      {
+        path: 'establishments',
+        element: <Employees />,
+      },
+      {
+        path: 'establishments/create',
+        element: <EstablishmentCreation />,
       },
       {
         path: '/backoffice/companies-validation',
