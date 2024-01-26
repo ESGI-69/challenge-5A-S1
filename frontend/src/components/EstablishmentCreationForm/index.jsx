@@ -5,11 +5,13 @@ import Button from '@/components/lib/Button';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { EstablishmentTypeContext } from '@/contexts/api/EstablishmentTypeContext';
+import { ProfileContext } from '@/contexts/ProfileContext';
 
 export default function RegisterForm() {
   const { t } = useTranslation('establishment');
   const navigate = useNavigate();
   const { post, isPostEstablishmentLoading } = useContext(EstablishmentContext);
+  const { profile } = useContext(ProfileContext);
   const { establishmentTypes, isEstablishmentTypesLoading, get } = useContext(EstablishmentTypeContext);
 
   useEffect(() => {
@@ -24,7 +26,31 @@ export default function RegisterForm() {
 
   const [ establishmentTypeInput, setEstablishmentTypeInput ] = useState({
     id: crypto.randomUUID(),
-    name: 'establishment_type',
+    name: 'type',
+    value: '',
+  });
+
+  const [ streetInput, setStreetInput ] = useState({
+    id: crypto.randomUUID(),
+    name: 'street',
+    value: '',
+  });
+
+  const [ cityInput, setCityInput ] = useState({
+    id: crypto.randomUUID(),
+    name: 'city',
+    value: '',
+  });
+
+  const [ zipCodeInput, setZipCodeInput ] = useState({
+    id: crypto.randomUUID(),
+    name: 'zipCode',
+    value: '',
+  });
+
+  const [ countryInput, setCountryInput ] = useState({
+    id: crypto.randomUUID(),
+    name: 'country',
     value: '',
   });
 
@@ -42,11 +68,45 @@ export default function RegisterForm() {
     }));
   };
 
+  const handleStreetInputChange = (e) => {
+    setStreetInput((old) => ({
+      ...old,
+      value: e.target.value,
+    }));
+  };
+
+  const handleCityInputChange = (e) => {
+    setCityInput((old) => ({
+      ...old,
+      value: e.target.value,
+    }));
+  };
+
+  const handleZipCodeInputChange = (e) => {
+    setZipCodeInput((old) => ({
+      ...old,
+      value: e.target.value,
+    }));
+  };
+
+  const handleCountryInputChange = (e) => {
+    setCountryInput((old) => ({
+      ...old,
+      value: e.target.value,
+    }));
+  };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = {
       firstname: formData.get('firstname'),
+      type: formData.get('type'),
+      street: formData.get('street'),
+      city: formData.get('city'),
+      zipCode: formData.get('zipCode'),
+      country: formData.get('country'),
+      company: `/api/companies/${profile.company.id}`,
     };
     console.log(data);
     // await post(data);
@@ -64,6 +124,55 @@ export default function RegisterForm() {
           disabled={isPostEstablishmentLoading}
           value={emailInput.value}
           onInput={handleFirstnameInputChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor={streetInput.id}>{t('form.street')} *</label>
+        <Input
+          id={streetInput.id}
+          name={streetInput.name}
+          placeholder={t('form.street')}
+          disabled={isPostEstablishmentLoading}
+          value={streetInput.value}
+          onInput={handleStreetInputChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor={cityInput.id}>{t('form.city')} *</label>
+        <Input
+          id={cityInput.id}
+          name={cityInput.name}
+          placeholder={t('form.city')}
+          disabled={isPostEstablishmentLoading}
+          value={cityInput.value}
+          onInput={handleCityInputChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor={zipCodeInput.id}>{t('form.zipCode')} *</label>
+        <Input
+          id={zipCodeInput.id}
+          name={zipCodeInput.name}
+          placeholder={t('form.zipCode')}
+          disabled={isPostEstablishmentLoading}
+          value={zipCodeInput.value}
+          onInput={handleZipCodeInputChange}
+          type="number"
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor={countryInput.id}>{t('form.country')} *</label>
+        <Input
+          id={countryInput.id}
+          name={countryInput.name}
+          placeholder={t('form.country')}
+          disabled={isPostEstablishmentLoading}
+          value={countryInput.value}
+          onInput={handleCountryInputChange}
           required
         />
       </div>
