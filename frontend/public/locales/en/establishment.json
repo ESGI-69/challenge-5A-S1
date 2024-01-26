@@ -22,6 +22,8 @@
     "city": "City",
     "zipCode": "Zip code",
     "street": "Street",
+    "establishmentType": "Establishment type",
+    "establishmentTypeLoading": "Loading establishment types...",
     "actions": {
       "create": "Create"
     }

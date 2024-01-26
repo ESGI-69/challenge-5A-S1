@@ -22,6 +22,8 @@
     "city": "Ville",
     "zipCode": "Code postal",
     "street": "Rue",
+    "establishmentType": "Type d'établissement",
+    "establishmentTypeLoading": "Chargement des types d'établissement...",
     "actions": {
       "create": "Créer"
     }
