@@ -20,7 +20,7 @@ export default function RegisterForm() {
 
   const [ emailInput, setEmailInput ] = useState({
     id: crypto.randomUUID(),
-    name: 'firstname',
+    name: 'email',
     value: '',
   });
 
@@ -54,7 +54,7 @@ export default function RegisterForm() {
     value: '',
   });
 
-  const handleFirstnameInputChange = (e) => {
+  const handleEmailInputChange = (e) => {
     setEmailInput((old) => ({
       ...old,
       value: e.target.value,
@@ -100,7 +100,7 @@ export default function RegisterForm() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = {
-      firstname: formData.get('firstname'),
+      email: formData.get('email'),
       type: formData.get('type'),
       street: formData.get('street'),
       city: formData.get('city'),
@@ -108,8 +108,7 @@ export default function RegisterForm() {
       country: formData.get('country'),
       company: `/api/companies/${profile.company.id}`,
     };
-    console.log(data);
-    // await post(data);
+    await post(data);
     // navigate('/backoffice/establishments');
   };
 
@@ -123,7 +122,7 @@ export default function RegisterForm() {
           placeholder={t('form.email')}
           disabled={isPostEstablishmentLoading}
           value={emailInput.value}
-          onInput={handleFirstnameInputChange}
+          onInput={handleEmailInputChange}
           required
         />
       </div>
