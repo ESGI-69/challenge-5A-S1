@@ -15,6 +15,12 @@
     "globalNotation": "Global notation",
     "reviews": "Reveiws"
   },
+  "list": {
+    "title": "My establishments",
+    "actions": {
+      "create": "Create an establishment"
+    }
+  },
   "establishementLocation": "Where is the hair salon located ?",
   "form": {
     "email": "Email",

@@ -9,7 +9,8 @@ import Library from '@/pages/Library';
 import CompaniesValidation from '@/pages/backoffice/CompaniesValidation';
 import Dashboard from '@/pages/backoffice/Dashboard/';
 import Employees from '@/pages/backoffice/Employees';
-import EstablishmentCreation from '@/pages/backoffice/EstablishmentCreation';
+import EstablishmentCreation from '@/pages/backoffice/Establishments/EstablishmentCreation';
+import BackofficeEstablishments from '@/pages/backoffice/Establishments';
 
 import CompanyRegister from '@/pages/website/CompanyRegister';
 import Establishment from '@/pages/website/Establishment';
@@ -81,11 +82,16 @@ const router = createBrowserRouter([
       },
       {
         path: 'establishments',
-        element: <Employees />,
-      },
-      {
-        path: 'establishments/create',
-        element: <EstablishmentCreation />,
+        children: [
+          {
+            index: true,
+            element: <BackofficeEstablishments />,
+          },
+          {
+            path: 'create',
+            element: <EstablishmentCreation />,
+          },
+        ],
       },
       {
         path: '/backoffice/companies-validation',

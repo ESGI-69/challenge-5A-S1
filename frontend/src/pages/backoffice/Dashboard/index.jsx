@@ -50,7 +50,7 @@ export default function Dashboard() {
                   <ul>
                     {establishments.map((establishment) => (
                       <li key={establishment.id}>
-                        {establishment.name}
+                        {establishment.city} - {establishment.street}
                       </li>
                     ))}
                   </ul>

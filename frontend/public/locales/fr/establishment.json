@@ -15,6 +15,12 @@
     "globalNotation": "Note globale",
     "reviews": "Avis"
   },
+  "list": {
+    "title": "Mes Établissements",
+    "actions": {
+      "create": "Créer un établissement"
+    }
+  },
   "establishementLocation": "Où se situe le salon ?",
   "form": {
     "email": "Email",
