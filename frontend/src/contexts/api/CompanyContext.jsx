@@ -134,6 +134,27 @@ export default function CompanyProvider({ children }) {
     }
   };
 
+  const prestaGetById = async (id) => {
+    dispatch({
+      type: 'isCompanyLoading',
+      payload: true,
+    });
+    try {
+      const { data } = await apiCall.get(`/companies/${id}`);
+      dispatch({
+        type: 'company',
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isCompanyLoading',
+        payload: false,
+      });
+    }
+  };
+
   const get = async (queries) => {
     dispatch({
       type: 'isCompaniesLoading',
@@ -156,13 +177,13 @@ export default function CompanyProvider({ children }) {
     }
   };
 
-  const getCompanyEstablishments = async ({ establishmentId }) => {
+  const getCompanyEstablishments = async (companyId) => {
     dispatch({
       type: 'isCompanyEstablishmentsLoading',
       payload: true,
     });
     try {
-      const { data } = await apiCall.get(`/companies/${establishmentId}/establishments`);
+      const { data } = await apiCall.get(`/companies/${companyId}/establishments`);
       dispatch({
         type: 'companyEstablishments',
         payload: data,
@@ -208,6 +229,7 @@ export default function CompanyProvider({ children }) {
       adminValidate,
       adminReject,
 
+      prestaGetById,
       adminGetById,
       company: state.company,
       isCompanyLoading: state.isCompanyLoading,

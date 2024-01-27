@@ -6,6 +6,8 @@ import styles from './Sidemenu.module.scss';
 import { Expand } from '@/components/lib/Icons';
 import { BellIcon, BuildingStorefrontIcon, ChartPieIcon, Cog6ToothIcon, DocumentCheckIcon, UsersIcon } from '@heroicons/react/20/solid';
 import ProfileButton from '@/components/ProfileButton';
+import { useContext } from 'react';
+import { ProfileContext } from '@/contexts/ProfileContext';
 
 function SidemenuLink({ children, to, svgJsx }) {
   return (
@@ -24,6 +26,7 @@ SidemenuLink.propTypes = {
 };
 
 export default function Sidemenu({ ...delegated }) {
+  const { profile } = useContext(ProfileContext);
   const { t } = useTranslation('backofficeSidebar');
   const [ isExpanded, setIsExpanded ] = useState(false);
   return (
@@ -32,22 +35,33 @@ export default function Sidemenu({ ...delegated }) {
         <button className={styles.Expand} onClick={() => setIsExpanded(!isExpanded)}>
           <Expand />
         </button>
-        <nav className={styles.Nav}>
-          <ul className={styles.NavMenu}>
-            <SidemenuLink to="/backoffice/" svgJsx={<ChartPieIcon />}>
-              {t('menu.stats')}
-            </SidemenuLink>
-            <SidemenuLink to="/backoffice/companies-validation" svgJsx={<DocumentCheckIcon />}>
-              {t('menu.companiesValidation')}
-            </SidemenuLink>
-            <SidemenuLink to="/backoffice/employees" svgJsx={<UsersIcon />}>
-              {t('menu.employees')}
-            </SidemenuLink>
-            <SidemenuLink to="/backoffice/establishments" svgJsx={<BuildingStorefrontIcon />}>
-              {t('menu.establishments')}
-            </SidemenuLink>
-          </ul>
-        </nav>
+        { profile && (
+          <nav className={styles.Nav}>
+            { profile.roles.includes('ROLE_ADMIN') && (
+              <ul className={styles.NavMenu}>
+                <SidemenuLink to="/backoffice/" svgJsx={<ChartPieIcon />}>
+                  {t('menu.stats')}
+                </SidemenuLink>
+                <SidemenuLink to="/backoffice/companies-validation" svgJsx={<DocumentCheckIcon />}>
+                  {t('menu.companiesValidation')}
+                </SidemenuLink>
+              </ul>
+            )}
+            { profile.roles.includes('ROLE_PRESTA') && (
+              <ul className={styles.NavMenu}>
+                <SidemenuLink to="/backoffice/" svgJsx={<ChartPieIcon />}>
+                  {t('menu.stats')}
+                </SidemenuLink>
+                <SidemenuLink to="/backoffice/employees" svgJsx={<UsersIcon />}>
+                  {t('menu.employees')}
+                </SidemenuLink>
+                <SidemenuLink to="/backoffice/establishments" svgJsx={<BuildingStorefrontIcon />}>
+                  {t('menu.establishments')}
+                </SidemenuLink>
+              </ul>
+            )}
+          </nav>
+        )}
         <div className={styles.Usermenu}>
           <div className={styles.UsermenuList}>
             <BellIcon />

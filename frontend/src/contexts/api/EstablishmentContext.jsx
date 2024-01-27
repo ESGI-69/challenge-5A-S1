@@ -9,6 +9,8 @@ const initialState = {
 
   establishment: null,
   isEstablishmentLoading: false,
+
+  isPostEstablishmentLoading: false,
 };
 
 export const EstablishmentContext = createContext(initialState);
@@ -34,6 +36,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         isEstablishmentLoading: action.payload,
+      };
+    case 'isPostEstablishmentLoading':
+      return {
+        ...state,
+        isPostEstablishmentLoading: action.payload,
       };
     default:
       return state;
@@ -86,6 +93,23 @@ export default function EstablishmentProvider({ children }) {
     }
   };
 
+  const post = async (data) => {
+    dispatch({
+      type: 'isPostEstablishmentLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.post('/establishments', data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isPostEstablishmentLoading',
+        payload: false,
+      });
+    }
+  };
+
   return (
     <EstablishmentContext.Provider value={{
       get,
@@ -95,6 +119,8 @@ export default function EstablishmentProvider({ children }) {
       getById,
       establishment: state.establishment,
       isEstablishmentLoading: state.isEstablishmentLoading,
+
+      post,
     }}>
       {children}
     </EstablishmentContext.Provider>

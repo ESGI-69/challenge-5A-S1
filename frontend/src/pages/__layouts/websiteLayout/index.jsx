@@ -12,6 +12,7 @@ export default function WebsiteLayout() {
     '/login',
     '/register',
     '/search',
+    '/company-register',
   ];
 
   const isFullPage = fullPagePaths.includes(pathname) ? styles.WebsiteLayoutFullPage : '';

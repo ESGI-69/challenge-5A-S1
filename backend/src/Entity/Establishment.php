@@ -19,7 +19,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
-
+use App\Denormalizer\EstablishmentCreationDenormalizer; // Import the custom denormalizer class
 
 #[ORM\Entity(repositoryClass: EstablishmentRepository::class)]
 #[ApiResource(
@@ -35,7 +35,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
             normalizationContext: ['groups' => ['read-establishment', 'read-company']]
         ),
         new Post(
-            denormalizationContext: ['groups' => ['create-establishment']],
+            denormalizationContext: [
+                'groups' => ['create-establishment'],
+                'denormalizer' => EstablishmentCreationDenormalizer::class, // Add the custom denormalizer class
+            ],
             securityPostDenormalize: 'is_granted("ROLE_PRESTA") and object.getCompany() == user.getCompany()',
             securityMessage: 'You can only create an establishment for your company',
             securityPostDenormalizeMessage: 'You can only create an establishment for your company',
@@ -78,7 +81,7 @@ class Establishment
     private ?int $id = null;
 
     #[Assert\Email()]
-    #[Groups(['create-establishment', 'update-establishment', 'appointment-read'])]
+    #[Groups(['create-establishment', 'update-establishment', 'appointment-read', 'read-establishment'])]
     #[ORM\Column(length: 55)]
     private ?string $email = null;
 
@@ -109,13 +112,13 @@ class Establishment
     #[Assert\NotBlank()]
     #[Assert\Range(min: -90, max: 90)]
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 6)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read'])]
+    #[Groups(['read-establishment', 'update-establishment', 'appointment-read'])]
     private ?string $lat = null;
 
     #[Assert\NotBlank()]
     #[Assert\Range(min: -180, max: 180)]
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 6)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read'])]
+    #[Groups(['read-establishment', 'update-establishment', 'appointment-read'])]
     private ?string $long = null;
 
     #[ApiFilter(SearchFilter::class, properties: [
@@ -144,6 +147,8 @@ class Establishment
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: ServiceType::class, orphanRemoval: true)]
     private Collection $serviceTypes;
 
+    #[Assert\NotBlank()]
+    #[Groups(['create-establishment', 'update-establishment', 'read-establishment'])]
     #[ORM\ManyToOne(inversedBy: 'establishments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?EstablishmentType $type = null;

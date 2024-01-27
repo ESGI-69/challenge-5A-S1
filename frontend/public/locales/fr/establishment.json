@@ -15,5 +15,36 @@
     "globalNotation": "Note globale",
     "reviews": "Avis"
   },
-  "establishementLocation": "Où se situe le salon ?"
+  "list": {
+    "title": "Mes Établissements",
+    "actions": {
+      "create": "Créer un établissement"
+    }
+  },
+  "create": {
+    "title": "Création d'un établissement"
+  },
+  "establishementLocation": "Où se situe le salon ?",
+  "form": {
+    "email": "Email",
+    "country": "Pays",
+    "city": "Ville",
+    "zipCode": "Code postal",
+    "street": "Rue",
+    "establishmentType": "Type d'établissement",
+    "establishmentTypeLoading": "Chargement des types d'établissement...",
+    "actions": {
+      "create": "Créer"
+    }
+  },
+  "table": {
+    "titles": {
+      "email": "Email",
+      "street": "Rue",
+      "city": "Ville",
+      "zipCode": "Code postal",
+      "country": "Pays",
+      "type": "Type"
+    }
+  }
 }

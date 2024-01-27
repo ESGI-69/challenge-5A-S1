@@ -5,6 +5,7 @@ import Checkbox from '@/components/lib/Checkbox';
 import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/components/lib/Dropdown';
 import { Chevron, Dots } from '@/components/lib/Icons';
 import Button from '../Button';
+import { useTranslation } from 'react-i18next';
 
 export default function PTable({
   template,
@@ -18,7 +19,9 @@ export default function PTable({
   onDelete,
   onPageNext,
   onPagePrevious,
-  loading }) {
+  loading,
+}) {
+  const { t } = useTranslation('base');
   const [ selected, setSelected ] = useState(new Set());
   const selectAllState = useMemo(() => {
     if (selected.size === 0) {
@@ -121,7 +124,7 @@ export default function PTable({
             <div className={styles.TableBodyRowActions}></div>
           </div>
           <div className={styles.TableBody}>
-            {!data?.length && <div className={styles.TableBodyNoresult}>Pas de résultats</div>}
+            {!data?.length && <div className={styles.TableBodyNoresult}>{ t('table.noResults') }</div>}
             {data?.length > 0 && data.map((item) => (
               <div
                 className={`${styles.TableBodyRow} ${selected.has(item.id) ? styles.TableBodyRow_Selected : ''}`}
@@ -187,7 +190,7 @@ export default function PTable({
       <div className={styles.TableFooter}>
         <span className={styles.TableFooterResult}>
           <span className={styles.TableFooterResultNumber}>{data?.length || 0}</span>
-          <span>résultats</span>
+          <span>{ t('table.result', { count: data?.length || 0 }) }</span>
         </span>
         {pagination && (
           <div className={styles.TableFooterPagination}>
@@ -196,13 +199,13 @@ export default function PTable({
                 transform: 'rotate(90deg)',
                 height: '10px',
               }} />
-              <span>Précédent</span>
+              <span>{ t('table.previous') }</span>
             </Button>
             <Button variant="secondary" size="small">1</Button>
             <Button variant="black" size="small">2</Button>
             <Button variant="secondary" size="small">3</Button>
             <Button variant="secondary" size="small" onClick={() => onPageNext()}>
-              <span>Suivant</span>
+              <span>{ t('table.next') }</span>
               <Chevron style={{
                 transform: 'rotate(-90deg)',
                 height: '10px',
