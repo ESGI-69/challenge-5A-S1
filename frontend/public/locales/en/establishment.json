@@ -33,5 +33,15 @@
     "actions": {
       "create": "Create"
     }
+  },
+  "table": {
+    "titles": {
+      "email": "Email",
+      "street": "Street",
+      "city": "City",
+      "zipCode": "Zip code",
+      "country": "Country",
+      "type": "Type"
+    }
   }
 }

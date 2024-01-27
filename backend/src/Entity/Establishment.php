@@ -81,7 +81,7 @@ class Establishment
     private ?int $id = null;
 
     #[Assert\Email()]
-    #[Groups(['create-establishment', 'update-establishment', 'appointment-read'])]
+    #[Groups(['create-establishment', 'update-establishment', 'appointment-read', 'read-establishment'])]
     #[ORM\Column(length: 55)]
     private ?string $email = null;
 
@@ -148,7 +148,7 @@ class Establishment
     private Collection $serviceTypes;
 
     #[Assert\NotBlank()]
-    #[Groups(['create-establishment', 'update-establishment'])]
+    #[Groups(['create-establishment', 'update-establishment', 'read-establishment'])]
     #[ORM\ManyToOne(inversedBy: 'establishments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?EstablishmentType $type = null;
