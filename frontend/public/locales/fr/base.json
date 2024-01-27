@@ -7,5 +7,12 @@
         "friday": "Vendredi",
         "saturday": "Samedi",
         "sunday": "Dimanche"
+    },
+    "table": {
+        "result_one": "résultat",
+        "result_other": "résultats",
+        "previous": "Précédent",
+        "next": "Suivant",
+        "noResult": "Aucun résultat"
     }
 }

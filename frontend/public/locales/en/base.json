@@ -7,5 +7,12 @@
         "friday": "Friday",
         "saturday": "Saturday",
         "sunday": "Sunday"
+    },
+    "table": {
+        "result_one": "result",
+        "result_other": "results",
+        "previous": "Previous",
+        "next": "Next",
+        "noResults": "No results"
     }
 }
