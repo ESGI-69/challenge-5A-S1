@@ -116,10 +116,14 @@ class Employee
     #[ORM\OneToMany(mappedBy: 'Employee', targetEntity: WorkingHoursRange::class, orphanRemoval: true)]
     private Collection $workingHoursRanges;
 
+    #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Feedback::class)]
+    private Collection $feedback;
+
     public function __construct()
     {
         $this->appointments = new ArrayCollection();
         $this->workingHoursRanges = new ArrayCollection();
+        $this->feedback = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -247,6 +251,36 @@ class Employee
             // set the owning side to null (unless already changed)
             if ($workingHoursRange->getEmployee() === $this) {
                 $workingHoursRange->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Feedback>
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
+
+    public function addFeedback(Feedback $feedback): static
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback->add($feedback);
+            $feedback->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): static
+    {
+        if ($this->feedback->removeElement($feedback)) {
+            // set the owning side to null (unless already changed)
+            if ($feedback->getEmployee() === $this) {
+                $feedback->setEmployee(null);
             }
         }
 

@@ -153,6 +153,9 @@ class Establishment
     #[ORM\JoinColumn(nullable: false)]
     private ?EstablishmentType $type = null;
 
+    #[ORM\ManyToMany(targetEntity: FeedbackType::class, mappedBy: 'Establishments')]
+    private Collection $feedbackTypes;
+
     public function __construct()
     {
         $this->employees = new ArrayCollection();
@@ -160,6 +163,7 @@ class Establishment
         $this->openingHours = new ArrayCollection();
         $this->services = new ArrayCollection();
         $this->serviceTypes = new ArrayCollection();
+        $this->feedbackTypes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -421,6 +425,33 @@ class Establishment
     public function setType(?EstablishmentType $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FeedbackType>
+     */
+    public function getFeedbackTypes(): Collection
+    {
+        return $this->feedbackTypes;
+    }
+
+    public function addFeedbackType(FeedbackType $feedbackType): static
+    {
+        if (!$this->feedbackTypes->contains($feedbackType)) {
+            $this->feedbackTypes->add($feedbackType);
+            $feedbackType->addEstablishment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedbackType(FeedbackType $feedbackType): static
+    {
+        if ($this->feedbackTypes->removeElement($feedbackType)) {
+            $feedbackType->removeEstablishment($this);
+        }
 
         return $this;
     }
