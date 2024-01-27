@@ -3,13 +3,14 @@ import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import Input from '@/components/lib/Input';
 import Button from '@/components/lib/Button';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { EstablishmentTypeContext } from '@/contexts/api/EstablishmentTypeContext';
 import { ProfileContext } from '@/contexts/ProfileContext';
+import styles from './EstablishmentCreationForm.module.scss';
 
 export default function RegisterForm() {
   const { t } = useTranslation('establishment');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { post, isPostEstablishmentLoading } = useContext(EstablishmentContext);
   const { profile } = useContext(ProfileContext);
   const { establishmentTypes, isEstablishmentTypesLoading, get } = useContext(EstablishmentTypeContext);
@@ -113,9 +114,9 @@ export default function RegisterForm() {
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <div>
-        <label htmlFor={emailInput.id}>{t('form.email')} *</label>
+    <form className={styles.EstablishmentCreationForm} onSubmit={handleFormSubmit}>
+      <div className={styles.EstablishmentCreationFormField}>
+        <label htmlFor={emailInput.id} className={styles.EstablishmentCreationFormFieldLabel}>{t('form.email')} *</label>
         <Input
           id={emailInput.id}
           name={emailInput.name}
@@ -126,8 +127,8 @@ export default function RegisterForm() {
           required
         />
       </div>
-      <div>
-        <label htmlFor={streetInput.id}>{t('form.street')} *</label>
+      <div className={styles.EstablishmentCreationFormField}>
+        <label htmlFor={streetInput.id} className={styles.EstablishmentCreationFormFieldLabel}>{t('form.street')} *</label>
         <Input
           id={streetInput.id}
           name={streetInput.name}
@@ -138,8 +139,8 @@ export default function RegisterForm() {
           required
         />
       </div>
-      <div>
-        <label htmlFor={cityInput.id}>{t('form.city')} *</label>
+      <div className={styles.EstablishmentCreationFormField}>
+        <label htmlFor={cityInput.id} className={styles.EstablishmentCreationFormFieldLabel}>{t('form.city')} *</label>
         <Input
           id={cityInput.id}
           name={cityInput.name}
@@ -150,8 +151,8 @@ export default function RegisterForm() {
           required
         />
       </div>
-      <div>
-        <label htmlFor={zipCodeInput.id}>{t('form.zipCode')} *</label>
+      <div className={styles.EstablishmentCreationFormField}>
+        <label htmlFor={zipCodeInput.id} className={styles.EstablishmentCreationFormFieldLabel}>{t('form.zipCode')} *</label>
         <Input
           id={zipCodeInput.id}
           name={zipCodeInput.name}
@@ -163,8 +164,8 @@ export default function RegisterForm() {
           required
         />
       </div>
-      <div>
-        <label htmlFor={countryInput.id}>{t('form.country')} *</label>
+      <div className={styles.EstablishmentCreationFormField}>
+        <label htmlFor={countryInput.id} className={styles.EstablishmentCreationFormFieldLabel}>{t('form.country')} *</label>
         <Input
           id={countryInput.id}
           name={countryInput.name}
@@ -179,8 +180,8 @@ export default function RegisterForm() {
         <span>{t('form.establishmentTypeLoading')}</span>
       )}
       { !isEstablishmentTypesLoading && establishmentTypes.length > 0 && (
-        <div>
-          <label htmlFor={establishmentTypeInput.id}>{t('form.establishmentType')} *</label>
+        <div className={styles.EstablishmentCreationFormField}>
+          <label htmlFor={establishmentTypeInput.id} className={styles.EstablishmentCreationFormFieldLabel}>{t('form.establishmentType')} *</label>
           <select
             id={establishmentTypeInput.id}
             name={establishmentTypeInput.name}

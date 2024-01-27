@@ -21,6 +21,10 @@
       "create": "Create an establishment"
     }
   },
+  "create": {
+    "title": "Establishment creation",
+    "back": "Back to my establishments"
+  },
   "establishementLocation": "Where is the hair salon located ?",
   "form": {
     "email": "Email",

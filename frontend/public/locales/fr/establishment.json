@@ -21,6 +21,9 @@
       "create": "Créer un établissement"
     }
   },
+  "create": {
+    "title": "Création d'un établissement"
+  },
   "establishementLocation": "Où se situe le salon ?",
   "form": {
     "email": "Email",
