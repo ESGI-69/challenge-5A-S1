@@ -17,10 +17,8 @@ export default function BackofficeLayout() {
     if (profile && profile.roles.includes('ROLE_PRESTA')) {
       if (profile.company?.id) {
         if (!company) {
-          console.log('get company');
           prestaGetById(profile.company.id);
         } else if (company.id) {
-          console.log('get company establishments');
           get({ 'company.id': company.id });
         }
       }
