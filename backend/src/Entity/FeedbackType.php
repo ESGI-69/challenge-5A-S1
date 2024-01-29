@@ -7,6 +7,7 @@ use App\Repository\FeedbackTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: FeedbackTypeRepository::class)]
 #[ApiResource]
@@ -18,17 +19,18 @@ class FeedbackType
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['feedback-read'])]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Establishment::class, inversedBy: 'feedbackTypes')]
-    private Collection $Establishments;
+    private Collection $establishments;
 
     #[ORM\OneToMany(mappedBy: 'feedbackType', targetEntity: SubFeedback::class)]
     private Collection $subFeedback;
 
     public function __construct()
     {
-        $this->Establishments = new ArrayCollection();
+        $this->establishments = new ArrayCollection();
         $this->subFeedback = new ArrayCollection();
     }
 
@@ -54,13 +56,13 @@ class FeedbackType
      */
     public function getEstablishments(): Collection
     {
-        return $this->Establishments;
+        return $this->establishments;
     }
 
     public function addEstablishment(Establishment $establishment): static
     {
-        if (!$this->Establishments->contains($establishment)) {
-            $this->Establishments->add($establishment);
+        if (!$this->establishments->contains($establishment)) {
+            $this->establishments->add($establishment);
         }
 
         return $this;
@@ -68,7 +70,7 @@ class FeedbackType
 
     public function removeEstablishment(Establishment $establishment): static
     {
-        $this->Establishments->removeElement($establishment);
+        $this->establishments->removeElement($establishment);
 
         return $this;
     }

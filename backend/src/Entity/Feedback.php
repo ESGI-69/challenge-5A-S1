@@ -2,14 +2,52 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Get;
 use App\Repository\FeedbackRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use App\Entity\Appointment;
+use App\Entity\Service;
+use App\Entity\Employee;
+use App\Entity\User;
+use App\Entity\SubFeedback;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use App\Denormalizer\FeedbackCreationDenormalizer;
 
 #[ORM\Entity(repositoryClass: FeedbackRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new GetCollection(
+            normalizationContext: ['groups' => ['feedback-read',]],
+        ),
+        new Get(
+            normalizationContext: ['groups' => ['feedback-read-admin']],
+            security: 'is_granted("ROLE_ADMIN")',
+        ),
+        new Post(
+            denormalizationContext: [
+                'groups' => ['create-feedback'],
+                'denormalizer' => FeedbackCreationDenormalizer::class,
+            ],
+            securityPostDenormalize: 'is_granted("ROLE_USER") and object.getAppointment().getClient() == user',
+            securityPostDenormalizeMessage: 'You can only create feedbacks for your appointments',
+        )
+    ]
+)]
+
+#[ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'appointment.establishment.id' => 'exact',
+    ]
+)]
+
 class Feedback
 {
     #[ORM\Id]
@@ -18,21 +56,27 @@ class Feedback
     private ?int $id = null;
 
     #[ORM\Column(length: 1000)]
+    #[Groups(['create-feedback', 'feedback-read'])]
     private ?string $comment = null;
 
     #[ORM\OneToOne(inversedBy: 'feedback', cascade: ['persist', 'remove'])]
+    #[Groups(['create-feedback'])]
     private ?Appointment $appointment = null;
 
     #[ORM\ManyToOne(inversedBy: 'feedback')]
+    #[Groups(['create-feedback'])]
     private ?Service $service = null;
 
     #[ORM\ManyToOne(inversedBy: 'feedback')]
+    #[Groups(['create-feedback'])]
     private ?Employee $employee = null;
 
     #[ORM\ManyToOne(inversedBy: 'feedback')]
+    #[Groups(['feedback-read'])]
     private ?User $author = null;
 
-    #[ORM\OneToMany(mappedBy: 'feedback', targetEntity: SubFeedback::class)]
+    #[ORM\OneToMany(mappedBy: 'feedback', targetEntity: SubFeedback::class, cascade: ['persist'])]
+    #[Groups(['create-feedback', 'feedback-read'])]
     private Collection $subFeedback;
 
     public function __construct()

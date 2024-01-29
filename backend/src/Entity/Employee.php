@@ -28,10 +28,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
             controller: GetWorkingHoursRangesOfEmployeeController::class,
         ),
         new Get(
-            security: 'is_granted("ADMIN")',
+            security: 'is_granted("ROLE_ADMIN")',
             normalizationContext: ['groups' => ['employee-get']]),
         new Post(
-            security: 'is_granted("ADMIN")',
+            security: 'is_granted("ROLE_ADMIN")',
             normalizationContext: ['groups' => ['employee-post']],
             denormalizationContext: ['groups' => ['employee-post']],
         ),
@@ -53,7 +53,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             read: false,
         ),
         new Patch(
-            security: 'is_granted("ADMIN")',
+            security: 'is_granted("ROLE_ADMIN")',
             normalizationContext: ['groups' => ['employee-patch']],
             denormalizationContext: ['groups' => ['employee-patch']],
         ),
@@ -66,7 +66,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             securityPostDenormalizeMessage: 'You can only patch employees of your company',
         ),
         new Delete(
-            security: 'is_granted("ADMIN")',
+            security: 'is_granted("ROLE_ADMIN")',
             normalizationContext: ['groups' => ['employee-get']]
         ),
         new Delete(

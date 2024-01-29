@@ -89,9 +89,9 @@ class Service
 
     #[ORM\ManyToOne(inversedBy: 'services')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read-establishment'])]
     private ?Establishment $establishment = null;
 
-    #[Groups(['read-establishment'])]
     #[ORM\ManyToOne(inversedBy: 'services')]
     #[ORM\JoinColumn(nullable: false)]
     private ?ServiceType $type = null;

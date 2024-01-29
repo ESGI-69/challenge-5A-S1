@@ -5,9 +5,21 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\SubFeedbackRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 
 #[ORM\Entity(repositoryClass: SubFeedbackRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new GetCollection(
+            security: 'is_granted("ROLE_ADMIN")'
+        ),
+        new Get(
+            security: 'is_granted("ROLE_ADMIN")'
+        )
+    ]
+)]
 class SubFeedback
 {
     #[ORM\Id]
@@ -16,12 +28,15 @@ class SubFeedback
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'note')]
+    #[Groups(['create-feedback',])]
     private ?Feedback $feedback = null;
 
     #[ORM\Column]
+    #[Groups(['create-feedback', 'feedback-read'])]
     private ?int $note = null;
 
     #[ORM\ManyToOne(inversedBy: 'subFeedback')]
+    #[Groups(['create-feedback', 'feedback-read'])]
     private ?FeedbackType $feedbackType = null;
 
     public function getId(): ?int
