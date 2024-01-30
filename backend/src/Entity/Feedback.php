@@ -18,6 +18,7 @@ use App\Entity\User;
 use App\Entity\SubFeedback;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\Delete;
 use App\Denormalizer\FeedbackCreationDenormalizer;
 
 #[ORM\Entity(repositoryClass: FeedbackRepository::class)]
@@ -37,7 +38,10 @@ use App\Denormalizer\FeedbackCreationDenormalizer;
             ],
             securityPostDenormalize: 'is_granted("ROLE_USER") and object.getAppointment().getClient() == user',
             securityPostDenormalizeMessage: 'You can only create feedbacks for your appointments',
-        )
+        ),
+        new Delete(
+            security: 'is_granted("ROLE_ADMIN")'
+        ),
     ]
 )]
 
