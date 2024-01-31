@@ -159,6 +159,10 @@ class Establishment
     #[ORM\ManyToMany(targetEntity: FeedbackType::class, mappedBy: 'establishments')]
     private Collection $feedbackTypes;
 
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Feedback::class)]
+    #[Groups(['read-establishment'])]
+    private Collection $feedback;
+
     public function __construct()
     {
         $this->employees = new ArrayCollection();
@@ -167,6 +171,7 @@ class Establishment
         $this->services = new ArrayCollection();
         $this->serviceTypes = new ArrayCollection();
         $this->feedbackTypes = new ArrayCollection();
+        $this->feedback = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -454,6 +459,36 @@ class Establishment
     {
         if ($this->feedbackTypes->removeElement($feedbackType)) {
             $feedbackType->removeEstablishment($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Feedback>
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
+
+    public function addFeedback(Feedback $feedback): static
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback->add($feedback);
+            $feedback->setEstablishment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): static
+    {
+        if ($this->feedback->removeElement($feedback)) {
+            // set the owning side to null (unless already changed)
+            if ($feedback->getEstablishment() === $this) {
+                $feedback->setEstablishment(null);
+            }
         }
 
         return $this;

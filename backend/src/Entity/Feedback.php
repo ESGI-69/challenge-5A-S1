@@ -57,14 +57,15 @@ class Feedback
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['feedback-read', 'feedback-read-admin', 'read-establishment'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 1000)]
-    #[Groups(['create-feedback', 'feedback-read'])]
+    #[Groups(['create-feedback', 'feedback-read', 'read-establishment'])]
     private ?string $comment = null;
 
     #[ORM\OneToOne(inversedBy: 'feedback', cascade: ['persist', 'remove'])]
-    #[Groups(['create-feedback'])]
+    #[Groups(['create-feedback',])]
     private ?Appointment $appointment = null;
 
     #[ORM\ManyToOne(inversedBy: 'feedback')]
@@ -76,12 +77,23 @@ class Feedback
     private ?Employee $employee = null;
 
     #[ORM\ManyToOne(inversedBy: 'feedback')]
-    #[Groups(['feedback-read'])]
+    #[Groups(['feedback-read', 'read-establishment'])]
     private ?User $author = null;
 
     #[ORM\OneToMany(mappedBy: 'feedback', targetEntity: SubFeedback::class, cascade: ['persist'])]
     #[Groups(['create-feedback', 'feedback-read'])]
     private Collection $subFeedback;
+
+    #[ORM\ManyToOne(inversedBy: 'feedback')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Establishment $establishment = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    #[Groups(['read-establishment', 'feedback-read'])]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function __construct()
     {
@@ -179,6 +191,42 @@ class Feedback
                 $subFeedback->setFeedback(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEstablishment(): ?Establishment
+    {
+        return $this->establishment;
+    }
+
+    public function setEstablishment(?Establishment $establishment): static
+    {
+        $this->establishment = $establishment;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

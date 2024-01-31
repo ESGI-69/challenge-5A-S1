@@ -5,6 +5,7 @@
     gap: var(--size-3);
     padding: var(--size-3);
     border-bottom: solid 1px var(--color-border-light);
+    cursor: pointer;
 
     &:hover {
         background-color: var(--gray-1);

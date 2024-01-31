@@ -12,12 +12,27 @@ import { useTranslation } from 'react-i18next';
 import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
 import Review from '@/components/Notation/Review';
 import Map from '@/components/Map';
+import { useState } from 'react';
 
 function Establishment() {
   const { t } = useTranslation('establishment');
   const { id } = useParams();
   const { getById, establishment, isEstablishmentLoading } = useContext(EstablishmentContext);
   const { profile } = useContext(ProfileContext);
+
+  const [ currentReviewsPage, setCurrentReviewsPage ] = useState(0);
+  const reviewsPerPage = 5;
+
+  const handleNextReviews = () => {
+    setCurrentReviewsPage(currentReviewsPage + 1);
+  };
+
+  const handlePreviousReview = () => {
+    setCurrentReviewsPage(currentReviewsPage - 1);
+  };
+
+  const startReviews = currentReviewsPage * reviewsPerPage;
+  const endReviews = startReviews + reviewsPerPage;
 
   useEffect(() => {
     getById(id);
@@ -48,8 +63,8 @@ function Establishment() {
           <img src="https://picsum.photos/seed/7/534/300" alt="random" />
         </Gallery>
         <div className={styles.EstablishmentHeaderDescription}>
-          <h2 className={styles.EstablishmentTitle}>{ t('description', { establishmentName: establishment?.company?.name })}</h2>
-          <p>{ t('advantages') }</p>
+          <h2 className={styles.EstablishmentTitle}>{t('description', { establishmentName: establishment?.company?.name })}</h2>
+          <p>{t('advantages')}</p>
         </div>
       </div>
       <div className={styles.EstablishmentLeft}>
@@ -109,12 +124,19 @@ function Establishment() {
             <GlobalNotation />
           </TabContent>
           <TabContent value="tab2">
-            <Review
-              authorName='John Doe'
-              note={5}
-              content='Super coiffeur, je recommande !'
-              date={new Date()}
-            />
+            {establishment?.feedback.slice(startReviews, endReviews).map(review => (
+              <Review
+                key={review.id}
+                authorName={review.author.firstname}
+                note={5}
+                content={review.comment}
+                date={review.updatedAt}
+              />
+            ))}
+            <div>
+              <Button disabled={currentReviewsPage === 0} onClick={handlePreviousReview}>{t('previous')}</Button>
+              <Button disabled={endReviews >= establishment?.feedback.length} onClick={handleNextReviews}>{t('next')}</Button>
+            </div>
           </TabContent>
         </Tabs >
         <div className={styles.EstablishmentRightOpeningHoursSection}>
