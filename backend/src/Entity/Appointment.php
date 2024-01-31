@@ -88,6 +88,9 @@ class Appointment
     #[ORM\Column(nullable: true)]
     private ?float $price = null;
 
+    #[ORM\OneToOne(mappedBy: 'appointment', cascade: ['persist', 'remove'])]
+    private ?Feedback $feedback = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -197,6 +200,28 @@ class Appointment
     public function setPrice(?float $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getFeedback(): ?Feedback
+    {
+        return $this->feedback;
+    }
+
+    public function setFeedback(?Feedback $feedback): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($feedback === null && $this->feedback !== null) {
+            $this->feedback->setAppointment(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($feedback !== null && $feedback->getAppointment() !== $this) {
+            $feedback->setAppointment($this);
+        }
+
+        $this->feedback = $feedback;
 
         return $this;
     }

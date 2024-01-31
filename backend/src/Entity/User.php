@@ -72,7 +72,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     #[Assert\NotBlank()]
-    #[Groups(['read-user', 'create-user', 'update-user', 'read-me', 'appointment-read'])]
+    #[Groups(['read-user', 'create-user', 'update-user', 'read-me', 'appointment-read', 'feedback-read'])]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
@@ -112,11 +112,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['update-user-self'])]
     private $newPassword;
 
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Feedback::class)]
+    private Collection $feedback;
+
     public function __construct()
     {
         $this->authoredServices = new ArrayCollection();
         $this->validatedServices = new ArrayCollection();
         $this->appointments = new ArrayCollection();
+        $this->feedback = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -363,6 +367,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNewPassword(?string $newPassword): self
     {
         $this->newPassword = $newPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Feedback>
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
+
+    public function addFeedback(Feedback $feedback): static
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback->add($feedback);
+            $feedback->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): static
+    {
+        if ($this->feedback->removeElement($feedback)) {
+            // set the owning side to null (unless already changed)
+            if ($feedback->getAuthor() === $this) {
+                $feedback->setAuthor(null);
+            }
+        }
 
         return $this;
     }
