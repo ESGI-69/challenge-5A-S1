@@ -133,9 +133,19 @@ function Establishment() {
                 date={review.updatedAt}
               />
             ))}
-            <div>
-              <Button disabled={currentReviewsPage === 0} onClick={handlePreviousReview}>{t('previous')}</Button>
-              <Button disabled={endReviews >= establishment?.feedback.length} onClick={handleNextReviews}>{t('next')}</Button>
+            <div className={styles.EstablishmentRightCommentsButtons}>
+              <Button
+                disabled={currentReviewsPage === 0}
+                onClick={handlePreviousReview}
+              >
+                {t('tabs.previousComments')}
+              </Button>
+              <Button
+                disabled={endReviews >= establishment?.feedback.length}
+                onClick={handleNextReviews}
+              >
+                {t('tabs.nextComments')}
+              </Button>
             </div>
           </TabContent>
         </Tabs >

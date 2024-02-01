@@ -10,6 +10,7 @@ const Button = React.forwardRef(function Button(
     variant = 'primary',
     size = 'default',
     isPlain = false,
+    disabled = false,
     ...delegated
   },
   ref,
@@ -34,7 +35,9 @@ const Button = React.forwardRef(function Button(
         ${variantClassesSelector()}
         ${size === 'large' && styles.ButtonLarge}
         ${size === 'small' && styles.ButtonSmall}
+        ${disabled && styles.ButtonDisabled}
       `}
+      disabled={disabled}
       {...delegated}
     >
       {children}
@@ -55,6 +58,7 @@ Button.propTypes = {
   ]),
   size: PropTypes.oneOf([ 'default', 'large' ]),
   isPlain: PropTypes.bool,
+  disabled: PropTypes.bool,
   style: PropTypes.object,
 };
 

@@ -13,7 +13,9 @@
   },
   "tabs": {
     "globalNotation": "Note globale",
-    "reviews": "Avis"
+    "reviews": "Avis",
+     "previousComments": "Page précédente",
+     "nextComments": "Page suivante"
   },
   "list": {
     "title": "Mes Établissements",

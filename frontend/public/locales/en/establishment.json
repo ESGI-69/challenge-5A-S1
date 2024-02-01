@@ -13,7 +13,9 @@
   },
   "tabs": {
     "globalNotation": "Global notation",
-    "reviews": "Reveiws"
+    "reviews": "Reviews",
+    "previousComments": "Previous page",
+    "nextComments": "Next page"
   },
   "list": {
     "title": "My establishments",
