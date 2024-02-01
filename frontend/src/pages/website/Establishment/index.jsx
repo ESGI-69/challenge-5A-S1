@@ -121,7 +121,11 @@ function Establishment() {
             <Tab value="tab2">{t('tabs.reviews')}</Tab>
           </TabsList>
           <TabContent value="global-notation">
-            <GlobalNotation />
+            <GlobalNotation
+              globalAverage={establishment?.average}
+              subFeedbacks={establishment?.subFeedbacks}
+              reviewsCount={establishment?.feedback.length}
+            />
           </TabContent>
           <TabContent value="tab2">
             {establishment?.feedback.slice(startReviews, endReviews).map(review => (
@@ -136,12 +140,14 @@ function Establishment() {
             <div className={styles.EstablishmentRightCommentsButtons}>
               <Button
                 disabled={currentReviewsPage === 0}
+                variant="black"
                 onClick={handlePreviousReview}
               >
                 {t('tabs.previousComments')}
               </Button>
               <Button
                 disabled={endReviews >= establishment?.feedback.length}
+                variant="black"
                 onClick={handleNextReviews}
               >
                 {t('tabs.nextComments')}

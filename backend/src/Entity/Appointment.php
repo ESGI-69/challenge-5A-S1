@@ -13,6 +13,9 @@ use App\Controller\Appointment\CreateAppointmentController;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use App\Controller\Appointment\GetAppointmentMeController;
 
 #[ORM\Entity(repositoryClass: AppointmentRepository::class)]
 #[ApiResource(
@@ -20,6 +23,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
         new GetCollection(
             security: 'is_granted("ROLE_ADMIN")',
             normalizationContext: ['groups' => ['appointment-getall']]
+        ),
+        //pass the establishment id as a parameter to the controller
+        new GetCollection(
+            uriTemplate: '/appointments/{id}/me',
+            security: 'is_granted("ROLE_USER")',
+            normalizationContext: ['groups' => ['appointment-me']],
+            controller: GetAppointmentMeController::class,
+            read: false
         ),
         new Get(
             security: 'is_granted("ROLE_USER") and (object.getClient() == user or object.getEstablishment().getCompany() == user.getCompany())',
@@ -41,11 +52,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
         )
     ],
 )]
+
 class Appointment
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['appointment-getall', 'appointment-me'])]
     private ?int $id = null;
 
     #[Groups(['appointment-create', 'appointment-getall', 'appointment-read'])]
@@ -58,7 +71,7 @@ class Appointment
     #[ORM\JoinColumn(nullable: false)]
     private ?Establishment $establishment = null;
 
-    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read'])]
+    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me'])]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Service $service = null;
@@ -68,23 +81,23 @@ class Appointment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
 
-    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read'])]
+    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $startDate = null;
 
-    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read'])]
+    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me'])]
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $endDate = null;
 
-    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-update'])]
+    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-update', 'appointment-me'])]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $comment = null;
 
-    #[Groups(['appointment-getall', 'appointment-read', 'appointment-update'])]
+    #[Groups(['appointment-getall', 'appointment-read', 'appointment-update', 'appointment-me'])]
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $cancelledAt = null;
 
-    #[Groups(['appointment-getall', 'appointment-read'])]
+    #[Groups(['appointment-getall', 'appointment-read', 'appointment-me'])]
     #[ORM\Column(nullable: true)]
     private ?float $price = null;
 
