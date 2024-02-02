@@ -105,7 +105,7 @@ migration: | $(SF_CONSOLE_DEPS)  ## Create new migration
 .PHONY: fixtures
 fixtures: | $(SF_CONSOLE_DEPS) ## Load Alice fixtures and post process some data
 	@$(PRINT_COLOR) "$(LOG_START) Add fixtures $(LOG_END)"
-	$(SF_CONSOLE_CMD) hautelook:fixture:load --no-interaction --env=$(env)
+	$(SF_CONSOLE_CMD) doctrine:fixtures:load
 
 .PHONY: entity
 entity: | $(SF_CONSOLE_DEPS) ## Create new entity
