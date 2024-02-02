@@ -87,6 +87,16 @@ migrate: | $(SF_CONSOLE_DEPS) ## Play all symfony migration
 	@$(PRINT_COLOR) "$(LOG_START) Execute Symfony migrations $(LOG_END)"
 	$(SF_CONSOLE_CMD) doctrine:migrations:migrate -n --env=$(env)
 
+.PHONY: migrate.down
+migrate.down: | $(SF_CONSOLE_DEPS) ## Rollback last migration
+	@$(PRINT_COLOR) "$(LOG_START) Rollback last migration $(LOG_END)"
+	$(SF_CONSOLE_CMD) doctrine:migrations:migrate prev -n --env=$(env)
+
+.PHONY: migration.status
+migration.status: | $(SF_CONSOLE_DEPS) ## Show migration status
+	@$(PRINT_COLOR) "$(LOG_START) Show migration status $(LOG_END)"
+	$(SF_CONSOLE_CMD) doctrine:migrations:status --env=$(env)
+
 .PHONY: bddReset
 bddReset: ## Purge all data, recreate tables and execute migrations
 	@$(PRINT_COLOR) "$(LOG_START) Reset DB $(LOG_END)"

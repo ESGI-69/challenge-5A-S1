@@ -15,7 +15,8 @@
     "globalNotation": "Note globale",
     "reviews": "Avis",
      "previousComments": "Page précédente",
-     "nextComments": "Page suivante"
+     "nextComments": "Page suivante",
+     "noComments": "Aucun avis pour le moment"
   },
   "list": {
     "title": "Mes Établissements",

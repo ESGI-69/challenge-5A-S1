@@ -1,4 +1,5 @@
 import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
+import { AppointmentContext } from '@/contexts/api/AppointmentContext';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -13,12 +14,19 @@ import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
 import Review from '@/components/Notation/Review';
 import Map from '@/components/Map';
 import { useState } from 'react';
+import AppointmentCard from '@/components/AppointmentCard';
 
 function Establishment() {
   const { t } = useTranslation('establishment');
   const { id } = useParams();
   const { getById, establishment, isEstablishmentLoading } = useContext(EstablishmentContext);
+  const { getMyAppointments, myAppointments, isMyAppointmentsLoading } = useContext(AppointmentContext);
   const { profile } = useContext(ProfileContext);
+
+  const now = new Date();
+
+  const pastAppointments = myAppointments.filter(appointment => new Date(appointment.endDate) < now);
+  const futureAppointments = myAppointments.filter(appointment => new Date(appointment.endDate) >= now);
 
   const [ currentReviewsPage, setCurrentReviewsPage ] = useState(0);
   const reviewsPerPage = 5;
@@ -36,6 +44,7 @@ function Establishment() {
 
   useEffect(() => {
     getById(id);
+    getMyAppointments(id);
   }, []);
 
   return isEstablishmentLoading ?
@@ -68,14 +77,21 @@ function Establishment() {
         </div>
       </div>
       <div className={styles.EstablishmentLeft}>
-        {profile && (
+        {isMyAppointmentsLoading && <span>Loading ...</span>}
+        {profile && myAppointments.length > 0 && (
           <div className={styles.EstablishmentLeftApointmentsSection}>
+            <h3>Past Appointments</h3>
+            {pastAppointments.map(appointment => (
+              <p key={appointment.id} >{appointment.endDate}</p>
+            ))}
             <h3 className={styles.EstablishmentSubtitle}>
               {t('myApointments.title')}
             </h3>
             <div className={styles.EstablishmentLeftApointmentsSectionApointments}>
-              <div style={{ height: '180px', background: 'red', flexGrow: 1 }}></div>
-              <div style={{ height: '180px', background: 'red', flexGrow: 1 }}></div>
+              {futureAppointments.map(appointment => (
+                console.log(appointment),
+                <AppointmentCard key={appointment.id} appointment={appointment} />
+              ))}
             </div>
           </div>
         )}
@@ -128,6 +144,9 @@ function Establishment() {
             />
           </TabContent>
           <TabContent value="tab2">
+            {establishment?.feedback.length === 0 && (
+              <span>{t('tabs.noComments')}</span>
+            )}
             {establishment?.feedback.slice(startReviews, endReviews).map(review => (
               <Review
                 key={review.id}

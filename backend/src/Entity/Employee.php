@@ -98,7 +98,7 @@ class Employee
     #[ORM\JoinColumn(nullable: false)]
     private ?Establishment $preferedEstablishment = null;
 
-    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall', 'appointment-read','read-company-employees', 'read-establishment-employees'])]
+    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall', 'appointment-read','read-company-employees', 'read-establishment-employees', 'appointment-me'])]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 

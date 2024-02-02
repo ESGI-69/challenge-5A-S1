@@ -61,7 +61,7 @@ class Appointment
     #[Groups(['appointment-getall', 'appointment-me'])]
     private ?int $id = null;
 
-    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read'])]
+    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me'])]
     #[ORM\ManyToOne(inversedBy: 'appointments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Employee $employee = null;
@@ -82,25 +82,26 @@ class Appointment
     private ?User $client = null;
 
     #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me'])]
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $startDate = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $startDate = null;
 
     #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me'])]
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $endDate = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $endDate = null;
 
     #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-update', 'appointment-me'])]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $comment = null;
 
     #[Groups(['appointment-getall', 'appointment-read', 'appointment-update', 'appointment-me'])]
-    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $cancelledAt = null;
+    #[ORM\Column (nullable: true)]
+    private ?\DateTimeImmutable $cancelledAt = null;
 
     #[Groups(['appointment-getall', 'appointment-read', 'appointment-me'])]
     #[ORM\Column(nullable: true)]
     private ?float $price = null;
 
+    #[Groups(['appointment-me'])]
     #[ORM\OneToOne(mappedBy: 'appointment', cascade: ['persist', 'remove'])]
     private ?Feedback $feedback = null;
 

@@ -15,7 +15,8 @@
     "globalNotation": "Global notation",
     "reviews": "Reviews",
     "previousComments": "Previous page",
-    "nextComments": "Next page"
+    "nextComments": "Next page",
+    "noComments": "No comments yet"
   },
   "list": {
     "title": "My establishments",

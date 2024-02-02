@@ -1,0 +1,15 @@
+.AppointmentCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+
+  &Row {
+    margin: 0;
+  }
+
+  &Details {
+    display: flex;
+    flex-direction: row;
+    gap: var(--size-3);
+  }
+}
