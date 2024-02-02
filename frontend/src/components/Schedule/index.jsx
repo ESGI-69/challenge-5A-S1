@@ -6,6 +6,7 @@ import EmptyArrow from '../lib/Icons/EmptyArrow';
 const Schedule = React.forwardRef(function Schedule(
   {
     schedule,
+    onDateSelect,
     children,
     ...delegated
   },
@@ -47,7 +48,12 @@ const Schedule = React.forwardRef(function Schedule(
                       <div className={styles.ColumnBody}>
 
                         {day.times.map((appointement, index) => (
-                          <button  key={index} className={styles.ColumnButton}>{appointement.time}</button>
+                          <button  key={index} className={styles.ColumnButton} onClick={() => {
+                            onDateSelect(
+                              new Date(`${day.date} ${appointement.time}`).toISOString(),
+                            );}
+                          }
+                          >{appointement.time}</button>
                         ))}
 
                       </div>

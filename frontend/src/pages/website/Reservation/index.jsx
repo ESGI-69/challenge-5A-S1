@@ -4,8 +4,19 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/componen
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Schedule  from '@/components/Schedule';
+import { ProfileContext } from '@/contexts/ProfileContext';
+import { useContext } from 'react';
+import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 
 export default function Reservation () {
+
+  const { profile } = useContext(ProfileContext);
+
+  const [ selectedDate, setSelectedDate ] = useState(null);
+
+  const handleDateSelect = (date) => {
+    setSelectedDate(date);
+  };
 
   const servicesPicked = [
     {
@@ -15,6 +26,9 @@ export default function Reservation () {
       duration: 30,
     },
   ];
+
+  const serviceId = 1;
+  const { getById, establishment, isEstablishmentLoading } = useContext(EstablishmentContext);
 
   const persons = [
     {
@@ -348,30 +362,63 @@ export default function Reservation () {
           </div>
         ))}
       </div>
-
       <h2 className={styles.PageTitle}>2. Choix de la date et heure</h2>
       <div>
-        <Schedule schedule={schedule} />
-        <div className={styles.AppointementPicked}>
-          <div className={styles.AppointementPickedInfo}>
-            <div className={styles.AppointementPickedSpec}>
-              <span>Mercredi 20 decembre</span>
-              <span className={styles.AppointementPickedSpecTime}>à 10:00</span>
+        {!selectedDate && (
+          <Schedule schedule={schedule} onDateSelect={handleDateSelect} />
+        )}
+        {selectedDate && (
+          <div className={styles.AppointementPicked}>
+            <div className={styles.AppointementPickedInfo}>
+              <div className={styles.AppointementPickedSpec}>
+                <span>{new Date(selectedDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                <span className={styles.AppointementPickedSpecTime}>à 10:00</span>
+              </div>
+            </div>
+            <div className={styles.AppointementPickedAction}>
+              <a href="#" className={styles.AppointementPickedActionDelete} onClick={() => setSelectedDate(null)}>Modifier</a>
             </div>
           </div>
-          <div className={styles.AppointementPickedAction}>
-            <a href="#" className={styles.AppointementPickedActionDelete}>Modifier</a>
-          </div>
-        </div>
+        )}
       </div>
 
-      <h2 className={styles.PageTitle}>3. Indentification</h2>
-      <div className={styles.Identification}>
-        <h2 className={styles.PageTitle}>Nouveau sur platiny ?</h2>
-        <Button variant="black" isPlain="true">Créer mon compte</Button>
-        <h2 className={styles.PageTitle}>Vous avez déja utilisé platiny ?</h2>
-        <Button variant="black">Se connecter</Button>
-      </div>
+      {!profile && selectedDate && (
+        <>
+          <h2 className={styles.PageTitle}>3. Indentification</h2>
+          <div className={styles.Identification}>
+            <h2 className={styles.PageTitle}>Nouveau sur platiny ?</h2>
+            <Button variant="black" isPlain="true">Créer mon compte</Button>
+            <h2 className={styles.PageTitle}>Vous avez déjà utilisé platiny ?</h2>
+            <Button variant="black">Se connecter</Button>
+          </div>
+        </>
+      )}
+
+      {/* if profile and selectedDate */}
+      {!profile && selectedDate && (
+        <>
+          <h2 className={styles.PageTitle}>4. Moyen de paiement</h2>
+          <div className={styles.Payment}>
+            {servicesPicked.map(service => (
+              <>
+                <div key ={service.id} className={styles.PaymentService}>
+                  <span className={styles.PaymentServicePickedName}>{service.name}</span>
+                  <span className={styles.PaymentServicePrice}> {service.price}€</span>
+                </div>
+              </>
+            ))}
+            <div className={`${styles.PaymentService  } ${  styles.PaymentServiceTotal}`}>
+              <span>Total</span>
+              <span> {50}€</span>
+            </div>
+            <div className={styles.PaymentMethod}>
+              <Button variant="black">Payer {50}€</Button>
+            </div>
+
+          </div>
+
+        </>
+      )}
 
     </div>
   );
