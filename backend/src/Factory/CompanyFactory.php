@@ -52,7 +52,9 @@ final class CompanyFactory extends ModelFactory
       'email' => self::faker()->email(),
       'validatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('-1 years', 'now')),
       'rejected_reason' => null,
-      'logo_path' => null,
+      'logo_path' => '/images/placeholderX100.svg',
+      'created_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('-1 years', 'now')),
+      'updated_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('-1 years', 'now')),
     ];
   }
 
