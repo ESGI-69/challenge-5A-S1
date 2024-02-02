@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Delete;
@@ -33,6 +34,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
             normalizationContext: ['groups' => ['read-service']],
             uriTemplate: '/services-all',
             security: 'is_granted("ROLE_ADMIN")',
+        ),
+        new Get(
+            normalizationContext: ['groups' => ['read-service']],
+            securityPostDenormalize: 'object.getValidatedAt() !== null',
+            securityMessage: 'You cannot access this service',
+            securityPostDenormalizeMessage: 'You cannot access this service',
         ),
         new Post(
             name: 'creation',
@@ -93,18 +100,18 @@ class Service
 
     #[ORM\ManyToOne(inversedBy: 'services')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['read-establishment'])]
+    #[Groups(['read-establishment','read-service'])]
     private ?Establishment $establishment = null;
 
     #[ORM\ManyToOne(inversedBy: 'services')]
     #[ORM\JoinColumn(nullable: false)]
     private ?ServiceType $type = null;
 
-    #[Groups(['read-establishment', 'appointment-me'])]
+    #[Groups(['read-establishment', 'appointment-me','read-service'])]
     #[ORM\Column]
     private ?int $duration = null;
 
-    #[Groups(['read-establishment', 'appointment-me'])]
+    #[Groups(['read-establishment', 'appointment-me','read-service'])]
     #[ORM\Column]
     private ?float $price = null;
 
