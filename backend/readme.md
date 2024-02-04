@@ -49,7 +49,7 @@ If make is not enabled :
 > bin/console lexik:jwt:generate-keypair -n --overwrite
 > bin/console doctrine:database:create --if-not-exists
 > bin/console doctrine:migrations:migrate -n
-> bin/console hautelook:fixture:load -n
+> bin/console doctrine:fixtures:load -n
 ```
 # Access to the project
 ```

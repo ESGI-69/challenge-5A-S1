@@ -19,7 +19,7 @@ class CreateOpeningHourController
 
         $user = $this->security->getUser();
 
-        if ( !$this->security->isGranted('ROLE_ADMIN') && $openinghour->getEstablishment().getCompany() !== $user->getCompany() ) {
+        if ( !$this->security->isGranted('ROLE_ADMIN') && $openinghour->getEstablishment()->getCompany() !== $user->getCompany() ) {
             throw new AccessDeniedException('You can only set opening hours for your own company');
         }
 

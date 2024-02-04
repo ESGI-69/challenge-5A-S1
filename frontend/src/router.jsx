@@ -10,6 +10,7 @@ import CompaniesValidation from '@/pages/backoffice/CompaniesValidation';
 import Dashboard from '@/pages/backoffice/Dashboard/';
 import Employees from '@/pages/backoffice/Employees';
 import EstablishmentCreation from '@/pages/backoffice/Establishments/EstablishmentCreation';
+import EstablishmentUpdate from '@/pages/backoffice/Establishments/EstablishmentUpdate';
 import BackofficeEstablishments from '@/pages/backoffice/Establishments';
 
 import CompanyRegister from '@/pages/website/CompanyRegister';
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
           {
             path: 'create',
             element: <EstablishmentCreation />,
+          },
+          {
+            path: ':id',
+            element: <EstablishmentProvider><EstablishmentUpdate /></EstablishmentProvider>,
           },
         ],
       },

@@ -3,14 +3,14 @@ import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import Input from '@/components/lib/Input';
 import Button from '@/components/lib/Button';
 import { useTranslation } from 'react-i18next';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { EstablishmentTypeContext } from '@/contexts/api/EstablishmentTypeContext';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import styles from './EstablishmentCreationForm.module.scss';
 
 export default function RegisterForm() {
   const { t } = useTranslation('establishment');
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { post, isPostEstablishmentLoading } = useContext(EstablishmentContext);
   const { profile } = useContext(ProfileContext);
   const { establishmentTypes, isEstablishmentTypesLoading, get } = useContext(EstablishmentTypeContext);
@@ -110,7 +110,7 @@ export default function RegisterForm() {
       company: `/api/companies/${profile.company.id}`,
     };
     await post(data);
-    // navigate('/backoffice/establishments');
+    navigate('/backoffice/establishments');
   };
 
   return (

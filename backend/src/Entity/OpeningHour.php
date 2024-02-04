@@ -34,6 +34,7 @@ class OpeningHour
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read-establishment'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'openingHours')]
@@ -48,6 +49,10 @@ class OpeningHour
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     #[Groups(['create-opening-hour', 'update-opening-hour', 'read-establishment'])]
     private ?\DateTimeInterface $endTime = null;
+
+    #[ORM\Column(length: 255, columnDefinition: 'ENUM("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")')]
+    #[Groups(['create-opening-hour', 'update-opening-hour', 'read-establishment'])]
+    private ?string $day = null;
 
     public function getId(): ?int
     {
@@ -86,6 +91,18 @@ class OpeningHour
     public function setEndTime(?\DateTimeInterface $endTime): static
     {
         $this->endTime = $endTime;
+
+        return $this;
+    }
+
+    public function getDay(): ?string
+    {
+        return $this->day;
+    }
+
+    public function setDay(string $day): static
+    {
+        $this->day = $day;
 
         return $this;
     }

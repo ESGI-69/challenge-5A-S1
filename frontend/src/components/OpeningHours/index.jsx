@@ -8,52 +8,37 @@ const OpeningHours = function OpeningHours({
 ) {
   const { t } = useTranslation('openingHours');
 
-  const dateByDay = {
-    0: [],
-    1: [],
-    2: [],
-    3: [],
-    4: [],
-    5: [],
-    6: [],
+  const openingDays = {
+    monday: [],
+    tuesday: [],
+    wednesday: [],
+    thursday: [],
+    friday: [],
+    saturday: [],
+    sunday: [],
   };
 
-  const dayNumberToString = {
-    0: t('weekDays.sunday', { ns: 'base' }),
-    1: t('weekDays.monday', { ns: 'base' }),
-    2: t('weekDays.tuesday', { ns: 'base' }),
-    3: t('weekDays.wednesday', { ns: 'base' }),
-    4: t('weekDays.thursday', { ns: 'base' }),
-    5: t('weekDays.friday', { ns: 'base' }),
-    6: t('weekDays.saturday', { ns: 'base' }),
-  };
+  value.forEach((oppeningHour) => {
+    openingDays[oppeningHour.day].push({
+      startTime: new Date(oppeningHour.startTime),
+      endTime: new Date(oppeningHour.endTime),
+    });
+  });
 
   let currentDay = new Date().getDay();
-
-  const dateTab = value.map(({ startTime, endTime })=>({
-    startTime: new Date(startTime),
-    endTime: new Date(endTime),
-  }));
-
-  dateTab.forEach(el => {
-    dateByDay[el.startTime.getDay()].push(el);
-  });
-
-  Object.keys(dateByDay).forEach((day) => {
-    dateByDay[day].sort((a, b) => a.startTime - b.startTime);
-  });
 
   return (
     <div className={styles.OpeningHours}>
       {
-        Object.keys(dateByDay).map((day) => (
-          <div className={`${styles.RowDay} ${currentDay!=day?'':styles.RowDayCurrentDay}`} key={day}>
-            <span className={`${styles.DayArea} ${currentDay!=day?'':styles.DayAreaCurrentDay}`}>{dayNumberToString[day]} : </span>
-            <span className={`${styles.HoursArea} ${currentDay!=day?'':styles.HoursAreaCurrentDay}`} key={day}>
+        Object.entries(openingDays).map(([ day, oppeningHours ]) => (
+          <div className={`${styles.RowDay} ${currentDay !== day ? '' : styles.RowDayCurrentDay}`} key={day}>
+            <span className={`${styles.DayArea} ${currentDay !== day ? '' : styles.DayAreaCurrentDay}`}>{t(`weekDays.${day}`, { ns: 'base' })} : </span>
+            <span className={`${styles.HoursArea} ${currentDay !== day ? '' : styles.HoursAreaCurrentDay}`} key={day}>
               {
-                dateByDay[day].length === 0 ? <div className={styles.HoursAreaClosed}>{t('closed')}</div> :
-                  dateByDay[day].map(({ startTime, endTime }) => (
-                    <div key={startTime}>{`${startTime.getHours()}:${startTime.getMinutes()}`} - {`${endTime.getHours()}:${endTime.getMinutes()}`}</div>
+                oppeningHours.length === 0
+                  ? <div className={styles.HoursAreaClosed}>{t('closed')}</div>
+                  : oppeningHours.map(({ startTime, endTime }) => (
+                    <div key={startTime}>{`${startTime.getHours().toString().padStart(2, '0')}:${startTime.getMinutes().toString().padEnd(2, '0')}`} - {`${endTime.getHours().toString().padStart(2, '0')}:${endTime.getMinutes().toString().padEnd(2, '0')}`}</div>
                   ))
               }
             </span>

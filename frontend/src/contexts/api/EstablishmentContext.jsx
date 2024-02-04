@@ -11,6 +11,9 @@ const initialState = {
   isEstablishmentLoading: false,
 
   isPostEstablishmentLoading: false,
+
+  isPostOpeningHourLoading: false,
+  isPatchOpeningHourLoading: false,
 };
 
 export const EstablishmentContext = createContext(initialState);
@@ -41,6 +44,16 @@ const reducer = (state, action) => {
       return {
         ...state,
         isPostEstablishmentLoading: action.payload,
+      };
+    case 'isPostOpeningHourLoading':
+      return {
+        ...state,
+        isPostOpeningHourLoading: action.payload,
+      };
+    case 'isPatchOpeningHourLoading':
+      return {
+        ...state,
+        isPatchOpeningHourLoading: action.payload,
       };
     default:
       return state;
@@ -110,6 +123,44 @@ export default function EstablishmentProvider({ children }) {
     }
   };
 
+  const postOpeningHour = async (data) => {
+    dispatch({
+      type: 'isPostOpeningHourLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.post('/opening_hours', data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isPostOpeningHourLoading',
+        payload: false,
+      });
+    }
+  };
+
+  const patchOpeningHour = async (id, data) => {
+    dispatch({
+      type: 'isPatchOpeningHourLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.patch(`/opening_hours/${id}`, data, {
+        headers: {
+          'Content-Type': 'application/merge-patch+json',
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isPatchOpeningHourLoading',
+        payload: false,
+      });
+    }
+  };
+
   return (
     <EstablishmentContext.Provider value={{
       get,
@@ -121,6 +172,10 @@ export default function EstablishmentProvider({ children }) {
       isEstablishmentLoading: state.isEstablishmentLoading,
 
       post,
+      postOpeningHour,
+      isPostOpeningHourLoading: state.isPostOpeningHourLoading,
+      patchOpeningHour,
+      isPatchOpeningHourLoading: state.isPatchOpeningHourLoading,
     }}>
       {children}
     </EstablishmentContext.Provider>
