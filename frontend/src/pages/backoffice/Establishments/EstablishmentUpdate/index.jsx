@@ -23,6 +23,7 @@ export default function EstablishmentUpdate() {
       </BackofficeHeader>
       <Button to="/backoffice/establishments">{ t('update.back') }</Button>
       {/* <EstablishmentUpdateForm /> */}
+      <h2>{ t('openingHourSelector') }</h2>
       {(!isEstablishmentLoading && establishment) && <OpeningHoursSelector />}
     </>
   );

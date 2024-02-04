@@ -51,5 +51,6 @@
       "country": "Pays",
       "type": "Type"
     }
-  }
+  },
+  "openingHourSelector": "Selectionnez les horaires d'ouverture"
 }
