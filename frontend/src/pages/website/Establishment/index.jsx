@@ -29,6 +29,7 @@ function Establishment() {
   const futureAppointments = myAppointments.filter(appointment => new Date(appointment.endDate) >= now);
 
   const [ currentReviewsPage, setCurrentReviewsPage ] = useState(0);
+  const [ isPastAppointmentsShowned, setIsPastAppointmentsShowned ] = useState(false);
   const reviewsPerPage = 5;
 
   const handleNextReviews = () => {
@@ -46,6 +47,10 @@ function Establishment() {
     getById(id);
     getMyAppointments(id);
   }, []);
+
+  const handlePastAppointmentsClick = () => {
+    setIsPastAppointmentsShowned(!isPastAppointmentsShowned);
+  };
 
   return isEstablishmentLoading ?
     <span>Loading ...</span> :
@@ -80,19 +85,29 @@ function Establishment() {
         {isMyAppointmentsLoading && <span>Loading ...</span>}
         {profile && myAppointments.length > 0 && (
           <div className={styles.EstablishmentLeftApointmentsSection}>
-            <h3>Past Appointments</h3>
-            {pastAppointments.map(appointment => (
-              <p key={appointment.id} >{appointment.endDate}</p>
-            ))}
             <h3 className={styles.EstablishmentSubtitle}>
               {t('myApointments.title')}
             </h3>
             <div className={styles.EstablishmentLeftApointmentsSectionApointments}>
               {futureAppointments.map(appointment => (
-                console.log(appointment),
                 <AppointmentCard key={appointment.id} appointment={appointment} />
               ))}
             </div>
+            <Button variant="black" onClick={handlePastAppointmentsClick}>
+              {isPastAppointmentsShowned ? t('myApointments.hidePast') : t('myApointments.seePast')}
+            </Button>
+            {isPastAppointmentsShowned &&
+              <>
+                <h3 className={styles.EstablishmentSubtitle}>
+                  {t('myApointments.titlePast')}
+                </h3>
+                <div className={styles.EstablishmentLeftApointmentsSectionApointments}>
+                  {pastAppointments.map(appointment => (
+                    <AppointmentCard key={appointment.id} appointment={appointment} />
+                  ))}
+                </div>
+              </>
+            }
           </div>
         )}
         <div className={styles.EstablishmentLeftServicesSection}>

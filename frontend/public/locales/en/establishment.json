@@ -3,7 +3,10 @@
   "advantages": "24h/24 - Payment on site - Immediate confirmation - Free cancellation",
   "makeAnAppointment": "Make an appointment",
   "myApointments": {
-    "title": "My appointments"
+    "title": "My appointments",
+    "titlePast": "My past appointments",
+    "seePast": "See past appointments",
+    "hidePast": "Hide past appointments"
   },
   "services": {
     "title": "Prestations choices"

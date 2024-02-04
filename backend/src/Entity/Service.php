@@ -96,7 +96,7 @@ class Service
     #[ORM\JoinColumn(nullable: false)]
     private ?ServiceType $type = null;
 
-    #[Groups(['read-establishment'])]
+    #[Groups(['read-establishment', 'appointment-me'])]
     #[ORM\Column]
     private ?int $duration = null;
 

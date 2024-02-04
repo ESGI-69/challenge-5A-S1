@@ -1,23 +1,43 @@
 import PropTypes from 'prop-types';
 import styles from './AppointmentCard.module.scss';
-import { dateTime } from '@/utils/formater/date';
+import { dateTimeFull } from '@/utils/formater/date';
+import Button from '@/components/lib/Button';
+import { useTranslation } from 'react-i18next';
+import { BanknotesIcon, CalendarIcon, ClockIcon } from '@heroicons/react/20/solid';
 
 function AppointmentCard({
   appointment,
 }) {
+  const { t } = useTranslation('appointmentCard');
+
+  const isPast = new Date(appointment.endDate) < new Date();
+  console.log('appointment date', new Date(appointment.endDate));
+  console.log('now', new Date());
+
   return (
     <div className={styles.AppointmentCard}>
-      <p className={styles.AppointmentCardRow}>
-        {dateTime(appointment.startDate)}
-      </p>
-      <p className={styles.AppointmentCardRow}>
+      <h4 className={styles.AppointmentCardDate}>
+        {dateTimeFull(appointment.startDate)}
+      </h4>
+      <p className={styles.AppointmentCardName}>
         {appointment.service.name}
       </p>
       <div className={styles.AppointmentCardDetails}>
-        <span>{appointment.service.price} €</span>
-        <span>{appointment.service.name}</span>
-        <span>{appointment.employee.firstname}</span>
+        <span className={styles.AppointmentCardDetailsText}>
+          <ClockIcon />{appointment.service.duration} min
+        </span>
+        <span className={styles.AppointmentCardDetailsText}>
+          <BanknotesIcon />{appointment.service.price} €
+        </span>
+        <span className={styles.AppointmentCardDetailsText}>
+          <CalendarIcon />{t('with')} {appointment.employee.firstname}
+        </span>
       </div>
+      {isPast &&
+       <Button variant="black">
+         {t('leaveComment')}
+       </Button>
+      }
     </div>
   );
 }
@@ -30,6 +50,7 @@ AppointmentCard.propTypes = {
     service: PropTypes.shape({
       name: PropTypes.string,
       price: PropTypes.number,
+      duration: PropTypes.number,
     }),
     employee: PropTypes.shape({
       firstname: PropTypes.string,
