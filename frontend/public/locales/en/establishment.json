@@ -25,6 +25,10 @@
     "title": "Establishment creation",
     "back": "Back to my establishments"
   },
+  "update": {
+    "title": "Establishment update",
+    "back": "Back to my establishments"
+  },
   "establishementLocation": "Where is the hair salon located ?",
   "form": {
     "email": "Email",
@@ -47,5 +51,6 @@
       "country": "Country",
       "type": "Type"
     }
-  }
+  },
+  "openingHourSelector": "Select the opening hours"
 }

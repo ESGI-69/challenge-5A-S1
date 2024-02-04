@@ -22,7 +22,12 @@
     }
   },
   "create": {
-    "title": "Création d'un établissement"
+    "title": "Création d'un établissement",
+    "back": "Retour à la liste des établissements"
+  },
+  "update": {
+    "title": "Modification d'un établissement",
+    "back": "Retour à la liste des établissements"
   },
   "establishementLocation": "Où se situe le salon ?",
   "form": {
@@ -46,5 +51,6 @@
       "country": "Pays",
       "type": "Type"
     }
-  }
+  },
+  "openingHourSelector": "Selectionnez les horaires d'ouverture"
 }
