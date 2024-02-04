@@ -62,7 +62,6 @@ export default function OpeningHoursSelector() {
   const [ openingDays, setOpeningDays ] = useState([]);
 
   const sendRequest = async () => {
-    console.log(establishment);
     const promiseArray = [];
     openingDays.forEach((day) => {
       if (!openingHours[day].id) {
@@ -86,7 +85,7 @@ export default function OpeningHoursSelector() {
   return (
     <>
       <div className={styles.OpeningHoursSelector}>
-        {Object.entries(openingHours).map(([ day, hours ]) => (
+        {Object.entries(openingHours).map(([ day ]) => (
           <div key={day} className={[ styles.OpeningHoursSelectorRow ].concat(openingDays.includes(day) ? styles.OpeningHoursSelectorRowActive : []).join(' ')}>
             <input className={styles.OpeningHoursSelectorRowCheckbox} type="checkbox" checked={openingDays.includes(day)} onChange={(e) => { e.target.checked ? setOpeningDays((old) => [ ...old, day ]) : setOpeningDays((old) => old.filter((d) => d !== day)); }} />
             <div className={styles.OpeningHoursSelectorRowDay}>
