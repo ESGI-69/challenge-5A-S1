@@ -11,6 +11,7 @@ const initialState = {
   isEstablishmentLoading: false,
 
   isPostEstablishmentLoading: false,
+  isPatchEstablishmentLoading: false,
 
   isPostOpeningHourLoading: false,
   isPatchOpeningHourLoading: false,
@@ -44,6 +45,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         isPostEstablishmentLoading: action.payload,
+      };
+    case 'isPatchEstablishmentLoading':
+      return {
+        ...state,
+        isPatchEstablishmentLoading: action.payload,
       };
     case 'isPostOpeningHourLoading':
       return {
@@ -123,6 +129,27 @@ export default function EstablishmentProvider({ children }) {
     }
   };
 
+  const patch = async (id, data) => {
+    dispatch({
+      type: 'isPatchEstablishmentLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.patch(`/establishments/${id}`, data, {
+        headers: {
+          'Content-Type': 'application/merge-patch+json',
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isPatchEstablishmentLoading',
+        payload: false,
+      });
+    }
+  };
+
   const postOpeningHour = async (data) => {
     dispatch({
       type: 'isPostOpeningHourLoading',
@@ -170,8 +197,10 @@ export default function EstablishmentProvider({ children }) {
       getById,
       establishment: state.establishment,
       isEstablishmentLoading: state.isEstablishmentLoading,
+      isPatchEstablishmentLoading: state.isPatchEstablishmentLoading,
 
       post,
+      patch,
       postOpeningHour,
       isPostOpeningHourLoading: state.isPostOpeningHourLoading,
       patchOpeningHour,

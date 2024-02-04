@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 export default function EstablishmentUpdate() {
-  const { establishment, getById, isEstablishmentLoading } = useContext(EstablishmentContext);
+  const { establishment, getById, isEstablishmentLoading, isPatchEstablishmentLoading, patch: patchEstablishment } = useContext(EstablishmentContext);
   const { establishmentTypes, get: getEstablishmentTypes, isEstablishmentTypesLoading } = useContext(EstablishmentTypeContext);
   const { id } = useParams();
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function EstablishmentUpdate() {
   }, []);
 
   const updateEstablishment = (data) => {
-    console.log(data);
+    patchEstablishment(id, data);
   };
 
   const { t } = useTranslation('establishment');
@@ -33,6 +33,7 @@ export default function EstablishmentUpdate() {
         <EstablishmentUpdateForm
           establishmentTypes={establishmentTypes}
           onSubmit={updateEstablishment}
+          isLoading={isPatchEstablishmentLoading}
           {...establishment}
         />
       )}
