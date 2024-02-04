@@ -80,7 +80,7 @@ class Establishment
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['read-establishment', 'employee-getall', 'appointment-read'])]
+    #[Groups(['read-establishment','read-service','employee-getall', 'appointment-read'])]
     private ?int $id = null;
 
     #[Assert\Email()]

@@ -95,6 +95,7 @@ class Service
     #[ORM\ManyToOne(inversedBy: 'validatedServices')]
     private ?User $validatedBy = null;
 
+    #[Groups(['read-service'])]
     #[ORM\ManyToMany(targetEntity: WorkingHoursRange::class, mappedBy: 'services')]
     private Collection $workingHoursRanges;
 

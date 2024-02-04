@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Schedule  from '@/components/Schedule';
 import { ProfileContext } from '@/contexts/ProfileContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
+import { ServiceContext } from '@/contexts/api/ServiceContext';
 
 export default function Reservation () {
 
@@ -28,7 +29,68 @@ export default function Reservation () {
   ];
 
   const serviceId = 1;
-  const { getById, establishment, isEstablishmentLoading } = useContext(EstablishmentContext);
+  const { getById, service, isServiceLoading } = useContext(ServiceContext);
+  const [ schedule, setSchedule ] = useState([]);
+
+  useEffect(() => {
+    getById(serviceId);
+  }, []);
+
+  useEffect(() => {
+    if (service) {
+      const schedule = generateSchedule(service);
+      setSchedule(schedule);
+    }
+  }, [ service ]);
+
+  function generateSchedule(service) {
+    const schedule = [];
+
+    service.workingHoursRanges.forEach(range => {
+      const startDate = new Date(range.startDate);
+      const endDate = new Date(range.endDate);
+
+      let currentTime = new Date(startDate.getTime());
+
+      while (currentTime <= endDate) {
+        const timeSlot = {
+          time: currentTime.toISOString().slice(11, 16), // format HH:mm
+          available: true, // vérifier ici si le créneau est déjà pri
+        };
+
+        // Trouvez la semaine correspondante ou créez-en une nouvelle si elle n'existe pas
+        const weekNumber = getWeek(currentTime);
+        let week = schedule.find(week => week.week === weekNumber);
+        if (!week) {
+          week = { week: weekNumber, days: [] };
+          schedule.push(week);
+        }
+
+        // Ajoutez le créneau horaire au tableau du jour correspondant
+        const day = week.days.find(day => day.date === currentTime.toISOString().slice(0, 10)); // format YYYY-MM-DD
+        if (day) {
+          day.times.push(timeSlot);
+        } else {
+          week.days.push({
+            date: currentTime.toISOString().slice(0, 10), //format YYYY-MM-DD
+            times: [ timeSlot ],
+          });
+        }
+
+        // generation de la prochaine période de service
+        currentTime.setMinutes(currentTime.getMinutes() + service.duration);
+      }
+    });
+
+    return schedule;
+  }
+
+  function getWeek(date) {
+    const localDate = new Date(date.toLocaleString('en-US', { timeZone: 'Europe/Paris' }));
+    const firstDayOfYear = new Date(localDate.getFullYear(), 0, 1);
+    const pastDaysOfYear = (localDate - firstDayOfYear) / 86400000;
+    return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+  }
 
   const persons = [
     {
@@ -47,282 +109,6 @@ export default function Reservation () {
 
   const [ person, setPerson ] = useState(persons[0]);
 
-  const schedule = [
-    {
-      week: 1,
-      days: [
-        {
-          date: '2021-12-14',
-          times: [
-            {
-              time: '10:00',
-              available: true,
-            },
-            {
-              time: '10:30',
-              available: false,
-            },
-            {
-              time: '11:00',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-          ],
-        },
-        {
-          date: '2021-12-15',
-          times: [
-            {
-              time: '10:00',
-              available: true,
-            },
-            {
-              time: '10:30',
-              available: false,
-            },
-            {
-              time: '11:00',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-          ],
-        },
-        {
-          date: '2021-12-16',
-          times: [
-            {
-              time: '10:00',
-              available: true,
-            },
-            {
-              time: '10:30',
-              available: false,
-            },
-            {
-              time: '11:00',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-          ],
-        },
-        {
-          date: '2021-12-17',
-          times: [
-            {
-              time: '10:00',
-              available: true,
-            },
-            {
-              time: '10:30',
-              available: false,
-            },
-            {
-              time: '11:00',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-          ],
-        },
-        {
-          date: '2021-12-18',
-          times: [
-            {
-              time: '10:00',
-              available: true,
-            },
-            {
-              time: '10:30',
-              available: false,
-            },
-            {
-              time: '11:00',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-          ],
-        },
-        {
-          date: '2021-12-19',
-          times: [
-            {
-              time: '10:00',
-              available: true,
-            },
-            {
-              time: '10:30',
-              available: false,
-            },
-            {
-              time: '11:00',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      week: 2,
-      days: [
-        {
-          date: '2021-12-20',
-          times: [
-            {
-              time: '10:00',
-              available: true,
-            },
-            {
-              time: '10:30',
-              available: false,
-            },
-            {
-              time: '11:00',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-          ],
-        },
-        {
-          date: '2021-12-21',
-          times: [
-            {
-              time: '10:00',
-              available: true,
-            },
-            {
-              time: '10:30',
-              available: false,
-            },
-            {
-              time: '11:00',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-          ],
-        },
-        {
-          date: '2021-12-22',
-          times: [
-            {
-              time: '10:00',
-              available: true,
-            },
-            {
-              time: '10:30',
-              available: false,
-            },
-            {
-              time: '11:00',
-              available: true,
-            },
-            {
-              time: '11:30',
-              available: true,
-            },
-          ],
-        },
-        {
-          date: '2021-12-23',
-          times: [
-            {
-              time: '10:00',
-              available: false,
-            },
-            {
-              time: '10:30',
-              available: false,
-            },
-            {
-              time: '11:00',
-              available: false,
-            },
-            {
-              time: '11:30',
-              available: false,
-            },
-          ],
-        },
-        {
-          date: '2021-12-24',
-          times: [
-            {
-              time: '10:00',
-              available: false,
-            },
-            {
-              time: '10:30',
-              available: false,
-            },
-            {
-              time: '11:00',
-              available: false,
-            },
-            {
-              time: '11:30',
-              available: false,
-            },
-          ],
-        },
-      ],
-    },
-  ];
-
   return (
     <div className={styles.Page}>
       <h2>Reservation</h2>
@@ -335,32 +121,30 @@ export default function Reservation () {
 
       <h2 className={styles.PageTitle}>1. Prestation selectionnée</h2>
       <div className={styles.ServicesPicked}>
-        {servicesPicked.map(service => (
-          <div key={service.id} className={styles.ServicePicked}>
-            <div className={styles.ServiceInfo}>
-              <span className={styles.ServicePickedName}>{service.name}</span>
-              <div className={styles.ServiceSpec}>
-                <span className={styles.ServiceSpecName}>{service.duration}h</span>
-                <span>à partir de {service.price}€</span>
-              </div>
-            </div>
-            <div className={styles.ServicePerson}>
-              <Dropdown>
-                <DropdownButton>
-                  <Button variant="black" isPlain="false">{person.name}</Button>
-                </DropdownButton>
-                <DropdownList>
-                  {persons.map(person => (
-                    <DropdownItem key={person.id} onClick={() => setPerson(person)}>{person.name}</DropdownItem>
-                  ))}
-                </DropdownList>
-              </Dropdown>
-            </div>
-            <div className={styles.ServiceAction}>
-              <a href="#" className={styles.ServiceActionDelete}>Supprimer</a>
+        <div className={styles.ServicePicked}>
+          <div className={styles.ServiceInfo}>
+            <span className={styles.ServicePickedName}>{service?.name}</span>
+            <div className={styles.ServiceSpec}>
+              <span className={styles.ServiceSpecName}>{service?.duration}min</span>
+              <span>à partir de {service?.price}€</span>
             </div>
           </div>
-        ))}
+          <div className={styles.ServicePerson}>
+            <Dropdown>
+              <DropdownButton>
+                <Button variant="black" isPlain="false">{person.name}</Button>
+              </DropdownButton>
+              <DropdownList>
+                {persons.map(person => (
+                  <DropdownItem key={person.id} onClick={() => setPerson(person)}>{person.name}</DropdownItem>
+                ))}
+              </DropdownList>
+            </Dropdown>
+          </div>
+          <div className={styles.ServiceAction}>
+            <a href="#" className={styles.ServiceActionDelete}>Supprimer</a>
+          </div>
+        </div>
       </div>
       <h2 className={styles.PageTitle}>2. Choix de la date et heure</h2>
       <div>
@@ -372,7 +156,7 @@ export default function Reservation () {
             <div className={styles.AppointementPickedInfo}>
               <div className={styles.AppointementPickedSpec}>
                 <span>{new Date(selectedDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-                <span className={styles.AppointementPickedSpecTime}>à 10:00</span>
+                <span className={styles.AppointementPickedSpecTime}>à {new Date(selectedDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
               </div>
             </div>
             <div className={styles.AppointementPickedAction}>
@@ -394,25 +178,34 @@ export default function Reservation () {
         </>
       )}
 
+      {profile && selectedDate && (
+        <>
+          <h2 className={styles.PageTitle}>3. Indentification</h2>
+          <div className={styles.Identification}>
+            <p>
+              Connecté en tant que {profile['firstname']} {profile['lastname']}
+            </p>
+          </div>
+        </>
+      )}
+
       {/* if profile and selectedDate */}
-      {!profile && selectedDate && (
+      {profile && selectedDate && (
         <>
           <h2 className={styles.PageTitle}>4. Moyen de paiement</h2>
           <div className={styles.Payment}>
-            {servicesPicked.map(service => (
-              <>
-                <div key ={service.id} className={styles.PaymentService}>
-                  <span className={styles.PaymentServicePickedName}>{service.name}</span>
-                  <span className={styles.PaymentServicePrice}> {service.price}€</span>
-                </div>
-              </>
-            ))}
+            <>
+              <div className={styles.PaymentService}>
+                <span className={styles.PaymentServicePickedName}>{service.name}</span>
+                <span className={styles.PaymentServicePrice}> {service.price}€</span>
+              </div>
+            </>
             <div className={`${styles.PaymentService  } ${  styles.PaymentServiceTotal}`}>
               <span>Total</span>
-              <span> {50}€</span>
+              <span> {service.price}€</span>
             </div>
             <div className={styles.PaymentMethod}>
-              <Button variant="black">Payer {50}€</Button>
+              <Button variant="black">Payer {service.price}€</Button>
             </div>
 
           </div>

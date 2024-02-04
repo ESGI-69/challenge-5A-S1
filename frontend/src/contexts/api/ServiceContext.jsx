@@ -3,11 +3,19 @@ import PropTypes from 'prop-types';
 import apiCall from '@/axios';
 import { toast } from 'react-hot-toast';
 import i18n from 'i18next';
+import queryBuilder from '@/utils/queryBuilder';
 
 const initialState = {
   isPostServiceLoading: false,
   isDeleteServiceLoading: false,
   isPatchServiceLoading: false,
+
+  services: [],
+  isServicesLoading: false,
+
+  service: null,
+  isServiceLoading: false,
+
 };
 
 export const ServiceContext = createContext(initialState);
@@ -28,6 +36,26 @@ const reducer = (state, action) => {
       return {
         ...state,
         isPatchServiceLoading: action.payload,
+      };
+    case 'services':
+      return {
+        ...state,
+        services: action.payload,
+      };
+    case 'isServicesLoading':
+      return {
+        ...state,
+        isServicesLoading: action.payload,
+      };
+    case 'service':
+      return {
+        ...state,
+        service: action.payload,
+      };
+    case 'isServiceLoading':
+      return {
+        ...state,
+        isServiceLoading: action.payload,
       };
     default:
       return state;
@@ -86,6 +114,48 @@ export default function ServiceProvider({ children }) {
       dispatch({ type: 'isDeleteServiceLoading', payload: false });
     }
   };
+  const get = async (queries = null) => {
+    dispatch({
+      type: 'isServicesLoading',
+      payload: true,
+    });
+    try {
+      const url = queries ? `/services${queryBuilder(queries)}` : '/services';
+      const { data } = await apiCall.get(url);
+      dispatch({
+        type: 'services',
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isServicesLoading',
+        payload: false,
+      });
+    }
+  };
+
+  const getById = async (id) => {
+    dispatch({
+      type: 'isServiceLoading',
+      payload: true,
+    });
+    try {
+      const { data } = await apiCall.get(`/services/${id}`);
+      dispatch({
+        type: 'service',
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isServiceLoading',
+        payload: false,
+      });
+    }
+  };
 
   return (
     <ServiceContext.Provider value={{
@@ -97,7 +167,14 @@ export default function ServiceProvider({ children }) {
 
       patchService,
       isPatchServiceLoading: state.isPatchServiceLoading,
-    }} >
+      get,
+      services: state.services,
+      isServicesLoading: state.isServicesLoading,
+
+      getById,
+      service: state.service,
+      isServiceLoading: state.isServiceLoading,
+    }}>
       {children}
     </ServiceContext.Provider>
   );

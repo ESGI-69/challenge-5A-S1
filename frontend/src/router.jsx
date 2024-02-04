@@ -31,6 +31,7 @@ import ServiceTypeProvider from './contexts/api/ServiceTypeContext';
 import FeedbackProvider from './contexts/api/FeedbackContext';
 
 import EmployeeCreation from '@/pages/backoffice/Employees/EmployeeCreation';
+import ServiceProvider from '@/contexts/api/ServiceContext';
 
 const router = createBrowserRouter([
   {
@@ -68,7 +69,10 @@ const router = createBrowserRouter([
       },
       {
         path: '/:establishementSlug/reservation',
-        element: <Reservation/>,
+        element:
+        <ServiceProvider>
+          <Reservation/>
+        </ServiceProvider>,
       },
       {
         path: '*',
