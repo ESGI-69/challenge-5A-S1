@@ -47,7 +47,6 @@
       &Right {
         justify-content: flex-end;
       }
-      
     }
 
     &Description {
@@ -89,6 +88,14 @@
   &Right {
     grid-area: right;
     gap: var(--size-5);
+
+    &Comments {
+      &Buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
 
     &OpeningHoursSection {
       display: flex;

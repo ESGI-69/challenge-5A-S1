@@ -33,8 +33,12 @@ class FeedbackCreationDenormalizer implements DenormalizerInterface
 
         /** @var Feedback $feedback */
         $loggedUser = $this->security->getUser();
+        $establishment = $feedback->getAppointment()->getEstablishment();
 
+        $feedback->setEstablishment($establishment);
         $feedback->setAuthor($loggedUser);
+        $feedback->setCreatedAt(new \DateTimeImmutable());
+        $feedback->setUpdatedAt(new \DateTimeImmutable());
 
         return $feedback;
     }

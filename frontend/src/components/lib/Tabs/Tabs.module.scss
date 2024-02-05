@@ -89,6 +89,10 @@
   }
 
   &Content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-5);
+
     &_Big {
       padding: var(--size-5);
     }

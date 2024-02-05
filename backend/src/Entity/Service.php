@@ -61,7 +61,7 @@ class Service
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read', 'read-establishment'])]
+    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read', 'read-establishment', 'appointment-me'])]
     #[Assert\NotBlank]
     #[Assert\NotNull]
     #[ORM\Column(length: 50, unique: true)]
@@ -96,11 +96,11 @@ class Service
     #[ORM\JoinColumn(nullable: false)]
     private ?ServiceType $type = null;
 
-    #[Groups(['read-establishment'])]
+    #[Groups(['read-establishment', 'appointment-me'])]
     #[ORM\Column]
     private ?int $duration = null;
 
-    #[Groups(['read-establishment'])]
+    #[Groups(['read-establishment', 'appointment-me'])]
     #[ORM\Column]
     private ?float $price = null;
 

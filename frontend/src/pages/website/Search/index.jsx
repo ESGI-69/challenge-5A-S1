@@ -36,7 +36,7 @@ export default function Search() {
             adress={establishment.street}
             city={establishment.city}
             zipCode={establishment.zipCode}
-            reviewsNumber={2}
+            reviewsNumber={establishment.feedback.length}
             globalReview={3}
             key={establishment.id}
             id={establishment.id}

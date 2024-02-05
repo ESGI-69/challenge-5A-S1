@@ -1,35 +1,44 @@
 import style from './GlobalNotation.module.scss';
 import Note from '@/components/Notation/Note';
+import PropsType from 'prop-types';
 
-function GlobalNotation() {
+function GlobalNotation({
+  globalAverage = 0,
+  subFeedbacks,
+  reviewsCount = 0,
+}) {
   return (
     <div className={style.GlobalNotation}>
       <div className={style.GlobalNotationTotalAverage}>
-        4,2
+        {globalAverage}
       </div>
       <div className={style.GlobalNotationDetail}>
-        <span className={style.GlobalNotationDetailItem}>
-          Accueil
-          <Note value={4} className={style.GlobalNotationDetailItemAverage} />
-        </span>
-        <span className={style.GlobalNotationDetailItem}>
-          Propreté
-          <Note value={4} className={style.GlobalNotationDetailItemAverage} />
-        </span>
-        <span className={style.GlobalNotationDetailItem}>
-          Cadre & Ambiance
-          <Note value={4} className={style.GlobalNotationDetailItemAverage} />
-        </span>
-        <span className={style.GlobalNotationDetailItem}>
-          Qualité de la prestation
-          <Note value={4} className={style.GlobalNotationDetailItemAverage} />
-        </span>
+
+        {subFeedbacks?.map((subFeedback) => (
+          <span
+            key={subFeedback.id}
+            className={style.GlobalNotationDetailItem}
+          >
+            {subFeedback.name}
+            <Note value={subFeedback.average} className={style.GlobalNotationDetailItemAverage} />
+          </span>
+        ))}
         <span className={style.GlobalNotationCount}>
-          315 clients ont donné leur avis
+          {reviewsCount} clients ont donné leur avis
         </span>
       </div>
     </div>
   );
 }
+
+GlobalNotation.propTypes = {
+  globalAverage: PropsType.number,
+  subFeedbacks: PropsType.arrayOf(PropsType.shape({
+    id: PropsType.number.isRequired,
+    name: PropsType.string.isRequired,
+    average: PropsType.number.isRequired,
+  })),
+  reviewsCount: PropsType.number,
+};
 
 export default GlobalNotation;

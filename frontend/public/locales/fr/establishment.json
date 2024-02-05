@@ -3,7 +3,10 @@
   "advantages": "24h/24 - Paiement sur place - Confirmation immédiate - Annulation gratuite",
   "makeAnAppointment": "Prendre RDV",
   "myApointments": {
-    "title": "Mes RDV"
+    "title": "Mes RDV",
+    "titlePast": "Mes RDV passés",
+    "seePast": "Voir les RDV passés",
+    "hidePast": "Cacher les RDV passés"
   },
   "services": {
     "title": "Choix de la prestation"
@@ -13,7 +16,10 @@
   },
   "tabs": {
     "globalNotation": "Note globale",
-    "reviews": "Avis"
+    "reviews": "Avis",
+     "previousComments": "Page précédente",
+     "nextComments": "Page suivante",
+     "noComments": "Aucun avis pour le moment"
   },
   "list": {
     "title": "Mes Établissements",
