@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 /**
  * @method  getSupportedTypes(?string $format)
  */
-class EstablishmentCreationDenormalizer implements DenormalizerInterface
+class EstablishmentAddressDenormalizer implements DenormalizerInterface
 {
     use DenormalizerAwareTrait;
 
