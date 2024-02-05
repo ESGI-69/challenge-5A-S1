@@ -1,242 +1,132 @@
-import { useContext, useEffect, useState } from 'react';
-import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
-import Input from '@/components/lib/Input';
-import Button from '@/components/lib/Button';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { EstablishmentTypeContext } from '@/contexts/api/EstablishmentTypeContext';
-import { ProfileContext } from '@/contexts/ProfileContext';
 import styles from './EstablishmentUpdateForm.module.scss';
-import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import Button from '@/components/lib/Button';
+import Input from '@/components/lib/Input';
 
-export default function RegisterUpdateForm() {
+export default function RegisterUpdateForm({
+  establishmentTypes,
+  type,
+  email,
+  street,
+  city,
+  zipCode,
+  country,
+  onSubmit,
+  isLoading = false,
+}) {
   const { t } = useTranslation('establishment');
-  const navigate = useNavigate();
-  const { post, isPostEstablishmentLoading, getById: getEstablishmentById, establishment, isEstablishmentLoading } = useContext(EstablishmentContext);
-  const { profile } = useContext(ProfileContext);
-  const { establishmentTypes, isEstablishmentTypesLoading, get: getEstablishmentTypes } = useContext(EstablishmentTypeContext);
-  const { id } = useParams();
 
-  const [ emailInput, setEmailInput ] = useState({
-    id: crypto.randomUUID(),
-    name: 'email',
-    value: '',
+  const [ form, setForm ] = useState({
+    email,
+    type: type.id,
+    street,
+    city,
+    zipCode,
+    country,
   });
-
-  const [ establishmentTypeInput, setEstablishmentTypeInput ] = useState({
-    id: crypto.randomUUID(),
-    name: 'type',
-    value: '',
-  });
-
-  const [ streetInput, setStreetInput ] = useState({
-    id: crypto.randomUUID(),
-    name: 'street',
-    value: '',
-  });
-
-  const [ cityInput, setCityInput ] = useState({
-    id: crypto.randomUUID(),
-    name: 'city',
-    value: '',
-  });
-
-  const [ zipCodeInput, setZipCodeInput ] = useState({
-    id: crypto.randomUUID(),
-    name: 'zipCode',
-    value: '',
-  });
-
-  const [ countryInput, setCountryInput ] = useState({
-    id: crypto.randomUUID(),
-    name: 'country',
-    value: '',
-  });
-
-  const handleEmailInputChange = (e) => {
-    setEmailInput((old) => ({
-      ...old,
-      value: e.target.value,
-    }));
-  };
-
-  const handleEstablishmentTypeInputChange = (e) => {
-    setEstablishmentTypeInput((old) => ({
-      ...old,
-      value: e.target.value,
-    }));
-  };
-
-  const handleStreetInputChange = (e) => {
-    setStreetInput((old) => ({
-      ...old,
-      value: e.target.value,
-    }));
-  };
-
-  const handleCityInputChange = (e) => {
-    setCityInput((old) => ({
-      ...old,
-      value: e.target.value,
-    }));
-  };
-
-  const handleZipCodeInputChange = (e) => {
-    setZipCodeInput((old) => ({
-      ...old,
-      value: e.target.value,
-    }));
-  };
-
-  const handleCountryInputChange = (e) => {
-    setCountryInput((old) => ({
-      ...old,
-      value: e.target.value,
-    }));
-  };
-
-  useEffect(() => {
-    const effect = async () => {
-      await getEstablishmentTypes();
-      await getEstablishmentById(id);
-      setEmailInput((old) => ({
-        ...old,
-        value: establishment.email,
-      }));
-      setEstablishmentTypeInput((old) => ({
-        ...old,
-        value: establishment.type.id,
-      }));
-      setStreetInput((old) => ({
-        ...old,
-        value: establishment.street,
-      }));
-      setCityInput((old) => ({
-        ...old,
-        value: establishment.city,
-      }));
-      setZipCodeInput((old) => ({
-        ...old,
-        value: establishment.zipCode,
-      }));
-      setCountryInput((old) => ({
-        ...old,
-        value: establishment.country,
-      }));
-    };
-    effect();
-  }, []);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
     const data = {
-      email: formData.get('email'),
-      type: formData.get('type'),
-      street: formData.get('street'),
-      city: formData.get('city'),
-      zipCode: formData.get('zipCode'),
-      country: formData.get('country'),
-      company: `/api/companies/${profile.company.id}`,
+      email: form.email,
+      type: `/api/establishment_types/${form.type}`,
+      street: form.street,
+      city: form.city,
+      zipCode: form.zipCode,
+      country: form.country,
     };
-    await post(data);
-    navigate('/backoffice/establishments');
+    onSubmit(data);
   };
 
   return (
-    <>
-      { (isEstablishmentLoading || isEstablishmentTypesLoading || !establishment ) && (
-        <span>{t('form.loading')}</span>
-      )}
-      { (!isEstablishmentLoading && !isEstablishmentTypesLoading) && (
-        <form className={styles.EstablishmentCreationForm} onSubmit={handleFormSubmit}>
-          <div className={styles.EstablishmentCreationFormField}>
-            <label htmlFor={emailInput.id} className={styles.EstablishmentCreationFormFieldLabel}>{t('form.email')} *</label>
-            <Input
-              id={emailInput.id}
-              name={emailInput.name}
-              placeholder={t('form.email')}
-              disabled={isPostEstablishmentLoading}
-              value={emailInput.value}
-              onInput={handleEmailInputChange}
-              required
-            />
-          </div>
-          <div className={styles.EstablishmentCreationFormField}>
-            <label htmlFor={streetInput.id} className={styles.EstablishmentCreationFormFieldLabel}>{t('form.street')} *</label>
-            <Input
-              id={streetInput.id}
-              name={streetInput.name}
-              placeholder={t('form.street')}
-              disabled={isPostEstablishmentLoading}
-              value={streetInput.value}
-              onInput={handleStreetInputChange}
-              required
-            />
-          </div>
-          <div className={styles.EstablishmentCreationFormField}>
-            <label htmlFor={cityInput.id} className={styles.EstablishmentCreationFormFieldLabel}>{t('form.city')} *</label>
-            <Input
-              id={cityInput.id}
-              name={cityInput.name}
-              placeholder={t('form.city')}
-              disabled={isPostEstablishmentLoading}
-              value={cityInput.value}
-              onInput={handleCityInputChange}
-              required
-            />
-          </div>
-          <div className={styles.EstablishmentCreationFormField}>
-            <label htmlFor={zipCodeInput.id} className={styles.EstablishmentCreationFormFieldLabel}>{t('form.zipCode')} *</label>
-            <Input
-              id={zipCodeInput.id}
-              name={zipCodeInput.name}
-              placeholder={t('form.zipCode')}
-              disabled={isPostEstablishmentLoading}
-              value={zipCodeInput.value}
-              onInput={handleZipCodeInputChange}
-              type="number"
-              required
-            />
-          </div>
-          <div className={styles.EstablishmentCreationFormField}>
-            <label htmlFor={countryInput.id} className={styles.EstablishmentCreationFormFieldLabel}>{t('form.country')} *</label>
-            <Input
-              id={countryInput.id}
-              name={countryInput.name}
-              placeholder={t('form.country')}
-              disabled={isPostEstablishmentLoading}
-              value={countryInput.value}
-              onInput={handleCountryInputChange}
-              required
-            />
-          </div>
-          { isEstablishmentTypesLoading && establishmentTypes.length === 0 && (
-            <span>{t('form.establishmentTypeLoading')}</span>
-          )}
-          { !isEstablishmentTypesLoading && establishmentTypes.length > 0 && (
-            <div className={styles.EstablishmentCreationFormField}>
-              <label htmlFor={establishmentTypeInput.id} className={styles.EstablishmentCreationFormFieldLabel}>{t('form.establishmentType')} *</label>
-              <select
-                id={establishmentTypeInput.id}
-                name={establishmentTypeInput.name}
-                disabled={isPostEstablishmentLoading}
-                value={establishmentTypeInput.value}
-                onChange={handleEstablishmentTypeInputChange}
-                required
-              >
-                {establishmentTypes.map(({ id, name }) => ({
-                  id: `api/establishment_types/${id}`,
-                  name,
-                })).map((establishmentType) => (
-                  <option key={establishmentType.id} value={establishmentType.id}>{establishmentType.name}</option>
-                ))}
-              </select>
-            </div>
-          )}
-          <Button type="submit" disabled={isPostEstablishmentLoading}>{t('form.actions.create')}</Button>
-        </form>
-      )}
-    </>
+    <form onSubmit={handleFormSubmit} className={styles.EstablishmentUpdateForm}>
+      <div className={styles.EstablishmentUpdateFormGroup}>
+        <label htmlFor="email">{t('form.email')}</label>
+        <Input
+          disabled={isLoading}
+          type="email"
+          id="email"
+          value={form.email}
+          onChange={(newValue) => setForm({ ...form, email: newValue })}
+        />
+      </div>
+      <div className={styles.EstablishmentUpdateFormGroup}>
+        <label htmlFor="type">{t('form.establishmentType')}</label>
+        <select
+          disabled={isLoading}
+          id="type"
+          value={form.type}
+          onChange={(e) => setForm({ ...form, type: e.target.value })}
+        >
+          {establishmentTypes.map((type) => (
+            <option key={type.id} value={type.id}>{type.name}</option>
+          ))}
+        </select>
+      </div>
+      <div className={styles.EstablishmentUpdateFormGroup}>
+        <label htmlFor="street">{t('form.street')}</label>
+        <Input
+          disabled={isLoading}
+          type="text"
+          id="street"
+          value={form.street}
+          onChange={(newValue) => setForm({ ...form, street: newValue })}
+        />
+      </div>
+      <div className={styles.EstablishmentUpdateFormGroup}>
+        <label htmlFor="city">{t('form.city')}</label>
+        <Input
+          disabled={isLoading}
+          type="text"
+          id="city"
+          value={form.city}
+          onChange={(newValue) => setForm({ ...form, city: newValue })}
+        />
+      </div>
+      <div className={styles.EstablishmentUpdateFormGroup}>
+        <label htmlFor="zipCode">{t('form.zipCode')}</label>
+        <Input
+          disabled={isLoading}
+          type="text"
+          id="zipCode"
+          value={form.zipCode}
+          onChange={(newValue) => setForm({ ...form, zipCode: newValue })}
+        />
+      </div>
+      <div className={styles.EstablishmentUpdateFormGroup}>
+        <label htmlFor="country">{t('form.country')}</label>
+        <Input
+          disabled={isLoading}
+          type="text"
+          id="country"
+          value={form.country}
+          onChange={(newValue) => setForm({ ...form, country: newValue })}
+        />
+      </div>
+      <Button disabled={isLoading} type="submit">
+        {t('update', { ns: 'base' })}
+      </Button>
+    </form>
   );
 }
+
+RegisterUpdateForm.propTypes = {
+  establishmentTypes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  })).isRequired,
+  type: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
+  email: PropTypes.string.isRequired,
+  street: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  zipCode: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+};
+

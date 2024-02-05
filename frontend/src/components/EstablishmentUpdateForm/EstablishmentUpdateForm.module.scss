@@ -1,7 +1,7 @@
 .EstablishmentUpdateForm {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   width: 100%;
   padding: var(--size-3);
@@ -11,16 +11,16 @@
   margin-bottom: var(--size-3);
   margin-top: var(--size-3);
   gap: var(--size-3);
-
-  &Field {
+  
+  &Group {
     display: flex;
     flex-direction: column;
-    gap: var(--size-1);
+    gap: var(--size-2);
     width: 100%;
 
-    &Label {
-      font-size: var(--font-size-2);
-      font-weight: var(--font-weight-5);
+    label {
+      font-size: var(--size-3);
+      font-weight: 600;
     }
   }
 }

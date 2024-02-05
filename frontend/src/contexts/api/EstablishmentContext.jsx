@@ -2,6 +2,8 @@ import { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import apiCall from '@/axios';
 import queryBuilder from '@/utils/queryBuilder';
+import toast from 'react-hot-toast';
+import i18n from 'i18next';
 
 const initialState = {
   establishments: [],
@@ -11,6 +13,7 @@ const initialState = {
   isEstablishmentLoading: false,
 
   isPostEstablishmentLoading: false,
+  isPatchEstablishmentLoading: false,
 
   isPostOpeningHourLoading: false,
   isPatchOpeningHourLoading: false,
@@ -44,6 +47,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         isPostEstablishmentLoading: action.payload,
+      };
+    case 'isPatchEstablishmentLoading':
+      return {
+        ...state,
+        isPatchEstablishmentLoading: action.payload,
       };
     case 'isPostOpeningHourLoading':
       return {
@@ -113,11 +121,36 @@ export default function EstablishmentProvider({ children }) {
     });
     try {
       await apiCall.post('/establishments', data);
+      toast.success(i18n.t('events.creation.success', { ns: 'establishment' }));
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.creation.error', { ns: 'establishment' }));
     } finally {
       dispatch({
         type: 'isPostEstablishmentLoading',
+        payload: false,
+      });
+    }
+  };
+
+  const patch = async (id, data) => {
+    dispatch({
+      type: 'isPatchEstablishmentLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.patch(`/establishments/${id}`, data, {
+        headers: {
+          'Content-Type': 'application/merge-patch+json',
+        },
+      });
+      toast.success(i18n.t('events.update.success', { ns: 'establishment' }));
+    } catch (error) {
+      console.error(error);
+      toast.error(i18n.t('events.update.error', { ns: 'establishment' }));
+    } finally {
+      dispatch({
+        type: 'isPatchEstablishmentLoading',
         payload: false,
       });
     }
@@ -130,8 +163,10 @@ export default function EstablishmentProvider({ children }) {
     });
     try {
       await apiCall.post('/opening_hours', data);
+      toast.success(i18n.t('events.openingHours.success', { ns: 'establishment' }));
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.openingHours.error', { ns: 'establishment' }));
     } finally {
       dispatch({
         type: 'isPostOpeningHourLoading',
@@ -151,8 +186,10 @@ export default function EstablishmentProvider({ children }) {
           'Content-Type': 'application/merge-patch+json',
         },
       });
+      toast.success(i18n.t('events.openingHours.success', { ns: 'establishment' }));
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.openingHours.error', { ns: 'establishment' }));
     } finally {
       dispatch({
         type: 'isPatchOpeningHourLoading',
@@ -170,8 +207,10 @@ export default function EstablishmentProvider({ children }) {
       getById,
       establishment: state.establishment,
       isEstablishmentLoading: state.isEstablishmentLoading,
+      isPatchEstablishmentLoading: state.isPatchEstablishmentLoading,
 
       post,
+      patch,
       postOpeningHour,
       isPostOpeningHourLoading: state.isPostOpeningHourLoading,
       patchOpeningHour,

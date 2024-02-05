@@ -1,0 +1,11 @@
+{
+  "title": "Tableau de bord",
+  "admin": {},
+  "backToUserLand": "Retour à l'espace utilisateur",
+  "presta": {
+    "ownedEstablishments_zero": "Vous n'avez aucun établissement",
+    "ownedEstablishments_one": "Vous avez 1 établissement",
+    "ownedEstablishments_other": "Vous avez {{count}} établissements",
+    "addEstablishment": "Ajouter un établissement"
+  }
+}

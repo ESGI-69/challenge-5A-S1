@@ -22,6 +22,7 @@ import Search from '@/pages/website/Search';
 
 import CompanyProvider from '@/contexts/api/CompanyContext';
 import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
+import EstablishmentTypeProvider from './contexts/api/EstablishmentTypeContext';
 
 const router = createBrowserRouter([
   {
@@ -94,7 +95,7 @@ const router = createBrowserRouter([
           },
           {
             path: ':id',
-            element: <EstablishmentProvider><EstablishmentUpdate /></EstablishmentProvider>,
+            element: <EstablishmentTypeProvider><EstablishmentProvider><EstablishmentUpdate /></EstablishmentProvider></EstablishmentTypeProvider>,
           },
         ],
       },

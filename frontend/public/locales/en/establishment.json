@@ -52,5 +52,19 @@
       "type": "Type"
     }
   },
-  "openingHourSelector": "Select the opening hours"
+  "openingHourSelector": "Select the opening hours",
+  "events": {
+    "creation": {
+      "success": "The establishment has been created successfully",
+      "error": "An error occured while creating the establishment"
+    },
+    "update": {
+      "success": "The establishment has been updated successfully",
+      "error": "An error occured while updating the establishment"
+    },
+    "openingHours": {
+      "success": "The opening hours have been updated successfully",
+      "error": "An error occured while updating the opening hours"
+    }
+  }
 }

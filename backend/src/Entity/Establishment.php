@@ -19,7 +19,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
-use App\Denormalizer\EstablishmentCreationDenormalizer; // Import the custom denormalizer class
+use App\Denormalizer\EstablishmentAddressDenormalizer; // Import the custom denormalizer class
 
 #[ORM\Entity(repositoryClass: EstablishmentRepository::class)]
 #[ApiResource(
@@ -37,14 +37,17 @@ use App\Denormalizer\EstablishmentCreationDenormalizer; // Import the custom den
         new Post(
             denormalizationContext: [
                 'groups' => ['create-establishment'],
-                'denormalizer' => EstablishmentCreationDenormalizer::class, // Add the custom denormalizer class
+                'denormalizer' => EstablishmentAddressDenormalizer::class, // Add the custom denormalizer class
             ],
             securityPostDenormalize: 'is_granted("ROLE_PRESTA") and object.getCompany() == user.getCompany()',
             securityMessage: 'You can only create an establishment for your company',
             securityPostDenormalizeMessage: 'You can only create an establishment for your company',
         ),
         new Patch(
-            denormalizationContext: ['groups' => ['update-establishment']],
+            denormalizationContext: [
+                'groups' => ['update-establishment'],
+                'denormalizer' => EstablishmentAddressDenormalizer::class, // Add the custom denormalizer class
+            ],
             securityPostDenormalize: 'is_granted("ROLE_PRESTA") and object.getCompany() == user.getCompany()',
             securityMessage: 'You can only update an establishment for your company',
             securityPostDenormalizeMessage: 'You can only update an establishment for your company',
@@ -126,7 +129,7 @@ class Establishment
     ])]
     #[ORM\ManyToOne(inversedBy: 'establishments')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment'])]
+    #[Groups(['read-establishment', 'create-establishment'])]
     private ?Company $company = null;
 
     #[ORM\OneToMany(mappedBy: 'preferedEstablishment', targetEntity: Employee::class)]
@@ -153,7 +156,7 @@ class Establishment
     #[ORM\JoinColumn(nullable: false)]
     private ?EstablishmentType $type = null;
 
-    #[ORM\ManyToMany(targetEntity: FeedbackType::class, mappedBy: 'Establishments')]
+    #[ORM\ManyToMany(targetEntity: FeedbackType::class, mappedBy: 'establishments')]
     private Collection $feedbackTypes;
 
     public function __construct()
