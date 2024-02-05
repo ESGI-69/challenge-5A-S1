@@ -16,14 +16,12 @@ class GetAppointmentMeController
     $this->appointmentRepository = $appointmentRepository;
   }
 
-  public function __invoke(string $id): array
+  public function __invoke(): array
   {
     $user = $this->security->getUser();
-    $establishmentId = $id;
     $appointments = $this->appointmentRepository->findBy(
       [
         'client' => $user,
-        'establishment' => $establishmentId,
       ]
     );
 

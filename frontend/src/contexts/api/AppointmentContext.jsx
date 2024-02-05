@@ -35,7 +35,7 @@ export default function AppointmentProvider({ children }) {
       payload: true,
     });
     try {
-      const { data } = await apiCall.get(`/appointments/${establishmentId}/me`);
+      const { data } = await apiCall.get(`/appointments/me?establishment.id=${establishmentId}`);
       dispatch({
         type: 'myAppointments',
         payload: data,

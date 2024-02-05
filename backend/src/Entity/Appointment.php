@@ -24,9 +24,8 @@ use App\Controller\Appointment\GetAppointmentMeController;
             security: 'is_granted("ROLE_ADMIN")',
             normalizationContext: ['groups' => ['appointment-getall']]
         ),
-        //pass the establishment id as a parameter to the controller
         new GetCollection(
-            uriTemplate: '/appointments/{id}/me',
+            uriTemplate: '/appointments/me',
             security: 'is_granted("ROLE_USER")',
             normalizationContext: ['groups' => ['appointment-me']],
             controller: GetAppointmentMeController::class,
@@ -51,6 +50,13 @@ use App\Controller\Appointment\GetAppointmentMeController;
             security: 'is_granted("ROLE_ADMIN")',
         )
     ],
+)]
+
+#[ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'establishment.id' => 'exact',
+    ]
 )]
 
 class Appointment
