@@ -130,6 +130,7 @@ export default function ProfileProvider({ children }) {
       profile: state.profile,
       login,
       logout,
+      isLoggingIn: state.isLoggingIn,
     }} >
       {children}
     </ProfileContext.Provider>
