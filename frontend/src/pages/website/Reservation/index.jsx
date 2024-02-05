@@ -9,6 +9,7 @@ import { useContext, useEffect } from 'react';
 import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import { ServiceContext } from '@/contexts/api/ServiceContext';
 import { AppointmentContext } from '@/contexts/api/AppointmentContext';
+import Tag from '@/components/lib/Tag';
 
 export default function Reservation () {
 
@@ -17,13 +18,15 @@ export default function Reservation () {
   const { post, appointment, isPostAppointmentLoading } = useContext(AppointmentContext);
 
   const [ selectedDate, setSelectedDate ] = useState(null);
+  const [ selectedEmployee, setSelectedEmployee ] = useState(null);
 
-  const handleDateSelect = (date) => {
+  const handleDateSelect = (date, employeeId) => {
     setSelectedDate(date);
+    setSelectedEmployee(employeeId);
   };
 
   const handlePayment = () => {
-    const employeeId = 1;
+    const employeeId = selectedEmployee;
     const establishmentId = 1;
     const startDate = selectedDate;
     const endDate = selectedDate;
@@ -59,6 +62,7 @@ export default function Reservation () {
     service.workingHoursRanges.forEach(range => {
       const startDate = new Date(range.startDate);
       const endDate = new Date(range.endDate);
+      const serviceEmployee = range.Employee.id;
 
       let currentTime = new Date(startDate.getTime());
 
@@ -66,6 +70,7 @@ export default function Reservation () {
         const timeSlot = {
           time: currentTime.toISOString().slice(11, 16), // format HH:mm
           available: true, // vérifier ici si le créneau est déjà pri
+          employee: serviceEmployee,
         };
 
         // Trouvez la semaine correspondante ou créez-en une nouvelle si elle n'existe pas
@@ -167,6 +172,7 @@ export default function Reservation () {
               <div className={styles.AppointementPickedSpec}>
                 <span>{new Date(selectedDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                 <span className={styles.AppointementPickedSpecTime}>à {new Date(selectedDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
+                <span> avec employé id : {selectedEmployee}</span>
               </div>
             </div>
             <div className={styles.AppointementPickedAction}>
@@ -181,9 +187,13 @@ export default function Reservation () {
           <h2 className={styles.PageTitle}>3. Indentification</h2>
           <div className={styles.Identification}>
             <h2 className={styles.PageTitle}>Nouveau sur platiny ?</h2>
-            <Button variant="black" isPlain="true">Créer mon compte</Button>
+            <Link to="/register">
+              <Button variant="black" isPlain="true">Créer mon compte</Button>
+            </Link>
             <h2 className={styles.PageTitle}>Vous avez déjà utilisé platiny ?</h2>
-            <Button variant="black">Se connecter</Button>
+            <Link to="/login">
+              <Button variant="black">Se connecter</Button>
+            </Link>
           </div>
         </>
       )}
@@ -215,11 +225,11 @@ export default function Reservation () {
               <span> {service.price}€</span>
             </div>
             <div className={styles.PaymentMethod}>
-              <Button onClick={handlePayment} variant="black">Payer {service.price}€</Button>
+              <Button onClick={appointment ? null : handlePayment} variant={appointment ? 'success' : 'black'}>
+                {isPostAppointmentLoading ? 'Loading...' : appointment ? `Votre rendez-vous est confirmé pour le ${new Date(appointment.startDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} à ${new Date(appointment.startDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })} ✔️ ` : `Payer ${service.price}€`}
+              </Button>
             </div>
-
           </div>
-
         </>
       )}
 

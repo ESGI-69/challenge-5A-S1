@@ -46,6 +46,7 @@ class WorkingHoursRange
     #[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'workingHoursRanges')]
     private Collection $services;
 
+    #[Groups(['read-service'])]
     #[ORM\ManyToOne(inversedBy: 'workingHoursRanges')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Employee $Employee = null;

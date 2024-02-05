@@ -85,6 +85,10 @@ export default function AppointmentProvider({ children }) {
     });
     try {
       await apiCall.post('/appointments', data);
+      dispatch({
+        type: 'appointment',
+        payload: data,
+      });
     } catch (error) {
       console.error(error);
     } finally {

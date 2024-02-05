@@ -84,7 +84,7 @@ class Employee
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['employee-get', 'employee-getall', 'read-company-employees', 'read-establishment-employees', 'appointment-me'])]
+    #[Groups(['employee-get', 'employee-getall', 'read-company-employees', 'read-establishment-employees','read-service','appointment-me'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'employees')]

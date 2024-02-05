@@ -51,6 +51,7 @@ const Schedule = React.forwardRef(function Schedule(
                           <button  key={index} className={styles.ColumnButton} onClick={() => {
                             onDateSelect(
                               new Date(`${day.date} ${appointement.time}`).toISOString(),
+                              appointement.employee,
                             );}
                           }
                           >{appointement.time}</button>
