@@ -22,15 +22,13 @@ final class DefaultUsersStory extends Story
           'firstname' => 'Chad',
           'lastname' => 'Giga',
           'password' => password_hash('password', PASSWORD_BCRYPT),
-          'phonenumber' => '+3369696969',
           'roles' => ['ROLE_USER', 'ROLE_ADMIN'],
         ]);
         UserFactory::createOne([
           'email' => 'user@platiny.com',
-          'firstname' => 'Peon',
-          'lastname' => 'Juste',
+          'firstname' => 'Juste',
+          'lastname' => 'Le Blanc',
           'password' => password_hash('password', PASSWORD_BCRYPT),
-          'phonenumber' => '+3369696969',
           'roles' => ['ROLE_USER'],
         ]);
     }
