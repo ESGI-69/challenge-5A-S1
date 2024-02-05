@@ -31,11 +31,11 @@ export default function RegisterUpdateForm({
     e.preventDefault();
     const data = {
       email: form.email,
-      // // type: `/api/establishment_types/${form.type}`,
-      // street: form.street,
-      // city: form.city,
-      // zipCode: form.zipCode,
-      // country: form.country,
+      type: `/api/establishment_types/${form.type}`,
+      street: form.street,
+      city: form.city,
+      zipCode: form.zipCode,
+      country: form.country,
     };
     onSubmit(data);
   };
