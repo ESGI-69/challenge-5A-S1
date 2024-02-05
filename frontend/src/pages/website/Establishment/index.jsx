@@ -140,7 +140,7 @@ function Establishment() {
             ]}
             zoomLevel={13}
             />
-          )};
+          )}
         </div>
 
       </div>

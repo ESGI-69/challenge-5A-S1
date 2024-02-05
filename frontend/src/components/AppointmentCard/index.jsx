@@ -4,6 +4,8 @@ import { dateTimeFull } from '@/utils/formater/date';
 import Button from '@/components/lib/Button';
 import { useTranslation } from 'react-i18next';
 import { BanknotesIcon, CalendarIcon, ClockIcon } from '@heroicons/react/20/solid';
+import Modal from 'react-modal';
+import { useContext, useEffect, useState } from 'react';
 
 function AppointmentCard({
   appointment,
@@ -11,6 +13,12 @@ function AppointmentCard({
   const { t } = useTranslation('appointmentCard');
 
   const isPast = new Date(appointment.endDate) < new Date();
+
+  const [ modalIsOpen, setIsModalOpen ] = useState(false);
+
+  const openReviewModal = () => {
+    setIsModalOpen(true);
+  };
 
   return (
     <div className={styles.AppointmentCard}>
@@ -32,10 +40,31 @@ function AppointmentCard({
         </span>
       </div>
       {isPast &&
-       <Button variant="black">
+       <Button
+         variant="black"
+         onClick={openReviewModal}
+       >
          {t('leaveComment')}
        </Button>
       }
+      <Modal
+        isOpen={modalIsOpen}
+        ariaHideApp={false}
+        className={styles.AppointmentCardModal}
+        style={{
+          overlay: {
+            zIndex: 1000,
+          },
+        }}
+      >
+        <p>Test</p>
+        <Button
+          variant="black"
+          onClick={() => setIsModalOpen(false)}
+        >
+          Cancel
+        </Button>
+      </Modal>
     </div>
   );
 }
