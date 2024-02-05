@@ -3,9 +3,9 @@ import Note from '@/components/Notation/Note';
 import PropsType from 'prop-types';
 
 function GlobalNotation({
-  globalAverage,
+  globalAverage = 0,
   subFeedbacks,
-  reviewsCount,
+  reviewsCount = 0,
 }) {
   return (
     <div className={style.GlobalNotation}>
@@ -32,13 +32,13 @@ function GlobalNotation({
 }
 
 GlobalNotation.propTypes = {
-  globalAverage: PropsType.number.isRequired,
+  globalAverage: PropsType.number,
   subFeedbacks: PropsType.arrayOf(PropsType.shape({
     id: PropsType.number.isRequired,
     name: PropsType.string.isRequired,
     average: PropsType.number.isRequired,
-  })).isRequired,
-  reviewsCount: PropsType.number.isRequired,
+  })),
+  reviewsCount: PropsType.number,
 };
 
 export default GlobalNotation;
