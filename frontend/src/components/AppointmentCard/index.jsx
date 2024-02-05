@@ -11,8 +11,6 @@ function AppointmentCard({
   const { t } = useTranslation('appointmentCard');
 
   const isPast = new Date(appointment.endDate) < new Date();
-  console.log('appointment date', new Date(appointment.endDate));
-  console.log('now', new Date());
 
   return (
     <div className={styles.AppointmentCard}>

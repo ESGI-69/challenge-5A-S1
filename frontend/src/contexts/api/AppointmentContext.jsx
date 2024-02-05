@@ -36,7 +36,6 @@ export default function AppointmentProvider({ children }) {
     });
     try {
       const { data } = await apiCall.get(`/appointments/${establishmentId}/me`);
-      console.log('data', data);
       dispatch({
         type: 'myAppointments',
         payload: data,
