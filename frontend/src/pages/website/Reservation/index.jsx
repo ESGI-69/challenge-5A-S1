@@ -8,10 +8,13 @@ import { ProfileContext } from '@/contexts/ProfileContext';
 import { useContext, useEffect } from 'react';
 import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import { ServiceContext } from '@/contexts/api/ServiceContext';
+import { AppointmentContext } from '@/contexts/api/AppointmentContext';
 
 export default function Reservation () {
 
   const { profile } = useContext(ProfileContext);
+
+  const { post, appointment, isPostAppointmentLoading } = useContext(AppointmentContext);
 
   const [ selectedDate, setSelectedDate ] = useState(null);
 
@@ -19,14 +22,21 @@ export default function Reservation () {
     setSelectedDate(date);
   };
 
-  const servicesPicked = [
-    {
-      id: 1,
-      name: 'Coloration + Shampoing Brushing cheveux courts',
-      price: 10,
-      duration: 30,
-    },
-  ];
+  const handlePayment = () => {
+    const employeeId = 1;
+    const establishmentId = 1;
+    const startDate = selectedDate;
+    const endDate = selectedDate;
+    const comment = 'test';
+    post({
+      employee: `/api/employees/${employeeId}`,
+      establishment: `/api/establishments/${establishmentId}`,
+      service: `/api/services/${serviceId}`,
+      startDate,
+      endDate,
+      comment,
+    });
+  };
 
   const serviceId = 1;
   const { getById, service, isServiceLoading } = useContext(ServiceContext);
@@ -205,7 +215,7 @@ export default function Reservation () {
               <span> {service.price}€</span>
             </div>
             <div className={styles.PaymentMethod}>
-              <Button variant="black">Payer {service.price}€</Button>
+              <Button onClick={handlePayment} variant="black">Payer {service.price}€</Button>
             </div>
 
           </div>
