@@ -80,7 +80,7 @@ class Establishment
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['read-establishment', 'employee-getall'])]
+    #[Groups(['read-establishment', 'employee-getall', 'appointment-read'])]
     private ?int $id = null;
 
     #[Assert\Email()]
@@ -155,8 +155,9 @@ class Establishment
     #[ORM\ManyToOne(inversedBy: 'establishments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?EstablishmentType $type = null;
-
+    
     #[ORM\ManyToMany(targetEntity: FeedbackType::class, mappedBy: 'establishments')]
+    #[Groups(['read-establishment'])]
     private Collection $feedbackTypes;
 
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Feedback::class)]

@@ -25,8 +25,12 @@ function Establishment() {
 
   const now = new Date();
 
-  const pastAppointments = myAppointments.filter(appointment => new Date(appointment.endDate) < now);
-  const futureAppointments = myAppointments.filter(appointment => new Date(appointment.endDate) >= now);
+  const pastAppointments = myAppointments
+    .filter(appointment => new Date(appointment.endDate) < now)
+    .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+  const futureAppointments = myAppointments
+    .filter(appointment => new Date(appointment.endDate) >= now)
+    .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
 
   const [ currentReviewsPage, setCurrentReviewsPage ] = useState(0);
   const [ isPastAppointmentsShowned, setIsPastAppointmentsShowned ] = useState(false);
@@ -90,7 +94,11 @@ function Establishment() {
             </h3>
             <div className={styles.EstablishmentLeftApointmentsSectionApointments}>
               {futureAppointments.map(appointment => (
-                <AppointmentCard key={appointment.id} appointment={appointment} />
+                <AppointmentCard
+                  key={appointment.id}
+                  appointment={appointment}
+                  feedbackTypes={establishment?.feedbackTypes}
+                />
               ))}
             </div>
             <Button variant="black" onClick={handlePastAppointmentsClick}>
@@ -103,7 +111,11 @@ function Establishment() {
                 </h3>
                 <div className={styles.EstablishmentLeftApointmentsSectionApointments}>
                   {pastAppointments.map(appointment => (
-                    <AppointmentCard key={appointment.id} appointment={appointment} />
+                    <AppointmentCard
+                      key={appointment.id}
+                      appointment={appointment}
+                      feedbackTypes={establishment?.feedbackTypes}
+                    />
                   ))}
                 </div>
               </>

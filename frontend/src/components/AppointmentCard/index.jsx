@@ -5,12 +5,14 @@ import Button from '@/components/lib/Button';
 import { useTranslation } from 'react-i18next';
 import { BanknotesIcon, CalendarIcon, ClockIcon } from '@heroicons/react/20/solid';
 import Modal from 'react-modal';
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function AppointmentCard({
   appointment,
+  feedbackTypes,
 }) {
   const { t } = useTranslation('appointmentCard');
+  const { i18n } = useTranslation();
 
   const isPast = new Date(appointment.endDate) < new Date();
 
@@ -19,11 +21,10 @@ function AppointmentCard({
   const openReviewModal = () => {
     setIsModalOpen(true);
   };
-
   return (
     <div className={styles.AppointmentCard}>
       <h4 className={styles.AppointmentCardDate}>
-        {dateTimeFull(appointment.startDate)}
+        {dateTimeFull(appointment.startDate, i18n.resolvedLanguage)}
       </h4>
       <p className={styles.AppointmentCardName}>
         {appointment.service.name}
@@ -39,7 +40,7 @@ function AppointmentCard({
           <CalendarIcon />{t('with')} {appointment.employee.firstname}
         </span>
       </div>
-      {isPast &&
+      {isPast && !appointment.feedback &&
        <Button
          variant="black"
          onClick={openReviewModal}
@@ -57,12 +58,32 @@ function AppointmentCard({
           },
         }}
       >
-        <p>Test</p>
+        <h4>{t('modal.title')}</h4>
+        <p>{t('modal.subText')}</p>
+        <div className={styles.AppointmentCardModalRating}>
+          {feedbackTypes?.map(feedbackType => (
+            <div key={feedbackType.id}>
+              {feedbackType.name}
+            </div>
+          ))}
+        </div>
+        <textarea
+          name=""
+          id=""
+          placeholder={t('modal.placeholder')}
+        >
+        </textarea>
         <Button
-          variant="black"
+          variant="primary"
           onClick={() => setIsModalOpen(false)}
         >
-          Cancel
+          {t('modal.confirm')}
+        </Button>
+        <Button
+          variant="danger"
+          onClick={() => setIsModalOpen(false)}
+        >
+          {t('modal.cancel')}
         </Button>
       </Modal>
     </div>
@@ -74,6 +95,9 @@ AppointmentCard.propTypes = {
     id: PropTypes.number,
     startDate: PropTypes.string,
     endDate: PropTypes.string,
+    feedback: PropTypes.shape({
+      id: PropTypes.number,
+    }),
     service: PropTypes.shape({
       name: PropTypes.string,
       price: PropTypes.number,
@@ -83,6 +107,11 @@ AppointmentCard.propTypes = {
       firstname: PropTypes.string,
     }),
   }),
+  feedbackTypes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  })),
+  hasFeedback: PropTypes.bool,
 };
 
 export default AppointmentCard;

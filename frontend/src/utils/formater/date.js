@@ -18,7 +18,7 @@ export const time = (date) => {
 
 export const dateTime = (date) => `${dayMonthYearNumber(date)} ${time(date)}`;
 
-export const dateTimeFull = (date) => {
+export const dateTimeFull = (date, language = 'en') => {
   const newDate = new Date(date);
   const options = {
     weekday: 'long',
@@ -28,5 +28,13 @@ export const dateTimeFull = (date) => {
     minute: 'numeric',
   };
 
-  return newDate.toLocaleString('fr-FR', options).replace(',', '');
+  let selectedLanguage;
+  if (language === 'en') {
+    selectedLanguage = 'en-US';
+  }
+  if (language === 'fr') {
+    selectedLanguage = 'fr-FR';
+  }
+
+  return newDate.toLocaleString(selectedLanguage, options).replace(',', '');
 };

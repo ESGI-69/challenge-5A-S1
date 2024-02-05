@@ -1,4 +1,11 @@
 {
   "leaveComment": "Laisser un commentaire",
-  "with": "avec"
+  "with": "avec",
+  "modal": {
+    "title": "Laisser un commentaire",
+    "subText": "Merci d'évaluer votre préstation.",
+    "placeholder": "Entrez votre commentaire ici",
+    "cancel": "Annuler",
+    "confirm": "Confirmer"
+  }
 }
