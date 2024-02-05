@@ -57,7 +57,7 @@ export default function RegisterUpdateForm({
         <select
           disabled={isLoading}
           id="type"
-          value={form.type.id}
+          value={form.type}
           onChange={(e) => setForm({ ...form, type: e.target.value })}
         >
           {establishmentTypes.map((type) => (
