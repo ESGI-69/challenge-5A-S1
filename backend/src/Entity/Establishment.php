@@ -126,7 +126,7 @@ class Establishment
     ])]
     #[ORM\ManyToOne(inversedBy: 'establishments')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment'])]
+    #[Groups(['read-establishment', 'create-establishment'])]
     private ?Company $company = null;
 
     #[ORM\OneToMany(mappedBy: 'preferedEstablishment', targetEntity: Employee::class)]
@@ -153,7 +153,7 @@ class Establishment
     #[ORM\JoinColumn(nullable: false)]
     private ?EstablishmentType $type = null;
 
-    #[ORM\ManyToMany(targetEntity: FeedbackType::class, mappedBy: 'Establishments')]
+    #[ORM\ManyToMany(targetEntity: FeedbackType::class, mappedBy: 'establishments')]
     private Collection $feedbackTypes;
 
     public function __construct()

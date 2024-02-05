@@ -52,5 +52,19 @@
       "type": "Type"
     }
   },
-  "openingHourSelector": "Selectionnez les horaires d'ouverture"
+  "openingHourSelector": "Selectionnez les horaires d'ouverture",
+  "events": {
+    "creation": {
+      "success": "L'établissement a bien été créé",
+      "error": "Une erreur est survenue lors de la création de l'établissement"
+    },
+    "update": {
+      "success": "L'établissement a bien été modifié",
+      "error": "Une erreur est survenue lors de la modification de l'établissement"
+    },
+    "openingHours": {
+      "success": "Les horaires d'ouverture ont bien été modifiés",
+      "error": "Une erreur est survenue lors de la modification des horaires d'ouverture"
+    }
+  }
 }
