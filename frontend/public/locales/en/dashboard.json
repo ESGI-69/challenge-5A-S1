@@ -1,0 +1,11 @@
+{
+  "title": "Dashboard",
+  "admin": {},
+  "backToUserLand": "Back to user land",
+  "presta": {
+    "ownedEstablishments_zero": "You don't have establishments",
+    "ownedEstablishments_one": "You have 1 establishment",
+    "ownedEstablishments_other": "You have {{count}} establishments",
+    "addEstablishment": "Add an establishment"
+  }
+}
