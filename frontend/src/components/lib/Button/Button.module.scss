@@ -84,4 +84,8 @@
     padding: var(--size-1);
     font-size: var(--font-size-0);
   }
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
 }
