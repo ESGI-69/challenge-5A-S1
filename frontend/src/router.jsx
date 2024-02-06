@@ -69,7 +69,7 @@ const router = createBrowserRouter([
         element: <CompanyRegister />,
       },
       {
-        path: '/:establishementSlug/reservation',
+        path: '/reservation/:serviceEstablishmentId',
         element:
         <ServiceProvider>
           <AppointmentProvider>

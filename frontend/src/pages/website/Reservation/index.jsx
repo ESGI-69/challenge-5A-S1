@@ -3,6 +3,7 @@ import Button from '@/components/lib/Button';
 import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/components/lib/Dropdown';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Schedule  from '@/components/Schedule';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import { useContext, useEffect } from 'react';
@@ -14,12 +15,10 @@ import Tag from '@/components/lib/Tag';
 export default function Reservation () {
 
   const { profile } = useContext(ProfileContext);
-
+  const { serviceEstablishmentId } = useParams();
   const { post, appointment, isPostAppointmentLoading } = useContext(AppointmentContext);
-
   const [ selectedDate, setSelectedDate ] = useState(null);
   const [ selectedEmployee, setSelectedEmployee ] = useState(null);
-
   const handleDateSelect = (date, employeeId) => {
     setSelectedDate(date);
     setSelectedEmployee(employeeId);
@@ -27,13 +26,12 @@ export default function Reservation () {
 
   const handlePayment = () => {
     const employeeId = selectedEmployee;
-    const establishmentId = 1;
     const startDate = selectedDate;
     const endDate = selectedDate;
     const comment = 'test';
     post({
       employee: `/api/employees/${employeeId}`,
-      establishment: `/api/establishments/${establishmentId}`,
+      establishment: `/api/establishments/${service.establishment.id}`,
       service: `/api/services/${serviceId}`,
       startDate,
       endDate,
@@ -41,7 +39,7 @@ export default function Reservation () {
     });
   };
 
-  const serviceId = 1;
+  const serviceId = serviceEstablishmentId;
   const { getById, service, isServiceLoading } = useContext(ServiceContext);
   const [ schedule, setSchedule ] = useState([]);
 
@@ -133,7 +131,7 @@ export default function Reservation () {
       <span className={styles.ReservationNotation}>
         4.5
       </span>
-
+      <br></br>
       <h2 className={styles.PageTitle}>1. Prestation selectionnée</h2>
       <div className={styles.ServicesPicked}>
         <div className={styles.ServicePicked}>
@@ -164,7 +162,7 @@ export default function Reservation () {
       <h2 className={styles.PageTitle}>2. Choix de la date et heure</h2>
       <div>
         {!selectedDate && (
-          <Schedule schedule={schedule} onDateSelect={handleDateSelect} />
+          <Schedule schedule={schedule} personSelected={person} onDateSelect={handleDateSelect} />
         )}
         {selectedDate && (
           <div className={styles.AppointementPicked}>
@@ -226,7 +224,7 @@ export default function Reservation () {
             </div>
             <div className={styles.PaymentMethod}>
               <Button onClick={appointment ? null : handlePayment} variant={appointment ? 'success' : 'black'}>
-                {isPostAppointmentLoading ? 'Loading...' : appointment ? `Votre rendez-vous est confirmé pour le ${new Date(appointment.startDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} à ${new Date(appointment.startDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })} ✔️ ` : `Payer ${service.price}€`}
+                {isPostAppointmentLoading ? 'Loading...' : appointment ? `Votre rendez-vous est confirmé pour le ${new Date(appointment.startDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} à ${new Date(appointment.startDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })} ✔️ ` : `Reserver pour ${service.price}€`}
               </Button>
             </div>
           </div>

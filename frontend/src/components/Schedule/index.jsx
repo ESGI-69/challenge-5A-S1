@@ -6,6 +6,7 @@ import EmptyArrow from '../lib/Icons/EmptyArrow';
 const Schedule = React.forwardRef(function Schedule(
   {
     schedule,
+    personSelected,
     onDateSelect,
     children,
     ...delegated
@@ -46,17 +47,25 @@ const Schedule = React.forwardRef(function Schedule(
                         <span className={styles.ColumnDate}>        {new Date(day.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}</span>
                       </div>
                       <div className={styles.ColumnBody}>
-
-                        {day.times.map((appointement, index) => (
-                          <button  key={index} className={styles.ColumnButton} onClick={() => {
-                            onDateSelect(
-                              new Date(`${day.date} ${appointement.time}`).toISOString(),
-                              appointement.employee,
-                            );}
+                        {day.times.map((appointement, index) => {
+                          if (appointement.employee !== personSelected.id) {
+                            return null;
                           }
-                          >{appointement.time}</button>
-                        ))}
-
+                          return (
+                            <button
+                              key={index}
+                              className={styles.ColumnButton}
+                              onClick={() => {
+                                onDateSelect(
+                                  new Date(`${day.date} ${appointement.time}`).toISOString(),
+                                  appointement.employee,
+                                );
+                              }}
+                            >
+                              {appointement.time}
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
                   ))}
