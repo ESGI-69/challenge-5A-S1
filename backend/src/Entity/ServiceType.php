@@ -29,7 +29,7 @@ class ServiceType
     private ?string $description = null;
 
     #[Groups(['read-establishment'])]
-    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Service::class)]
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Service::class, cascade: ['remove'], orphanRemoval: true)]
     private Collection $services;
 
     #[ORM\ManyToOne(inversedBy: 'serviceTypes')]

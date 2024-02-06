@@ -59,6 +59,24 @@
     }
   },
   "openingHourSelector": "Select the opening hours",
+  "serviceType": {
+    "title": "Select the service type",
+    "loading": "Loading service types...",
+    "empty": "No service type. Please create one.",
+    "actions": {
+      "create": "Create a new service type"
+    },
+    "toast": {
+      "deletion": {
+        "success": "The service type has been deleted successfully",
+        "error": "An error occured while deleting the service type"
+      },
+      "update": {
+        "success": "The service type has been updated successfully",
+        "error": "An error occured while updating the service type"
+      }
+    }
+  },
   "events": {
     "creation": {
       "success": "The establishment has been created successfully",

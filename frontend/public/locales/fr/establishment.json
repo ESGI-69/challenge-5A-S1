@@ -59,6 +59,24 @@
     }
   },
   "openingHourSelector": "Selectionnez les horaires d'ouverture",
+  "serviceType": {
+    "title": "Selectionnez les services",
+    "loading": "Chargement des types de services...",
+    "empty": "Aucun type de service. Créez en un pour commencer",
+    "actions": {
+      "create": "Créer un nouveau type de service"
+    },
+    "toast": {
+      "deletion": {
+        "success": "Le type de service a bien été supprimé",
+        "error": "Une erreur est survenue lors de la suppression du type de service"
+      },
+      "update": {
+        "success": "Le type de service a bien été modifié",
+        "error": "Une erreur est survenue lors de la modification du type de service"
+      }
+    }
+  },
   "events": {
     "creation": {
       "success": "L'établissement a bien été créé",

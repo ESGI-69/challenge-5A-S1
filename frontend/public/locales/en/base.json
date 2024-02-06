@@ -18,5 +18,6 @@
     "back": "Back",
     "applingChanges": "Applying changes...",
     "update": "Update",
-    "loading": "Loading"
+    "loading": "Loading",
+    "delete": "Delete"
 }
