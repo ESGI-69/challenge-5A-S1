@@ -44,6 +44,7 @@ export default function EstablishmentTypeProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isEstablishmentTypesLoading',
