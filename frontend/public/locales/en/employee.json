@@ -1,0 +1,16 @@
+{
+    "create": {
+        "title": "Employee creation",
+        "back": "Back to the list of employees"
+    },
+    "form": {
+        "firstname": "Firstname",
+        "lastname": "Lastname",
+        "avatar": "Avatar",
+        "preferedEstablishment": "Prefered establishment",
+        "establishmentsLoading": "Establishments list loading",
+        "actions": {
+            "create": "Create"
+        }
+    }
+}

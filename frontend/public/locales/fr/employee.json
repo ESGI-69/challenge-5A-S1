@@ -1,0 +1,16 @@
+{
+    "create": {
+        "title": "Création d'un employé",
+        "back": "Retour à la liste des employés"
+    },
+    "form": {
+        "firstname": "Prénom",
+        "lastname": "Nom",
+        "avatar": "Avatar",
+        "preferedEstablishment": "Établissement préféré",
+        "establishmentsLoading": "Liste des établissements en cours de chargement",
+        "actions": {
+            "create": "Créer"
+        }
+    }
+}

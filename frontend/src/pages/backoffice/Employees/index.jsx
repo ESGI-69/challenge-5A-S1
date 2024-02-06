@@ -1,17 +1,24 @@
+import Button from '@/components/lib/Button';
 import BackofficeHeader from '@/components/BackofficeHeader';
 import EmployeesTable from './EmployeesTable';
-import UserProvider from '@/contexts/api/UserContext';
+import EmployeeProvider from '@/contexts/api/EmployeeContext';
 
 export default function Employees() {
 
   return (
     <>
-      <BackofficeHeader>
+      <BackofficeHeader
+        actionsComponent={
+          <Button to="/backoffice/employees/create">
+            Créer un employé
+          </Button>
+        }
+      >
         <h1>Employés</h1>
       </BackofficeHeader>
-      <UserProvider>
+      <EmployeeProvider>
         <EmployeesTable></EmployeesTable>
-      </UserProvider>
+      </EmployeeProvider>
     </>
   );
 }
