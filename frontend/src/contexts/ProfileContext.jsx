@@ -2,6 +2,7 @@ import { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import apiCall from '@/axios';
 import Cookies from 'js-cookie';
+import { toast } from 'react-hot-toast';
 
 const initialState = {
   profile: null,
@@ -74,6 +75,8 @@ export default function ProfileProvider({ children }) {
       });
     } catch (error) {
       resetProfileState();
+      toast.error('Error while fetching user data');
+      throw error;
     } finally {
       dispatch({
         type: 'isLoggingIn',
@@ -106,6 +109,8 @@ export default function ProfileProvider({ children }) {
       Cookies.set('token', data.token);
     } catch (error) {
       resetProfileState();
+      toast.error('Error while logging in');
+      throw error;
     } finally {
       dispatch({
         type: 'isLoggingIn',
@@ -125,6 +130,7 @@ export default function ProfileProvider({ children }) {
       profile: state.profile,
       login,
       logout,
+      isLoggingIn: state.isLoggingIn,
     }} >
       {children}
     </ProfileContext.Provider>

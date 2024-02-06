@@ -59,6 +59,11 @@
 
         &_Active {
           background: var(--color-primary);
+          color: var(--color-text-white);
+
+          &:hover {
+            background: var(--color-primary-light);
+          }
         }
       }
     }

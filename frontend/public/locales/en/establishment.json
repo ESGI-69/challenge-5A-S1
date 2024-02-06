@@ -59,6 +59,35 @@
     }
   },
   "openingHourSelector": "Select the opening hours",
+  "serviceType": {
+    "title": "Select the service type",
+    "serviceType": "Service type",
+    "name": "Name",
+    "description": "Description",
+    "loading": "Loading service types...",
+    "empty": "No service type. Please create one.",
+    "action": {
+      "create": "Create a new service type"
+    },
+    "toast": {
+      "creation": {
+        "success": "The service type has been created successfully",
+        "error": "An error occured while creating the service type"
+      },
+      "deletion": {
+        "success": "The service type has been deleted successfully",
+        "error": "An error occured while deleting the service type"
+      },
+      "update": {
+        "success": "The service type has been updated successfully",
+        "error": "An error occured while updating the service type"
+      }
+    },
+    "modal": {
+      "title": "Service type creation",
+      "create": "Create"
+    }
+  },
   "events": {
     "creation": {
       "success": "The establishment has been created successfully",

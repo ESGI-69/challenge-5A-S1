@@ -24,6 +24,7 @@ import CompanyProvider from '@/contexts/api/CompanyContext';
 import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
 import EstablishmentTypeProvider from './contexts/api/EstablishmentTypeContext';
 import AppointmentProvider from './contexts/api/AppointmentContext';
+import ServiceTypeProvider from './contexts/api/ServiceTypeContext';
 
 const router = createBrowserRouter([
   {
@@ -96,7 +97,14 @@ const router = createBrowserRouter([
           },
           {
             path: ':id',
-            element: <EstablishmentTypeProvider><EstablishmentProvider><EstablishmentUpdate /></EstablishmentProvider></EstablishmentTypeProvider>,
+            element:
+              <ServiceTypeProvider>
+                <EstablishmentTypeProvider>
+                  <EstablishmentProvider>
+                    <EstablishmentUpdate />
+                  </EstablishmentProvider>
+                </EstablishmentTypeProvider>
+              </ServiceTypeProvider>,
           },
         ],
       },

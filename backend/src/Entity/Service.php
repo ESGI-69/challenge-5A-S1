@@ -36,7 +36,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
         ),
         new Post(
             name: 'creation',
-            security: 'is_granted("ROLE_PRESTA")',
+            securityPostDenormalize: "is_granted('ROLE_PRESTA') and object.getEstablishment().getCompany() === user.getCompany()",
             controller: CreateServiceController::class
         ),
         new Post(
@@ -47,8 +47,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
             normalizationContext: ['groups' => ['admin-read-service', 'read-service']],
             denormalizationContext: ['groups' => []],
         ),
-        new Patch(name: 'edition-admin', security: 'is_granted("ROLE_ADMIN")'),
-        new Delete(security: 'is_granted("ROLE_ADMIN")'),
+        new Patch(
+            securityPostDenormalize: "is_granted('ROLE_PRESTA') and object.getEstablishment().getCompany() === user.getCompany()",
+        ),
+        new Delete(
+            securityPostDenormalize: "is_granted('ROLE_PRESTA') and object.getEstablishment().getCompany() === user.getCompany()",
+        ),
     ],
     // denormalizationContext: ['groups' => ['create-service']],
     // normalizationContext: ['groups' => ['read-service']],

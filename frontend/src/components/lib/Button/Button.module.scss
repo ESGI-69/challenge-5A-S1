@@ -39,7 +39,7 @@
     &#{$variant} {
       $color-text: var(--color-text-white);
       
-      @if($variant == Primary or $variant == Secondary) {
+      @if($variant == Secondary) {
         $color-text: var(--color-text-regular);
       }
       
@@ -83,5 +83,9 @@
   &Small {
     padding: var(--size-1);
     font-size: var(--font-size-0);
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
   }
 }

@@ -17,5 +17,8 @@
     },
     "back": "Back",
     "applingChanges": "Applying changes...",
-    "update": "Update"
+    "update": "Update",
+    "loading": "Loading",
+    "delete": "Delete",
+    "minutes": "Minutes"
 }

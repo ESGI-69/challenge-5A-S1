@@ -54,6 +54,7 @@ export default function UserProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isUsersLoading',
@@ -75,6 +76,7 @@ export default function UserProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isUserLoading',
@@ -96,6 +98,7 @@ export default function UserProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isUserLoading',
@@ -116,6 +119,7 @@ export default function UserProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isUserLoading',
@@ -133,6 +137,7 @@ export default function UserProvider({ children }) {
       await apiCall.delete(`/users/${id}`);
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isUserLoading',

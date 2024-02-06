@@ -132,9 +132,9 @@ function Establishment() {
             {establishment?.street}, {establishment?.zipCode} {establishment?.city}
           </span>
           {establishment && (
-            <Map position={[ establishment?.lat, establishment?.long ]} markers={[
+            <Map position={[ parseFloat(establishment?.lat), parseFloat(establishment?.long) ]} markers={[
               {
-                position: [ establishment?.lat, establishment?.long ],
+                position: [ parseFloat(establishment?.lat), parseFloat(establishment?.long) ],
                 popup: 'Popup 1',
               },
             ]}

@@ -8,7 +8,7 @@ import { ProfileContext } from '@/contexts/ProfileContext';
 import { Logout } from '@/components/lib/Icons';
 
 export default function Header() {
-  const { profile, logout } = useContext(ProfileContext);
+  const { profile, logout, isLoggingIn: isLoginLoading } = useContext(ProfileContext);
   const { t } = useTranslation('header');
   return (
     <nav className={styles.Navbar}>
@@ -43,8 +43,17 @@ export default function Header() {
           )}
           {!profile && (
             <>
-              <Link to="/register" className={styles.NavbarContentMenuLink}>{t('menu.register')}</Link>
-              <Button to="/login" variant="black">{t('menu.login')}</Button>
+              {isLoginLoading
+                ? (
+                  <span>{t('loading', { ns: 'base' })}...</span>
+                )
+                : (
+                  <>
+                    <Link to="/register" className={styles.NavbarContentMenuLink}>{t('menu.register')}</Link>
+                    <Button to="/login" variant="black">{t('menu.login')}</Button>
+                  </>
+                )
+              }
             </>
           )}
         </div>

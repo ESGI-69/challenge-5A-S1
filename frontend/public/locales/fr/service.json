@@ -1,0 +1,33 @@
+{
+  "title": "Selectionnez les services",
+  "service": "Service",
+  "name": "Nom",
+  "description": "Description",
+  "duration": "Durée",
+  "price": "Prix",
+  "loading": "Chargement des services...",
+  "empty": "Aucun service. Créez en un pour commencer",
+  "action": {
+    "create": "Créer un nouveau service",
+    "update": "Modifier",
+    "delete": "Supprimer"
+  },
+  "toast": {
+    "creation": {
+      "success": "Le service a bien été créé",
+      "error": "Une erreur est survenue lors de la création du service"
+    },
+    "deletion": {
+      "success": "Le service a bien été supprimé",
+      "error": "Une erreur est survenue lors de la suppression du service"
+    },
+    "update": {
+      "success": "Le service a bien été modifié",
+      "error": "Une erreur est survenue lors de la modification du service"
+    }
+  },
+  "modal": {
+    "title": "Création d'un service",
+    "create": "Créer"
+  }
+}

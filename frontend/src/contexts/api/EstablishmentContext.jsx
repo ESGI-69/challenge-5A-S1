@@ -85,6 +85,7 @@ export default function EstablishmentProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isEstablishmentsLoading',
@@ -106,6 +107,7 @@ export default function EstablishmentProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isEstablishmentLoading',
@@ -125,6 +127,7 @@ export default function EstablishmentProvider({ children }) {
     } catch (error) {
       console.error(error);
       toast.error(i18n.t('events.creation.error', { ns: 'establishment' }));
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isPostEstablishmentLoading',
@@ -148,6 +151,7 @@ export default function EstablishmentProvider({ children }) {
     } catch (error) {
       console.error(error);
       toast.error(i18n.t('events.update.error', { ns: 'establishment' }));
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isPatchEstablishmentLoading',
@@ -167,6 +171,7 @@ export default function EstablishmentProvider({ children }) {
     } catch (error) {
       console.error(error);
       toast.error(i18n.t('events.openingHours.error', { ns: 'establishment' }));
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isPostOpeningHourLoading',
@@ -190,6 +195,7 @@ export default function EstablishmentProvider({ children }) {
     } catch (error) {
       console.error(error);
       toast.error(i18n.t('events.openingHours.error', { ns: 'establishment' }));
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isPatchOpeningHourLoading',

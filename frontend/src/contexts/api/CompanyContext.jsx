@@ -64,6 +64,7 @@ export default function CompanyProvider({ children }) {
       return window.URL.createObjectURL(response.data);
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     }
   };
 
@@ -80,6 +81,7 @@ export default function CompanyProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isCompanyLoading',
@@ -102,6 +104,7 @@ export default function CompanyProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isCompaniesLoading',
@@ -119,6 +122,7 @@ export default function CompanyProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     }
   };
 
@@ -131,6 +135,7 @@ export default function CompanyProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     }
   };
 
@@ -147,6 +152,7 @@ export default function CompanyProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isCompanyLoading',
@@ -169,6 +175,7 @@ export default function CompanyProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isCompaniesLoading',
@@ -190,6 +197,7 @@ export default function CompanyProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isCompanyEstablishmentsLoading',
@@ -215,7 +223,7 @@ export default function CompanyProvider({ children }) {
       });
     } catch (error) {
       console.error;
-      throw error;
+      throw new Error(error);
     } finally {
       dispatch({
         type: 'isCompanyLoading',
