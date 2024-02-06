@@ -60,7 +60,8 @@
   },
   "openingHourSelector": "Selectionnez les horaires d'ouverture",
   "serviceType": {
-    "title": "Selectionnez les services",
+    "title": "Selectionnez les types de services",
+    "serviceType": "Type de service",
     "name": "Nom",
     "description": "Description",
     "loading": "Chargement des types de services...",

@@ -1,4 +1,33 @@
 {
+  "title": "Select the service",
+  "service": "Service",
   "name": "Name",
-  "description": "Description"  
+  "description": "Description",
+  "duration": "Duration",
+  "price": "Price",
+  "loading": "Loading services...",
+  "empty": "No service. Please create one.",
+  "action": {
+    "create": "Create a new service",
+    "update": "Update",
+    "delete": "Delete"
+  },
+  "toast": {
+    "creation": {
+      "success": "The service has been created successfully",
+      "error": "An error occured while creating the service"
+    },
+    "deletion": {
+      "success": "The service has been deleted successfully",
+      "error": "An error occured while deleting the service"
+    },
+    "update": {
+      "success": "The service has been updated successfully",
+      "error": "An error occured while updating the service"
+    }
+  },
+  "modal": {
+    "title": "Service creation",
+    "create": "Create"
+  }
 }

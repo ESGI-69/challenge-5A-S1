@@ -14,6 +14,7 @@ import Input from '@/components/lib/Input';
 
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import ServiceProvider from '@/contexts/api/ServiceContext';
 
 export default function EstablishmentUpdate() {
   const { establishment, getById, isEstablishmentLoading, isPatchEstablishmentLoading, patch: patchEstablishment } = useContext(EstablishmentContext);
@@ -87,13 +88,16 @@ export default function EstablishmentUpdate() {
           <h2>{ t('serviceType.title') }</h2>
           {(establishment.serviceTypes.length > 0
             ? establishment.serviceTypes.map((serviceType) => (
-              <ServiceTypeSelector
+              <ServiceProvider
                 key={serviceType.id}
-                {...serviceType}
-                isLoading={isDeleteServiceTypeLoading || isPatchServiceTypeLoading}
-                onUpdateServiceType={updateServiceTypeHandler}
-                onDeleteServiceType={deleteServiceTypeHandler}
-              />
+              >
+                <ServiceTypeSelector
+                  {...serviceType}
+                  isLoading={isDeleteServiceTypeLoading || isPatchServiceTypeLoading}
+                  onUpdateServiceType={updateServiceTypeHandler}
+                  onDeleteServiceType={deleteServiceTypeHandler}
+                />
+              </ServiceProvider>
             ))
             : <div>
               <span>{ t('serviceType.empty') }</span>

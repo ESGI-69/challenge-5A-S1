@@ -61,6 +61,7 @@
   "openingHourSelector": "Select the opening hours",
   "serviceType": {
     "title": "Select the service type",
+    "serviceType": "Service type",
     "name": "Name",
     "description": "Description",
     "loading": "Loading service types...",

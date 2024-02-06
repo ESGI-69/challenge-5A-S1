@@ -19,5 +19,6 @@
     "applingChanges": "Applying changes...",
     "update": "Update",
     "loading": "Loading",
-    "delete": "Delete"
+    "delete": "Delete",
+    "minutes": "Minutes"
 }

@@ -17,10 +17,10 @@ class CreateServiceController
     {
         $service->setAuthor($this->security->getUser());
         // If the user is an admin, the service is automatically validated
-        if ($this->security->isGranted('ROLE_ADMIN')) {
+        // if ($this->security->isGranted('ROLE_ADMIN')) {
             $service->setValidatedAt(new \DateTimeImmutable());
             $service->setValidatedBy($this->security->getUser());
-        }
+        // }
         return $service;
     }
 }
