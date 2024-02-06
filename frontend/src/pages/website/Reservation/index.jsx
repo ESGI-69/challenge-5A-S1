@@ -7,10 +7,8 @@ import { useParams } from 'react-router-dom';
 import Schedule  from '@/components/Schedule';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import { useContext, useEffect } from 'react';
-import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import { ServiceContext } from '@/contexts/api/ServiceContext';
 import { AppointmentContext } from '@/contexts/api/AppointmentContext';
-import Tag from '@/components/lib/Tag';
 
 export default function Reservation () {
 
@@ -19,22 +17,9 @@ export default function Reservation () {
   const { post, appointment, isPostAppointmentLoading } = useContext(AppointmentContext);
   const [ selectedDate, setSelectedDate ] = useState(null);
   const [ selectedEmployee, setSelectedEmployee ] = useState(null);
-  const persons = [
-    {
-      id: 1,
-      name: 'Personne 1',
-    },
-    {
-      id: 2,
-      name: 'Personne 2',
-    },
-    {
-      id: 3,
-      name: 'Personne 3',
-    },
-  ];
+  const [ persons, setPersons ] = useState([]);
 
-  const [ person, setPerson ] = useState(persons[0]);
+  const [ person, setPerson ] = useState(null);
   const handleDateSelect = (date, employeeId) => {
     setSelectedDate(date);
     setSelectedEmployee(employeeId);
@@ -68,20 +53,33 @@ export default function Reservation () {
       const schedule = generateSchedule(service);
       setSchedule(schedule);
     }
-  }, [ service, person ]);
+    if (persons){
+      setPerson(persons[0]);
+    }
+  }, [
+    service,
+    person,
+    persons,
+  ]);
 
   function generateSchedule(service) {
     const schedule = [];
+    const employees = {};
 
     service.workingHoursRanges.forEach(range => {
       const startDate = new Date(range.startDate);
       const endDate = new Date(range.endDate);
       const serviceEmployee = range.Employee.id;
 
-      if (serviceEmployee === person.id) {
+      employees[serviceEmployee] = {
+        id: serviceEmployee,
+        name: `Personne ${serviceEmployee}`,
+      };
+
+      if (serviceEmployee === person?.id) {
 
         let currentTime = new Date(startDate.getTime());
-
+        //WIP pour la génération du schedule
         while (currentTime <= endDate) {
           const timeSlot = {
             time: currentTime.toISOString().slice(11, 16), // format HH:mm
@@ -114,7 +112,8 @@ export default function Reservation () {
       }
 
     });
-    console.log(schedule);
+    // console.log(schedule);
+    setPersons(Object.values(employees));
     return schedule;
   }
 
@@ -148,7 +147,7 @@ export default function Reservation () {
           <div className={styles.ServicePerson}>
             <Dropdown>
               <DropdownButton>
-                <Button variant="black" isPlain="false">{person.name}</Button>
+                <Button variant="black" isPlain="false">{person?.name}</Button>
               </DropdownButton>
               <DropdownList>
                 {persons.map(person => (

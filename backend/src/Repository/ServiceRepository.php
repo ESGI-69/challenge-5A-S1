@@ -40,7 +40,7 @@ class ServiceRepository extends ServiceEntityRepository
             ->setParameter('serviceId', $serviceId)
             ->setParameter('now', new \DateTime())
             ->getQuery()
-            ->getResult()
+            ->getResult();
         ;
     }
 

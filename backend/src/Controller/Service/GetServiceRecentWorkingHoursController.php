@@ -17,8 +17,9 @@ class GetServiceRecentWorkingHoursController
         $this->serviceRepository = $serviceRepository;
     }
 
-    public function __invoke(Service $service): iterable
+    public function __invoke(Service $service): Service
     {
-        return $this->serviceRepository->findRecentWorkingHours($service->getId());
+        // return $service;
+        return $this->serviceRepository->findRecentWorkingHours($service->getId())[0];
     }
 }
