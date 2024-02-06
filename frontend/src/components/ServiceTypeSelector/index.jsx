@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './ServiceTypeSelector.module.scss';
 import Button from '../lib/Button';
@@ -22,7 +22,7 @@ export default function ServiceTypeSelector({
     description,
   });
 
-  const [ servicesState, setServicesState ] = useState(services);
+  const [ servicesState ] = useState(services);
 
   return (
     <div className={styles.ServiceTypeSelector}>

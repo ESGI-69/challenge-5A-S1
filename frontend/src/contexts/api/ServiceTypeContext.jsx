@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import i18n from 'i18next';
 
 const initialState = {
+  isPostServiceTypeLoading: false,
   isDeleteServiceTypeLoading: false,
   isPatchServiceTypeLoading: false,
 };
@@ -13,6 +14,11 @@ export const ServiceTypeContext = createContext(initialState);
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'isPostServiceTypeLoading':
+      return {
+        ...state,
+        isPostServiceTypeLoading: action.payload,
+      };
     case 'isDeleteServiceTypeLoading':
       return {
         ...state,
@@ -30,6 +36,22 @@ const reducer = (state, action) => {
 
 export default function ServiceTypeProvider({ children }) {
   const [ state, dispatch ] = useReducer(reducer, initialState);
+
+  const postServiceType = async (data) => {
+    dispatch({ type: 'isPostServiceTypeLoading', payload: true });
+    try {
+      const response = await apiCall.post('/service_types', data);
+      if (response.status === 201) {
+        toast.success(i18n.t('serviceType.toast.creation.success', { ns: 'establishment' }));
+      }
+      return response.data;
+    } catch (error) {
+      toast.error(i18n.t('serviceType.toast.creation.error', { ns: 'establishment' }));
+      throw new Error(error);
+    } finally {
+      dispatch({ type: 'isPostServiceTypeLoading', payload: false });
+    }
+  };
 
   const patchServiceType = async (id, data) => {
     dispatch({ type: 'isPatchServiceTypeLoading', payload: true });
@@ -67,6 +89,9 @@ export default function ServiceTypeProvider({ children }) {
 
   return (
     <ServiceTypeContext.Provider value={{
+      postServiceType,
+      isPostServiceTypeLoading: state.isPostServiceTypeLoading,
+
       deleteServiceType,
       isDeleteServiceTypeLoading: state.isDeleteServiceTypeLoading,
 

@@ -61,12 +61,18 @@
   "openingHourSelector": "Selectionnez les horaires d'ouverture",
   "serviceType": {
     "title": "Selectionnez les services",
+    "name": "Nom",
+    "description": "Description",
     "loading": "Chargement des types de services...",
     "empty": "Aucun type de service. Créez en un pour commencer",
-    "actions": {
+    "action": {
       "create": "Créer un nouveau type de service"
     },
     "toast": {
+      "creation": {
+        "success": "Le type de service a bien été créé",
+        "error": "Une erreur est survenue lors de la création du type de service"
+      },
       "deletion": {
         "success": "Le type de service a bien été supprimé",
         "error": "Une erreur est survenue lors de la suppression du type de service"
@@ -75,6 +81,10 @@
         "success": "Le type de service a bien été modifié",
         "error": "Une erreur est survenue lors de la modification du type de service"
       }
+    },
+    "modal": {
+      "title": "Création d'un type de service",
+      "create": "Créer"
     }
   },
   "events": {
