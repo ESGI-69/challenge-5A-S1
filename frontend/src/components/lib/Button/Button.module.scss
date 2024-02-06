@@ -39,7 +39,7 @@
     &#{$variant} {
       $color-text: var(--color-text-white);
       
-      @if($variant == Primary or $variant == Secondary) {
+      @if($variant == Secondary) {
         $color-text: var(--color-text-regular);
       }
       

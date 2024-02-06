@@ -5,10 +5,10 @@
 :root {
   --white: #fff;
   --black: #000;
-  --color-primary: var(--yellow-5);
-  --color-primary-light: hsl(var(--yellow-5-hsl) / 80%);
-  --color-primary-lighter: hsl(var(--yellow-5-hsl) / 50%);
-  --color-primary-lightest: hsl(var(--yellow-5-hsl) / 15%);
+  --color-primary: var(--gray-10);
+  --color-primary-light: hsl(var(--gray-10-hsl) / 80%);
+  --color-primary-lighter: hsl(var(--gray-10-hsl) / 50%);
+  --color-primary-lightest: hsl(var(--gray-10-hsl) / 15%);
   --color-danger: var(--red-7);
   --color-danger-light: hsl(var(--red-7-hsl) / 80%);
   --color-danger-lighter: hsl(var(--red-7-hsl) / 50%);
