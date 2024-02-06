@@ -47,11 +47,11 @@ const Schedule = React.forwardRef(function Schedule(
                         <span className={styles.ColumnDate}>        {new Date(day.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}</span>
                       </div>
                       <div className={styles.ColumnBody}>
-                        {day.times.map((appointement, index) => {
-                          if (appointement.employee !== personSelected.id) {
-                            return null;
-                          }
-                          return (
+                        {day.times.map((appointement, index) =>
+                          // if (appointement.employee !== personSelected.id) {
+                          //   return null;
+                          // }
+                          (
                             <button
                               key={index}
                               className={styles.ColumnButton}
@@ -62,10 +62,10 @@ const Schedule = React.forwardRef(function Schedule(
                                 );
                               }}
                             >
-                              {appointement.time}
+                              {appointement.time} - {appointement.employee}
                             </button>
-                          );
-                        })}
+                          ),
+                        )}
                       </div>
                     </div>
                   ))}

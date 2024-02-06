@@ -19,6 +19,22 @@ export default function Reservation () {
   const { post, appointment, isPostAppointmentLoading } = useContext(AppointmentContext);
   const [ selectedDate, setSelectedDate ] = useState(null);
   const [ selectedEmployee, setSelectedEmployee ] = useState(null);
+  const persons = [
+    {
+      id: 1,
+      name: 'Personne 1',
+    },
+    {
+      id: 2,
+      name: 'Personne 2',
+    },
+    {
+      id: 3,
+      name: 'Personne 3',
+    },
+  ];
+
+  const [ person, setPerson ] = useState(persons[0]);
   const handleDateSelect = (date, employeeId) => {
     setSelectedDate(date);
     setSelectedEmployee(employeeId);
@@ -52,7 +68,7 @@ export default function Reservation () {
       const schedule = generateSchedule(service);
       setSchedule(schedule);
     }
-  }, [ service ]);
+  }, [ service, person ]);
 
   function generateSchedule(service) {
     const schedule = [];
@@ -62,39 +78,43 @@ export default function Reservation () {
       const endDate = new Date(range.endDate);
       const serviceEmployee = range.Employee.id;
 
-      let currentTime = new Date(startDate.getTime());
+      if (serviceEmployee === person.id) {
 
-      while (currentTime <= endDate) {
-        const timeSlot = {
-          time: currentTime.toISOString().slice(11, 16), // format HH:mm
-          available: true, // vérifier ici si le créneau est déjà pri
-          employee: serviceEmployee,
-        };
+        let currentTime = new Date(startDate.getTime());
 
-        // Trouvez la semaine correspondante ou créez-en une nouvelle si elle n'existe pas
-        const weekNumber = getWeek(currentTime);
-        let week = schedule.find(week => week.week === weekNumber);
-        if (!week) {
-          week = { week: weekNumber, days: [] };
-          schedule.push(week);
+        while (currentTime <= endDate) {
+          const timeSlot = {
+            time: currentTime.toISOString().slice(11, 16), // format HH:mm
+            available: true, // vérifier ici si le créneau est déjà pri
+            employee: serviceEmployee,
+          };
+
+          // Trouvez la semaine correspondante ou créez-en une nouvelle si elle n'existe pas
+          const weekNumber = getWeek(currentTime);
+          let week = schedule.find(week => week.week === weekNumber);
+          if (!week) {
+            week = { week: weekNumber, days: [] };
+            schedule.push(week);
+          }
+
+          // Ajoutez le créneau horaire au tableau du jour correspondant
+          const day = week.days.find(day => day.date === currentTime.toISOString().slice(0, 10)); // format YYYY-MM-DD
+          if (day) {
+            day.times.push(timeSlot);
+          } else {
+            week.days.push({
+              date: currentTime.toISOString().slice(0, 10), //format YYYY-MM-DD
+              times: [ timeSlot ],
+            });
+          }
+
+          // generation de la prochaine période de service
+          currentTime.setMinutes(currentTime.getMinutes() + service.duration);
         }
-
-        // Ajoutez le créneau horaire au tableau du jour correspondant
-        const day = week.days.find(day => day.date === currentTime.toISOString().slice(0, 10)); // format YYYY-MM-DD
-        if (day) {
-          day.times.push(timeSlot);
-        } else {
-          week.days.push({
-            date: currentTime.toISOString().slice(0, 10), //format YYYY-MM-DD
-            times: [ timeSlot ],
-          });
-        }
-
-        // generation de la prochaine période de service
-        currentTime.setMinutes(currentTime.getMinutes() + service.duration);
       }
-    });
 
+    });
+    console.log(schedule);
     return schedule;
   }
 
@@ -104,23 +124,6 @@ export default function Reservation () {
     const pastDaysOfYear = (localDate - firstDayOfYear) / 86400000;
     return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
   }
-
-  const persons = [
-    {
-      id: 1,
-      name: 'Personne 1',
-    },
-    {
-      id: 2,
-      name: 'Personne 2',
-    },
-    {
-      id: 3,
-      name: 'Personne 3',
-    },
-  ];
-
-  const [ person, setPerson ] = useState(persons[0]);
 
   return (
     <div className={styles.Page}>

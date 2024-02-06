@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Delete;
 use App\Controller\Service\ValidateServiceController;
 use App\Controller\Service\CreateServiceController;
 use App\Controller\Service\GetValidatedServicesController;
+use App\Controller\Service\GetServiceRecentWorkingHoursController;
 use App\Repository\ServiceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -40,6 +41,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
             securityPostDenormalize: 'object.getValidatedAt() !== null',
             securityMessage: 'You cannot access this service',
             securityPostDenormalizeMessage: 'You cannot access this service',
+            controller: GetServiceRecentWorkingHoursController::class,
         ),
         new Post(
             name: 'creation',
@@ -97,6 +99,7 @@ class Service
 
     #[Groups(['read-service'])]
     #[ORM\ManyToMany(targetEntity: WorkingHoursRange::class, mappedBy: 'services')]
+    #[ORM\OrderBy(['startDate' => 'ASC'])]
     private Collection $workingHoursRanges;
 
     #[ORM\ManyToOne(inversedBy: 'services')]
