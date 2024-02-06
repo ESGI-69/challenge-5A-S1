@@ -27,10 +27,12 @@ function Establishment() {
 
   const pastAppointments = myAppointments
     .filter(appointment => new Date(appointment.endDate) < now)
-    .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+    .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+    .slice(0, 2);
   const futureAppointments = myAppointments
     .filter(appointment => new Date(appointment.endDate) >= now)
-    .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+    .sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
+    .slice(0, 2);
 
   const [ currentReviewsPage, setCurrentReviewsPage ] = useState(0);
   const [ isPastAppointmentsShowned, setIsPastAppointmentsShowned ] = useState(false);
@@ -101,9 +103,11 @@ function Establishment() {
                 />
               ))}
             </div>
-            <Button variant="black" onClick={handlePastAppointmentsClick}>
-              {isPastAppointmentsShowned ? t('myApointments.hidePast') : t('myApointments.seePast')}
-            </Button>
+            {pastAppointments.length > 0 && (
+              <Button variant="black" onClick={handlePastAppointmentsClick}>
+                {isPastAppointmentsShowned ? t('myApointments.hidePast') : t('myApointments.seePast')}
+              </Button>
+            )}
             {isPastAppointmentsShowned &&
               <>
                 <h3 className={styles.EstablishmentSubtitle}>

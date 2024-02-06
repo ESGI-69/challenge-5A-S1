@@ -3,7 +3,7 @@ import styles from './AppointmentCard.module.scss';
 import { dateTimeFull } from '@/utils/formater/date';
 import Button from '@/components/lib/Button';
 import { useTranslation } from 'react-i18next';
-import { BanknotesIcon, CalendarIcon, ClockIcon } from '@heroicons/react/20/solid';
+import { BanknotesIcon, CalendarIcon, ClockIcon, SparklesIcon } from '@heroicons/react/20/solid';
 import Modal from 'react-modal';
 import { useState } from 'react';
 
@@ -23,69 +23,80 @@ function AppointmentCard({
   };
   return (
     <div className={styles.AppointmentCard}>
-      <h4 className={styles.AppointmentCardDate}>
+      <p className={styles.AppointmentCardDate}>
         {dateTimeFull(appointment.startDate, i18n.resolvedLanguage)}
-      </h4>
+      </p>
       <p className={styles.AppointmentCardName}>
-        {appointment.service.name}
+        <SparklesIcon />
+        {appointment.service.name.length > 30 ? `${appointment.service.name.substring(0, 30)}...` : appointment.service.name}
       </p>
       <div className={styles.AppointmentCardDetails}>
         <span className={styles.AppointmentCardDetailsText}>
-          <ClockIcon />{appointment.service.duration} min
+          <ClockIcon />
+          {appointment.service.duration} min
         </span>
         <span className={styles.AppointmentCardDetailsText}>
-          <BanknotesIcon />{appointment.service.price} €
+          <BanknotesIcon />
+          {appointment.service.price} €
         </span>
         <span className={styles.AppointmentCardDetailsText}>
           <CalendarIcon />{t('with')} {appointment.employee.firstname}
         </span>
       </div>
       {isPast && !appointment.feedback &&
-       <Button
-         variant="black"
-         onClick={openReviewModal}
-       >
-         {t('leaveComment')}
-       </Button>
-      }
-      <Modal
-        isOpen={modalIsOpen}
-        ariaHideApp={false}
-        className={styles.AppointmentCardModal}
-        style={{
-          overlay: {
-            zIndex: 1000,
-          },
-        }}
-      >
-        <h4>{t('modal.title')}</h4>
-        <p>{t('modal.subText')}</p>
-        <div className={styles.AppointmentCardModalRating}>
-          {feedbackTypes?.map(feedbackType => (
-            <div key={feedbackType.id}>
-              {feedbackType.name}
+        <>
+          <Button
+            variant="black"
+            onClick={openReviewModal}
+          >
+            {t('leaveComment')}
+          </Button>
+          <Modal
+            isOpen={modalIsOpen}
+            ariaHideApp={false}
+            className={styles.AppointmentCardModal}
+            style={{
+              overlay: {
+                zIndex: 1000,
+              },
+            }}
+          >
+            <h1>{t('modal.title')}</h1>
+            <p>{t('modal.subText')} {dateTimeFull(appointment.startDate, i18n.resolvedLanguage)}.</p>
+            <div className={styles.AppointmentCardModalRating}>
+              {feedbackTypes?.map(feedbackType => (
+                <div key={feedbackType.id}>
+                  {feedbackType.name}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <textarea
-          name=""
-          id=""
-          placeholder={t('modal.placeholder')}
-        >
-        </textarea>
-        <Button
-          variant="primary"
-          onClick={() => setIsModalOpen(false)}
-        >
-          {t('modal.confirm')}
-        </Button>
-        <Button
-          variant="danger"
-          onClick={() => setIsModalOpen(false)}
-        >
-          {t('modal.cancel')}
-        </Button>
-      </Modal>
+            <div className={styles.AppointmentCardModalForm}>
+              <label htmlFor="">{t('modal.label')}</label>
+              <textarea
+                name="comment"
+                id="comment"
+                placeholder={t('modal.placeholder')}
+                className={styles.AppointmentCardModalFormTextarea}
+              >
+              </textarea>
+            </div>
+            <div className={styles.AppointmentCardModalBtns}>
+              <Button
+                variant="primary"
+                onClick={() => setIsModalOpen(false)}
+              >
+                {t('modal.confirm')}
+              </Button>
+              <Button
+                variant="danger"
+                onClick={() => setIsModalOpen(false)}
+              >
+                {t('modal.cancel')}
+              </Button>
+            </div>
+          </Modal>
+        </>
+      }
     </div>
   );
 }

@@ -3,8 +3,9 @@
   "with": "avec",
   "modal": {
     "title": "Laisser un commentaire",
-    "subText": "Merci d'évaluer votre préstation.",
-    "placeholder": "Entrez votre commentaire ici",
+    "subText": "Merci d'évaluer votre préstation du",
+    "label": "Entrez votre commentaire ici",
+    "placeholder": "Comment était votre expérience ?",
     "cancel": "Annuler",
     "confirm": "Confirmer"
   }

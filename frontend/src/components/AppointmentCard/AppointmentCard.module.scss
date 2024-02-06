@@ -7,6 +7,7 @@
   box-shadow: var(--shadow-2);
   border: var(--border-size-1) solid var(--color-border-light);
   padding: var(--size-4);
+  width: 50%;
 
   &Date {
     margin: 0;
@@ -15,18 +16,31 @@
 
   &Name {
     margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--size-2);
+    font-size: var(--font-size-0-5);
+    color: var(--color-text-light);
+    
+    svg {
+      width: var(--size-4);
+    }
   }
 
   &Details {
     display: flex;
     flex-direction: row;
     gap: var(--size-3);
+    margin-bottom: var(--size-3);
 
     &Text {
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: var(--size-2);
+      font-size: var(--font-size-0-5);
+      color: var(--color-text-light);
 
       svg {
         width: var(--size-4);
@@ -34,14 +48,47 @@
     }
   }
 
+  button {
+    width: fit-content;
+    font-size: var(--font-size-0-5);
+  }
+
   &Modal {
     position: absolute;
-    inset: 40px;
-    border: 1px solid rgb(204 204 204);
+    inset: 4rem 10rem;
+    border: var(--border-size-1) solid var(--color-border-light);
     background: rgb(255 255 255);
     overflow: auto;
-    border-radius: 4px;
     outline: none;
-    padding: 20px;
+    border-radius: var(--radius-2-5);
+    box-shadow: var(--shadow-2);
+    padding: var(--size-7);
+    height: fit-content;
+
+    &Form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--size-3);
+
+      &Textarea {
+        max-width: 100%;
+        min-height: 100px;
+        max-height: 400px;
+        height: 100px;
+        padding: var(--size-3);
+        border: var(--border-size-1) solid var(--color-border-light);
+        border-radius: var(--radius-2-5);
+        font-size: var(--font-size-0-5);
+        //disable horizontal resize
+        resize: vertical;
+      }
+    }
+
+    &Btns {
+      display: flex;
+      flex-direction: row;
+      gap: var(--size-3);
+      margin-top: var(--size-3);
+    }
   }
 }
