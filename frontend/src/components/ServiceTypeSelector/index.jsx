@@ -36,7 +36,7 @@ export default function ServiceTypeSelector({
     price: 0,
   });
 
-  const [ servicesState ] = useState(services);
+  const [ servicesState, setServicesState ] = useState(services);
 
   const updateServiceHandler = async (serviceId, serviceData) => {
     await patchService(serviceId, {
@@ -44,16 +44,17 @@ export default function ServiceTypeSelector({
       type: `api/service_types/${id}`,
       establishment: `api/establishments/${establishmentId}`,
     });
-    servicesState.forEach((service, index) => {
+    setServicesState(servicesState.map((service) => {
       if (service.id === serviceId) {
-        servicesState[index] = { ...service, ...serviceData };
+        return { ...service, ...serviceData };
       }
-    });
+      return service;
+    }));
   };
 
   const deleteServiceHandler = async (serviceId) => {
     await deleteService(serviceId);
-    servicesState.filter((service) => service.id !== serviceId);
+    setServicesState(servicesState.filter((service) => service.id !== serviceId));
   };
 
   const createServiceHandler = async () => {
@@ -62,7 +63,7 @@ export default function ServiceTypeSelector({
       type: `api/service_types/${id}`,
       establishment: `api/establishments/${establishmentId}`,
     });
-    servicesState.push(responseService);
+    setServicesState([ ...servicesState, responseService ]);
     setNewService({
       name: '',
       description: '',
