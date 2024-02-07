@@ -104,9 +104,11 @@ function Establishment() {
               ))}
             </div>
             {pastAppointments.length > 0 && (
-              <Button variant="black" onClick={handlePastAppointmentsClick}>
-                {isPastAppointmentsShowned ? t('myApointments.hidePast') : t('myApointments.seePast')}
-              </Button>
+              <div className={styles.EstablishmentLeftApointmentsSectionButton} >
+                <Button variant="black" onClick={handlePastAppointmentsClick}>
+                  {isPastAppointmentsShowned ? t('myApointments.hidePast') : t('myApointments.seePast')}
+                </Button>
+              </div>
             )}
             {isPastAppointmentsShowned &&
               <>
@@ -178,15 +180,18 @@ function Establishment() {
             {establishment?.feedback.length === 0 && (
               <span>{t('tabs.noComments')}</span>
             )}
-            {establishment?.feedback.slice(startReviews, endReviews).map(review => (
-              <Review
-                key={review.id}
-                authorName={review.author.firstname}
-                note={5}
-                content={review.comment}
-                date={review.updatedAt}
-              />
-            ))}
+            {establishment?.feedback
+              .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+              .slice(startReviews, endReviews)
+              .map(review => (
+                <Review
+                  key={review.id}
+                  authorName={review.author.firstname}
+                  note={5}
+                  content={review.comment}
+                  date={review.updatedAt}
+                />
+              ))}
             <div className={styles.EstablishmentRightCommentsButtons}>
               <Button
                 disabled={currentReviewsPage === 0}

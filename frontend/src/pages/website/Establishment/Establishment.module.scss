@@ -76,6 +76,10 @@
         display: flex;
         gap: var(--size-5);
       }
+
+      &Button {
+        margin-bottom: var(--size-5);
+      }
     }
 
     &ServicesSection {

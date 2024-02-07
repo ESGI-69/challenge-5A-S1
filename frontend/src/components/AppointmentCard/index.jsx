@@ -4,8 +4,8 @@ import { dateTimeFull } from '@/utils/formater/date';
 import Button from '@/components/lib/Button';
 import { useTranslation } from 'react-i18next';
 import { BanknotesIcon, CalendarIcon, ClockIcon, SparklesIcon } from '@heroicons/react/20/solid';
-import Modal from 'react-modal';
 import { useState } from 'react';
+import ModalSendReview  from '@/components/ModalSendReview';
 
 function AppointmentCard({
   appointment,
@@ -51,52 +51,14 @@ function AppointmentCard({
           >
             {t('leaveComment')}
           </Button>
-          <Modal
-            isOpen={modalIsOpen}
-            ariaHideApp={false}
-            className={styles.AppointmentCardModal}
-            style={{
-              overlay: {
-                zIndex: 1000,
-              },
-            }}
-          >
-            <h1>{t('modal.title')}</h1>
-            <p>{t('modal.subText')} {dateTimeFull(appointment.startDate, i18n.resolvedLanguage)}.</p>
-            <div className={styles.AppointmentCardModalRating}>
-              {feedbackTypes?.map(feedbackType => (
-                <div key={feedbackType.id}>
-                  {feedbackType.name}
-                </div>
-              ))}
-            </div>
-            <div className={styles.AppointmentCardModalForm}>
-              <label htmlFor="">{t('modal.label')}</label>
-              <textarea
-                name="comment"
-                id="comment"
-                placeholder={t('modal.placeholder')}
-                className={styles.AppointmentCardModalFormTextarea}
-              >
-              </textarea>
-            </div>
-            <div className={styles.AppointmentCardModalBtns}>
-              <Button
-                variant="primary"
-                onClick={() => setIsModalOpen(false)}
-              >
-                {t('modal.confirm')}
-              </Button>
-              <Button
-                variant="danger"
-                onClick={() => setIsModalOpen(false)}
-              >
-                {t('modal.cancel')}
-              </Button>
-            </div>
-          </Modal>
         </>
       }
+      <ModalSendReview
+        feedbackTypes={feedbackTypes}
+        appointment={appointment}
+        modalIsOpen={modalIsOpen}
+        setIsModalOpen={setIsModalOpen}
+      />
     </div>
   );
 }
@@ -110,11 +72,13 @@ AppointmentCard.propTypes = {
       id: PropTypes.number,
     }),
     service: PropTypes.shape({
+      id: PropTypes.number,
       name: PropTypes.string,
       price: PropTypes.number,
       duration: PropTypes.number,
     }),
     employee: PropTypes.shape({
+      id: PropTypes.number,
       firstname: PropTypes.string,
     }),
   }),
@@ -122,7 +86,6 @@ AppointmentCard.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
   })),
-  hasFeedback: PropTypes.bool,
 };
 
 export default AppointmentCard;

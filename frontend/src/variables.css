@@ -26,6 +26,7 @@
   --color-text-regular: var(--gray-9);
   --color-text-secondary: var(--gray-8);
   --color-text-light: var(--gray-7);
+  --color-text-lighter: var(--gray-4);
   --color-text-white: var(--white);
 
   /* Background */

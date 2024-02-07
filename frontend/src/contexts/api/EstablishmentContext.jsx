@@ -1,9 +1,10 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import apiCall from '@/axios';
 import queryBuilder from '@/utils/queryBuilder';
 import toast from 'react-hot-toast';
 import i18n from 'i18next';
+import { AppointmentContext } from '@/contexts/api/AppointmentContext';
 
 const initialState = {
   establishments: [],
@@ -63,6 +64,11 @@ const reducer = (state, action) => {
         ...state,
         isPatchOpeningHourLoading: action.payload,
       };
+    case 'clearEstablishment':
+      return {
+        ...state,
+        establishment: null,
+      };
     default:
       return state;
   }
@@ -70,6 +76,7 @@ const reducer = (state, action) => {
 
 export default function EstablishmentProvider({ children }) {
   const [ state, dispatch ] = useReducer(reducer, initialState);
+  const { refetchAppointments } = useContext(AppointmentContext);
 
   const get = async (queries = null) => {
     dispatch({
@@ -204,6 +211,17 @@ export default function EstablishmentProvider({ children }) {
     }
   };
 
+  const refetchEstablishment = async () => {
+    // je suis pas sur de ca ???
+    // review pls
+    const { id } = state.establishment;
+    dispatch({
+      type: 'clearEstablishment',
+    });
+    await getById(id);
+    await refetchAppointments(id);
+  };
+
   return (
     <EstablishmentContext.Provider value={{
       get,
@@ -211,6 +229,7 @@ export default function EstablishmentProvider({ children }) {
       isEstablishmentsLoading: state.isEstablishmentsLoading,
 
       getById,
+      refetchEstablishment,
       establishment: state.establishment,
       isEstablishmentLoading: state.isEstablishmentLoading,
       isPatchEstablishmentLoading: state.isPatchEstablishmentLoading,

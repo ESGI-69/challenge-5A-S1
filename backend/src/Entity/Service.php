@@ -59,7 +59,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 )]
 class Service
 {
-    #[Groups(['read-service', 'read-service-all', 'read-establishment'])]
+    #[Groups(['read-service', 'read-service-all', 'read-establishment', 'appointment-me'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
