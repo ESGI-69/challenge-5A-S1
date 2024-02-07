@@ -34,5 +34,11 @@
       "success": "Employee deleted successfully",
       "error": "An error occured during the employee deletion"
     }
+  },
+  "list": {
+    "title": "My employees",
+    "actions": {
+      "create": "Create an employee"
+    }
   }
 }

@@ -34,5 +34,11 @@
       "success": "L'employé a bien été supprimé",
       "error": "Une erreur est survenue lors de la suppression de l'employé"
     }
+  },
+  "list": {
+    "title": "Mes employés",
+    "actions": {
+      "create": "Créer un employé"
+    }
   }
 }
