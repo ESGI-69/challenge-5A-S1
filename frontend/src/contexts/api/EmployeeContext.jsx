@@ -2,6 +2,7 @@ import { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import apiCall from '@/axios';
 import toast from 'react-hot-toast';
+import i18n from 'i18next';
 
 const initialState = {
   employee: null,
@@ -69,6 +70,7 @@ export default function EmployeeProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.get.error', { ns: 'employee' }));
     } finally {
       dispatch({
         type: 'isEmployeesLoading',
@@ -83,13 +85,14 @@ export default function EmployeeProvider({ children }) {
       payload: true,
     });
     try {
-      const data = await apiCall.get(`/employees/${id}`);
+      const { data } = await apiCall.get(`/companies/employees/${id}`);
       dispatch({
         type: 'employee',
         payload: data,
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.get.errorList', { ns: 'employee' }));
     } finally {
       dispatch({
         type: 'isEmployeeLoading',
@@ -105,10 +108,10 @@ export default function EmployeeProvider({ children }) {
     });
     try {
       await apiCall.post('/companies/employees', data);
-      toast.success('Employee created');
+      toast.success(i18n.t('events.creation.success', { ns: 'employee' }));
     } catch (error) {
       console.error(error);
-      toast.error('Employee creation failed');
+      toast.error(i18n.t('events.creation.error', { ns: 'employee' }));
     } finally {
       dispatch({
         type: 'isPostEmployeeLoading',
@@ -123,13 +126,15 @@ export default function EmployeeProvider({ children }) {
       payload: true,
     });
     try {
-      const data = await apiCall.patch(`/employees/${id}`, payload);
-      dispatch({
-        type: 'employee',
-        payload: data,
+      await apiCall.patch(`/companies/employees/${id}`, payload, {
+        headers: {
+          'Content-Type': 'application/merge-patch+json',
+        },
       });
+      toast.success(i18n.t('events.update.success', { ns: 'employee' }));
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.update.error', { ns: 'employee' }));
     } finally {
       dispatch({
         type: 'isPatchEmployeeLoading',
@@ -144,9 +149,11 @@ export default function EmployeeProvider({ children }) {
       payload: true,
     });
     try {
-      await apiCall.delete(`/employees/${id}`);
+      await apiCall.delete(`/companies/employees/${id}`);
+      toast.success(i18n.t('events.delete.success', { ns: 'employee' }));
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.delete.error', { ns: 'employee' }));
     } finally {
       dispatch({
         type: 'isEmployeeLoading',

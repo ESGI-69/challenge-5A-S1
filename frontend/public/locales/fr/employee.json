@@ -1,16 +1,38 @@
 {
-    "create": {
-        "title": "Création d'un employé",
-        "back": "Retour à la liste des employés"
-    },
-    "form": {
-        "firstname": "Prénom",
-        "lastname": "Nom",
-        "avatar": "Avatar",
-        "preferedEstablishment": "Établissement préféré",
-        "establishmentsLoading": "Liste des établissements en cours de chargement",
-        "actions": {
-            "create": "Créer"
-        }
+  "create": {
+    "title": "Création d'un employé",
+    "back": "Retour à la liste des employés"
+  },
+  "form": {
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "avatar": "Avatar",
+    "preferedEstablishment": "Établissement préféré",
+    "establishmentsLoading": "Liste des établissements en cours de chargement",
+    "actions": {
+      "create": "Créer"
     }
+  },
+  "update": {
+    "title": "Modification d'un employé",
+    "back": "Retour à la liste des employés"
+  },
+  "events": {
+    "creation": {
+      "success": "L'employé a bien été créé",
+      "error": "Une erreur est survenue lors de la création de l'employé"
+    },
+    "update": {
+      "success": "L'employé a bien été modifié",
+      "error": "Une erreur est survenue lors de la modification de l'employé"
+    },
+    "get": {
+      "error": "Une erreur est survenue lors de la récupération de l'employé",
+      "errorList": "Une erreur est survenue lors de la récupération de la liste des employés"
+    },
+    "delete": {
+      "success": "L'employé a bien été supprimé",
+      "error": "Une erreur est survenue lors de la suppression de l'employé"
+    }
+  }
 }

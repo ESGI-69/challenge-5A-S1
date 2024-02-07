@@ -1,16 +1,38 @@
 {
-    "create": {
-        "title": "Employee creation",
-        "back": "Back to the list of employees"
-    },
-    "form": {
-        "firstname": "Firstname",
-        "lastname": "Lastname",
-        "avatar": "Avatar",
-        "preferedEstablishment": "Prefered establishment",
-        "establishmentsLoading": "Establishments list loading",
-        "actions": {
-            "create": "Create"
-        }
+  "create": {
+    "title": "Employee creation",
+    "back": "Back to the list of employees"
+  },
+  "form": {
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "avatar": "Avatar",
+    "preferedEstablishment": "Prefered establishment",
+    "establishmentsLoading": "Establishments list loading",
+    "actions": {
+      "create": "Create"
     }
+  },
+  "update": {
+    "title": "Employee update",
+    "back": "Back to my employees"
+  },
+  "events": {
+    "creation": {
+      "success": "Employee created successfully",
+      "error": "An error occured during the employee creation"
+    },
+    "update": {
+      "success": "Employee updated successfully",
+      "error": "An error occured during the employee update"
+    },
+    "get": {
+      "error": "An error occured during the employee loading",
+      "errorList": "An error occured during the employees loading"
+    },
+    "delete": {
+      "success": "Employee deleted successfully",
+      "error": "An error occured during the employee deletion"
+    }
+  }
 }

@@ -2,10 +2,12 @@ import PTable from '@/components/lib/PTable';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import { EmployeeContext } from '@/contexts/api/EmployeeContext';
 import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function EmployeesTable() {
   const { employees, get: getEmployees, isEmployeesLoading } = useContext(EmployeeContext);
   const { profile } = useContext(ProfileContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getEmployees(profile.company.id);
@@ -32,6 +34,12 @@ export default function EmployeesTable() {
       template={DATA_TEMPLATE}
       data={employees}
       loading={isEmployeesLoading}
+      actions={[
+        {
+          name: 'view',
+          onClick: ({ id }) => navigate(`/backoffice/employees/${id}`),
+        },
+      ]}
     />
   );
 }
