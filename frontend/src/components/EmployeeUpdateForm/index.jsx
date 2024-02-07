@@ -1,43 +1,36 @@
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './EmployeeUpdateForm.module.scss';
 import PropTypes from 'prop-types';
 import Button from '@/components/lib/Button';
 import Input from '@/components/lib/Input';
-import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
-import { ProfileContext } from '@/contexts/ProfileContext';
 
 export default function RegisterUpdateForm({
   lastname,
   firstname,
   avatar,
+  establishments,
   preferedEstablishment,
   onSubmit,
   isLoading = false,
 }) {
   const { t } = useTranslation('employee');
-  const { profile } = useContext(ProfileContext);
-  const { establishments, isEstablishmentsLoading, get } = useContext(EstablishmentContext);
-
-  useEffect(() => {
-    get({ 'company.id': profile.company.id });
-  }, []);
 
   const [ form, setForm ] = useState({
     lastname,
     firstname,
     avatar,
-    preferedEstablishment,
+    establishments,
+    preferedEstablishment: preferedEstablishment.id,
   });
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
     const data = {
       lastname: form.lastname,
       firstname: form.firstname,
       avatar: form.avatar,
-      preferedEstablishment: `/api/establishments/${form.preferedEstablishment.id}`,
+      preferedEstablishment: `/api/establishments/${form.preferedEstablishment}`,
     };
     onSubmit(data);
   };
@@ -74,28 +67,19 @@ export default function RegisterUpdateForm({
           onChange={(newValue) => setForm({ ...form, avatar: newValue })}
         />
       </div>
-      { isEstablishmentsLoading && establishments.length === 0 && (
-        <span>{t('form.establishmentsLoading')}</span>
-      )}
-      { !isEstablishmentsLoading && establishments.length > 0 && (
-        <div className={styles.EstablishmentUpdateFormGroup}>
-          <label htmlFor="preferedEstablishment">{t('form.preferedEstablishment')}</label>
-          <select
-            disabled={isLoading}
-            id="preferedEstablishment"
-            value={form.preferedEstablishment}
-            onChange={(e) => setForm({ ...form, preferedEstablishment: e.target.value })}
-          >
-            {establishments.map(({ id, city, street }) => ({
-              id: `api/establishments/${id}`,
-              city,
-              street,
-            })).map((establishment) => (
-              <option key={establishment.id} value={establishment.id}>{establishment.street} - {establishment.city}</option>
-            ))}
-          </select>
-        </div>
-      )}
+      <div className={styles.EstablishmentUpdateFormGroup}>
+        <label htmlFor="preferedEstablishment">{t('form.establishmentType')}</label>
+        <select
+          disabled={isLoading}
+          id="preferedEstablishment"
+          value={form.preferedEstablishment}
+          onChange={(e) => setForm({ ...form, preferedEstablishment: e.target.value })}
+        >
+          {establishments.map((establishment) => (
+            <option key={establishment.id} value={establishment.id}>{establishment.street} - {establishment.city}</option>
+          ))}
+        </select>
+      </div>
       <Button disabled={isLoading} type="submit">
         {t('update', { ns: 'base' })}
       </Button>
@@ -104,7 +88,14 @@ export default function RegisterUpdateForm({
 }
 
 RegisterUpdateForm.propTypes = {
-  preferedEstablishment: PropTypes.object.isRequired,
+  establishments: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  })).isRequired,
+  preferedEstablishment: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
   lastname: PropTypes.string.isRequired,
   firstname: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
