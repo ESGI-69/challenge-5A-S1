@@ -36,11 +36,11 @@ class WorkingHoursRange
     private ?int $id = null;
 
     #[Groups(['read-service'])]
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $startDate = null;
 
     #[Groups(['read-service'])]
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'workingHoursRanges')]
@@ -50,6 +50,9 @@ class WorkingHoursRange
     #[ORM\ManyToOne(inversedBy: 'workingHoursRanges')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Employee $Employee = null;
+
+    #[ORM\Column(length: 255, columnDefinition: 'ENUM("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")')]
+    private ?string $day = null;
 
     public function __construct()
     {
@@ -117,6 +120,18 @@ class WorkingHoursRange
     public function setEmployee(?Employee $Employee): static
     {
         $this->Employee = $Employee;
+
+        return $this;
+    }
+
+    public function getDay(): ?string
+    {
+        return $this->day;
+    }
+
+    public function setDay(string $day): static
+    {
+        $this->day = $day;
 
         return $this;
     }
