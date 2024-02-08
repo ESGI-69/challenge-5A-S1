@@ -53,8 +53,8 @@ RUN composer install --no-dev --no-scripts
 
 COPY . /srv/app/
 
-# Add write permissions to the var directory
-RUN chown -R www-data:www-data /srv/app/var
+# Add write permissions 777 to the var director
+RUN chmod -R 777 /srv/app
 
 RUN APP_ENV=prod composer run auto-scripts
 
