@@ -80,7 +80,7 @@ class Establishment
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['read-establishment'])]
+    #[Groups(['read-establishment', 'employee-getall'])]
     private ?int $id = null;
 
     #[Assert\Email()]
@@ -91,13 +91,13 @@ class Establishment
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 255)]
     #[ORM\Column(length: 255)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read'])]
+    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'employee-getall'])]
     private ?string $city = null;
 
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 255)]
     #[ORM\Column(length: 255)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read'])]
+    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'employee-getall'])]
     private ?string $street = null;
 
     #[Assert\NotBlank()]

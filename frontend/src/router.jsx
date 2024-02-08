@@ -11,6 +11,7 @@ import Dashboard from '@/pages/backoffice/Dashboard/';
 import Employees from '@/pages/backoffice/Employees';
 import EstablishmentCreation from '@/pages/backoffice/Establishments/EstablishmentCreation';
 import EstablishmentUpdate from '@/pages/backoffice/Establishments/EstablishmentUpdate';
+import EmployeeUpdate from '@/pages/backoffice/Employees/EmployeeUpdate';
 import BackofficeEstablishments from '@/pages/backoffice/Establishments';
 
 import CompanyRegister from '@/pages/website/CompanyRegister';
@@ -22,9 +23,12 @@ import Search from '@/pages/website/Search';
 
 import CompanyProvider from '@/contexts/api/CompanyContext';
 import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
+import EmployeeProvider from '@/contexts/api/EmployeeContext';
 import EstablishmentTypeProvider from './contexts/api/EstablishmentTypeContext';
 import AppointmentProvider from './contexts/api/AppointmentContext';
 import ServiceTypeProvider from './contexts/api/ServiceTypeContext';
+
+import EmployeeCreation from '@/pages/backoffice/Employees/EmployeeCreation';
 
 const router = createBrowserRouter([
   {
@@ -105,6 +109,23 @@ const router = createBrowserRouter([
                   </EstablishmentProvider>
                 </EstablishmentTypeProvider>
               </ServiceTypeProvider>,
+          },
+        ],
+      },
+      {
+        path: 'employees',
+        children: [
+          {
+            index: true,
+            element: <Employees />,
+          },
+          {
+            path: 'create',
+            element: <EmployeeCreation />,
+          },
+          {
+            path: ':id',
+            element: <EmployeeProvider><EmployeeUpdate /></EmployeeProvider>,
           },
         ],
       },
