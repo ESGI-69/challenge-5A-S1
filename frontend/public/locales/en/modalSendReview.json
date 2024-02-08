@@ -6,5 +6,12 @@
   "cancel": "Cancel",
   "confirm": "Confirm",
   "errorForm": "Please don't leave any field empty",
-  "successForm": "Thanks for your feedback!"
+  "successForm": "Thanks for your feedback!",
+  "notation": {
+    "1": "Very bad",
+    "2": "Bad",
+    "3": "Normal",
+    "4": "Good",
+    "5": "Very good"
+  }
 }

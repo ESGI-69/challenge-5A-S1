@@ -24,11 +24,11 @@ function ModalSendReview({
   const { refetchEstablishment } = useContext(EstablishmentContext);
 
   const ratingTexts = {
-    1: 'Nul',
-    2: 'Bof',
-    3: 'Moyen',
-    4: 'Bien',
-    5: 'Excellent',
+    1: t('notation.1'),
+    2: t('notation.2'),
+    3: t('notation.3'),
+    4: t('notation.4'),
+    5: t('notation.5'),
   };
 
   const handleRating = (feedbackTypeId, rating) => {

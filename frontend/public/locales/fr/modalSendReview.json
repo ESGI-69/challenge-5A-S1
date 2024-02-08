@@ -6,5 +6,12 @@
   "cancel": "Annuler",
   "confirm": "Confirmer",
   "errorForm": "Veuillez remplir tout les champs du formulaire",
-  "successForm": "Merci pour votre commentaire"
+  "successForm": "Merci pour votre commentaire",
+  "notation": {
+    "1": "Très mauvais",
+    "2": "Mauvais",
+    "3": "Moyen",
+    "4": "Bon",
+    "5": "Très bon" 
+  }
 }

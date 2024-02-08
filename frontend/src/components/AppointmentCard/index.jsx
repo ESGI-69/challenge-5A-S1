@@ -33,7 +33,7 @@ function AppointmentCard({
       <div className={styles.AppointmentCardDetails}>
         <span className={styles.AppointmentCardDetailsText}>
           <ClockIcon />
-          {appointment.service.duration} min
+          {appointment.service.duration} {t('minutes', { ns: 'base' })}
         </span>
         <span className={styles.AppointmentCardDetailsText}>
           <BanknotesIcon />
