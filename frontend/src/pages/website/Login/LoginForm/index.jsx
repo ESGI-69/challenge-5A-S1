@@ -6,7 +6,7 @@ import Button from '@/components/lib/Button';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import crypto from 'crypto';
+import { v4 } from 'uuid';
 
 export default function LoginForm() {
   const { t } = useTranslation('login');
@@ -14,12 +14,12 @@ export default function LoginForm() {
 
   const { login } = useContext(ProfileContext);
   const [ emailInput, setEmailInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'email',
     value: '',
   });
   const [ passwordInput, setPasswordInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'password',
     value: '',
   });

@@ -6,7 +6,7 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/componen
 import { Chevron, Dots } from '@/components/lib/Icons';
 import Button from '../Button';
 import { useTranslation } from 'react-i18next';
-import crypto from 'crypto';
+import { v4 } from 'uuid';
 
 export default function PTable({
   template,
@@ -129,7 +129,7 @@ export default function PTable({
             {data?.length > 0 && data.map((item) => (
               <div
                 className={`${styles.TableBodyRow} ${selected.has(item.id) ? styles.TableBodyRow_Selected : ''}`}
-                key={item.id || crypto.randomUUID()}
+                key={item.id || v4()}
               >
                 {selectable && (
                   <div className={styles.TableBodySelector}>
