@@ -1,0 +1,66 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_DOMAIN=http://localhost:8888
+        - VITE_API=/api
+        - VITE_API_TIMEOUT=60000
+    ports:
+      - "8080:8080"
+    depends_on:
+      - server
+      
+  database:
+    image: postgres:15.4-alpine
+    environment:
+      POSTGRES_DB: symfony
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
+    ports:
+      - "5432:5432"
+
+  server:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+      target: server
+    volumes:
+      - ./backend:/srv/app
+    links:
+      - php
+    ports:
+      - '8888:80'
+    depends_on:
+      - database
+    environment:
+      - CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
+  php:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+      target: php
+    volumes:
+      - ./backend:/srv/app
+    depends_on:
+      - database
+    environment:
+      - CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
+
+###> symfony/mailer ###
+  mailer:
+    image: schickling/mailcatcher
+    ports: ["1025:1025", "1080:1080"]
+    depends_on:
+      - database
+###< symfony/mailer ###
+
+volumes:
+  database_data:
