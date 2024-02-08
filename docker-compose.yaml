@@ -4,6 +4,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
+        - VITE_API_DOMAIN=vps-0525fb04.vps.ovh.net:8888
         - VITE_API=/api
         - VITE_API_TIMEOUT=60000
     ports:
