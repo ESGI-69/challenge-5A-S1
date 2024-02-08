@@ -164,6 +164,10 @@ class Establishment
     #[Groups(['read-establishment'])]
     private Collection $feedback;
 
+    #[ORM\Column(nullable: true)]
+    #[Groups(['read-establishment'])]
+    private ?float $averageNotation = null;
+
     public function __construct()
     {
         $this->employees = new ArrayCollection();
@@ -491,6 +495,18 @@ class Establishment
                 $feedback->setEstablishment(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAverageNotation(): ?float
+    {
+        return $this->averageNotation;
+    }
+
+    public function setAverageNotation(?float $averageNotation): static
+    {
+        $this->averageNotation = $averageNotation;
 
         return $this;
     }

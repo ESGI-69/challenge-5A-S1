@@ -21,6 +21,16 @@ class SubFeedbackRepository extends ServiceEntityRepository
         parent::__construct($registry, SubFeedback::class);
     }
 
+    public function countSubFeedBacksByFeedbackType(int $feedbackTypeId): int
+    {
+        return $this->createQueryBuilder('s')
+            ->select('count(s.id)')
+            ->andWhere('s.feedbackType = :feedbackTypeId')
+            ->setParameter('feedbackTypeId', $feedbackTypeId)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 //    /**
 //     * @return SubFeedback[] Returns an array of SubFeedback objects
 //     */
