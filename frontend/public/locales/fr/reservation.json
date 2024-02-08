@@ -1,0 +1,24 @@
+{
+    "reservation": "Réservation",
+    "servicePicked": "Prestation selectionnée",
+    "from": "à partir de ",
+    "delete": "Supprimer",
+    "dateChoice": "Choix de la date et heure",
+    "with": "avec",
+    "at": "à",
+    "edit": "Modifier",
+    "Authentication": "Indentification",
+    "catchPhraseRegister": "Nouveau sur platiny ?",
+    "catchPhraseLogin": "Vous avez déjà utilisé platiny ?",
+    "createAccount": "Créer mon compte",
+    "loginAccount": "Se connecter",
+    "connectedAs": "Connecté en tant que",
+    "paymentMethod": "Moyen de paiement",
+    "book": "Réserver pour",
+    "eventstoast": {
+        "creation": {
+            "success": "Le rendez vous à bien été créé",
+            "error": "Erreur lors de la prise de rendez-vous"
+        }
+    }
+}

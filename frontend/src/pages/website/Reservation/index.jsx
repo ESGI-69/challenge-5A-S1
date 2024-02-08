@@ -9,9 +9,10 @@ import { ProfileContext } from '@/contexts/ProfileContext';
 import { useContext, useEffect } from 'react';
 import { ServiceContext } from '@/contexts/api/ServiceContext';
 import { AppointmentContext } from '@/contexts/api/AppointmentContext';
+import { useTranslation } from 'react-i18next';
 
 export default function Reservation () {
-
+  const { t } = useTranslation('reservation');
   const { profile } = useContext(ProfileContext);
   const { serviceEstablishmentId } = useParams();
   const { post, appointment, isPostAppointmentLoading } = useContext(AppointmentContext);
@@ -122,7 +123,7 @@ export default function Reservation () {
 
   return (
     <div className={styles.Page}>
-      <h2>Reservation</h2>
+      <h2>{t('reservation')}</h2>
       <span className={styles.ReservationAddress}>
         Rue du bonsoir
       </span>
@@ -130,14 +131,14 @@ export default function Reservation () {
         4.5
       </span>
       <br></br>
-      <h2 className={styles.PageTitle}>1. Prestation selectionnée</h2>
+      <h2 className={styles.PageTitle}>1. {t('servicePicked')}</h2>
       <div className={styles.ServicesPicked}>
         <div className={styles.ServicePicked}>
           <div className={styles.ServiceInfo}>
             <span className={styles.ServicePickedName}>{service?.name}</span>
             <div className={styles.ServiceSpec}>
               <span className={styles.ServiceSpecName}>{service?.duration}min</span>
-              <span>à partir de {service?.price}€</span>
+              <span>{t('from')} {service?.price}€</span>
             </div>
           </div>
           <div className={styles.ServicePerson}>
@@ -153,11 +154,11 @@ export default function Reservation () {
             </Dropdown>
           </div>
           <div className={styles.ServiceAction}>
-            <a href="#" className={styles.ServiceActionDelete}>Supprimer</a>
+            <a href="#" className={styles.ServiceActionDelete}>{t('delete')}</a>
           </div>
         </div>
       </div>
-      <h2 className={styles.PageTitle}>2. Choix de la date et heure</h2>
+      <h2 className={styles.PageTitle}>2. {t('dateChoice')}</h2>
       <div>
         {!selectedDate && (
           <Schedule schedule={schedule} personSelected={person} onDateSelect={handleDateSelect} />
@@ -167,12 +168,12 @@ export default function Reservation () {
             <div className={styles.AppointementPickedInfo}>
               <div className={styles.AppointementPickedSpec}>
                 <span>{new Date(selectedDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-                <span className={styles.AppointementPickedSpecTime}>à {new Date(selectedDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
-                <span> avec employé id : {selectedEmployee}</span>
+                <span className={styles.AppointementPickedSpecTime}>{t('at')} {new Date(selectedDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
+                <span> {t('with')} {selectedEmployee}</span>
               </div>
             </div>
             <div className={styles.AppointementPickedAction}>
-              <a href="#" className={styles.AppointementPickedActionDelete} onClick={() => setSelectedDate(null)}>Modifier</a>
+              <a href="#" className={styles.AppointementPickedActionDelete} onClick={() => setSelectedDate(null)}>{t('edit')}</a>
             </div>
           </div>
         )}
@@ -180,15 +181,15 @@ export default function Reservation () {
 
       {!profile && selectedDate && (
         <>
-          <h2 className={styles.PageTitle}>3. Indentification</h2>
+          <h2 className={styles.PageTitle}>3. {t('Authentication')}</h2>
           <div className={styles.Identification}>
-            <h2 className={styles.PageTitle}>Nouveau sur platiny ?</h2>
+            <h2 className={styles.PageTitle}>{t('catchPhraseRegister')}</h2>
             <Link to="/register">
-              <Button variant="black" isPlain="true">Créer mon compte</Button>
+              <Button variant="black" isPlain="true">{t('createAccount')}</Button>
             </Link>
-            <h2 className={styles.PageTitle}>Vous avez déjà utilisé platiny ?</h2>
+            <h2 className={styles.PageTitle}>{t('catchPhraseLogin')}</h2>
             <Link to="/login">
-              <Button variant="black">Se connecter</Button>
+              <Button variant="black">{t('loginAccount')}</Button>
             </Link>
           </div>
         </>
@@ -196,10 +197,10 @@ export default function Reservation () {
 
       {profile && selectedDate && (
         <>
-          <h2 className={styles.PageTitle}>3. Indentification</h2>
+          <h2 className={styles.PageTitle}>3. {t('Authentication')}</h2>
           <div className={styles.Identification}>
             <p>
-              Connecté en tant que {profile['firstname']} {profile['lastname']}
+              {t('connectedAs')} {profile['firstname']} {profile['lastname']}
             </p>
           </div>
         </>
@@ -208,7 +209,7 @@ export default function Reservation () {
       {/* if profile and selectedDate */}
       {profile && selectedDate && (
         <>
-          <h2 className={styles.PageTitle}>4. Moyen de paiement</h2>
+          <h2 className={styles.PageTitle}>4. {t('paymentMethod')}</h2>
           <div className={styles.Payment}>
             <>
               <div className={styles.PaymentService}>
@@ -222,7 +223,7 @@ export default function Reservation () {
             </div>
             <div className={styles.PaymentMethod}>
               <Button onClick={appointment ? null : handlePayment} variant={appointment ? 'success' : 'black'}>
-                {isPostAppointmentLoading ? 'Loading...' : appointment ? `Votre rendez-vous est confirmé pour le ${new Date(appointment.startDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} à ${new Date(appointment.startDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })} ✔️ ` : `Reserver pour ${service.price}€`}
+                {isPostAppointmentLoading ? 'Loading...' : appointment ? `Votre rendez-vous est confirmé pour le ${new Date(appointment.startDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} à ${new Date(appointment.startDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })} ✔️ ` : `${t('book')} ${service.price}€`}
               </Button>
             </div>
           </div>

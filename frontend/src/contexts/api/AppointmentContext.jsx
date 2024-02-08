@@ -2,6 +2,8 @@ import { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import apiCall from '@/axios';
 import queryBuilder from '@/utils/queryBuilder';
+import toast from 'react-hot-toast';
+import i18n from 'i18next';
 
 const initialState = {
   myAppointments: [],
@@ -90,6 +92,7 @@ export default function AppointmentProvider({ children }) {
         payload: data,
       });
     } catch (error) {
+      toast.error(i18n.t('events.creation.error', { ns: 'reservation' }));
       console.error(error);
     } finally {
       dispatch({
