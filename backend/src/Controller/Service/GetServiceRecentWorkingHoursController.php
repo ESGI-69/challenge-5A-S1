@@ -6,6 +6,7 @@ use App\Entity\Service;
 use App\Repository\ServiceRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Attribute\AsController;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[AsController]
 class GetServiceRecentWorkingHoursController
@@ -19,7 +20,13 @@ class GetServiceRecentWorkingHoursController
 
     public function __invoke(Service $service): Service
     {
-        // return $service;
-        return $this->serviceRepository->findRecentWorkingHours($service->getId())[0];
+        //On enlève les workingHours qui sont passés !
+        $responseService = $this->serviceRepository->findRecentWorkingHours($service->getId())[0] ?? $service;
+        foreach ($responseService->getWorkingHoursRanges() as $workingHoursRange) {
+            if ($workingHoursRange->getStartDate() < new \DateTime()) {
+                $responseService->removeWorkingHoursRange($workingHoursRange);
+            }
+        }
+        return $responseService;
     }
 }

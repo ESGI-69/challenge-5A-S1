@@ -50,23 +50,20 @@ export default function Reservation () {
 
   useEffect(() => {
     if (service) {
-      const schedule = generateSchedule(service);
+      const { schedule, persons } = generateSchedule(service);
       setSchedule(schedule);
-    }
-    if (persons){
+      setPersons(persons);    }
+    if (persons && !person){
       setPerson(persons[0]);
     }
-  }, [
-    service,
-    person,
-    persons,
-  ]);
+  }, [ service, person ]);
 
   function generateSchedule(service) {
     const schedule = [];
     const employees = {};
 
-    service.workingHoursRanges.forEach(range => {
+    //WorkingHoursRanges est renvoyé sous forme d'objet :)
+    Object.values(service.workingHoursRanges).forEach(range => {
       const startDate = new Date(range.startDate);
       const endDate = new Date(range.endDate);
       const serviceEmployee = range.Employee.id;
@@ -113,15 +110,14 @@ export default function Reservation () {
 
     });
     // console.log(schedule);
-    setPersons(Object.values(employees));
-    return schedule;
+    return { schedule, persons: Object.values(employees) };
   }
 
   function getWeek(date) {
-    const localDate = new Date(date.toLocaleString('en-US', { timeZone: 'Europe/Paris' }));
-    const firstDayOfYear = new Date(localDate.getFullYear(), 0, 1);
-    const pastDaysOfYear = (localDate - firstDayOfYear) / 86400000;
-    return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+    let tempDate = new Date(date.valueOf());
+    tempDate.setDate(tempDate.getDate() + (3 - (tempDate.getDay() + 6) % 7));
+    var firstDayOfYear = new Date(tempDate.getFullYear(), 0, 1);
+    return 1 + Math.ceil(((tempDate - firstDayOfYear) / 86400000) / 7);
   }
 
   return (
