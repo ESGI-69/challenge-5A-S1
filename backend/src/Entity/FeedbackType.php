@@ -52,10 +52,11 @@ class FeedbackType
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read-establishment'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['feedback-read', 'feedback-type-create', 'feedback-type-read'])]
+    #[Groups(['feedback-read', 'feedback-type-create', 'feedback-type-read', 'read-establishment'])]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Establishment::class, inversedBy: 'feedbackTypes')]

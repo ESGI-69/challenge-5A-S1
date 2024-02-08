@@ -7,6 +7,7 @@
   box-shadow: var(--shadow-2);
   border: var(--border-size-1) solid var(--color-border-light);
   padding: var(--size-4);
+  width: 50%;
 
   &Date {
     margin: 0;
@@ -15,25 +16,40 @@
 
   &Name {
     margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--size-2);
+    font-size: var(--font-size-0-5);
+    color: var(--color-text-light);
+    
+    svg {
+      width: var(--size-4);
+    }
   }
 
   &Details {
     display: flex;
     flex-direction: row;
     gap: var(--size-3);
+    margin-bottom: var(--size-3);
 
     &Text {
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: var(--size-2);
+      font-size: var(--font-size-0-5);
+      color: var(--color-text-light);
 
       svg {
         width: var(--size-4);
       }
     }
+  }
 
-
-
+  button {
+    width: fit-content;
+    font-size: var(--font-size-0-5);
   }
 }

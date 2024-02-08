@@ -25,8 +25,14 @@ function Establishment() {
 
   const now = new Date();
 
-  const pastAppointments = myAppointments.filter(appointment => new Date(appointment.endDate) < now);
-  const futureAppointments = myAppointments.filter(appointment => new Date(appointment.endDate) >= now);
+  const pastAppointments = myAppointments
+    .filter(appointment => new Date(appointment.endDate) < now)
+    .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+    .slice(0, 2);
+  const futureAppointments = myAppointments
+    .filter(appointment => new Date(appointment.endDate) >= now)
+    .sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
+    .slice(0, 2);
 
   const [ currentReviewsPage, setCurrentReviewsPage ] = useState(0);
   const [ isPastAppointmentsShowned, setIsPastAppointmentsShowned ] = useState(false);
@@ -90,12 +96,20 @@ function Establishment() {
             </h3>
             <div className={styles.EstablishmentLeftApointmentsSectionApointments}>
               {futureAppointments.map(appointment => (
-                <AppointmentCard key={appointment.id} appointment={appointment} />
+                <AppointmentCard
+                  key={appointment.id}
+                  appointment={appointment}
+                  feedbackTypes={establishment?.feedbackTypes}
+                />
               ))}
             </div>
-            <Button variant="black" onClick={handlePastAppointmentsClick}>
-              {isPastAppointmentsShowned ? t('myApointments.hidePast') : t('myApointments.seePast')}
-            </Button>
+            {pastAppointments.length > 0 && (
+              <div className={styles.EstablishmentLeftApointmentsSectionButton} >
+                <Button variant="black" onClick={handlePastAppointmentsClick}>
+                  {isPastAppointmentsShowned ? t('myApointments.hidePast') : t('myApointments.seePast')}
+                </Button>
+              </div>
+            )}
             {isPastAppointmentsShowned &&
               <>
                 <h3 className={styles.EstablishmentSubtitle}>
@@ -103,7 +117,11 @@ function Establishment() {
                 </h3>
                 <div className={styles.EstablishmentLeftApointmentsSectionApointments}>
                   {pastAppointments.map(appointment => (
-                    <AppointmentCard key={appointment.id} appointment={appointment} />
+                    <AppointmentCard
+                      key={appointment.id}
+                      appointment={appointment}
+                      feedbackTypes={establishment?.feedbackTypes}
+                    />
                   ))}
                 </div>
               </>
@@ -140,7 +158,7 @@ function Establishment() {
             ]}
             zoomLevel={13}
             />
-          )};
+          )}
         </div>
 
       </div>
@@ -162,15 +180,18 @@ function Establishment() {
             {establishment?.feedback.length === 0 && (
               <span>{t('tabs.noComments')}</span>
             )}
-            {establishment?.feedback.slice(startReviews, endReviews).map(review => (
-              <Review
-                key={review.id}
-                authorName={review.author.firstname}
-                note={5}
-                content={review.comment}
-                date={review.updatedAt}
-              />
-            ))}
+            {establishment?.feedback
+              .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+              .slice(startReviews, endReviews)
+              .map(review => (
+                <Review
+                  key={review.id}
+                  authorName={review.author.firstname}
+                  note={5}
+                  content={review.comment}
+                  date={review.updatedAt}
+                />
+              ))}
             <div className={styles.EstablishmentRightCommentsButtons}>
               <Button
                 disabled={currentReviewsPage === 0}

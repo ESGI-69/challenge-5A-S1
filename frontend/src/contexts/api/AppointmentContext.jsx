@@ -21,6 +21,11 @@ const reducer = (state, action) => {
         ...state,
         isMyAppointmentsLoading: action.payload,
       };
+    case 'clearMyAppointments':
+      return {
+        ...state,
+        myAppointments: [],
+      };
     default:
       return state;
   }
@@ -50,9 +55,19 @@ export default function AppointmentProvider({ children }) {
     }
   };
 
+  const refetchAppointments = async (id) => {
+    // je suis pas sur de ca ???
+    // review pls
+    dispatch({
+      type: 'clearMyAppointments',
+    });
+    await getMyAppointments(id);
+  };
+
   return (
     <AppointmentContext.Provider value={{
       getMyAppointments,
+      refetchAppointments,
       myAppointments: state.myAppointments,
       isMyAppointmentsLoading: state.isMyAppointmentsLoading,
     }}>

@@ -1,0 +1,80 @@
+.Modal {
+  position: absolute;
+  inset: 4rem 10rem;
+  border: var(--border-size-1) solid var(--color-border-light);
+  background: rgb(255 255 255);
+  overflow: auto;
+  outline: none;
+  border-radius: var(--radius-2-5);
+  box-shadow: var(--shadow-2);
+  padding: var(--size-7);
+  height: fit-content;
+
+  &Subtext {
+    font-size: var(--font-size-0-5);
+    color: var(--color-text-light);
+  }
+
+  &Ratings {
+    display: flex;
+    flex-direction: column;
+    margin: var(--size-7) 0;
+    gap: var(--size-3);
+  }
+
+  &Rating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--size-10);
+
+    &Name {
+      width: var(--size-13);
+      text-transform: capitalize;
+    }
+
+    &Stars {
+      display: flex;
+      flex-direction: row;
+      gap: var(--size-3);
+
+      &Star {
+        width: 20px;
+        cursor: pointer;
+
+        &Inactive {
+          fill: var(--color-text-lighter);
+        }
+      }
+    }
+
+    &Text {
+      margin: 0;
+    }
+  }
+
+  &Form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+
+    &Textarea {
+      max-width: 100%;
+      min-height: 100px;
+      max-height: 400px;
+      height: 100px;
+      padding: var(--size-3);
+      border: var(--border-size-1) solid var(--color-border-light);
+      border-radius: var(--radius-2-5);
+      font-size: var(--font-size-0-5);
+      resize: vertical;
+    }
+  }
+
+  &Btns {
+    display: flex;
+    flex-direction: row;
+    gap: var(--size-3);
+    margin-top: var(--size-3);
+  }
+}
