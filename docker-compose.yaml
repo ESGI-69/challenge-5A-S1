@@ -4,7 +4,6 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - VITE_API_DOMAIN=http://localhost:8888
         - VITE_API=/api
         - VITE_API_TIMEOUT=60000
     ports:
@@ -45,9 +44,6 @@ services:
       target: php
     depends_on:
       - database
-    environment:
-      - CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
-      - APP_ENV=prod
     volumes:
       - ./backend/public/company_kbis:/srv/app/public/company_kbis
       - ./backend/public/company_logo:/srv/app/public/company_logo
