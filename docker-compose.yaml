@@ -30,16 +30,12 @@ services:
       context: ./backend
       dockerfile: ./Dockerfile
       target: server
-    volumes:
-      - ./backend:/srv/app
     links:
       - php
     ports:
       - '8888:80'
     depends_on:
       - database
-    environment:
-      - CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
   php:
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -47,12 +43,13 @@ services:
       context: ./backend
       dockerfile: ./Dockerfile
       target: php
-    volumes:
-      - ./backend:/srv/app
     depends_on:
       - database
     environment:
       - CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
+    volumes:
+      - ./backend/public/company_kbis:/srv/app/public/company_kbis
+      - ./backend/public/company_logo:/srv/app/public/company_logo
 
 ###> symfony/mailer ###
   mailer:

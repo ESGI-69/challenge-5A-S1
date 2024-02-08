@@ -103,7 +103,7 @@ bin/console api:openapi:export --output=swagger.json
 
 - load fixtures:
   ```sh
-  docker compose exec php bin/console doctrine:fixtures:load
+  docker compose exec php bin/console doctrine:fixtures:load --no-interaction
   ```
 
 You can log to the project with the following credentials:
