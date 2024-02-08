@@ -15,6 +15,7 @@ import Review from '@/components/Notation/Review';
 import Map from '@/components/Map';
 import { useState } from 'react';
 import AppointmentCard from '@/components/AppointmentCard';
+import { addDigit } from '@/utils/formater/note';
 
 function Establishment() {
   const { t } = useTranslation('establishment');
@@ -48,6 +49,8 @@ function Establishment() {
 
   const startReviews = currentReviewsPage * reviewsPerPage;
   const endReviews = startReviews + reviewsPerPage;
+
+  const uniqueAuthorCount = new Set(establishment?.feedback.filter(feedback => feedback.author).map(feedback => feedback.author.id)).size;
 
   useEffect(() => {
     getById(id);
@@ -171,9 +174,9 @@ function Establishment() {
           </TabsList>
           <TabContent value="global-notation">
             <GlobalNotation
-              globalAverage={establishment?.average}
-              subFeedbacks={establishment?.subFeedbacks}
-              reviewsCount={establishment?.feedback.length}
+              globalAverage={addDigit(establishment?.averageNotation)}
+              subFeedbacks={establishment?.feedbackTypes}
+              reviewsCount={uniqueAuthorCount}
             />
           </TabContent>
           <TabContent value="tab2">
@@ -187,7 +190,7 @@ function Establishment() {
                 <Review
                   key={review.id}
                   authorName={review.author.firstname}
-                  note={5}
+                  note={review.averageRating}
                   content={review.comment}
                   date={review.updatedAt}
                 />

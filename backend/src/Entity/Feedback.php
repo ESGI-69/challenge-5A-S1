@@ -95,6 +95,10 @@ class Feedback
     #[Groups(['read-establishment', 'feedback-read'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column (type: "float", nullable: true)]
+    #[Groups(['read-establishment', 'feedback-read', 'create-feedback'])]
+    private ?float $averageRating = null;
+
     public function __construct()
     {
         $this->subFeedback = new ArrayCollection();
@@ -227,6 +231,18 @@ class Feedback
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getAverageRating(): ?float
+    {
+        return $this->averageRating;
+    }
+
+    public function setAverageRating(float $averageRating): static
+    {
+        $this->averageRating = $averageRating;
 
         return $this;
     }

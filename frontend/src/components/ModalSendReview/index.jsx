@@ -49,6 +49,7 @@ function ModalSendReview({
         employee: `/api/employees/${appointment.employee.id}`,
         appointment: `/api/appointments/${appointment.id}`,
         service: `/api/services/${appointment.service.id}`,
+        averageRating: Object.values(ratings).reduce((acc, rating) => acc + rating, 0) / feedbackTypes.length,
         subFeedback: [
           ...feedbackTypes.map(feedbackType => ({
             feedbackType: `/api/feedback_types/${feedbackType.id}`,

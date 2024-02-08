@@ -20,7 +20,7 @@ function GlobalNotation({
             className={style.GlobalNotationDetailItem}
           >
             {subFeedback.name}
-            <Note value={subFeedback.average} className={style.GlobalNotationDetailItemAverage} />
+            <Note value={subFeedback.averageNotation ?? 0} className={style.GlobalNotationDetailItemAverage} />
           </span>
         ))}
         <span className={style.GlobalNotationCount}>
@@ -32,11 +32,11 @@ function GlobalNotation({
 }
 
 GlobalNotation.propTypes = {
-  globalAverage: PropsType.number,
+  globalAverage: PropsType.string,
   subFeedbacks: PropsType.arrayOf(PropsType.shape({
     id: PropsType.number.isRequired,
     name: PropsType.string.isRequired,
-    average: PropsType.number.isRequired,
+    averageNotation: PropsType.number || PropsType.string,
   })),
   reviewsCount: PropsType.number,
 };

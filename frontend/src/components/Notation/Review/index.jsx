@@ -5,7 +5,7 @@ import { dayMonthYearNumber } from '@/utils/formater/date';
 
 function Review({
   authorName,
-  note,
+  note = 0,
   date,
   content,
 }) {

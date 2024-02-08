@@ -66,6 +66,9 @@ class FeedbackType
     #[ORM\OneToMany(mappedBy: 'feedbackType', targetEntity: SubFeedback::class)]
     private Collection $subFeedback;
 
+    #[ORM\Column(nullable: true)]
+    #[Groups(['read-establishment'])]
+    private ?float $averageNotation = null;
     public function __construct()
     {
         $this->establishments = new ArrayCollection();
@@ -139,6 +142,18 @@ class FeedbackType
                 $subFeedback->setFeedbackType(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAverageNotation(): ?float
+    {
+        return $this->averageNotation;
+    }
+
+    public function setAverageNotation(?float $averageNotation): static
+    {
+        $this->averageNotation = $averageNotation;
 
         return $this;
     }
