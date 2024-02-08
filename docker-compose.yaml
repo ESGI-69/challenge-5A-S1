@@ -4,13 +4,13 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - VITE_API_DOMAIN=vps-0525fb04.vps.ovh.net:8888
+        - VITE_API_DOMAIN=http://vps-0525fb04.vps.ovh.net:8888
         - VITE_API=/api
         - VITE_API_TIMEOUT=60000
     ports:
       - "8080:8080"
-    depends_on:
-      - server
+#    depends_on:
+#      - server
       
   database:
     image: postgres:15.4-alpine
@@ -45,6 +45,9 @@ services:
       target: php
     depends_on:
       - database
+    environment:
+      - CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
+      - APP_ENV=prod
     volumes:
       - ./backend/public/company_kbis:/srv/app/public/company_kbis
       - ./backend/public/company_logo:/srv/app/public/company_logo
