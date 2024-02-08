@@ -4,6 +4,7 @@ import Input from '@/components/lib/Input';
 import styles from './CompanyRegisterForm.module.scss';
 import { useTranslation } from 'react-i18next';
 import Button from '@/components/lib/Button';
+import crypto from 'crypto';
 
 export default function CompanyRegisterForm() {
   const { t } = useTranslation('companyRegister');

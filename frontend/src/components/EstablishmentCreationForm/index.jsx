@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { EstablishmentTypeContext } from '@/contexts/api/EstablishmentTypeContext';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import styles from './EstablishmentCreationForm.module.scss';
+import crypto from 'crypto';
 
 export default function RegisterForm() {
   const { t } = useTranslation('establishment');

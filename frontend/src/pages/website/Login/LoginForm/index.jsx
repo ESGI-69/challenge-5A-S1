@@ -6,6 +6,7 @@ import Button from '@/components/lib/Button';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import crypto from 'crypto';
 
 export default function LoginForm() {
   const { t } = useTranslation('login');

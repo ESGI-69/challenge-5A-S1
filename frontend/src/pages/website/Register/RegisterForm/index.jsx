@@ -5,6 +5,7 @@ import styles from './RegisterForm.module.scss';
 import Button from '@/components/lib/Button';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import crypto from 'crypto';
 
 export default function RegisterForm() {
   const { t } = useTranslation('register');

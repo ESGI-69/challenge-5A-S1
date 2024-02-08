@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import styles from './EmployeeCreationForm.module.scss';
+import crypto from 'crypto';
 
 export default function RegisterForm() {
   const { t } = useTranslation('employee');

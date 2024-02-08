@@ -6,6 +6,7 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/componen
 import { Chevron, Dots } from '@/components/lib/Icons';
 import Button from '../Button';
 import { useTranslation } from 'react-i18next';
+import crypto from 'crypto';
 
 export default function PTable({
   template,
