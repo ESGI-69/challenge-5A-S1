@@ -67,7 +67,7 @@ class Appointment
     #[Groups(['appointment-getall', 'appointment-me'])]
     private ?int $id = null;
 
-    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me'])]
+    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me','read-service'])]
     #[ORM\ManyToOne(inversedBy: 'appointments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Employee $employee = null;
@@ -87,7 +87,7 @@ class Appointment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
 
-    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me'])]
+    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me','read-service'])]
     #[ORM\Column]
     private ?\DateTimeImmutable $startDate = null;
 

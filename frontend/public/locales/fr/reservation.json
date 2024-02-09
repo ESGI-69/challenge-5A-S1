@@ -15,10 +15,11 @@
     "connectedAs": "Connecté en tant que",
     "paymentMethod": "Moyen de paiement",
     "book": "Réserver pour",
-    "eventstoast": {
+    "events": {
         "creation": {
             "success": "Le rendez vous à bien été créé",
             "error": "Erreur lors de la prise de rendez-vous"
         }
     }
 }
+

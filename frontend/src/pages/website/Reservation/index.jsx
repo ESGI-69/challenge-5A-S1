@@ -28,15 +28,17 @@ export default function Reservation () {
 
   const handlePayment = () => {
     const employeeId = selectedEmployee;
-    const startDate = selectedDate;
-    const endDate = selectedDate;
+    const startDate = new Date(selectedDate);
+    startDate.setHours(startDate.getHours()); // Add 1 hour
+    const endDate = new Date(selectedDate);
+    endDate.setHours(endDate.getHours()); // Add 1 hour
     const comment = 'test';
     post({
       employee: `/api/employees/${employeeId}`,
       establishment: `/api/establishments/${service.establishment.id}`,
       service: `/api/services/${serviceId}`,
-      startDate,
-      endDate,
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
       comment,
     });
   };
@@ -59,6 +61,11 @@ export default function Reservation () {
     }
   }, [ service, person ]);
 
+  service?.appointments.forEach(appointment => {
+    // console.log('appointment:');
+    // console.log(`${new Date(appointment.startDate).getTime() }-${appointment.startDate}`);
+  });
+
   function generateSchedule(service) {
     const schedule = [];
     const employees = {};
@@ -68,23 +75,25 @@ export default function Reservation () {
       const startDate = new Date(range.startDate);
       const endDate = new Date(range.endDate);
       const serviceEmployee = range.Employee.id;
+      const serviceEmployeeName = range.Employee.firstname;
 
       employees[serviceEmployee] = {
         id: serviceEmployee,
-        name: `Personne ${serviceEmployee}`,
+        name: `${serviceEmployeeName}`,
       };
 
       if (serviceEmployee === person?.id) {
 
-        let currentTime = new Date(startDate.getTime());
-        //WIP pour la génération du schedule
+        let currentTime = startDate;
         while (currentTime <= endDate) {
+
+          let timeFix = new Date(currentTime);
+          timeFix.setHours(timeFix.getHours() + 1);
           const timeSlot = {
-            time: currentTime.toISOString().slice(11, 16), // format HH:mm
-            available: true, // vérifier ici si le créneau est déjà pri
+            time: timeFix.toISOString().slice(11, 16), // format HH:mm
+            available: !(service.appointments.some(appointment => new Date(appointment.startDate).getTime() === currentTime.getTime() && appointment.employee.id === serviceEmployee)), // vérifie si le créneau est dispo
             employee: serviceEmployee,
           };
-
           // Trouvez la semaine correspondante ou créez-en une nouvelle si elle n'existe pas
           const weekNumber = getWeek(currentTime);
           let week = schedule.find(week => week.week === weekNumber);
@@ -110,7 +119,6 @@ export default function Reservation () {
       }
 
     });
-    // console.log(schedule);
     return { schedule, persons: Object.values(employees) };
   }
 
@@ -223,7 +231,7 @@ export default function Reservation () {
             </div>
             <div className={styles.PaymentMethod}>
               <Button onClick={appointment ? null : handlePayment} variant={appointment ? 'success' : 'black'}>
-                {isPostAppointmentLoading ? 'Loading...' : appointment ? `Votre rendez-vous est confirmé pour le ${new Date(appointment.startDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} à ${new Date(appointment.startDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })} ✔️ ` : `${t('book')} ${service.price}€`}
+                {isPostAppointmentLoading ? 'Loading...' : appointment ? `${t('events.creation.success')}` : `${t('book')} ${service.price}€` }
               </Button>
             </div>
           </div>

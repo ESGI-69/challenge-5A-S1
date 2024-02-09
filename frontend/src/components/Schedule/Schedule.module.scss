@@ -72,13 +72,15 @@
         max-width: 118.29px;
         width: 100%;
         cursor: pointer;
+
+        &Disabled {
+            background-color: var(--gray-3);
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
     }
 
-    &ButtonDisabled {
-        background-color: var(--gray-3);
-        opacity: 0.4;
-        cursor: not-allowed;
-    }
+    
 
     &Button:hover {
         background-color: var(--gray-2);

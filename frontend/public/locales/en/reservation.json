@@ -15,7 +15,7 @@
     "connectedAs": "Connected as",
     "paymentMethod": "Payment method",
     "book": "Book for",
-    "eventstoast": {
+    "events": {
         "creation": {
             "success": "The appointment has been successfully created",
             "error": "Error during appointment scheduling"

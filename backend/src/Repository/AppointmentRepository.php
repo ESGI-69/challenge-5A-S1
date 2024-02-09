@@ -59,4 +59,5 @@ class AppointmentRepository extends ServiceEntityRepository
             ->getOneOrNullResult() !== null;
     }
 
+
 }

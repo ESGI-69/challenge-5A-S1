@@ -48,21 +48,18 @@ const Schedule = React.forwardRef(function Schedule(
                       </div>
                       <div className={styles.ColumnBody}>
                         {day.times.map((appointement, index) =>
-                          // if (appointement.employee !== personSelected.id) {
-                          //   return null;
-                          // }
                           (
                             <button
                               key={index}
-                              className={styles.ColumnButton}
+                              className={appointement.available ? `${styles.ColumnButton}`: `${styles.ColumnButton} ${styles.ColumnButtonDisabled}`}
                               onClick={() => {
-                                onDateSelect(
-                                  new Date(`${day.date} ${appointement.time}`).toISOString(),
-                                  appointement.employee,
-                                );
+                                if (appointement.available) {
+                                  const selectedDate = new Date(`${day.date}T${appointement.time}:00.000Z`);
+                                  onDateSelect(selectedDate, appointement.employee);
+                                }
                               }}
                             >
-                              {appointement.time} - {appointement.employee}
+                              {appointement.time}
                             </button>
                           ),
                         )}

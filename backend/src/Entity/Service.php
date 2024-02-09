@@ -102,6 +102,10 @@ class Service
     #[ORM\OrderBy(['startDate' => 'ASC'])]
     private Collection $workingHoursRanges;
 
+    #[Groups(['read-service'])]
+    #[ORM\OneToMany(mappedBy: 'service', targetEntity: Appointment::class)]
+    private Collection $appointments;
+
     #[ORM\ManyToOne(inversedBy: 'services')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['read-establishment','read-service'])]
@@ -191,6 +195,15 @@ class Service
         $this->validatedBy = $validatedBy;
 
         return $this;
+    }
+
+    //add appointment relation
+    /**
+     * @return Collection<int, Appointment>
+     */
+    public function getAppointments(): Collection
+    {
+        return $this->appointments;
     }
 
     /**
