@@ -1,0 +1,12 @@
+{
+  "title": "Types de feedback",
+  "feedbackTypeSelector": "Selectionnez le type de feedback",
+  "feedbackType": {
+    "titleAdd": "Ajout d'un type de feedback",
+    "buttonAdd": "Ajouter un type de feedback",
+    "buttonClose": "Annuler",
+    "buttonAddConfirm": "Confirmer",
+    "labelName": "Nom",
+    "placeHolderName": "Nom du type de feedback"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Feedback types",
+  "feedbackTypeSelector": "Select the feedback type",
+  "feedbackType": {
+    "titleAdd": "Add a feedback type",
+    "buttonAdd": "Add a feedback type",
+    "buttonClose": "Annuler",
+    "buttonAddConfirm": "Confirm",
+    "labelName": "Name",
+    "placeHolderName": "Name of the feedback type"
+  }
+}

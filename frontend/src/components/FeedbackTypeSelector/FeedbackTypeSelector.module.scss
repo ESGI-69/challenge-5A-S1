@@ -1,0 +1,17 @@
+.FeedbackTypeSelector {
+  &Modal {
+    &Form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--size-3);
+      margin-bottom: var(--size-6);
+      margin-top: var(--size-6);
+    }
+
+    &Btns {
+      display: flex;
+      flex-direction: row;
+      gap: var(--size-3);
+    }
+  }
+}

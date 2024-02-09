@@ -4,13 +4,14 @@ import styles from './EstablishmentCard.module.scss';
 import Star from '@/components/lib/Icons/Star';
 import Shop from '@/components/lib/Icons/Shop';
 import { Link } from 'react-router-dom';
+import { addDigit } from '@/utils/formater/note';
 
 const EstablishmentCard = function EstablishmentCard({
   id,
   picturePath,
   name,
   adress,
-  globalReview,
+  globalReview = 0,
   reviewsNumber,
   zipCode,
   city,
@@ -29,7 +30,7 @@ const EstablishmentCard = function EstablishmentCard({
         </div>
         <div className={styles.CardContentReview}>
           <Star className={styles.CardContentReviewStar}/>
-          {` ${globalReview} (${reviewsNumber} avis)`}
+          {` ${addDigit(globalReview)} (${reviewsNumber} avis)`}
         </div>
       </div>
     </Link>

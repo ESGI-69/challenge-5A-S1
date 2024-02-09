@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import styles from './Sidemenu.module.scss';
 import { Expand } from '@/components/lib/Icons';
-import { BellIcon, BuildingStorefrontIcon, ChartPieIcon, Cog6ToothIcon, DocumentCheckIcon, UsersIcon } from '@heroicons/react/20/solid';
+import { BellIcon, BuildingStorefrontIcon, ChartPieIcon, Cog6ToothIcon, DocumentCheckIcon, FunnelIcon, UsersIcon } from '@heroicons/react/20/solid';
 import ProfileButton from '@/components/ProfileButton';
 import { useContext } from 'react';
 import { ProfileContext } from '@/contexts/ProfileContext';
@@ -44,6 +44,9 @@ export default function Sidemenu({ ...delegated }) {
                 </SidemenuLink>
                 <SidemenuLink to="/backoffice/companies-validation" svgJsx={<DocumentCheckIcon />}>
                   {t('menu.companiesValidation')}
+                </SidemenuLink>
+                <SidemenuLink to="/backoffice/feedbacks-type" svgJsx={<FunnelIcon />}>
+                  {t('menu.feedbacksType')}
                 </SidemenuLink>
               </ul>
             )}
