@@ -76,10 +76,10 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        flex-grow: 1;
         width: 24px;
         right: 0;
-        z-index: 0;
+        z-index: 1;
+        margin-left: auto;
 
         &Button {
           padding: var(--size-2);

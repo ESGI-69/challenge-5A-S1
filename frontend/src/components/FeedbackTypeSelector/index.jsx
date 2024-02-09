@@ -213,6 +213,7 @@ export default function FeedbackTypeSelector() {
         style={{
           overlay: {
             backgroundColor: 'rgba(0, 0, 0, 0.75)',
+            zIndex: 1000,
           },
           content: {
             width: '500px',
