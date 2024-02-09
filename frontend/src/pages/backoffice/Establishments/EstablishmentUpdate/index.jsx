@@ -77,7 +77,7 @@ export default function EstablishmentUpdate() {
         <h1>{ t('update.title') }</h1>
       </BackofficeHeader>
       <Button to="/backoffice/establishments">{ t('update.back') }</Button>
-      <Button to={`/establishmens/${id}`}>{ t('seeInUserLand', { ns: 'base' }) }</Button>
+      <Button to={`/establishment/${id}`}>{ t('seeInUserLand', { ns: 'base' }) }</Button>
       {(!isEstablishmentTypesLoading && !isEstablishmentLoading && establishment && establishmentTypes) && (
         <>
           <EstablishmentUpdateForm
