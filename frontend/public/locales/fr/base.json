@@ -21,5 +21,7 @@
     "loading": "Chargement",
     "delete": "Supprimer",
     "minutes": "Minutes",
-    "seeInUserLand": "Voir dans l'interface utilisateur"
+    "seeInUserLand": "Voir dans l'interface utilisateur",
+    "cancel": "Annuler",
+    "confirm": "Confirmer"
 }

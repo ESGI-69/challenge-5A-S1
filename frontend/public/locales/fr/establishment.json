@@ -56,6 +56,10 @@
       "zipCode": "Code postal",
       "country": "Pays",
       "type": "Type"
+    },
+    "actions": {
+      "edit": "Modifier",
+      "delete": "Supprimer"
     }
   },
   "openingHourSelector": "Selectionnez les horaires d'ouverture",
@@ -100,6 +104,16 @@
     "openingHours": {
       "success": "Les horaires d'ouverture ont bien été modifiés",
       "error": "Une erreur est survenue lors de la modification des horaires d'ouverture"
+    },
+    "deletion": {
+      "success": "L'établissement a bien été supprimé",
+      "error": "Une erreur est survenue lors de la suppression de l'établissement"
+    }
+  },
+  "modal": {
+    "deletion": {
+      "title": "Suppression",
+      "content": "Êtes-vous sûr de vouloir supprimer votre établissement dans la ville de {{city}} ?"
     }
   }
 }

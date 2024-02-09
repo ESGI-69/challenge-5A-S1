@@ -21,5 +21,7 @@
     "loading": "Loading",
     "delete": "Delete",
     "minutes": "Minutes",
-    "seeInUserLand": "See in user land"
+    "seeInUserLand": "See in user land",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
 }
