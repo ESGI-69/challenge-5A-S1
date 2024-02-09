@@ -9,6 +9,8 @@ const initialState = {
   isPostFeedbackTypeLoading: false,
 
   isDeleteFeedbackTypeLoading: false,
+
+  isPatchFeedbackTypeLoading: false,
 };
 
 export const FeedbackTypeContext = createContext(initialState);
@@ -29,6 +31,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         isPostFeedbackTypeLoading: action.payload,
+      };
+    case 'isPatchFeedbackTypeLoading':
+      return {
+        ...state,
+        isPatchFeedbackTypeLoading: action.payload,
       };
     case 'isDeleteFeedbackTypeLoading':
       return {
@@ -81,6 +88,27 @@ export default function FeedbackTypeProvider({ children }) {
     }
   };
 
+  const patchFeedbackType = async (id, feedbackType) => {
+    dispatch({
+      type: 'isPatchFeedbackTypeLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.patch(`/feedback_types/${id}`, feedbackType, {
+        headers: {
+          'Content-Type': 'application/merge-patch+json',
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isPatchFeedbackTypeLoading',
+        payload: false,
+      });
+    }
+  };
+
   const deleteFeedbackType = async (id) => {
     dispatch({
       type: 'isDeleteFeedbackTypeLoading',
@@ -103,10 +131,12 @@ export default function FeedbackTypeProvider({ children }) {
       getAllFeedbackTypes,
       postFeedbackType,
       deleteFeedbackType,
+      patchFeedbackType,
       isGetAllFeedbackTypesLoading: state.isGetAllFeedbackTypesLoading,
       feedbackTypes: state.feedbackTypes,
       isPostFeedbackTypeLoading: state.isPostFeedbackTypeLoading,
       isDeleteFeedbackTypeLoading: state.isDeleteFeedbackTypeLoading,
+      isPatchFeedbackTypeLoading: state.isPatchFeedbackTypeLoading,
     }}>
       {children}
     </FeedbackTypeContext.Provider>

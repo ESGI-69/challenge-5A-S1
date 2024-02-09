@@ -5,18 +5,30 @@ import { useContext, useEffect, useState } from 'react';
 import styles from './FeedbackTypeSelector.module.scss';
 import Input from '../lib/Input';
 import { FeedbackTypeContext } from '@/contexts/api/FeedbackTypeContext';
-import { TrashIcon } from '@heroicons/react/20/solid';
 import toast from 'react-hot-toast';
 import PTable from '@/components/lib/PTable';
 
 export default function FeedbackTypeSelector() {
-  const { isGetAllFeedbackTypesLoading, feedbackTypes, getAllFeedbackTypes, postFeedbackType, deleteFeedbackType, isDeleteFeedbackTypeLoading, isPostFeedbackTypeLoading } = useContext(FeedbackTypeContext);
+  const {
+    isGetAllFeedbackTypesLoading,
+    feedbackTypes,
+    getAllFeedbackTypes,
+    postFeedbackType,
+    deleteFeedbackType,
+    isDeleteFeedbackTypeLoading,
+    isPostFeedbackTypeLoading,
+    patchFeedbackType,
+    isPatchFeedbackTypeLoading,
+  } = useContext(FeedbackTypeContext);
   const { t } = useTranslation('feedbackType');
   const [ modalCreateIsOpen, setModalCreateIsOpen ] = useState(false);
   const [ modalDeleteIsOpen, setModalDeleteIsOpen ] = useState(false);
+  const [ modalUpdateIsOpen, setModalUpdateIsOpen ] = useState(false);
   const [ postName, setPostName ] = useState('');
   const [ deleteId, setDeleteId ] = useState('');
   const [ deleteName, setDeleteName ] = useState('');
+  const [ updateId, setUpdateId ] = useState('');
+  const [ updateName, setUpdateName ] = useState('');
 
   useEffect(() => {
     getAllFeedbackTypes();
@@ -44,6 +56,12 @@ export default function FeedbackTypeSelector() {
     setModalDeleteIsOpen(true);
   };
 
+  const openModalUpdate = (id, name) => {
+    setUpdateId(id);
+    setUpdateName(name);
+    setModalUpdateIsOpen(true);
+  };
+
   const onPostSubmit = async (e) => {
     e.preventDefault();
     if (!postName) {
@@ -53,6 +71,19 @@ export default function FeedbackTypeSelector() {
       setModalCreateIsOpen(false);
       toast.success(t('feedbackType.successAdd'));
       setPostName('');
+      getAllFeedbackTypes();
+    }
+  };
+
+  const onUpdateSubmit = async (e) => {
+    e.preventDefault();
+    if (!updateName) {
+      toast.error(t('feedbackType.errorName'));
+    } else {
+      await patchFeedbackType(updateId, { name: updateName });
+      setModalUpdateIsOpen(false);
+      toast.success(t('feedbackType.successUpdate'));
+      setUpdateName('');
       getAllFeedbackTypes();
     }
   };
@@ -76,14 +107,18 @@ export default function FeedbackTypeSelector() {
       </Button>
       <div className={styles.FeedbackTypeSelectorTable}>
         <PTable
-
           template={DATA_TEMPLATE}
           data={feedbackTypes}
           loading={isGetAllFeedbackTypesLoading}
           actions={[
             {
-              name: <TrashIcon width="20px" height="20px" />,
+              name: t('feedbackType.delete'),
               onClick: ({ id, name }) => openModalDelete(id, name),
+            },
+            {
+
+              name: t('feedbackType.update'),
+              onClick: ({ id, name }) => openModalUpdate(id, name),
             },
           ]}
         />
@@ -170,6 +205,54 @@ export default function FeedbackTypeSelector() {
             {t('feedbackType.buttonClose')}
           </Button>
         </div>
+      </Modal>
+      <Modal
+        className={styles.FeedbackTypeSelectorModal}
+        isOpen={modalUpdateIsOpen}
+        ariaHideApp={false}
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+          },
+          content: {
+            width: '500px',
+            height: 'fit-content',
+            margin: 'auto',
+          },
+        }}
+      >
+        <h2>
+          {t('feedbackType.titleUpdate')}
+        </h2>
+        <form
+          onSubmit={onUpdateSubmit}
+          className={styles.FeedbackTypeSelectorModalForm}
+        >
+          <label htmlFor="name">
+            {t('feedbackType.labelName')} :
+          </label>
+          <Input
+            type="text"
+            placeholder={t('feedbackType.placeHolderName')}
+            value={updateName}
+            onChange={(newValue) => setUpdateName(newValue)}
+          />
+          <div className={styles.FeedbackTypeSelectorModalBtns}>
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={isPatchFeedbackTypeLoading}
+            >
+              {t('feedbackType.buttonAddConfirm')}
+            </Button>
+            <Button
+              variant="danger"
+              onClick={() => setModalUpdateIsOpen(false)}
+            >
+              {t('feedbackType.buttonClose')}
+            </Button>
+          </div>
+        </form>
       </Modal>
     </div>
   );

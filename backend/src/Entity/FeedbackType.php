@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Patch;
 use App\Repository\FeedbackTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -33,6 +34,13 @@ use ApiPlatform\Metadata\GetCollection;
             securityPostDenormalize: 'is_granted("ROLE_ADMIN")',
             securityPostDenormalizeMessage: 'You can only create feedback types for your establishments',
         ),
+        new Patch (
+            denormalizationContext: ['
+                groups' => ['feedback-type-patch'],
+            ],
+            security: 'is_granted("ROLE_ADMIN")',
+            securityMessage: 'You can only edit feedback types for your establishments',
+        ),
         new Delete(
             security: 'is_granted("ROLE_ADMIN")',
             securityMessage: 'You can only delete feedback types for your establishments',
@@ -56,7 +64,7 @@ class FeedbackType
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['feedback-read', 'feedback-type-create', 'feedback-type-read', 'read-establishment'])]
+    #[Groups(['feedback-read', 'feedback-type-create', 'feedback-type-read', 'read-establishment', 'feedback-type-patch'])]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Establishment::class, inversedBy: 'feedbackTypes')]
