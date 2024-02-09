@@ -1,11 +1,11 @@
 FROM node:lts-alpine
 
-# install git
-RUN apk update && apk upgrade && \
-    apk add --no-cache bash git openssh
-
-# install simple http server for serving static content
-RUN npm install -g http-server
+ARG VITE_API_DOMAIN
+ENV VITE_API_DOMAIN=$VITE_API_DOMAIN
+ARG VITE_API
+ENV VITE_API=$VITE_API
+ARG VITE_API_TIMEOUT
+ENV VITE_API_TIMEOUT=$VITE_API_TIMEOUT
 
 # Create app directory
 WORKDIR /app
@@ -22,4 +22,5 @@ RUN npm run build
 
 # Expose port and start application
 EXPOSE 8080
-CMD ["http-server", "-c-1", "--proxy", "http://localhost:8080?", "dist"]
+
+CMD ["npm", "run", "preview"]

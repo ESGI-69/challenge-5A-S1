@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import styles from './EmployeeCreationForm.module.scss';
+import { v4 } from 'uuid';
 
 export default function RegisterForm() {
   const { t } = useTranslation('employee');
@@ -20,7 +21,7 @@ export default function RegisterForm() {
   }, []);
 
   const [ firstnameInput, setFirstnameInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'firstname',
     value: '',
   });
@@ -33,7 +34,7 @@ export default function RegisterForm() {
   };
 
   const [ lastnameInput, setLastnameInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'lastname',
     value: '',
   });
@@ -46,7 +47,7 @@ export default function RegisterForm() {
   };
 
   const [ avatarInput, setAvatarInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'avatar',
     value: '',
   });
@@ -59,7 +60,7 @@ export default function RegisterForm() {
   };
 
   const [ preferedEstablishmentInput, setPreferedEstablishmentInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'preferedEstablishment',
     value: '',
   });

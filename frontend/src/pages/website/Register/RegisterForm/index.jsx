@@ -5,6 +5,7 @@ import styles from './RegisterForm.module.scss';
 import Button from '@/components/lib/Button';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { v4 } from 'uuid';
 
 export default function RegisterForm() {
   const { t } = useTranslation('register');
@@ -12,30 +13,30 @@ export default function RegisterForm() {
   const User = useContext(UserContext);
 
   const [ firstnameInput, setFirstnameInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'firstname',
     value: '',
   });
 
   const [ lastnameInput, setLastnameInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'lastname',
     value: '',
   });
 
   const [ phoneInput, setPhoneInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'phone',
     value: '',
   });
 
   const [ emailInput, setEmailInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'email',
     value: '',
   });
   const [ passwordInput, setPasswordInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'password',
     value: '',
   });

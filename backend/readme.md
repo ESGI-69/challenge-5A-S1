@@ -88,3 +88,24 @@ For api usage in hopscotch, you can export the open API documentation with this 
 ```sh
 bin/console api:openapi:export --output=swagger.json
 ```
+
+# Deploy with docker compose
+
+- Deploy the project with docker compose:
+  ```sh
+  docker compose up -d
+  ```
+
+- migrate the database:
+  ```sh
+  docker compose exec php bin/console doctrine:migrations:migrate
+  ```
+
+- load fixtures:
+  ```sh
+  docker compose exec php bin/console doctrine:fixtures:load --no-interaction
+  ```
+
+You can log to the project with the following credentials:
+- email: `admin@platiny.com`
+- password: `password`

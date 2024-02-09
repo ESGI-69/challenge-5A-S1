@@ -4,6 +4,7 @@ import Input from '@/components/lib/Input';
 import styles from './CompanyRegisterForm.module.scss';
 import { useTranslation } from 'react-i18next';
 import Button from '@/components/lib/Button';
+import { v4 } from 'uuid';
 
 export default function CompanyRegisterForm() {
   const { t } = useTranslation('companyRegister');
@@ -13,25 +14,25 @@ export default function CompanyRegisterForm() {
   const [ success, setSuccess ] = useState(false);
 
   const [ nameInput, setNameInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'name',
     value: '',
   });
 
   const [ emailInput, setEmailInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'email',
     value: '',
   });
 
   const [ fileKbisInput, setfileKbisInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'fileKbis',
     value: '',
   });
 
   const [ fileLogo, setfileLogo ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'fileLogo',
     value: '',
   });

@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const axiosConfig = {
-  baseURL: import.meta.env.VITE_API,
+  baseURL: import.meta.env.MODE === 'production' ? `${import.meta.env.VITE_API_DOMAIN}${import.meta.env.VITE_API}` : import.meta.env.VITE_API,
 };
 
 if (import.meta.env.VITE_API_TIMEOUT && parseInt(import.meta.env.VITE_API_TIMEOUT, 10)) {

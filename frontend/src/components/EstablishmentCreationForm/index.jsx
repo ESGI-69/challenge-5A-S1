@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { EstablishmentTypeContext } from '@/contexts/api/EstablishmentTypeContext';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import styles from './EstablishmentCreationForm.module.scss';
+import { v4 } from 'uuid';
 
 export default function RegisterForm() {
   const { t } = useTranslation('establishment');
@@ -20,37 +21,37 @@ export default function RegisterForm() {
   }, []);
 
   const [ emailInput, setEmailInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'email',
     value: '',
   });
 
   const [ establishmentTypeInput, setEstablishmentTypeInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'type',
     value: '',
   });
 
   const [ streetInput, setStreetInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'street',
     value: '',
   });
 
   const [ cityInput, setCityInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'city',
     value: '',
   });
 
   const [ zipCodeInput, setZipCodeInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'zipCode',
     value: '',
   });
 
   const [ countryInput, setCountryInput ] = useState({
-    id: crypto.randomUUID(),
+    id: v4(),
     name: 'country',
     value: '',
   });
