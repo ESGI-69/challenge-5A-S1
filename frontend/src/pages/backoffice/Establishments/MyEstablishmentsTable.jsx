@@ -29,7 +29,6 @@ export default function MyEstablishmentsTable() {
   const [ establishmentToDelete, setEstablishmentToDelete ] = useState(null);
 
   const openDeletionConfirmationModal = (establishment) => {
-    console.log(establishment);
     setEstablishmentToDelete(establishment);
     setIsConfirmDeletionModalOpen(true);
   };
