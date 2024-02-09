@@ -13,7 +13,7 @@ import EstablishmentCreation from '@/pages/backoffice/Establishments/Establishme
 import EstablishmentUpdate from '@/pages/backoffice/Establishments/EstablishmentUpdate';
 import EmployeeUpdate from '@/pages/backoffice/Employees/EmployeeUpdate';
 import BackofficeEstablishments from '@/pages/backoffice/Establishments';
-import FeedbacksType from '@/pages/backoffice/FeedbacksType';
+import FeedbackType from '@/pages/backoffice/FeedbackType';
 
 import CompanyRegister from '@/pages/website/CompanyRegister';
 import Establishment from '@/pages/website/Establishment';
@@ -137,7 +137,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/backoffice/feedbacks-type',
-        element: <FeedbacksType />,
+        element: <FeedbackType />,
       },
       {
         path: '*',

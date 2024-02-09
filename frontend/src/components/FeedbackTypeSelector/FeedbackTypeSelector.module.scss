@@ -1,4 +1,8 @@
 .FeedbackTypeSelector {
+  &Table {
+    margin-top: var(--size-6);
+  }
+
   &Modal {
     &Form {
       display: flex;

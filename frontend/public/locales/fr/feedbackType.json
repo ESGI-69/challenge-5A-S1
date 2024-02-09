@@ -1,5 +1,6 @@
 {
   "title": "Types de feedback",
+  "loading": "Chargement...",
   "feedbackTypeSelector": "Selectionnez le type de feedback",
   "feedbackType": {
     "titleAdd": "Ajout d'un type de feedback",
@@ -7,6 +8,11 @@
     "buttonClose": "Annuler",
     "buttonAddConfirm": "Confirmer",
     "labelName": "Nom",
-    "placeHolderName": "Nom du type de feedback"
+    "placeHolderName": "Nom du type de feedback",
+    "errorName": "Le nom est obligatoire",
+    "successAdd": "Le type de feedback a été ajouté avec succès",
+    "warningDeletion": "Attention, la suppression d'un type de feedback entrainera des modifications sur les feedbacks existants",
+    "successDelete": "Le type de feedback a été supprimé avec succès",
+    "warningDeletionSub": "Vous être sur le point de supprimer le type de feedback"
   }
 }

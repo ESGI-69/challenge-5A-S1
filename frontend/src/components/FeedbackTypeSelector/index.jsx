@@ -1,50 +1,97 @@
-import PropTypes from 'prop-types';
 import Button from '../lib/Button';
 import Modal from 'react-modal';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './FeedbackTypeSelector.module.scss';
 import Input from '../lib/Input';
+import { FeedbackTypeContext } from '@/contexts/api/FeedbackTypeContext';
+import { TrashIcon } from '@heroicons/react/20/solid';
+import toast from 'react-hot-toast';
+import PTable from '@/components/lib/PTable';
 
-export default function FeedbackTypeSelector(
-  {
-    feedbackTypes,
-    establishmentId,
-  },
-) {
+export default function FeedbackTypeSelector() {
+  const { isGetAllFeedbackTypesLoading, feedbackTypes, getAllFeedbackTypes, postFeedbackType, deleteFeedbackType, isDeleteFeedbackTypeLoading, isPostFeedbackTypeLoading } = useContext(FeedbackTypeContext);
   const { t } = useTranslation('feedbackType');
-  const [ modalIsOpen, setModalIsOpen ] = useState(false);
+  const [ modalCreateIsOpen, setModalCreateIsOpen ] = useState(false);
+  const [ modalDeleteIsOpen, setModalDeleteIsOpen ] = useState(false);
   const [ postName, setPostName ] = useState('');
+  const [ deleteId, setDeleteId ] = useState('');
+  const [ deleteName, setDeleteName ] = useState('');
 
-  const openModal = () => {
-    setModalIsOpen(true);
+  useEffect(() => {
+    getAllFeedbackTypes();
+  }, []);
+
+  const DATA_TEMPLATE = {
+    properties: {
+      id: {
+        width: '50px',
+      },
+      name: {
+        name: t('feedbackType.labelName'),
+        width: '120px',
+      },
+    },
+  };
+
+  const openModalCreate = () => {
+    setModalCreateIsOpen(true);
+  };
+
+  const openModalDelete = (id, name) => {
+    setDeleteId(id);
+    setDeleteName(name);
+    setModalDeleteIsOpen(true);
   };
 
   const onPostSubmit = async (e) => {
     e.preventDefault();
-    console.log(postName);
-    console.log(establishmentId);
+    if (!postName) {
+      toast.error(t('feedbackType.errorName'));
+    } else {
+      await postFeedbackType({ name: postName });
+      setModalCreateIsOpen(false);
+      toast.success(t('feedbackType.successAdd'));
+      setPostName('');
+      getAllFeedbackTypes();
+    }
+  };
+
+  const onDelete = async (id) => {
+    await deleteFeedbackType(id);
+    setDeleteId('');
+    setDeleteName('');
+    toast.success(t('feedbackType.successDelete'));
+    setModalDeleteIsOpen(false);
+    getAllFeedbackTypes();
   };
 
   return (
-    <div
-      className={styles.FeedbackTypeSelector}
-    >
-      {feedbackTypes.map((feedbackType) => (
-        <p key={feedbackType.id}>
-          {feedbackType.name} - {feedbackType.id}
-        </p>
-      ))}
-
+    <div className={styles.FeedbackTypeSelector}>
       <Button
         variant="primary"
-        onClick={openModal}
+        onClick={openModalCreate}
       >
         {t('feedbackType.buttonAdd')}
       </Button>
+      <div className={styles.FeedbackTypeSelectorTable}>
+        <PTable
+
+          template={DATA_TEMPLATE}
+          data={feedbackTypes}
+          loading={isGetAllFeedbackTypesLoading}
+          actions={[
+            {
+              name: <TrashIcon width="20px" height="20px" />,
+              onClick: ({ id, name }) => openModalDelete(id, name),
+            },
+          ]}
+        />
+      </div>
+
       <Modal
         className={styles.FeedbackTypeSelectorModal}
-        isOpen={modalIsOpen}
+        isOpen={modalCreateIsOpen}
         ariaHideApp={false}
         style={{
           overlay: {
@@ -77,23 +124,53 @@ export default function FeedbackTypeSelector(
             <Button
               variant="primary"
               type="submit"
+              disabled={isPostFeedbackTypeLoading}
             >
               {t('feedbackType.buttonAddConfirm')}
             </Button>
             <Button
               variant="danger"
-              onClick={() => setModalIsOpen(false)}
+              onClick={() => setModalCreateIsOpen(false)}
             >
               {t('feedbackType.buttonClose')}
             </Button>
           </div>
         </form>
       </Modal>
+      <Modal
+        className={styles.FeedbackTypeSelectorModal}
+        isOpen={modalDeleteIsOpen}
+        ariaHideApp={false}
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+            zIndex: 1000,
+          },
+          content: {
+            width: '500px',
+            height: 'fit-content',
+            margin: 'auto',
+          },
+        }}
+      >
+        <p>{t('feedbackType.warningDeletion')}</p>
+        <p>{t('feedbackType.warningDeletionSub')} : {deleteName}</p>
+        <div className={styles.FeedbackTypeSelectorModalBtns}>
+          <Button
+            variant="primary"
+            onClick={() => onDelete(deleteId)}
+            disabled={isDeleteFeedbackTypeLoading}
+          >
+            {t('feedbackType.buttonAddConfirm')}
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => setModalDeleteIsOpen(false)}
+          >
+            {t('feedbackType.buttonClose')}
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 }
-
-FeedbackTypeSelector.propTypes = {
-  feedbackTypes: PropTypes.array,
-  establishmentId: PropTypes.string,
-};

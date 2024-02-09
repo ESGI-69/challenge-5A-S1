@@ -42,7 +42,7 @@ EstablishmentCard.propTypes = {
   picturePath: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   adress: PropTypes.string.isRequired,
-  globalReview: PropTypes.number.isRequired,
+  globalReview: PropTypes.number,
   reviewsNumber: PropTypes.number.isRequired,
   zipCode: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,

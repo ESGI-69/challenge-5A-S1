@@ -20,7 +20,7 @@ use ApiPlatform\Metadata\GetCollection;
     operations: [
         new GetCollection(
             normalizationContext: ['groups' => ['feedback-type-read']],
-            security: 'is_granted("ROLE_PRESTA")',
+            security: 'is_granted("ROLE_PRESTA") or is_granted("ROLE_ADMIN")',
         ),
         new Get(
             normalizationContext: ['groups' => ['feedback-type-read']],
@@ -30,11 +30,11 @@ use ApiPlatform\Metadata\GetCollection;
             denormalizationContext: ['
                 groups' => ['feedback-type-create'],
             ],
-            securityPostDenormalize: 'is_granted("ROLE_PRESTA") and user.getCompany() == object.getEstablishments()[0].getCompany() ',
+            securityPostDenormalize: 'is_granted("ROLE_ADMIN")',
             securityPostDenormalizeMessage: 'You can only create feedback types for your establishments',
         ),
         new Delete(
-            security: 'is_granted("ROLE_PRESTA") and user.getCompany() == object.getEstablishments()[0].getCompany()',
+            security: 'is_granted("ROLE_ADMIN")',
             securityMessage: 'You can only delete feedback types for your establishments',
         )
     ]
@@ -52,7 +52,7 @@ class FeedbackType
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['read-establishment'])]
+    #[Groups(['read-establishment', 'feedback-type-read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -63,7 +63,7 @@ class FeedbackType
     #[Groups(['feedback-type-create', 'feedback-type-read'])]
     private Collection $establishments;
 
-    #[ORM\OneToMany(mappedBy: 'feedbackType', targetEntity: SubFeedback::class)]
+    #[ORM\OneToMany(mappedBy: 'feedbackType', targetEntity: SubFeedback::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $subFeedback;
 
     #[ORM\Column(nullable: true)]
