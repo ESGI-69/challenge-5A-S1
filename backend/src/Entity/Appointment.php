@@ -67,7 +67,7 @@ class Appointment
     #[Groups(['appointment-getall', 'appointment-me'])]
     private ?int $id = null;
 
-    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me','read-service'])]
+    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me','read-service', 'company-statistics-getall'])]
     #[ORM\ManyToOne(inversedBy: 'appointments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Employee $employee = null;
@@ -77,7 +77,7 @@ class Appointment
     #[ORM\JoinColumn(nullable: false)]
     private ?Establishment $establishment = null;
 
-    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me'])]
+    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me', 'company-statistics-getall'])]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Service $service = null;
@@ -103,11 +103,11 @@ class Appointment
     #[ORM\Column (nullable: true)]
     private ?\DateTimeImmutable $cancelledAt = null;
 
-    #[Groups(['appointment-getall', 'appointment-read', 'appointment-me'])]
+    #[Groups(['appointment-getall', 'appointment-read', 'appointment-me', 'company-statistics-getall'])]
     #[ORM\Column(nullable: true)]
     private ?float $price = null;
 
-    #[Groups(['appointment-me'])]
+    #[Groups(['appointment-me', 'company-statistics-getall'])]
     #[ORM\OneToOne(mappedBy: 'appointment', cascade: ['persist', 'remove'])]
     private ?Feedback $feedback = null;
 

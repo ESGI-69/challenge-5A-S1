@@ -26,6 +26,7 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
+use App\Controller\Statistics\CompanyStatisticsController;
 
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
@@ -64,6 +65,11 @@ use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
             normalizationContext: ['groups' => ['company-read']],
             controller: GetLogoFileController::class
         ),
+        new Get(
+          uriTemplate: '/companies/{id}/statistics',
+          normalizationContext: ['groups' => ['company-statistics-getall']],
+          controller: CompanyStatisticsController::class
+      ),
         new Post(
             securityPostDenormalize: 'is_granted("ROLE_USER")',
             denormalizationContext: ['groups' => ['company-create']], inputFormats: ['multipart' => ['multipart/form-data']],
@@ -145,11 +151,11 @@ class Company
     #[ORM\Column(length: 255, nullable: false)]
     private ?string $logoPath = null;
 
-    #[Groups(['company-getall'])]
+    #[Groups(['company-getall', 'company-statistics-getall'])]
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Establishment::class, orphanRemoval: true)]
     private Collection $establishments;
 
-    #[Groups(['company-read','read-company-employees'])]
+    #[Groups(['company-read','read-company-employees', 'company-statistics-getall'])]
     #[ORM\OneToMany(mappedBy: 'companyId', targetEntity: Employee::class, orphanRemoval: true)]
     private Collection $employees;
 

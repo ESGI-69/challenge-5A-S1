@@ -41,6 +41,16 @@ export default function Dashboard() {
           { isEstablishmentsLoading || isCompanyLoading && (<span>{t('loading', { ns: 'base' })}...</span>)}
           { !isCompanyLoading && !isEstablishmentsLoading && (
             <>
+              <div>
+                <p>18</p>
+                <p>Nombre moyen de RDV par semaine</p>
+              </div>
+              <div>
+                <ul>Nemours: 13.4 rdv/semaine</ul>
+                <ul>Fontainebleau: 11 rdv/semaine</ul>
+                <ul>Paris: 8.6 rdv/semaine</ul>
+                <p>Etablissement les plus performants</p>
+              </div>
               <p>{t('presta.ownedEstablishments', { count: establishments.length })}</p>
               <ul>
                 {establishments.map((establishment) => (
