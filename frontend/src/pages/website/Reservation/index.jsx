@@ -11,9 +11,11 @@ import { ServiceContext } from '@/contexts/api/ServiceContext';
 import { AppointmentContext } from '@/contexts/api/AppointmentContext';
 import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import { useTranslation } from 'react-i18next';
+import { dateCustom } from '@/utils/formater/date';
 
 export default function Reservation () {
   const { t } = useTranslation('reservation');
+  const { i18n } = useTranslation();
   const { profile } = useContext(ProfileContext);
   const { serviceEstablishmentId } = useParams();
   const { post, appointment, isPostAppointmentLoading } = useContext(AppointmentContext);
@@ -130,8 +132,8 @@ export default function Reservation () {
   return (
     <div className={styles.Page}>
       <h2>{t('reservation')}</h2>
-      {isServiceLoading && <span>Loading ...</span>}
-      {isEstablishmentLoading && <span>Loading ...</span>}
+      {isServiceLoading && <span>{t('loading')}...</span>}
+      {isEstablishmentLoading && <span>{t('loading')}...</span>}
       {!isEstablishmentLoading && (
         <>
           <span className={styles.ReservationAddress}>
@@ -177,7 +179,9 @@ export default function Reservation () {
           <div className={styles.AppointementPicked}>
             <div className={styles.AppointementPickedInfo}>
               <div className={styles.AppointementPickedSpec}>
-                <span>{new Date(selectedDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                <span>
+                  {dateCustom(selectedDate, i18n.resolvedLanguage)}
+                </span>
                 <span className={styles.AppointementPickedSpecTime}>{t('at')} {new Date(selectedDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
               </div>
             </div>
@@ -232,7 +236,7 @@ export default function Reservation () {
             </div>
             <div className={styles.PaymentMethod}>
               <Button onClick={appointment ? null : handlePayment} variant={appointment ? 'success' : 'black'}>
-                {isPostAppointmentLoading ? 'Loading...' : appointment ? `${t('events.creation.success')}` : `${t('book')} ${service.price}€` }
+                {isPostAppointmentLoading ? `${t('loading')}...` : appointment ? `${t('events.creation.success')}` : `${t('book')} ${service.price}€` }
               </Button>
             </div>
           </div>

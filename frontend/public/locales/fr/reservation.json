@@ -20,6 +20,7 @@
             "success": "Le rendez vous à bien été créé",
             "error": "Erreur lors de la prise de rendez-vous"
         }
-    }
+    },
+    "loading": "Chargement"
 }
 

@@ -3,6 +3,8 @@ import { useState } from 'react';
 import styles from './Schedule.module.scss';
 import EmptyArrow from '../lib/Icons/EmptyArrow';
 import PropTypes from 'prop-types';
+import { dateCustom, dateTime, time } from '@/utils/formater/date';
+import { useTranslation } from 'react-i18next';
 
 const Schedule = React.forwardRef(function Schedule(
   {
@@ -14,6 +16,7 @@ const Schedule = React.forwardRef(function Schedule(
 ){
 
   const [ currentWeek, setCurrentWeek ] = useState(0);
+  const { i18n } = useTranslation();
 
   const handleArrowClick = (direction) => {
     if (direction === 'prev') {
@@ -42,8 +45,8 @@ const Schedule = React.forwardRef(function Schedule(
                   {page.days.map((day, index) => (
                     <div className={styles.Column} key={index}>
                       <div className={styles.ColumnHeader}>
-                        <span className={styles.ColumnTitle}>{new Date(day.date).toLocaleDateString('fr-FR', { weekday: 'long' })}</span>
-                        <span className={styles.ColumnDate}>        {new Date(day.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}</span>
+                        <span className={styles.ColumnTitle}>{dateCustom(day.date, i18n.resolvedLanguage, { weekday: 'long' })}</span>
+                        <span className={styles.ColumnDate}>{dateCustom(day.date, i18n.resolvedLanguage, { day: 'numeric', month: 'short' })}</span>
                       </div>
                       <div className={styles.ColumnBody}>
                         {day.times.map((appointement, index) =>

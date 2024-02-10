@@ -20,5 +20,6 @@
             "success": "The appointment has been successfully created",
             "error": "Error during appointment scheduling"
         }
-    }
+    },
+    "loading": "Loading"
 }
