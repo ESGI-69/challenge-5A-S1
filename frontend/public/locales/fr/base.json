@@ -23,5 +23,7 @@
     "minutes": "Minutes",
     "seeInUserLand": "Voir dans l'interface utilisateur",
     "cancel": "Annuler",
-    "confirm": "Confirmer"
+    "confirm": "Confirmer",
+    "none": "Aucun",
+    "add": "Ajouter"
 }

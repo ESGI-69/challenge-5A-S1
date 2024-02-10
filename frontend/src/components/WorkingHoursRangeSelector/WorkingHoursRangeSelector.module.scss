@@ -19,15 +19,31 @@
   
       &Day {
         flex-grow: 1;
+        align-items: center;
+        display: flex;
       }
   
       &Hours {
         display: flex;
         gap: var(--size-1);
+        align-items: center;
   
         input {
           width: var(--size-8);
+          height: var(--size-4);
         }
+      }
+
+      &Services {
+        display: flex;
+        flex-direction: row;
+
+        &List {
+          display: flex;
+          flex-direction: column;
+          list-style-type: none;
+        }
+
       }
     }
   }

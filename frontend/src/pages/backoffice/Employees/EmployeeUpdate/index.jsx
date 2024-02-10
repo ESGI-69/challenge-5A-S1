@@ -5,7 +5,7 @@ import { EmployeeContext } from '@/contexts/api/EmployeeContext';
 import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import { useContext, useEffect } from 'react';
-import WorkingHoursRangeSelector from '@/components/workingHoursRangeSelector';
+import WorkingHoursRangeSelector from '@/components/WorkingHoursRangeSelector';
 
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';

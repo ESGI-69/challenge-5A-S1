@@ -68,13 +68,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 )]
 class Service
 {
-    #[Groups(['read-service', 'read-service-all', 'read-establishment', 'appointment-me'])]
+    #[Groups(['read-service', 'read-service-all', 'read-establishment', 'appointment-me', 'employee-getall'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read', 'read-establishment', 'appointment-me'])]
+    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read', 'read-establishment', 'appointment-me', 'employee-getall'])]
     #[Assert\NotBlank]
     #[Assert\NotNull]
     #[ORM\Column(length: 50, unique: true)]
