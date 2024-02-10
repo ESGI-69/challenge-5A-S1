@@ -36,7 +36,7 @@ export default function RegisterUpdateForm({
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className={styles.EmployeeUpdateForm}>
+    <form onSubmit={handleFormSubmit} className={styles.EmployeeUpdateForm} >
       <div className={styles.EmployeeUpdateFormGroup}>
         <label htmlFor="firstname">{t('form.firstname')}</label>
         <Input
@@ -113,6 +113,7 @@ RegisterUpdateForm.propTypes = {
   firstname: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  getById: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
 };
 

@@ -37,10 +37,11 @@ export default function EmployeeUpdate() {
             onSubmit={updateEmployee}
             establishments={establishments}
             isLoading={isPatchEmployeeLoading}
+            getById={getById}
             {...employee}
           />
           <h2>{ t('workingHoursRangeSelector') }</h2>
-          <WorkingHoursRangeSelector/>
+          <WorkingHoursRangeSelector />
         </>
       )}
     </>

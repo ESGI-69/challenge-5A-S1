@@ -49,5 +49,6 @@
       "edit": "Edit",
       "delete": "Delete"
     }
-  }
+  },
+  "workingHoursRangeSelector": "Working hours range"
 }

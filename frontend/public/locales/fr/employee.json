@@ -49,5 +49,6 @@
       "edit": "Modifier",
       "delete": "Supprimer"
     }
-  }
+  },
+  "workingHoursRangeSelector": "Plage horaire de travail"
 }

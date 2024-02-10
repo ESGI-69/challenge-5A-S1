@@ -81,13 +81,17 @@ export default function WorkingHoursRangeSelector() {
           startDate: `${workingHoursRange[day].from}:00`,
           endDate: `${workingHoursRange[day].to}:00`,
           day,
-          services: workingHoursRange[day].services.map((s) => `api/services/${s.id}`),
+          services: workingHoursRange[day].services
+            .filter((s) => employee.preferedEstablishment.services.some((service) => service.id === s.id))
+            .map((s) => `api/services/${s.id}`),
         }));
       } else {
         promiseArray.push(patchWorkingHoursRange(workingHoursRange[day].id, {
           startDate: `${workingHoursRange[day].from}:00`,
           endDate: `${workingHoursRange[day].to}:00`,
-          services: workingHoursRange[day].services.map((s) => `api/services/${s.id}`),
+          services: workingHoursRange[day].services
+            .filter((s) => employee.preferedEstablishment.services.some((service) => service.id === s.id))
+            .map((s) => `api/services/${s.id}`),
         }));
       }
     });
@@ -144,7 +148,7 @@ export default function WorkingHoursRangeSelector() {
       </div>
       {( isPatchWorkingHoursRangeLoading || isPostWorkingHoursRangeLoading || isEmployeeLoading )
         ? <span>{t('applingChanges')}</span>
-        : <Button onClick={sendRequest}>{t('send')}</Button>
+        : <Button onClick={sendRequest}>{t('update', { ns: 'base' })}</Button>
       }
     </>
   );

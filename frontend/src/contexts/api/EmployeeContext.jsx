@@ -144,6 +144,11 @@ export default function EmployeeProvider({ children }) {
           'Content-Type': 'application/merge-patch+json',
         },
       });
+      const employee = await apiCall.get(`/companies/employees/${id}`);
+      dispatch({
+        type: 'employee',
+        payload: employee.data,
+      });
       toast.success(i18n.t('events.update.success', { ns: 'employee' }));
     } catch (error) {
       console.error(error);
