@@ -9,6 +9,9 @@
     "avatar": "Avatar",
     "preferedEstablishment": "Établissement préféré",
     "establishmentsLoading": "Liste des établissements en cours de chargement",
+    "noEstablishments": "Vous devez créer un établissement pour pouvoir créer un employé",
+    "createEstablishment": "Créer un établissement",
+    "establishmentsList": "Liste des établissements",
     "actions": {
       "create": "Créer"
     }
@@ -39,6 +42,12 @@
     "title": "Mes employés",
     "actions": {
       "create": "Créer un employé"
+    }
+  },
+  "table": {
+    "actions": {
+      "edit": "Modifier",
+      "delete": "Supprimer"
     }
   }
 }

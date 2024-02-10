@@ -30,7 +30,7 @@ export default function EmployeeUpdate() {
       <BackofficeHeader>
         <h1>{ t('update.title') }</h1>
       </BackofficeHeader>
-      <Button to="/backoffice/eemployees">{ t('update.back') }</Button>
+      <Button to="/backoffice/employees">{ t('update.back') }</Button>
       {(!isEstablishmentsLoading && !isEmployeeLoading && employee && establishments) && (
         <>
           <EmployeeUpdateForm

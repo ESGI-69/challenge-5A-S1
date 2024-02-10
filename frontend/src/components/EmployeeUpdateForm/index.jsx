@@ -37,7 +37,7 @@ export default function RegisterUpdateForm({
 
   return (
     <form onSubmit={handleFormSubmit} className={styles.EmployeeUpdateForm}>
-      <div className={styles.EstablishmentUpdateFormGroup}>
+      <div className={styles.EmployeeUpdateFormGroup}>
         <label htmlFor="firstname">{t('form.firstname')}</label>
         <Input
           disabled={isLoading}
@@ -47,7 +47,7 @@ export default function RegisterUpdateForm({
           onChange={(newValue) => setForm({ ...form, firstname: newValue })}
         />
       </div>
-      <div className={styles.EstablishmentUpdateFormGroup}>
+      <div className={styles.EmployeeUpdateFormGroup}>
         <label htmlFor="lastname">{t('form.lastname')}</label>
         <Input
           disabled={isLoading}
@@ -57,7 +57,7 @@ export default function RegisterUpdateForm({
           onChange={(newValue) => setForm({ ...form, lastname: newValue })}
         />
       </div>
-      <div className={styles.EstablishmentUpdateFormGroup}>
+      <div className={styles.EmployeeUpdateFormGroup}>
         <label htmlFor="avatar">{t('form.avatar')}</label>
         <Input
           disabled={isLoading}
@@ -67,13 +67,14 @@ export default function RegisterUpdateForm({
           onChange={(newValue) => setForm({ ...form, avatar: newValue })}
         />
       </div>
-      <div className={styles.EstablishmentUpdateFormGroup}>
-        <label htmlFor="preferedEstablishment">{t('form.establishmentType')}</label>
+      <div className={styles.EmployeeUpdateFormGroup}>
+        <label htmlFor="preferedEstablishment">{t('form.establishmentsList')}</label>
         <select
           disabled={isLoading}
           id="preferedEstablishment"
           value={form.preferedEstablishment}
           onChange={(e) => setForm({ ...form, preferedEstablishment: e.target.value })}
+          className={styles.EmployeeUpdateFormGroupSelect}
         >
           {establishments.map((establishment) => (
             <option key={establishment.id} value={establishment.id}>{establishment.street} - {establishment.city}</option>

@@ -88,67 +88,81 @@ export default function RegisterForm() {
 
   return (
     <form className={styles.EmployeeCreationForm} onSubmit={handleFormSubmit}>
-      <div className={styles.EmployeeCreationFormField}>
-        <label htmlFor={firstnameInput.id} className={styles.EmployeeCreationFormFieldLabel}>{t('form.firstname')} *</label>
-        <Input
-          id={firstnameInput.id}
-          name={firstnameInput.name}
-          placeholder={t('form.firstname')}
-          disabled={isPostEmployeeLoading}
-          value={firstnameInput.value}
-          onInput={handleFirstnameInputChange}
-          required
-        />
-      </div>
-      <div className={styles.EmployeeCreationFormField}>
-        <label htmlFor={lastnameInput.id} className={styles.EmployeeCreationFormFieldLabel}>{t('form.lastname')} *</label>
-        <Input
-          id={lastnameInput.id}
-          name={lastnameInput.name}
-          placeholder={t('form.lastname')}
-          disabled={isPostEmployeeLoading}
-          value={lastnameInput.value}
-          onInput={handleLastnameInputChange}
-          required
-        />
-      </div>
-      <div className={styles.EmployeeCreationFormField}>
-        <label htmlFor={avatarInput.id} className={styles.EmployeeCreationFormFieldLabel}>{t('form.avatar')} *</label>
-        <Input
-          id={avatarInput.id}
-          name={avatarInput.name}
-          placeholder={t('form.avatar')}
-          disabled={isPostEmployeeLoading}
-          value={avatarInput.value}
-          onInput={handleAvatarInputChange}
-          required
-        />
-      </div>
-      { isEstablishmentsLoading && establishments.length === 0 && (
+      { !isEstablishmentsLoading && establishments.length > 0 && (
+        <>
+          <div className={styles.EmployeeCreationFormField}>
+            <label htmlFor={firstnameInput.id} className={styles.EmployeeCreationFormFieldLabel}>{t('form.firstname')} *</label>
+            <Input
+              id={firstnameInput.id}
+              name={firstnameInput.name}
+              placeholder={t('form.firstname')}
+              disabled={isPostEmployeeLoading}
+              value={firstnameInput.value}
+              onInput={handleFirstnameInputChange}
+              required
+            />
+          </div>
+          <div className={styles.EmployeeCreationFormField}>
+            <label htmlFor={lastnameInput.id} className={styles.EmployeeCreationFormFieldLabel}>{t('form.lastname')} *</label>
+            <Input
+              id={lastnameInput.id}
+              name={lastnameInput.name}
+              placeholder={t('form.lastname')}
+              disabled={isPostEmployeeLoading}
+              value={lastnameInput.value}
+              onInput={handleLastnameInputChange}
+              required
+            />
+          </div>
+          <div className={styles.EmployeeCreationFormField}>
+            <label htmlFor={avatarInput.id} className={styles.EmployeeCreationFormFieldLabel}>{t('form.avatar')} *</label>
+            <Input
+              id={avatarInput.id}
+              name={avatarInput.name}
+              placeholder={t('form.avatar')}
+              disabled={isPostEmployeeLoading}
+              value={avatarInput.value}
+              onInput={handleAvatarInputChange}
+              required
+            />
+          </div>
+          { isEstablishmentsLoading && establishments.length === 0 && (
+            <span>{t('form.establishmentsLoading')}</span>
+          )}
+          { !isEstablishmentsLoading && establishments.length > 0 && (
+            <div className={styles.EmployeeCreationFormField}>
+              <label htmlFor={preferedEstablishmentInput.id} className={styles.EmployeeCreationFormFieldLabel}>{t('form.preferedEstablishment')} *</label>
+              <select
+                id={preferedEstablishmentInput.id}
+                name={preferedEstablishmentInput.name}
+                disabled={isPostEmployeeLoading}
+                value={preferedEstablishmentInput.value}
+                onChange={handlePreferedEstablishmentInputChange}
+                required
+                className={styles.EmployeeCreationFormFieldSelect}
+              >
+                {establishments.map(({ id, city, street }) => ({
+                  id: `api/establishments/${id}`,
+                  city,
+                  street,
+                })).map((establishment) => (
+                  <option key={establishment.id} value={establishment.id}>{establishment.street} - {establishment.city}</option>
+                ))}
+              </select>
+            </div>
+          )}
+          <Button type="submit" disabled={isPostEmployeeLoading}>{t('form.actions.create')}</Button>
+        </>
+      )}
+      {isEstablishmentsLoading  && (
         <span>{t('form.establishmentsLoading')}</span>
       )}
-      { !isEstablishmentsLoading && establishments.length > 0 && (
-        <div className={styles.EstablishmentCreationFormField}>
-          <label htmlFor={preferedEstablishmentInput.id} className={styles.EmployeeCreationFormFieldLabel}>{t('form.preferedEstablishment')} *</label>
-          <select
-            id={preferedEstablishmentInput.id}
-            name={preferedEstablishmentInput.name}
-            disabled={isPostEmployeeLoading}
-            value={preferedEstablishmentInput.value}
-            onChange={handlePreferedEstablishmentInputChange}
-            required
-          >
-            {establishments.map(({ id, city, street }) => ({
-              id: `api/establishments/${id}`,
-              city,
-              street,
-            })).map((establishment) => (
-              <option key={establishment.id} value={establishment.id}>{establishment.street} - {establishment.city}</option>
-            ))}
-          </select>
-        </div>
+      {(!isEstablishmentsLoading && establishments.length === 0) && (
+        <>
+          <span>{t('form.noEstablishments')} : </span>
+          <Button to="/backoffice/establishments/create">{t('form.createEstablishment')}</Button>
+        </>
       )}
-      <Button type="submit" disabled={isPostEmployeeLoading}>{t('form.actions.create')}</Button>
     </form>
   );
 }
