@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from './Schedule.module.scss';
 import EmptyArrow from '../lib/Icons/EmptyArrow';
 import PropTypes from 'prop-types';
-import { dateCustom, dateTime, time } from '@/utils/formater/date';
+import { dateCustom } from '@/utils/formater/date';
 import { useTranslation } from 'react-i18next';
 
 const Schedule = React.forwardRef(function Schedule(
