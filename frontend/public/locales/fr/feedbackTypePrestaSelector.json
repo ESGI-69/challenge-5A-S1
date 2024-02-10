@@ -2,5 +2,6 @@
   "addTitle": "Ajouter un type de feedback",
   "deleteTitle": "Type de feedback sur votre établissement",
   "add": "Ajouter",
-  "delete": "Supprimer"
+  "delete": "Supprimer",
+  "loading": "Chargement..."
 }

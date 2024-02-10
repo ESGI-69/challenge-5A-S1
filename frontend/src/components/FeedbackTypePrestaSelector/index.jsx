@@ -30,7 +30,7 @@ export default function FeedbackTypePrestaSelector() {
   };
 
   if (isEstablishmentLoading || isGetAllFeedbackTypesLoading) {
-    return <div>Loading...</div>; // or any loading spinner component you have
+    return <div>{t('loading')}</div>;
   }
 
   return (
