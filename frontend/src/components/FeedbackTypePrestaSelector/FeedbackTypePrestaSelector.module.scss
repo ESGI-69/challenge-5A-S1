@@ -1,0 +1,14 @@
+.FeedbackTypePrestaSelector {
+  &Tab {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: var(--size-5);
+    margin-bottom: var(--size-3);
+
+    &Label {
+      text-transform: capitalize;
+      width: 150px;
+    }
+  }
+}

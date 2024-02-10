@@ -33,7 +33,7 @@ function GlobalNotation({
 }
 
 GlobalNotation.propTypes = {
-  globalAverage: PropsType.string,
+  globalAverage: PropsType.number,
   subFeedbacks: PropsType.arrayOf(PropsType.shape({
     id: PropsType.number.isRequired,
     name: PropsType.string.isRequired,
