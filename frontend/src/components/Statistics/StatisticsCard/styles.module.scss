@@ -1,0 +1,26 @@
+.Card {
+  padding: var(--size-5);
+  background: var(--gray-3);
+  border-radius: var(--radius-3);
+  width: 100%;
+
+  &Title {
+    font-size: var(--size-3);
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: var(--size-3);
+  }
+
+  &_Dark {
+    background: var(--color-primary);
+
+    .CardTitle {
+      color: var(--white);
+    }
+  }
+
+  &Number {
+    font-size: var(--size-8);
+    font-weight: 500;
+  }
+}

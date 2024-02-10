@@ -3,15 +3,14 @@ import Button from '@/components/lib/Button';
 import { useContext } from 'react';
 import { CompanyContext } from '@/contexts/api/CompanyContext';
 import { ProfileContext } from '@/contexts/ProfileContext';
-import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import CompanyStatisticsProvider from '@/contexts/api/CompanyStatisticsContext';
+import Statistics from './Statistics';
 
 export default function Dashboard() {
   const { t } = useTranslation('dashboard');
   const { company, isCompanyLoading } = useContext(CompanyContext);
   const { profile } = useContext(ProfileContext);
-  const { isEstablishmentsLoading, establishments } = useContext(EstablishmentContext);
 
   const userHighestRole = profile.roles.reduce((acc, role) => {
     if (role === 'ROLE_ADMIN') {
@@ -25,7 +24,7 @@ export default function Dashboard() {
 
   return (
     <>
-      { userHighestRole === 'ROLE_ADMIN' && (
+      {userHighestRole === 'ROLE_ADMIN' && (
         <>
           <BackofficeHeader actionsComponent={<Button to='/'>{t('backToUserLand')}</Button>}>
             <h1>{t('title')} admin</h1>
@@ -33,33 +32,17 @@ export default function Dashboard() {
           <p>Se tableau le bord</p>
         </>
       )}
-      { userHighestRole === 'ROLE_PRESTA' && (
+      {userHighestRole === 'ROLE_PRESTA' && (
         <>
           <BackofficeHeader actionsComponent={<Button to='/'>{t('backToUserLand')}</Button>}>
-            <h1>{t('title')} { company && ` - ${company.name}`}</h1>
+            <h1>{t('title')} {company && ` - ${company.name}`}</h1>
           </BackofficeHeader>
-          { isEstablishmentsLoading || isCompanyLoading && (<span>{t('loading', { ns: 'base' })}...</span>)}
-          { !isCompanyLoading && !isEstablishmentsLoading && (
+          {isCompanyLoading && (<span>{t('loading', { ns: 'base' })}...</span>)}
+          {!isCompanyLoading && company && (
             <>
-              <div>
-                <p>18</p>
-                <p>Nombre moyen de RDV par semaine</p>
-              </div>
-              <div>
-                <ul>Nemours: 13.4 rdv/semaine</ul>
-                <ul>Fontainebleau: 11 rdv/semaine</ul>
-                <ul>Paris: 8.6 rdv/semaine</ul>
-                <p>Etablissement les plus performants</p>
-              </div>
-              <p>{t('presta.ownedEstablishments', { count: establishments.length })}</p>
-              <ul>
-                {establishments.map((establishment) => (
-                  <li key={establishment.id}>
-                    {establishment.city} - {establishment.street} - <Link style={{ all: 'revert' }} to={`/backoffice/establishments/${establishment.id}`}>Voir</Link>
-                  </li>
-                ))}
-              </ul>
-              <Button to="/backoffice/establishments/create">{t('presta.addEstablishment')}</Button>
+              <CompanyStatisticsProvider>
+                <Statistics companyId={company.id} />
+              </CompanyStatisticsProvider>
             </>
           )}
         </>
