@@ -72,7 +72,9 @@ const router = createBrowserRouter([
         element:
         <ServiceProvider>
           <AppointmentProvider>
-            <Reservation/>
+            <EstablishmentProvider>
+              <Reservation/>
+            </EstablishmentProvider>
           </AppointmentProvider>
         </ServiceProvider>,
       },

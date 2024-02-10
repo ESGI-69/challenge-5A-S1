@@ -2,13 +2,12 @@ import React from 'react';
 import { useState } from 'react';
 import styles from './Schedule.module.scss';
 import EmptyArrow from '../lib/Icons/EmptyArrow';
+import PropTypes from 'prop-types';
 
 const Schedule = React.forwardRef(function Schedule(
   {
     schedule,
-    personSelected,
     onDateSelect,
-    children,
     ...delegated
   },
   ref,
@@ -25,7 +24,7 @@ const Schedule = React.forwardRef(function Schedule(
   };
 
   return (
-    <>
+    <div ref={ref} {...delegated}>
       <div className={styles.Schedule}>
         <div className={styles.ScheduleArrows}>
           <span className={styles.ScheduleArrowsLeft}  onClick={() => handleArrowClick('prev')}><EmptyArrow style={{ width:40 }} /></span>
@@ -77,8 +76,14 @@ const Schedule = React.forwardRef(function Schedule(
         </div>
 
       </div>
-    </>
+    </div>
   );
 });
 
+Schedule.propTypes = {
+  schedule: PropTypes.array.isRequired,
+  onDateSelect: PropTypes.func.isRequired,
+};
+
 export default Schedule;
+

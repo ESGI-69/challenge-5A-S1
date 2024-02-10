@@ -1,7 +1,6 @@
 import { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import apiCall from '@/axios';
-import queryBuilder from '@/utils/queryBuilder';
 import toast from 'react-hot-toast';
 import i18n from 'i18next';
 

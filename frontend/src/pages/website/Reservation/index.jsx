@@ -9,6 +9,7 @@ import { ProfileContext } from '@/contexts/ProfileContext';
 import { useContext, useEffect } from 'react';
 import { ServiceContext } from '@/contexts/api/ServiceContext';
 import { AppointmentContext } from '@/contexts/api/AppointmentContext';
+import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import { useTranslation } from 'react-i18next';
 
 export default function Reservation () {
@@ -16,6 +17,7 @@ export default function Reservation () {
   const { profile } = useContext(ProfileContext);
   const { serviceEstablishmentId } = useParams();
   const { post, appointment, isPostAppointmentLoading } = useContext(AppointmentContext);
+  const { getById: getEstablishmentById, establishment, isEstablishmentLoading } = useContext(EstablishmentContext);
   const [ selectedDate, setSelectedDate ] = useState(null);
   const [ selectedEmployee, setSelectedEmployee ] = useState(null);
   const [ persons, setPersons ] = useState([]);
@@ -53,6 +55,7 @@ export default function Reservation () {
 
   useEffect(() => {
     if (service) {
+      getEstablishmentById(service.establishment.id);
       const { schedule, persons } = generateSchedule(service);
       setSchedule(schedule);
       setPersons(persons);    }
@@ -60,11 +63,6 @@ export default function Reservation () {
       setPerson(persons[0]);
     }
   }, [ service, person ]);
-
-  service?.appointments.forEach(appointment => {
-    // console.log('appointment:');
-    // console.log(`${new Date(appointment.startDate).getTime() }-${appointment.startDate}`);
-  });
 
   function generateSchedule(service) {
     const schedule = [];
@@ -132,12 +130,16 @@ export default function Reservation () {
   return (
     <div className={styles.Page}>
       <h2>{t('reservation')}</h2>
-      <span className={styles.ReservationAddress}>
-        Rue du bonsoir
-      </span>
-      <span className={styles.ReservationNotation}>
-        4.5
-      </span>
+      {isServiceLoading && <span>Loading ...</span>}
+      {isEstablishmentLoading && <span>Loading ...</span>}
+      {!isEstablishmentLoading && (
+        <>
+          <span className={styles.ReservationAddress}>
+            {establishment?.street} - {establishment?.city}
+          </span>
+          <span className={styles.ReservationNotation}></span>
+        </>
+      )}
       <br></br>
       <h2 className={styles.PageTitle}>1. {t('servicePicked')}</h2>
       <div className={styles.ServicesPicked}>
@@ -177,7 +179,6 @@ export default function Reservation () {
               <div className={styles.AppointementPickedSpec}>
                 <span>{new Date(selectedDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                 <span className={styles.AppointementPickedSpecTime}>{t('at')} {new Date(selectedDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
-                <span> {t('with')} {selectedEmployee}</span>
               </div>
             </div>
             <div className={styles.AppointementPickedAction}>

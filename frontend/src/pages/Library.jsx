@@ -106,6 +106,11 @@ export default function Library() {
       <h3>PTable</h3>
       <PTable template={DATA_TEMPLATE} data={DATA}></PTable>
       <h3>Entity Table (auto managed)</h3>
+      <UserProvider>
+        <EntityTable entity="User" entityContext={UserContext}>
+          <EntityTableFooter></EntityTableFooter>
+        </EntityTable>
+      </UserProvider>
 
       <h2>Button</h2>
       <Button variant="primary">Primary</Button>
