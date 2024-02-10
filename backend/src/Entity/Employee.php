@@ -113,6 +113,7 @@ class Employee
     #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Appointment::class, orphanRemoval: true)]
     private Collection $appointments;
 
+    #[Groups(['employee-getall'])]
     #[ORM\OneToMany(mappedBy: 'Employee', targetEntity: WorkingHoursRange::class, orphanRemoval: true)]
     private Collection $workingHoursRanges;
 

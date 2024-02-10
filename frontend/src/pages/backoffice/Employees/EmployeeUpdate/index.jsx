@@ -5,6 +5,7 @@ import { EmployeeContext } from '@/contexts/api/EmployeeContext';
 import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import { useContext, useEffect } from 'react';
+import WorkingHoursRangeSelector from '@/components/workingHoursRangeSelector';
 
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -31,12 +32,16 @@ export default function EmployeeUpdate() {
       </BackofficeHeader>
       <Button to="/backoffice/eemployees">{ t('update.back') }</Button>
       {(!isEstablishmentsLoading && !isEmployeeLoading && employee && establishments) && (
-        <EmployeeUpdateForm
-          onSubmit={updateEmployee}
-          establishments={establishments}
-          isLoading={isPatchEmployeeLoading}
-          {...employee}
-        />
+        <>
+          <EmployeeUpdateForm
+            onSubmit={updateEmployee}
+            establishments={establishments}
+            isLoading={isPatchEmployeeLoading}
+            {...employee}
+          />
+          <h2>{ t('workingHoursRangeSelector') }</h2>
+          <WorkingHoursRangeSelector/>
+        </>
       )}
     </>
   );

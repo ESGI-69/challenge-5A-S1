@@ -6,10 +6,10 @@ import Button from '@/components/lib/Button';
 import Input from '@/components/lib/Input';
 
 export default function RegisterUpdateForm({
+  establishments,
   lastname,
   firstname,
   avatar,
-  establishments,
   preferedEstablishment,
   onSubmit,
   isLoading = false,
@@ -17,10 +17,10 @@ export default function RegisterUpdateForm({
   const { t } = useTranslation('employee');
 
   const [ form, setForm ] = useState({
+    establishments,
     lastname,
     firstname,
     avatar,
-    establishments,
     preferedEstablishment: preferedEstablishment.id,
   });
 
@@ -97,17 +97,6 @@ RegisterUpdateForm.propTypes = {
     country: PropTypes.string,
     lat: PropTypes.string,
     long: PropTypes.string,
-    company: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    })),
-    openingHours: PropTypes.arrayOf(),
-    serviceTypes: PropTypes.arrayOf(),
-    type: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    })),
-    feedback: PropTypes.arrayOf(),
   })).isRequired,
   preferedEstablishment: PropTypes.shape({
     id: PropTypes.number,
@@ -118,17 +107,6 @@ RegisterUpdateForm.propTypes = {
     country: PropTypes.string,
     lat: PropTypes.string,
     long: PropTypes.string,
-    company: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    })),
-    openingHours: PropTypes.arrayOf(),
-    serviceTypes: PropTypes.arrayOf(),
-    type: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    })),
-    feedback: PropTypes.arrayOf(),
   }).isRequired,
   lastname: PropTypes.string.isRequired,
   firstname: PropTypes.string.isRequired,

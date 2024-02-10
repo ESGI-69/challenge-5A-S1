@@ -181,7 +181,7 @@ export default function EmployeeProvider({ children }) {
       payload: true,
     });
     try {
-      await apiCall.post('/working_hours_range', data);
+      await apiCall.post('/working_hours_ranges', data);
       toast.success(i18n.t('events.workingHoursRange.success', { ns: 'establishment' }));
     } catch (error) {
       console.error(error);
@@ -201,7 +201,7 @@ export default function EmployeeProvider({ children }) {
       payload: true,
     });
     try {
-      await apiCall.patch(`/working_hours_range/${id}`, data, {
+      await apiCall.patch(`/working_hours_ranges/${id}`, data, {
         headers: {
           'Content-Type': 'application/merge-patch+json',
         },
