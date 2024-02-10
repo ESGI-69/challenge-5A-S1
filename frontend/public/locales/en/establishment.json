@@ -56,6 +56,10 @@
       "zipCode": "Zip code",
       "country": "Country",
       "type": "Type"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
     }
   },
   "openingHourSelector": "Select the opening hours",
@@ -100,6 +104,16 @@
     "openingHours": {
       "success": "The opening hours have been updated successfully",
       "error": "An error occured while updating the opening hours"
+    },
+    "deletion": {
+      "success": "The establishment has been deleted successfully",
+      "error": "An error occured while deleting the establishment"
+    }
+  },
+  "modal": {
+    "deletion": {
+      "title": "Establishment deletion",
+      "content": "Are you sure you want to delete your {{city}} establishment ?"
     }
   }
 }

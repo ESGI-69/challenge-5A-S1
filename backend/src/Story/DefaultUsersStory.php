@@ -2,6 +2,7 @@
 
 namespace App\Story;
 
+use App\Entity\User;
 use App\Factory\CompanyFactory;
 use App\Factory\UserFactory;
 use Zenstruck\Foundry\Story;
@@ -23,6 +24,17 @@ final class DefaultUsersStory extends Story
           'lastname' => 'Giga',
           'password' => password_hash('password', PASSWORD_BCRYPT),
           'roles' => ['ROLE_USER', 'ROLE_ADMIN'],
+        ]);
+        UserFactory::createOne([
+          'email' => 'presta@platiny.com',
+          'firstname' => 'Presta',
+          'lastname' => 'Tout',
+          'password' => password_hash('password', PASSWORD_BCRYPT),
+          'roles' => ['ROLE_USER', 'ROLE_PRESTA'],
+          'company' => lazy(fn() => CompanyFactory::createOne([
+            'name' => 'Presta Company',
+            'email' => 'presta.company@platiny.com',
+          ])),
         ]);
         UserFactory::createOne([
           'email' => 'user@platiny.com',

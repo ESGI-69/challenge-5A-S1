@@ -18,6 +18,8 @@ const initialState = {
 
   isPostOpeningHourLoading: false,
   isPatchOpeningHourLoading: false,
+
+  isDeleteEstablishmentLoading: false,
 };
 
 export const EstablishmentContext = createContext(initialState);
@@ -68,6 +70,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         establishment: null,
+      };
+    case 'isDeleteEstablishmentLoading':
+      return {
+        ...state,
+        isDeleteEstablishmentLoading: action.payload,
       };
     default:
       return state;
@@ -222,6 +229,26 @@ export default function EstablishmentProvider({ children }) {
     await refetchAppointments(id);
   };
 
+  const deleteEstablishment = async (id) => {
+    dispatch({
+      type: 'isDeleteEstablishmentLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.delete(`/establishments/${id}`);
+      toast.success(i18n.t('events.deletion.success', { ns: 'establishment' }));
+    } catch (error) {
+      console.error(error);
+      toast.error(i18n.t('events.deletion.error', { ns: 'establishment' }));
+      throw new Error(error);
+    } finally {
+      dispatch({
+        type: 'isDeleteEstablishmentLoading',
+        payload: false,
+      });
+    }
+  };
+
   return (
     <EstablishmentContext.Provider value={{
       get,
@@ -240,6 +267,9 @@ export default function EstablishmentProvider({ children }) {
       isPostOpeningHourLoading: state.isPostOpeningHourLoading,
       patchOpeningHour,
       isPatchOpeningHourLoading: state.isPatchOpeningHourLoading,
+
+      deleteEstablishment,
+      isDeleteEstablishmentLoading: state.isDeleteEstablishmentLoading,
     }}>
       {children}
     </EstablishmentContext.Provider>

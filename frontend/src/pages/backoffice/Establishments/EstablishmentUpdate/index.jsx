@@ -72,11 +72,12 @@ export default function EstablishmentUpdate() {
   });
 
   return (
-    <>
+    <div className={style.EstablishmentUpdate}>
       <BackofficeHeader>
         <h1>{ t('update.title') }</h1>
       </BackofficeHeader>
       <Button to="/backoffice/establishments">{ t('update.back') }</Button>
+      <Button to={`/establishment/${id}`}>{ t('seeInUserLand', { ns: 'base' }) }</Button>
       {(!isEstablishmentTypesLoading && !isEstablishmentLoading && establishment && establishmentTypes) && (
         <>
           <EstablishmentUpdateForm
@@ -132,6 +133,6 @@ export default function EstablishmentUpdate() {
           </div>
         </div>
       </Modal>
-    </>
+    </div>
   );
 }

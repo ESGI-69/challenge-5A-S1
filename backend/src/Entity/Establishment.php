@@ -53,7 +53,7 @@ use App\Denormalizer\EstablishmentAddressDenormalizer; // Import the custom deno
             securityPostDenormalizeMessage: 'You can only update an establishment for your company',
         ),
         new Delete(
-            security: 'is_granted("ROLE_ADMIN")',
+            security: 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_PRESTA") and object.getCompany() == user.getCompany())',
         ),
     ],
     
@@ -132,22 +132,22 @@ class Establishment
     #[Groups(['read-establishment', 'create-establishment'])]
     private ?Company $company = null;
 
-    #[ORM\OneToMany(mappedBy: 'preferedEstablishment', targetEntity: Employee::class)]
+    #[ORM\OneToMany(mappedBy: 'preferedEstablishment', targetEntity: Employee::class, cascade: ['remove'], orphanRemoval: true)]
     #[Groups(['read-establishment-employees'])]
     private Collection $employees;
 
-    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Appointment::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Appointment::class, cascade: ['remove'], orphanRemoval: true)]
     private Collection $appointments;
 
-    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: OpeningHour::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: OpeningHour::class, cascade: ['remove'], orphanRemoval: true)]
     #[Groups(['read-establishment'])]
     private Collection $openingHours;
 
-    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Service::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Service::class, cascade: ['remove'], orphanRemoval: true)]
     private Collection $services;
 
     #[Groups(['read-establishment'])]
-    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: ServiceType::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: ServiceType::class, cascade: ['remove'], orphanRemoval: true)]
     private Collection $serviceTypes;
 
     #[Assert\NotBlank()]
@@ -160,7 +160,7 @@ class Establishment
     #[Groups(['read-establishment'])]
     private Collection $feedbackTypes;
 
-    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Feedback::class)]
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Feedback::class, cascade: ['remove'], orphanRemoval: true)]
     #[Groups(['read-establishment'])]
     private Collection $feedback;
 

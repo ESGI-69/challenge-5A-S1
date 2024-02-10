@@ -20,5 +20,8 @@
     "update": "Mettre à jour",
     "loading": "Chargement",
     "delete": "Supprimer",
-    "minutes": "Minutes"
+    "minutes": "Minutes",
+    "seeInUserLand": "Voir dans l'interface utilisateur",
+    "cancel": "Annuler",
+    "confirm": "Confirmer"
 }
