@@ -1,6 +1,7 @@
 import style from './GlobalNotation.module.scss';
 import Note from '@/components/Notation/Note';
 import PropsType from 'prop-types';
+import { addDigit } from '@/utils/formater/note';
 
 function GlobalNotation({
   globalAverage = 0,
@@ -10,7 +11,7 @@ function GlobalNotation({
   return (
     <div className={style.GlobalNotation}>
       <div className={style.GlobalNotationTotalAverage}>
-        {globalAverage}
+        {addDigit(globalAverage)}
       </div>
       <div className={style.GlobalNotationDetail}>
 
@@ -32,7 +33,7 @@ function GlobalNotation({
 }
 
 GlobalNotation.propTypes = {
-  globalAverage: PropsType.string,
+  globalAverage: PropsType.number,
   subFeedbacks: PropsType.arrayOf(PropsType.shape({
     id: PropsType.number.isRequired,
     name: PropsType.string.isRequired,

@@ -115,5 +115,7 @@
       "title": "Establishment deletion",
       "content": "Are you sure you want to delete your {{city}} establishment ?"
     }
-  }
+  },
+  "feedbackTypePrestaSelector": "Select the feedback type"
+
 }

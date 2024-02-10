@@ -11,10 +11,12 @@ import Modal from 'react-modal';
 import style from './EstablishmentUpdate.module.scss';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import Input from '@/components/lib/Input';
+import FeedbackTypePrestaSelector from '@/components/FeedbackTypePrestaSelector';
 
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import ServiceProvider from '@/contexts/api/ServiceContext';
+import FeedbackTypeProvider from '@/contexts/api/FeedbackTypeContext';
 
 export default function EstablishmentUpdate() {
   const { establishment, getById, isEstablishmentLoading, isPatchEstablishmentLoading, patch: patchEstablishment } = useContext(EstablishmentContext);
@@ -107,6 +109,10 @@ export default function EstablishmentUpdate() {
           <Button onClick={() => setIsServiceTypeModalOpen(true)}>{t('serviceType.action.create')}</Button>
           <h2>{ t('openingHourSelector') }</h2>
           <OpeningHoursSelector />
+          <h2>{ t('feedbackTypePrestaSelector')}</h2>
+          <FeedbackTypeProvider>
+            <FeedbackTypePrestaSelector />
+          </FeedbackTypeProvider>
         </>
       )}
       <Modal style={{

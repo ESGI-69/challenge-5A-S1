@@ -219,8 +219,6 @@ export default function EstablishmentProvider({ children }) {
   };
 
   const refetchEstablishment = async () => {
-    // je suis pas sur de ca ???
-    // review pls
     const { id } = state.establishment;
     dispatch({
       type: 'clearEstablishment',

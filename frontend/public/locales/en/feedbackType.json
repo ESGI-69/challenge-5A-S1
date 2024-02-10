@@ -1,0 +1,21 @@
+{
+  "title": "Feedback types",
+  "loading": "Loading...",
+  "feedbackTypeSelector": "Select the feedback type",
+  "feedbackType": {
+    "titleAdd": "Add a feedback type",
+    "buttonAdd": "Add a feedback type",
+    "buttonClose": "Annuler",
+    "buttonAddConfirm": "Confirm",
+    "labelName": "Name",
+    "placeHolderName": "Name of the feedback type",
+    "errorName": "Name is required",
+    "successAdd": "Feedback type added",
+    "warningDeletion": "Are you sure you want to delete this feedback type?, this can affect current feedbacks",
+    "successDelete": "Feedback type deleted",
+    "warningDeletionSub": "Your are about to delete the feedback type",
+    "titleUpdate": "Update a feedback type",
+    "delete": "Delete",
+    "update": "Update"
+  }
+}

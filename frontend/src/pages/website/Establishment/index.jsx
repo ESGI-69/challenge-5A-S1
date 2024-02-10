@@ -15,7 +15,6 @@ import Review from '@/components/Notation/Review';
 import Map from '@/components/Map';
 import { useState } from 'react';
 import AppointmentCard from '@/components/AppointmentCard';
-import { addDigit } from '@/utils/formater/note';
 
 function Establishment() {
   const { t } = useTranslation('establishment');
@@ -174,7 +173,7 @@ function Establishment() {
           </TabsList>
           <TabContent value="global-notation">
             <GlobalNotation
-              globalAverage={addDigit(establishment?.averageNotation)}
+              globalAverage={establishment?.averageNotation}
               subFeedbacks={establishment?.feedbackTypes}
               reviewsCount={uniqueAuthorCount}
             />
