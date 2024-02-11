@@ -2,6 +2,7 @@
   "description": "Réserver en ligne pour un rendez-vous chez {{establishmentName}}",
   "advantages": "24h/24 - Paiement sur place - Confirmation immédiate - Annulation gratuite",
   "makeAnAppointment": "Prendre RDV",
+  "editEstablishment": "Modifier l'établissement",
   "myApointments": {
     "title": "Mes RDV",
     "titlePast": "Mes RDV passés",

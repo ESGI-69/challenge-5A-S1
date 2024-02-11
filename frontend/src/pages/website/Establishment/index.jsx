@@ -74,6 +74,15 @@ function Establishment() {
             </span>
           </div>
           <div className={styles.EstablishmentHeaderNameRight}>
+            { profile && profile.roles.includes('ROLE_PRESTA') && (
+              <Button
+                isPlain
+                variant="black"
+                to={`/backoffice/establishments/${id}`}
+              >
+                {t('editEstablishment')}
+              </Button>
+            )}
             <Button variant="black">{t('makeAnAppointment')}</Button>
           </div>
         </div>
