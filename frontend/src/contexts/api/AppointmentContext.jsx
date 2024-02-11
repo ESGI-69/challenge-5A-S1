@@ -55,7 +55,8 @@ export default function AppointmentProvider({ children }) {
       payload: true,
     });
     try {
-      const { data } = await apiCall.get(`/appointments/me?establishment.id=${establishmentId}`);
+      const url = establishmentId ? `/appointments/me?establishment.id=${establishmentId}` : '/appointments/me';
+      const { data } = await apiCall.get(url);
       dispatch({
         type: 'myAppointments',
         payload: data,

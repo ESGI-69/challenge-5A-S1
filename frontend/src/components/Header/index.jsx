@@ -5,10 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { ProfileContext } from '@/contexts/ProfileContext';
-import { Logout } from '@/components/lib/Icons';
 
 export default function Header() {
-  const { profile, logout, isLoggingIn: isLoginLoading } = useContext(ProfileContext);
+  const { profile, isLoggingIn: isLoginLoading } = useContext(ProfileContext);
   const { t } = useTranslation('header');
   return (
     <nav className={styles.Navbar}>
@@ -20,25 +19,8 @@ export default function Header() {
           <LanguageSelector />
           {profile && (
             <>
-              <Button to="/company-register" variant="primary">{t('menu.companyRegister')}</Button>
-              <Button href="/profile" variant="black">{profile.firstname}</Button>
-              <Button variant="danger" onClick={() => logout()}>
-                <Logout/>
-              </Button>
-              {profile.roles?.includes('ROLE_ADMIN') && (
-                <Link to="/backoffice">
-                  <Button variant="black">
-                    Admin Pannel
-                  </Button>
-                </Link>
-              )}
-              {profile.roles?.includes('ROLE_PRESTA') && (
-                <Link to="/backoffice">
-                  <Button variant="black">
-                    Backoffice
-                  </Button>
-                </Link>
-              )}
+              <Button to="/company-register" isPlain variant="primary">{t('menu.companyRegister')}</Button>
+              <Button to="/profile" variant="black">{profile.firstname}</Button>
             </>
           )}
           {!profile && (

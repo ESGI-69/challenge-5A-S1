@@ -72,7 +72,7 @@ class Appointment
     #[ORM\JoinColumn(nullable: false)]
     private ?Employee $employee = null;
 
-    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read'])]
+    #[Groups(['appointment-create', 'appointment-getall', 'appointment-read', 'appointment-me'])]
     #[ORM\ManyToOne(inversedBy: 'appointments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Establishment $establishment = null;

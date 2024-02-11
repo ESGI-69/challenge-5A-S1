@@ -2,6 +2,8 @@
   "menu" : {
     "companyRegister": "Add your company",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "adminPanel": "Admin panel",
+    "backoffice": "BackOffice"
   }
 }

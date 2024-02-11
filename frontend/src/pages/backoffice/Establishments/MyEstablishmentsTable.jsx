@@ -85,6 +85,10 @@ export default function MyEstablishmentsTable() {
             //   get({ 'company.id': profile.company.id });
             // },
           },
+          {
+            name: t('table.actions.viewInUserLand'),
+            onClick: ({ id }) => navigate(`/establishment/${id}`),
+          },
         ]}
       />
       <Modal

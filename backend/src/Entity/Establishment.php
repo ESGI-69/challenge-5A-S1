@@ -80,7 +80,7 @@ class Establishment
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['read-establishment','read-service','employee-getall', 'appointment-read'])]
+    #[Groups(['read-establishment','read-service','employee-getall', 'appointment-read', 'appointment-me'])]
     private ?int $id = null;
 
     #[Assert\Email()]
@@ -91,19 +91,19 @@ class Establishment
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 255)]
     #[ORM\Column(length: 255)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'employee-getall'])]
+    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'employee-getall', 'appointment-me'])]
     private ?string $city = null;
 
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 255)]
     #[ORM\Column(length: 255)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'employee-getall'])]
+    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'employee-getall', 'appointment-me'])]
     private ?string $street = null;
 
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 255)]
     #[ORM\Column(length: 255)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read'])]
+    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'appointment-me'])]
     private ?string $zipCode = null;
 
     #[Assert\NotBlank()]
@@ -129,7 +129,7 @@ class Establishment
     ])]
     #[ORM\ManyToOne(inversedBy: 'establishments')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['read-establishment', 'create-establishment'])]
+    #[Groups(['read-establishment', 'create-establishment', 'appointment-me'])]
     private ?Company $company = null;
 
     #[ORM\OneToMany(mappedBy: 'preferedEstablishment', targetEntity: Employee::class, cascade: ['remove'], orphanRemoval: true)]
