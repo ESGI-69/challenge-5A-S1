@@ -24,7 +24,7 @@ export default function WebsiteLayout() {
         <div className={styles.WebsiteLayoutContent}>
           <Outlet />
         </div>
-        <footer>Footer</footer>
+        {/* <footer>Footer</footer> */}
       </Suspense>
     </div>
   );
