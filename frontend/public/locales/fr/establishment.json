@@ -59,7 +59,8 @@
     },
     "actions": {
       "edit": "Modifier",
-      "delete": "Supprimer"
+      "delete": "Supprimer",
+      "viewInUserLand": "Voir sur l'interface utilisateur"
     }
   },
   "openingHourSelector": "Selectionnez les horaires d'ouverture",

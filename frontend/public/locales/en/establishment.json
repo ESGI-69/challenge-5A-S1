@@ -59,7 +59,8 @@
     },
     "actions": {
       "edit": "Edit",
-      "delete": "Delete"
+      "delete": "Delete",
+      "viewInUserLand": "View in user land"
     }
   },
   "openingHourSelector": "Select the opening hours",
