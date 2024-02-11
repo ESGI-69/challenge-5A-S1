@@ -7,6 +7,7 @@
     "settings": "Paramètres",
     "companiesValidation": "Validation d'Entreprises",
     "feedbacksType": "Types de Feedbacks",
-    "backToUserLand": "Retour à l'espace utilisateur"
+    "backToUserLand": "Retour à l'espace utilisateur",
+    "logout": "Déconnexion"
   }
 }

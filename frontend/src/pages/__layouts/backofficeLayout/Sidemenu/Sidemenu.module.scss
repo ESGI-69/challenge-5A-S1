@@ -140,6 +140,10 @@
       &:hover {
         background: var(--color-hover);
       }
+
+      &_Danger {
+        color: var(--color-danger);
+      }
     }
   }
 }
