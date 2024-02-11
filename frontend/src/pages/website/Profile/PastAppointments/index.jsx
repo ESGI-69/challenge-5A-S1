@@ -25,8 +25,13 @@ const PastAppointments = () => {
         className={styles.AppointmentsList}
       >
         {isMyAppointmentsLoading && <div>{t('loading', { ns: 'base' })}...</div>}
-        {myAppointments.length === 0 && !isMyAppointmentsLoading && <div>{t('pastAppointments.noAppointments')}</div>}
-        {myAppointments.map((appointment) => <AppointmentCard key={appointment.id} appointment={appointment} />)}
+        {(!isMyAppointmentsLoading && myAppointments.length === 0) && !isMyAppointmentsLoading && <div>{t('pastAppointments.noAppointments')}</div>}
+        {!isMyAppointmentsLoading && myAppointments.map((appointment) =>
+          <AppointmentCard
+            key={appointment.id}
+            appointment={appointment}
+            showEstablishment={true}
+          />)}
       </div>
     </div>
   );

@@ -36,6 +36,7 @@
   --color-dark-light: hsl(var(--gray-10-hsl) / 80%);
   --color-dark-lighter: hsl(var(--gray-10-hsl) / 50%);
   --color-dark-lightest: hsl(var(--gray-10-hsl) / 30%);
+  --color-dark-lightest2: hsl(var(--gray-10-hsl) / 5%);
 
   /* Border */
   --color-border-regular: var(--color-text-regular);

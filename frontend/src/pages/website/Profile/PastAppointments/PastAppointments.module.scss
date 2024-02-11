@@ -2,5 +2,9 @@
   &List {
     display: flex;
     gap: var(--size-5);
+
+    & > * {
+      width: 100%;
+    }
   }
 }

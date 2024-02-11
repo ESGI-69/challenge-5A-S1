@@ -107,10 +107,10 @@ class Company
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['company-read', 'company-create', 'company-update', 'company-getall', 'read-establishment'])]
+    #[Groups(['company-read', 'company-create', 'company-update', 'company-getall', 'read-establishment', 'appointment-me'])]
     private ?int $id = null;
 
-    #[Groups(['company-read', 'company-create', 'company-update', 'company-getall', 'read-establishment'])]
+    #[Groups(['company-read', 'company-create', 'company-update', 'company-getall', 'read-establishment', 'appointment-me'])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
@@ -138,7 +138,7 @@ class Company
 
     #[Assert\File(mimeTypes: ['image/svg+xml', 'image/jpeg', 'image/png'])]
     #[Vich\UploadableField(mapping: 'company_logo', fileNameProperty:'logoPath')]
-    #[Groups(['company-create', 'company-getall'])]
+    #[Groups(['company-create', 'company-getall', 'appointment-me'])]
     public ?File $fileLogo = null;
 
     #[Groups(['company-read', 'company-getall'])]
