@@ -4,10 +4,11 @@ import styles from './Profile.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useContext, useState } from 'react';
 import { ProfileContext } from '@/contexts/ProfileContext';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const { t } = useTranslation('profile');
-  const { logout } = useContext(ProfileContext);
+  const { profile, logout } = useContext(ProfileContext);
 
   const [ currentPage, setCurrentPage ] = useState('myAppointments');
 
@@ -31,6 +32,14 @@ const Profile = () => {
             {t('myAccount.myInformations')}
           </button>
           <div className={styles.ProfileMyProfileActionsSeparator} />
+          {profile?.roles?.includes('ROLE_ADMIN') || profile?.roles?.includes('ROLE_PRESTA') && (
+            <Link
+              to="/backoffice/"
+              className={styles.ProfileMyProfileActionsButton}
+            >
+              {t('myAccount.goToBackoffice')}
+            </Link>
+          )}
           <button
             onClick={logout}
             className={`${styles.ProfileMyProfileActionsButton} ${styles.ProfileMyProfileActionsButton_Danger}`}

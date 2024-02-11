@@ -3,7 +3,8 @@
     "title": "Mon compte",
     "myAppointments": "Mes rendez-vous",
     "myInformations": "Mes informations",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "goToBackoffice": "Aller au Backoffice"
   },
   "pastAppointments": {
     "title": "Rendez-vous passés",
