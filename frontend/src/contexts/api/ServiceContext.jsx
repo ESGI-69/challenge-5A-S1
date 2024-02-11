@@ -75,29 +75,6 @@ const reducer = (state, action) => {
 export default function ServiceProvider({ children }) {
   const [ state, dispatch ] = useReducer(reducer, initialState);
 
-  const get = async () => {
-    dispatch({
-      type: 'isServicesLoading',
-      payload: true,
-    });
-
-    try {
-      const { data } = await apiCall.get('/services');
-      dispatch({
-        type: 'services',
-        payload: data,
-      });
-    } catch (error) {
-      console.error(error);
-      toast.error(i18n.t('events.get.error', { ns: 'service' }));
-    } finally {
-      dispatch({
-        type: 'isServicesLoading',
-        payload: false,
-      });
-    }
-  };
-
   const postService = async (data) => {
     dispatch({ type: 'isPostServiceLoading', payload: true });
     try {
