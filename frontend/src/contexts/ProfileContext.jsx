@@ -131,6 +131,7 @@ export default function ProfileProvider({ children }) {
       login,
       logout,
       isLoggingIn: state.isLoggingIn,
+      getAndSetUserData,
     }} >
       {children}
     </ProfileContext.Provider>
