@@ -101,6 +101,7 @@
 }
 
 .Usermenu {
+  margin-left: var(--size-1);
   grid-area: usermenu;
   align-self: flex-end;
   justify-self: flex-start;

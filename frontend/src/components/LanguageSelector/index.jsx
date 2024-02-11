@@ -1,18 +1,21 @@
 import { useTranslation } from 'react-i18next';
 import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/components/lib/Dropdown';
 import style from './LanguageSelector.module.scss';
+import PropTypes from 'prop-types';
 
 const languages  = {
   en: { label: 'English', icon: '🇺🇸' },
   fr: { label: 'Français', icon: '🇫🇷' },
 };
 
-function LanguageSwticher() {
+function LanguageSwticher({
+  direction = 'br',
+}) {
   const { i18n } = useTranslation();
 
   return (
     <div>
-      <Dropdown>
+      <Dropdown direction={direction}>
         <DropdownButton className={style.LanguageSelectorButton}>
           {languages[i18n.resolvedLanguage || 'en'].icon}
         </DropdownButton>
@@ -27,5 +30,9 @@ function LanguageSwticher() {
     </div>
   );
 }
+
+LanguageSwticher.propTypes = {
+  direction: PropTypes.oneOf([ 'tl', 'br' ]),
+};
 
 export default LanguageSwticher;

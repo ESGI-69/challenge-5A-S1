@@ -2,6 +2,8 @@
   "menu" : {
     "companyRegister": "Ajouter votre entreprise",
     "login": "Se connecter",
-    "register": "Créer un compte"
+    "register": "Créer un compte",
+    "adminPanel": "Panneau d'administration",
+    "backoffice": "BackOffice"
   }
 }

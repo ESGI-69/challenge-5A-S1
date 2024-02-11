@@ -28,14 +28,14 @@ export default function Header() {
               {profile.roles?.includes('ROLE_ADMIN') && (
                 <Link to="/backoffice">
                   <Button variant="black">
-                    Admin Pannel
+                    {t('menu.backoffice')}
                   </Button>
                 </Link>
               )}
               {profile.roles?.includes('ROLE_PRESTA') && (
                 <Link to="/backoffice">
                   <Button variant="black">
-                    Backoffice
+                    {t('menu.backoffice')}
                   </Button>
                 </Link>
               )}

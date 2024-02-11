@@ -12,6 +12,7 @@ import {
   FunnelIcon,
   UsersIcon,
 } from '@heroicons/react/20/solid';
+import LanguageSelector from '@/components/LanguageSelector';
 import { Logout } from '@/components/lib/Icons';
 import ProfileButton from '@/components/ProfileButton';
 import { useContext } from 'react';
@@ -80,6 +81,7 @@ export default function Sidemenu({ ...delegated }) {
             )}
           </nav>
         )}
+        <LanguageSelector direction='tl' />
         <div className={styles.Usermenu}>
           <div className={styles.UsermenuList}>
             {/* <BellIcon /> */}
