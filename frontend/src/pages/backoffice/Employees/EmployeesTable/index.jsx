@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import PTable from '@/components/lib/PTable';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import { EmployeeContext } from '@/contexts/api/EmployeeContext';
@@ -5,6 +6,7 @@ import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function EmployeesTable() {
+  const { t } = useTranslation('employee');
   const { employees, get: getEmployees, isEmployeesLoading } = useContext(EmployeeContext);
   const { profile } = useContext(ProfileContext);
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ export default function EmployeesTable() {
       loading={isEmployeesLoading}
       actions={[
         {
-          name: 'view',
+          name: t('table.actions.edit'),
           onClick: ({ id }) => navigate(`/backoffice/employees/${id}`),
         },
       ]}

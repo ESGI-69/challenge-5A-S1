@@ -14,13 +14,12 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-// WAITING FOR THE EMPLOYE ENTITY 
-
 #[ORM\Entity(repositoryClass: WorkingHoursRangeRepository::class)]
 #[ApiResource(
     operations: [
         new Get(
             normalizationContext: ['groups' => ['read-service']],
+            security: 'is_granted("ROLE_PRESTA")',
         ),
         new Post(security: 'is_granted("ROLE_PRESTA")'),
         new Patch(security: 'is_granted("ROLE_PRESTA")'),
@@ -32,24 +31,29 @@ class WorkingHoursRange
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['read-service'])]
+    #[Groups(['read-service','employee-getall'])]
     private ?int $id = null;
 
-    #[Groups(['read-service'])]
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['read-service', 'employee-getall'])]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $startDate = null;
 
-    #[Groups(['read-service'])]
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['read-service', 'employee-getall'])]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $endDate = null;
 
+    #[Groups(['employee-getall'])]
     #[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'workingHoursRanges')]
     private Collection $services;
 
-    #[Groups(['read-service'])]
+    #[Groups(['read-service', 'employee-getall'])]
     #[ORM\ManyToOne(inversedBy: 'workingHoursRanges')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Employee $Employee = null;
+
+    #[Groups(['employee-getall'])]
+    #[ORM\Column(length: 255, columnDefinition: 'ENUM("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")')]
+    private ?string $day = null;
 
     public function __construct()
     {
@@ -117,6 +121,18 @@ class WorkingHoursRange
     public function setEmployee(?Employee $Employee): static
     {
         $this->Employee = $Employee;
+
+        return $this;
+    }
+
+    public function getDay(): ?string
+    {
+        return $this->day;
+    }
+
+    public function setDay(string $day): static
+    {
+        $this->day = $day;
 
         return $this;
     }

@@ -22,6 +22,16 @@ export const ServiceContext = createContext(initialState);
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'services':
+      return {
+        ...state,
+        services: action.payload,
+      };
+    case 'isServicesLoading':
+      return {
+        ...state,
+        isServicesLoading: action.payload,
+      };
     case 'isPostServiceLoading':
       return {
         ...state,
@@ -36,16 +46,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         isPatchServiceLoading: action.payload,
-      };
-    case 'services':
-      return {
-        ...state,
-        services: action.payload,
-      };
-    case 'isServicesLoading':
-      return {
-        ...state,
-        isServicesLoading: action.payload,
       };
     case 'service':
       return {
@@ -159,6 +159,10 @@ export default function ServiceProvider({ children }) {
 
   return (
     <ServiceContext.Provider value={{
+      get,
+      services: state.services,
+      isServicesLoading: state.isServicesLoading,
+
       postService,
       isPostServiceLoading: state.isPostServiceLoading,
 
@@ -167,9 +171,6 @@ export default function ServiceProvider({ children }) {
 
       patchService,
       isPatchServiceLoading: state.isPatchServiceLoading,
-      get,
-      services: state.services,
-      isServicesLoading: state.isServicesLoading,
 
       getById,
       service: state.service,

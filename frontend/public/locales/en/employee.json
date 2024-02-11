@@ -9,6 +9,9 @@
     "avatar": "Avatar",
     "preferedEstablishment": "Prefered establishment",
     "establishmentsLoading": "Establishments list loading",
+    "noEstablishments": "You must create an establishment before creating an employee",
+    "createEstablishment": "Create an establishment",
+    "establishmentsList": "Establishments list",
     "actions": {
       "create": "Create"
     }
@@ -40,5 +43,12 @@
     "actions": {
       "create": "Create an employee"
     }
-  }
+  },
+  "table": {
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    }
+  },
+  "workingHoursRangeSelector": "Working hours range"
 }

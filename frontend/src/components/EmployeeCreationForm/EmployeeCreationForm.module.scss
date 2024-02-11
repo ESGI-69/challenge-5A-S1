@@ -22,5 +22,13 @@
         font-size: var(--font-size-2);
         font-weight: var(--font-weight-5);
       }
+
+      &Select {
+        width: 100%;
+        border: 1px solid var(--gray-2);
+        border-radius: var(--size-1);
+        font-size: var(--font-size-2);
+        font-weight: var(--font-weight-5);
+      }
     }
   }

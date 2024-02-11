@@ -9,6 +9,9 @@
     "avatar": "Avatar",
     "preferedEstablishment": "Établissement préféré",
     "establishmentsLoading": "Liste des établissements en cours de chargement",
+    "noEstablishments": "Vous devez créer un établissement pour pouvoir créer un employé",
+    "createEstablishment": "Créer un établissement",
+    "establishmentsList": "Liste des établissements",
     "actions": {
       "create": "Créer"
     }
@@ -33,6 +36,10 @@
     "delete": {
       "success": "L'employé a bien été supprimé",
       "error": "Une erreur est survenue lors de la suppression de l'employé"
+    },
+    "workinghoursRange": {
+      "error": "Une erreur est survenue lors de la mise à jour de la plage horaire de travail",
+      "success": "La plage horaire de travail a bien été mise à jour"
     }
   },
   "list": {
@@ -40,5 +47,12 @@
     "actions": {
       "create": "Créer un employé"
     }
-  }
+  },
+  "table": {
+    "actions": {
+      "edit": "Modifier",
+      "delete": "Supprimer"
+    }
+  },
+  "workingHoursRangeSelector": "Plage horaire de travail"
 }

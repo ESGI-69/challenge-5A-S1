@@ -13,6 +13,9 @@ const initialState = {
 
   isPostEmployeeLoading: false,
   isPatchEmployeeLoading: false,
+
+  isPostworkingHoursRangeLoading: false,
+  isPatchworkingHoursRangeLoading: false,
 };
 
 export const EmployeeContext = createContext(initialState);
@@ -48,6 +51,16 @@ const reducer = (state, action) => {
       return {
         ...state,
         isPatchEmployeeLoading: action.payload,
+      };
+    case 'isPostWorkingHoursRangeLoading':
+      return {
+        ...state,
+        isPostWorkingHoursRangeLoading: action.payload,
+      };
+    case 'isPatchWorkingHoursRangeLoading':
+      return {
+        ...state,
+        isPatchWorkingHoursRangeLoading: action.payload,
       };
     default:
       return state;
@@ -131,6 +144,11 @@ export default function EmployeeProvider({ children }) {
           'Content-Type': 'application/merge-patch+json',
         },
       });
+      const employee = await apiCall.get(`/companies/employees/${id}`);
+      dispatch({
+        type: 'employee',
+        payload: employee.data,
+      });
       toast.success(i18n.t('events.update.success', { ns: 'employee' }));
     } catch (error) {
       console.error(error);
@@ -162,6 +180,50 @@ export default function EmployeeProvider({ children }) {
     }
   };
 
+  const postWorkingHoursRange = async (data) => {
+    dispatch({
+      type: 'isPostWorkingHoursRangeLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.post('/working_hours_ranges', data);
+      toast.success(i18n.t('events.workingHoursRange.success', { ns: 'employee' }));
+    } catch (error) {
+      console.error(error);
+      toast.error(i18n.t('events.workingHoursRange.error', { ns: 'employee' }));
+      throw new Error(error);
+    } finally {
+      dispatch({
+        type: 'isPostWorkingHoursRangeLoading',
+        payload: false,
+      });
+    }
+  };
+
+  const patchWorkingHoursRange = async (id, data) => {
+    dispatch({
+      type: 'isPatchWorkingHoursRangeLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.patch(`/working_hours_ranges/${id}`, data, {
+        headers: {
+          'Content-Type': 'application/merge-patch+json',
+        },
+      });
+      toast.success(i18n.t('events.workingHoursRange.success', { ns: 'employee' }));
+    } catch (error) {
+      console.error(error);
+      toast.error(i18n.t('events.workingHoursRange.error', { ns: 'employee' }));
+      throw new Error(error);
+    } finally {
+      dispatch({
+        type: 'isPatchWorkingHoursRangeLoading',
+        payload: false,
+      });
+    }
+  };
+
   return (
     <EmployeeContext.Provider value={{
       employee: state.employee,
@@ -175,6 +237,11 @@ export default function EmployeeProvider({ children }) {
       post,
       patch,
       remove,
+
+      postWorkingHoursRange,
+      isPostWorkingHoursRangeLoading: state.isPostWorkingHoursRangeLoading,
+      patchWorkingHoursRange,
+      isPatchWorkingHoursRangeLoading: state.isPatchWorkingHoursRangeLoading,
     }}>
       {children}
     </EmployeeContext.Provider>

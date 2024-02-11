@@ -6,10 +6,10 @@ import Button from '@/components/lib/Button';
 import Input from '@/components/lib/Input';
 
 export default function RegisterUpdateForm({
+  establishments,
   lastname,
   firstname,
   avatar,
-  establishments,
   preferedEstablishment,
   onSubmit,
   isLoading = false,
@@ -17,10 +17,10 @@ export default function RegisterUpdateForm({
   const { t } = useTranslation('employee');
 
   const [ form, setForm ] = useState({
+    establishments,
     lastname,
     firstname,
     avatar,
-    establishments,
     preferedEstablishment: preferedEstablishment.id,
   });
 
@@ -36,8 +36,8 @@ export default function RegisterUpdateForm({
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className={styles.EmployeeUpdateForm}>
-      <div className={styles.EstablishmentUpdateFormGroup}>
+    <form onSubmit={handleFormSubmit} className={styles.EmployeeUpdateForm} >
+      <div className={styles.EmployeeUpdateFormGroup}>
         <label htmlFor="firstname">{t('form.firstname')}</label>
         <Input
           disabled={isLoading}
@@ -47,7 +47,7 @@ export default function RegisterUpdateForm({
           onChange={(newValue) => setForm({ ...form, firstname: newValue })}
         />
       </div>
-      <div className={styles.EstablishmentUpdateFormGroup}>
+      <div className={styles.EmployeeUpdateFormGroup}>
         <label htmlFor="lastname">{t('form.lastname')}</label>
         <Input
           disabled={isLoading}
@@ -57,7 +57,7 @@ export default function RegisterUpdateForm({
           onChange={(newValue) => setForm({ ...form, lastname: newValue })}
         />
       </div>
-      <div className={styles.EstablishmentUpdateFormGroup}>
+      <div className={styles.EmployeeUpdateFormGroup}>
         <label htmlFor="avatar">{t('form.avatar')}</label>
         <Input
           disabled={isLoading}
@@ -67,13 +67,14 @@ export default function RegisterUpdateForm({
           onChange={(newValue) => setForm({ ...form, avatar: newValue })}
         />
       </div>
-      <div className={styles.EstablishmentUpdateFormGroup}>
-        <label htmlFor="preferedEstablishment">{t('form.establishmentType')}</label>
+      <div className={styles.EmployeeUpdateFormGroup}>
+        <label htmlFor="preferedEstablishment">{t('form.establishmentsList')}</label>
         <select
           disabled={isLoading}
           id="preferedEstablishment"
           value={form.preferedEstablishment}
           onChange={(e) => setForm({ ...form, preferedEstablishment: e.target.value })}
+          className={styles.EmployeeUpdateFormGroupSelect}
         >
           {establishments.map((establishment) => (
             <option key={establishment.id} value={establishment.id}>{establishment.street} - {establishment.city}</option>
@@ -97,17 +98,6 @@ RegisterUpdateForm.propTypes = {
     country: PropTypes.string,
     lat: PropTypes.string,
     long: PropTypes.string,
-    company: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    })),
-    openingHours: PropTypes.arrayOf(),
-    serviceTypes: PropTypes.arrayOf(),
-    type: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    })),
-    feedback: PropTypes.arrayOf(),
   })).isRequired,
   preferedEstablishment: PropTypes.shape({
     id: PropTypes.number,
@@ -118,22 +108,12 @@ RegisterUpdateForm.propTypes = {
     country: PropTypes.string,
     lat: PropTypes.string,
     long: PropTypes.string,
-    company: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    })),
-    openingHours: PropTypes.arrayOf(),
-    serviceTypes: PropTypes.arrayOf(),
-    type: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    })),
-    feedback: PropTypes.arrayOf(),
   }).isRequired,
   lastname: PropTypes.string.isRequired,
   firstname: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  getById: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
 };
 

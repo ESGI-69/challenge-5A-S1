@@ -23,5 +23,7 @@
     "minutes": "Minutes",
     "seeInUserLand": "See in user land",
     "cancel": "Cancel",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "none": "None",
+    "add": "Add"
 }

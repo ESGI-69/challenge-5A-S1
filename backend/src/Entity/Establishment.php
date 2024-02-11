@@ -143,6 +143,7 @@ class Establishment
     #[Groups(['read-establishment'])]
     private Collection $openingHours;
 
+    #[Groups(['employee-getall'])]
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Service::class, cascade: ['remove'], orphanRemoval: true)]
     private Collection $services;
 

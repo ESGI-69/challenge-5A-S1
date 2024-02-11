@@ -1,0 +1,49 @@
+.WorkingHoursRangeSelector {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+    max-width: 500px;
+  
+    &Row {
+      background: var(--gray-1);
+      border-radius: var(--radius-2-5);
+      padding: var(--size-2);
+      border: 1px solid var(--gray-2);
+      box-shadow: var(--shadow-1);
+      display: flex;
+      gap: var(--size-2);
+  
+      &_Active {
+        border: 1px solid black;
+      }
+  
+      &Day {
+        flex-grow: 1;
+        align-items: center;
+        display: flex;
+      }
+  
+      &Hours {
+        display: flex;
+        gap: var(--size-1);
+        align-items: center;
+  
+        input {
+          width: var(--size-8);
+          height: var(--size-4);
+        }
+      }
+
+      &Services {
+        display: flex;
+        flex-direction: row;
+
+        &List {
+          display: flex;
+          flex-direction: column;
+          list-style-type: none;
+        }
+
+      }
+    }
+  }
