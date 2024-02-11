@@ -6,6 +6,8 @@
     "notifs": "Notifications",
     "settings": "Paramètres",
     "companiesValidation": "Validation d'Entreprises",
-    "feedbacksType": "Types de Feedbacks"
+    "feedbacksType": "Types de Feedbacks",
+    "backToUserLand": "Retour à l'espace utilisateur",
+    "logout": "Déconnexion"
   }
 }

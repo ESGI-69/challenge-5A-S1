@@ -4,10 +4,19 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import styles from './Sidemenu.module.scss';
 import { Expand } from '@/components/lib/Icons';
-import { BellIcon, BuildingStorefrontIcon, ChartPieIcon, Cog6ToothIcon, DocumentCheckIcon, FunnelIcon, UsersIcon } from '@heroicons/react/20/solid';
+import {
+  BuildingStorefrontIcon,
+  ChartPieIcon,
+  CursorArrowRippleIcon,
+  DocumentCheckIcon,
+  FunnelIcon,
+  UsersIcon,
+} from '@heroicons/react/20/solid';
+import { Logout } from '@/components/lib/Icons';
 import ProfileButton from '@/components/ProfileButton';
 import { useContext } from 'react';
 import { ProfileContext } from '@/contexts/ProfileContext';
+import { Dropdown, DropdownButton, DropdownList } from '@/components/lib/Dropdown';
 
 function SidemenuLink({ children, to, svgJsx }) {
   return (
@@ -26,9 +35,15 @@ SidemenuLink.propTypes = {
 };
 
 export default function Sidemenu({ ...delegated }) {
-  const { profile } = useContext(ProfileContext);
+  const { profile, logout } = useContext(ProfileContext);
   const { t } = useTranslation('backofficeSidebar');
   const [ isExpanded, setIsExpanded ] = useState(false);
+
+  const handleLogout = () => {
+    logout();
+    window.location.href = '/';
+  };
+
   return (
     <aside {...delegated}>
       <div className={`${styles.Sidemenu} ${isExpanded ? '' : styles.Shrinked}`}>
@@ -67,11 +82,29 @@ export default function Sidemenu({ ...delegated }) {
         )}
         <div className={styles.Usermenu}>
           <div className={styles.UsermenuList}>
-            <BellIcon />
-            <NavLink to="/settings" className={styles.UsermenuItem}>
+            {/* <BellIcon /> */}
+            {/* <NavLink to="/settings" className={styles.UsermenuItem}>
               <Cog6ToothIcon />
-            </NavLink>
-            <ProfileButton />
+            </NavLink> */}
+            <Dropdown direction='tl'>
+              <DropdownButton>
+                <ProfileButton />
+              </DropdownButton>
+              <DropdownList>
+                <NavLink to='/' className={styles.UsermenuDropdownItem}>
+                  <CursorArrowRippleIcon />
+                  <span>
+                    {t('menu.backToUserLand')}
+                  </span>
+                </NavLink>
+                <DropdownButton className={`${styles.UsermenuDropdownItem} ${styles.UsermenuDropdownItem_Danger}`} onClick={handleLogout}>
+                  <Logout />
+                  <span>
+                    {t('menu.logout')}
+                  </span>
+                </DropdownButton>
+              </DropdownList>
+            </Dropdown>
           </div>
         </div>
       </div>

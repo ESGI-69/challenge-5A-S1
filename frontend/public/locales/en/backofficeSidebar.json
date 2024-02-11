@@ -6,6 +6,8 @@
     "notifs": "Notifications",
     "settings": "Settings",
     "companiesValidation": "Companies Validation",
-    "feedbacksType": "Feedbacks Type"
+    "feedbacksType": "Feedbacks Type",
+    "backToUserLand": "Back to user land",
+    "logout": "Logout"
   }
 }
