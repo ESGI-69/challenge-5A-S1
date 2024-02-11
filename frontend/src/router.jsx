@@ -19,9 +19,10 @@ import CompanyRegister from '@/pages/website/CompanyRegister';
 import Establishment from '@/pages/website/Establishment';
 import Home from '@/pages/website/Home';
 import Login from '@/pages/website/Login';
+import Profile from '@/pages/website/Profile';
 import Register from '@/pages/website/Register';
-import Search from '@/pages/website/Search';
 import Reservation from '@/pages/website/Reservation';
+import Search from '@/pages/website/Search';
 
 import CompanyProvider from '@/contexts/api/CompanyContext';
 import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
             </EstablishmentProvider>
           </AppointmentProvider>
         </ServiceProvider>,
+      },
+      {
+        path: '/profile',
+        element: <AppointmentProvider><Profile /></AppointmentProvider>,
       },
       {
         path: '*',

@@ -1,0 +1,56 @@
+.Profile {
+  display: grid;
+  gap: var(--size-6);
+  grid-template-columns: 1fr 2fr;
+
+  & > * {
+    padding: var(--size-7);
+    background-color: var(--white);
+    border-radius: var(--size-2-5);
+    box-shadow: var(--shadow-1);
+    border: 1px solid var(--color-border-light);
+
+    h2 {
+      margin: {
+        top: 0;
+        bottom: var(--size-3);
+      }
+
+      font-weight: 500;
+      font-size: var(--font-size-3);
+    }
+  }
+
+  &MyProfile {
+    &Actions {
+      display: flex;
+      gap: var(--size-4);
+      flex-direction: column;
+
+      &Button {
+        all: unset;
+        cursor: pointer;
+        color: var(--color-text-light);
+        font-weight: 300;
+
+        &_Active {
+          font-weight: bold;
+          color: var(--color-text-regular);
+        }
+
+        &_Danger {
+          color: var(--color-danger);
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      &Separator {
+        height: 1px;
+        background-color: var(--color-border-light);
+      }
+    }
+  }
+}

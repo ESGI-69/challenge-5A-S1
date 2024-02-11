@@ -1,0 +1,15 @@
+{
+  "myAccount": {
+    "title": "My Account",
+    "myAppointments": "My Appointments",
+    "myInformations": "My Informations",
+    "logout": "Logout"
+  },
+  "pastAppointments": {
+    "title": "Past Appointments",
+    "noAppointments": "No past appointments"
+  },
+  "myInformations": {
+    "title": "My Informations"
+  }
+}

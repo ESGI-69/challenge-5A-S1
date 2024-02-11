@@ -21,7 +21,7 @@ export default function Header() {
           {profile && (
             <>
               <Button to="/company-register" variant="primary">{t('menu.companyRegister')}</Button>
-              <Button href="/profile" variant="black">{profile.firstname}</Button>
+              <Button to="/profile" variant="black">{profile.firstname}</Button>
               <Button variant="danger" onClick={() => logout()}>
                 <Logout/>
               </Button>

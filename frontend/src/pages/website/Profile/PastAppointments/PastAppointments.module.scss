@@ -1,0 +1,6 @@
+.Appointments {
+  &List {
+    display: flex;
+    gap: var(--size-5);
+  }
+}

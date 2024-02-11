@@ -1,0 +1,15 @@
+{
+  "myAccount": {
+    "title": "Mon compte",
+    "myAppointments": "Mes rendez-vous",
+    "myInformations": "Mes informations",
+    "logout": "Se déconnecter"
+  },
+  "pastAppointments": {
+    "title": "Rendez-vous passés",
+    "noAppointments": "Vous n'avez pas de rendez-vous passés"
+  },
+  "myInformations": {
+    "title": "Mes informations"
+  }
+}
