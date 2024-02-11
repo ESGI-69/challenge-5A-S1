@@ -187,10 +187,10 @@ export default function EmployeeProvider({ children }) {
     });
     try {
       await apiCall.post('/working_hours_ranges', data);
-      toast.success(i18n.t('events.workingHoursRange.success', { ns: 'establishment' }));
+      toast.success(i18n.t('events.workingHoursRange.success', { ns: 'employee' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.workingHoursRange.error', { ns: 'establishment' }));
+      toast.error(i18n.t('events.workingHoursRange.error', { ns: 'employee' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -211,10 +211,10 @@ export default function EmployeeProvider({ children }) {
           'Content-Type': 'application/merge-patch+json',
         },
       });
-      toast.success(i18n.t('events.workingHoursRange.success', { ns: 'establishment' }));
+      toast.success(i18n.t('events.workingHoursRange.success', { ns: 'employee' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.workingHoursRange.error', { ns: 'establishment' }));
+      toast.error(i18n.t('events.workingHoursRange.error', { ns: 'employee' }));
       throw new Error(error);
     } finally {
       dispatch({
