@@ -47,16 +47,6 @@ const reducer = (state, action) => {
         ...state,
         isPatchServiceLoading: action.payload,
       };
-    case 'services':
-      return {
-        ...state,
-        services: action.payload,
-      };
-    case 'isServicesLoading':
-      return {
-        ...state,
-        isServicesLoading: action.payload,
-      };
     case 'service':
       return {
         ...state,
@@ -181,9 +171,6 @@ export default function ServiceProvider({ children }) {
 
       patchService,
       isPatchServiceLoading: state.isPatchServiceLoading,
-      get,
-      services: state.services,
-      isServicesLoading: state.isServicesLoading,
 
       getById,
       service: state.service,
