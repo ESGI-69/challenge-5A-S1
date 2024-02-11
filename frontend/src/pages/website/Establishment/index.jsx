@@ -53,7 +53,9 @@ function Establishment() {
 
   useEffect(() => {
     getById(id);
-    getMyAppointments(id);
+    if (profile){
+      getMyAppointments(id);
+    }
   }, []);
 
   const handlePastAppointmentsClick = () => {
