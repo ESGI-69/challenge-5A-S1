@@ -95,7 +95,7 @@ use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
 #[ApiFilter(
     SearchFilter::class,
     properties: [
-        'name' => 'partial',
+        'name' => 'ipartial',
     ],
 )]
 #[ApiFilter(ExistsFilter::class, properties: ['validatedAt', 'rejectedReason'])]
