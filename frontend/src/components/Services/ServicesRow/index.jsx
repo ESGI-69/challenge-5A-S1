@@ -1,10 +1,12 @@
 import style from './ServicesRow.module.scss';
 import PropTypes from 'prop-types';
 import Button from '../../lib/Button';
+import { Link } from 'react-router-dom';
 import { minToDuration } from '@/utils/formater/time';
 import { useTranslation } from 'react-i18next';
 
 function ServicesRow({
+  id,
   name,
   description,
   price,
@@ -27,7 +29,9 @@ function ServicesRow({
         <span>{price} €</span>
       </div>
       <div className={style.ServicesRowBtn}>
-        <Button variant="black">{t('choose')}</Button>
+        <Link to={`/reservation/${id}`}>
+          <Button variant="black">{t('choose')}</Button>
+        </Link>
       </div>
     </div>
   );

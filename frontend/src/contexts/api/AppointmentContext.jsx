@@ -1,10 +1,15 @@
 import { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import apiCall from '@/axios';
+import toast from 'react-hot-toast';
+import i18n from 'i18next';
 
 const initialState = {
   myAppointments: [],
   isMyAppointmentsLoading: false,
+
+  appointment: null,
+  isPostAppointmentLoading: false,
 };
 
 export const AppointmentContext = createContext(initialState);
@@ -25,6 +30,16 @@ const reducer = (state, action) => {
       return {
         ...state,
         myAppointments: [],
+      };
+    case 'appointment':
+      return {
+        ...state,
+        appointment: action.payload,
+      };
+    case 'isPostAppointmentLoading':
+      return {
+        ...state,
+        isPostAppointmentLoading: action.payload,
       };
     default:
       return state;
@@ -64,12 +79,39 @@ export default function AppointmentProvider({ children }) {
     await getMyAppointments(id);
   };
 
+  const post = async (data) => {
+    dispatch({
+      type: 'isPostAppointmentLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.post('/appointments', data);
+      dispatch({
+        type: 'appointment',
+        payload: data,
+      });
+    } catch (error) {
+      toast.error(i18n.t('events.creation.error', { ns: 'reservation' }));
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isPostAppointmentLoading',
+        payload: false,
+      });
+    }
+  };
+
   return (
     <AppointmentContext.Provider value={{
       getMyAppointments,
       refetchAppointments,
       myAppointments: state.myAppointments,
       isMyAppointmentsLoading: state.isMyAppointmentsLoading,
+
+      appointment: state.appointment,
+      isPostAppointmentLoading: state.isPostAppointmentLoading,
+
+      post,
     }}>
       {children}
     </AppointmentContext.Provider>

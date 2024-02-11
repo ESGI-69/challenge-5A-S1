@@ -21,16 +21,18 @@ import Home from '@/pages/website/Home';
 import Login from '@/pages/website/Login';
 import Register from '@/pages/website/Register';
 import Search from '@/pages/website/Search';
+import Reservation from '@/pages/website/Reservation';
 
 import CompanyProvider from '@/contexts/api/CompanyContext';
 import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
 import EmployeeProvider from '@/contexts/api/EmployeeContext';
 import EstablishmentTypeProvider from './contexts/api/EstablishmentTypeContext';
-import AppointmentProvider from './contexts/api/AppointmentContext';
 import ServiceTypeProvider from './contexts/api/ServiceTypeContext';
 import FeedbackProvider from './contexts/api/FeedbackContext';
 
 import EmployeeCreation from '@/pages/backoffice/Employees/EmployeeCreation';
+import ServiceProvider from '@/contexts/api/ServiceContext';
+import AppointmentProvider from '@/contexts/api/AppointmentContext';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +67,17 @@ const router = createBrowserRouter([
       {
         path: '/company-register',
         element: <CompanyRegister />,
+      },
+      {
+        path: '/reservation/:serviceEstablishmentId',
+        element:
+        <ServiceProvider>
+          <AppointmentProvider>
+            <EstablishmentProvider>
+              <Reservation/>
+            </EstablishmentProvider>
+          </AppointmentProvider>
+        </ServiceProvider>,
       },
       {
         path: '*',

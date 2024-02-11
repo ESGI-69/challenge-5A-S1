@@ -1,0 +1,25 @@
+{
+    "reservation": "Reservation",
+    "servicePicked": "Selected service",
+    "from": "from",
+    "delete": "Delete",
+    "dateChoice": "Date and time selection",
+    "with": "with",
+    "at": "at",
+    "edit": "Edit",
+    "Authentication": "Authentication",
+    "catchPhraseRegister": "New to platiny?",
+    "catchPhraseLogin": "Have you already used platiny?",
+    "createAccount": "Create my account",
+    "loginAccount": "Log in",
+    "connectedAs": "Connected as",
+    "paymentMethod": "Payment method",
+    "book": "Book for",
+    "events": {
+        "creation": {
+            "success": "The appointment has been successfully created",
+            "error": "Error during appointment scheduling"
+        }
+    },
+    "loading": "Loading"
+}

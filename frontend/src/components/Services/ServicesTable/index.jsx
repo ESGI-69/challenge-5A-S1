@@ -20,6 +20,7 @@ function ServicesTable({
         {(services && (isExpanded ? services : services.slice(0, 5))).map((service) => (
           <ServicesRow
             key={service.id}
+            id={service.id}
             name={service.name}
             description={service.description}
             price={service.price}

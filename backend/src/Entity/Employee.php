@@ -84,7 +84,7 @@ class Employee
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['employee-get', 'employee-getall', 'read-company-employees', 'read-establishment-employees', 'appointment-me'])]
+    #[Groups(['employee-get', 'employee-getall', 'read-company-employees', 'read-establishment-employees','read-service','appointment-me'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'employees')]
@@ -98,7 +98,7 @@ class Employee
     #[ORM\JoinColumn(nullable: false)]
     private ?Establishment $preferedEstablishment = null;
 
-    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall', 'appointment-read','read-company-employees', 'read-establishment-employees', 'appointment-me'])]
+    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall', 'appointment-read','read-company-employees', 'read-establishment-employees', 'appointment-me','read-service'])]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 

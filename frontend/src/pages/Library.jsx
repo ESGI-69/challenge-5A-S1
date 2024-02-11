@@ -111,6 +111,7 @@ export default function Library() {
           <EntityTableFooter></EntityTableFooter>
         </EntityTable>
       </UserProvider>
+
       <h2>Button</h2>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>

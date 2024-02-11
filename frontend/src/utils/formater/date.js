@@ -38,3 +38,21 @@ export const dateTimeFull = (date, language = 'en') => {
 
   return newDate.toLocaleString(selectedLanguage, options).replace(',', '');
 };
+
+export const dateCustom = (date, language = 'en', options = {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}) => {
+  const newDate = new Date(date);
+
+  let selectedLanguage;
+  if (language === 'en') {
+    selectedLanguage = 'en-US';
+  }
+  if (language === 'fr') {
+    selectedLanguage = 'fr-FR';
+  }
+
+  return newDate.toLocaleString(selectedLanguage, options).replace(',', '');
+};

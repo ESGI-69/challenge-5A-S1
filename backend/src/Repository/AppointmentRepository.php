@@ -45,4 +45,19 @@ class AppointmentRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function existsForUser(int $userId, int $serviceId, \DateTimeInterface $startDate): bool
+    {
+        return $this->createQueryBuilder('a')
+            // ->andWhere('a.client = :user')
+            ->andWhere('a.service = :service')
+            ->andWhere('a.startDate = :startDate')
+            // ->setParameter('user', $userId)
+            ->setParameter('service', $serviceId)
+            ->setParameter('startDate', $startDate)
+            ->getQuery()
+            ->getOneOrNullResult() !== null;
+    }
+
+
 }

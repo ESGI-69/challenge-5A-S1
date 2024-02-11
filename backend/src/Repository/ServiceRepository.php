@@ -30,6 +30,20 @@ class ServiceRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findRecentWorkingHours(int $serviceId)
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.workingHoursRanges', 'w')
+            ->andWhere('s.validatedAt IS NOT NULL')
+            ->andWhere('s.id = :serviceId')
+            ->andWhere('w.startDate > :now')
+            ->setParameter('serviceId', $serviceId)
+            ->setParameter('now', new \DateTime())
+            ->getQuery()
+            ->getResult();
+        ;
+    }
+
 //    /**
 //     * @return Service[] Returns an array of Service objects
 //     */

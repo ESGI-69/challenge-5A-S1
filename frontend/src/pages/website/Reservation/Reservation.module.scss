@@ -1,0 +1,144 @@
+.Page {
+    &Title {
+        font-weight: var(--font-weight-5);
+        font-size: var(--font-size-3);
+    }
+}
+
+.ServicePicked {
+    width: 100%;
+    padding:32px;
+    box-shadow: var(--shadow-3);
+    background-color: var(--white);
+    margin-bottom: 12px;
+    border-radius: var(--radius-3);
+    border: 1px solid var(--grey-200);
+    display: flex;
+    grid-template-columns: 4fr 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+
+  &Name {
+    font-weight: var(--font-weight-6);
+  }
+
+}
+
+
+.AppointementPicked {
+    width: 100%;
+    padding:32px;
+    box-shadow: var(--shadow-3);
+    background-color: var(--white);
+    margin-bottom: 12px;
+    border-radius: var(--radius-3);
+    border: 1px solid var(--grey-200);
+    display: flex;
+    grid-template-columns: 5fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+
+    &Spec {
+        &Time {
+            color: var(--gray-6);
+        }
+
+        &Time::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background-color: var(--gray-6);
+            border-radius: 100%;
+            margin-left: 8px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+    }
+
+    &Action {
+        &Delete {
+            color:var(--indigo-7);
+            text-decoration: underline;
+        }
+    }
+
+}
+
+.ServiceSpec {
+    &Name {
+        color: var(--gray-6);
+        // var(--font-weight-2);
+    }
+
+    &Name::after {
+        content: "";
+        display: inline-block;
+    width: 4px;
+    height: 4px;
+    background-color: var(--gray-10);
+    border-radius: 100%;
+    margin-left: 8px;
+    margin-right: 8px;
+    vertical-align: middle;
+    }
+    
+}
+
+.ServiceActionDelete {
+    color:var(--indigo-7);
+    text-decoration: underline;
+}
+
+.Identification {
+    padding:32px;
+    box-shadow: var(--shadow-3);
+    background-color: var(--white);
+    margin-bottom: 12px;
+    border-radius: var(--radius-3);
+    border: 1px solid var(--grey-200);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.Identification a button {
+    width: 100%;
+}
+
+.Payment {
+    width: 100%;
+    padding:32px;
+    box-shadow: var(--shadow-3);
+    background-color: var(--white);
+    margin-bottom: 12px;
+    border-radius: var(--radius-3);
+    border: 1px solid var(--grey-200);
+    align-items: center;
+
+    &Service {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin: var(--size-2) 0;
+
+        &Total {
+            font-weight: var(--font-weight-6);
+        }
+    }
+
+    &ServiceInfo {
+        display: flex;
+        justify-content: space-between;
+        margin:10px;
+    }
+
+
+    &Method {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    
+}
