@@ -131,4 +131,18 @@
     line-height: var(--size-3);
     cursor: pointer;
   }
+
+  &Dropdown {
+    &Item {
+      padding: var(--size-2);
+      display: flex;
+      gap: var(--size-2);
+      cursor: pointer;
+      align-items: center;
+      
+      &:hover {
+        background: var(--color-hover);
+      }
+    }
+  }
 }

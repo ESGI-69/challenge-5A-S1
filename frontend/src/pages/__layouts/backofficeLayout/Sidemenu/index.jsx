@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import styles from './Sidemenu.module.scss';
 import { Expand } from '@/components/lib/Icons';
-import { BellIcon, BuildingStorefrontIcon, ChartPieIcon, Cog6ToothIcon, DocumentCheckIcon, FunnelIcon, UsersIcon } from '@heroicons/react/20/solid';
+import { BuildingStorefrontIcon, ChartPieIcon, CursorArrowRippleIcon, DocumentCheckIcon, FunnelIcon, UsersIcon } from '@heroicons/react/20/solid';
 import ProfileButton from '@/components/ProfileButton';
 import { useContext } from 'react';
 import { ProfileContext } from '@/contexts/ProfileContext';
+import { Dropdown, DropdownButton, DropdownList } from '@/components/lib/Dropdown';
 
 function SidemenuLink({ children, to, svgJsx }) {
   return (
@@ -67,11 +68,23 @@ export default function Sidemenu({ ...delegated }) {
         )}
         <div className={styles.Usermenu}>
           <div className={styles.UsermenuList}>
-            <BellIcon />
-            <NavLink to="/settings" className={styles.UsermenuItem}>
+            {/* <BellIcon /> */}
+            {/* <NavLink to="/settings" className={styles.UsermenuItem}>
               <Cog6ToothIcon />
-            </NavLink>
-            <ProfileButton />
+            </NavLink> */}
+            <Dropdown direction='tl'>
+              <DropdownButton>
+                <ProfileButton />
+              </DropdownButton>
+              <DropdownList>
+                <div className={styles.UsermenuDropdownItem}>
+                  <CursorArrowRippleIcon />
+                  <NavLink to="/">
+                    {t('menu.backToUserLand')}
+                  </NavLink>
+                </div>
+              </DropdownList>
+            </Dropdown>
           </div>
         </div>
       </div>
