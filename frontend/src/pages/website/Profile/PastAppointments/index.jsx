@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import styles from './PastAppointments.module.scss';
 import { useTranslation } from 'react-i18next';
 import { AppointmentContext } from '@/contexts/api/AppointmentContext';
+import AppointmentCard from '@/components/AppointmentCard';
 
 const PastAppointments = () => {
   const { t } = useTranslation('profile');
@@ -25,16 +26,7 @@ const PastAppointments = () => {
       >
         {isMyAppointmentsLoading && <div>{t('loading', { ns: 'base' })}...</div>}
         {myAppointments.length === 0 && !isMyAppointmentsLoading && <div>{t('pastAppointments.noAppointments')}</div>}
-        {myAppointments.map((appointment) => (
-          <div key={appointment.id}>
-            <p>
-              {appointment.establishment.name}
-            </p>
-            <p>
-              {appointment.date}
-            </p>
-          </div>
-        ))}
+        {myAppointments.map((appointment) => <AppointmentCard key={appointment.id} appointment={appointment} />)}
       </div>
     </div>
   );
