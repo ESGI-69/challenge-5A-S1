@@ -6,7 +6,8 @@ import style from './SearchBar.module.scss';
 import { useContext, useEffect, useState } from 'react';
 import { CompanyContext } from '@/contexts/api/CompanyContext';
 import { useDebounce } from '@/hooks/useDebounce';
-import { Link } from 'react-router-dom';
+import EstablishmentTypeProvider from '@/contexts/api/EstablishmentTypeContext';
+import NameAutocomplete from './NameAutocomplete';
 
 function SearchBar({
   className,
@@ -38,18 +39,12 @@ function SearchBar({
         disabled={isLoading}
         onInput={(e) => setName(e.target.value)}
       />
-      {/* Temporary redirect the user on the first establishment on click on the company name */}
-      { (companies.length > 0 || isCompaniesLoading) && name.length > 0 && (
-        <div className={ style.SearchBarSuggestions }>
-          {companies.map((company) => (
-            company.establishments.length > 0 && (
-              <Link to={`/search?companyId=${company.id}`} key={company.id}>
-                {company.name}
-              </Link>
-            )
-          ))}
-        </div>
-      )}
+      <EstablishmentTypeProvider>
+        <NameAutocomplete
+          companies={companies}
+          isLoading={isCompaniesLoading}
+        />
+      </EstablishmentTypeProvider>
       <div className={ style.SearchBarSeparator } />
       <Input
         variant="no-border"
