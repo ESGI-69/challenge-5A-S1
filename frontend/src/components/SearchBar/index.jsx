@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Input from '@/components/lib/Input';
-import Button from '@/components/lib/Button';
 import style from './SearchBar.module.scss';
 import { useContext, useEffect, useState } from 'react';
 import { CompanyContext } from '@/contexts/api/CompanyContext';
@@ -31,6 +30,8 @@ function SearchBar({
     onSearch({ name, location });
   };
 
+  const [ isNameFormFocused, setIsNameFormFocused ] = useState(false);
+
   return (
     <form className={`${style.SearchBar} ${className}`} onSubmit={handleFormSubmission}>
       <Input
@@ -38,9 +39,12 @@ function SearchBar({
         placeholder={t('name.placeholder')}
         disabled={isLoading}
         onInput={(e) => setName(e.target.value)}
+        onFocus={() => setIsNameFormFocused(true)}
+        onBlur={() => setTimeout(() => setIsNameFormFocused(false), 200)}
       />
       <EstablishmentTypeProvider>
         <NameAutocomplete
+          style={{ display: isNameFormFocused ? 'flex' : 'none' }}
           companies={companies}
           isLoading={isCompaniesLoading}
         />
@@ -52,9 +56,9 @@ function SearchBar({
         disabled={isLoading}
         onInput={(e) => setLocation(e.target.value)}
       />
-      <Button variant="black" type="submit">
+      {/* <Button variant="black" type="submit">
         {t('search')}
-      </Button>
+      </Button> */}
     </form>
   );
 }

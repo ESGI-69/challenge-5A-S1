@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-const NameAutocomplete = ({ companies, isLoading }) => {
+const NameAutocomplete = ({ companies, isLoading, ...delegated }) => {
   const { establishmentTypes, isEstablishmentTypesLoading, get } = useContext(EstablishmentTypeContext);
   const { t } = useTranslation('searchbar');
 
@@ -14,7 +14,7 @@ const NameAutocomplete = ({ companies, isLoading }) => {
   }, []);
 
   return (
-    <div className={styles.NameAutocomplete}>
+    <div className={styles.NameAutocomplete} {...delegated}>
       {!isLoading
         ? (
           companies.length > 0 && companies.map((company) => (
