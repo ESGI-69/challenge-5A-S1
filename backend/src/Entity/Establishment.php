@@ -133,10 +133,11 @@ class Establishment
     private ?Company $company = null;
 
     #[ORM\OneToMany(mappedBy: 'preferedEstablishment', targetEntity: Employee::class, cascade: ['remove'], orphanRemoval: true)]
-    #[Groups(['read-establishment-employees'])]
+    #[Groups(['read-establishment-employees', 'company-statistics-getall'])]
     private Collection $employees;
 
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Appointment::class, cascade: ['remove'], orphanRemoval: true)]
+    #[Groups(['company-statistics-getall'])]
     private Collection $appointments;
 
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: OpeningHour::class, cascade: ['remove'], orphanRemoval: true)]

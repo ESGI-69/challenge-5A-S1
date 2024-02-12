@@ -1,0 +1,16 @@
+{
+  "statistics": {
+    "timeRange": {
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
+    "graph": {
+      "title": "Year revenues"
+    },
+    "monthlySum": "Revenues this month",
+    "weeklySum": "Revenues this week",
+    "totalSum": "Global revenues",
+    "establishmentsPerf": "Most performing establishments",
+    "employeesPerf": "Most performing employees"
+  }
+}

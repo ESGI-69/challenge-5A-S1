@@ -1,0 +1,16 @@
+{
+  "statistics": {
+    "timeRange": {
+      "weekly": "Hebdomadaire",
+      "monthly": "Mensuel"
+    },
+    "graph": {
+      "title": "Recettes annuelle"
+    },
+    "monthlySum": "Recettes ce mois ci",
+    "weeklySum": "Recettes cette semaine",
+    "totalSum": "Recette totale",
+    "establishmentsPerf": "Etablissements les plus performants",
+    "employeesPerf": "Employés les plus performants"
+  }
+}
