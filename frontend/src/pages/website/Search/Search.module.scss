@@ -9,13 +9,19 @@
     grid-template-columns: 1fr;
   }
 
+  &Left {
+    height: 100%;
+    overflow-y: auto;
+  }
+
   &Right {
     background-color: var(--gray-2);
+    height: 100%;
   }
 
   &Map {
     height: 100%;
-    
+
     @media (width <= $breakpoint-tablet) {
       display: none;
     }

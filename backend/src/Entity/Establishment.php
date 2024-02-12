@@ -72,6 +72,7 @@ use App\Denormalizer\EstablishmentAddressDenormalizer; // Import the custom deno
         'company.name' => 'partial',
         'services.id' => 'exact',
         'company.id' => 'exact',
+        'type.id' => 'exact',
     ],
 )]
 

@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Input from '@/components/lib/Input';
-import Button from '@/components/lib/Button';
 import style from './SearchBar.module.scss';
 import { useContext, useEffect, useState } from 'react';
 import { CompanyContext } from '@/contexts/api/CompanyContext';
 import { useDebounce } from '@/hooks/useDebounce';
-import { Link } from 'react-router-dom';
+import EstablishmentTypeProvider from '@/contexts/api/EstablishmentTypeContext';
+import NameAutocomplete from './NameAutocomplete';
 
 function SearchBar({
   className,
@@ -30,6 +30,8 @@ function SearchBar({
     onSearch({ name, location });
   };
 
+  const [ isNameFormFocused, setIsNameFormFocused ] = useState(false);
+
   return (
     <form className={`${style.SearchBar} ${className}`} onSubmit={handleFormSubmission}>
       <Input
@@ -37,19 +39,16 @@ function SearchBar({
         placeholder={t('name.placeholder')}
         disabled={isLoading}
         onInput={(e) => setName(e.target.value)}
+        onFocus={() => setIsNameFormFocused(true)}
+        onBlur={() => setTimeout(() => setIsNameFormFocused(false), 200)}
       />
-      {/* Temporary redirect the user on the first establishment on click on the company name */}
-      { (companies.length > 0 || isCompaniesLoading) && name.length > 0 && (
-        <div className={ style.SearchBarSuggestions }>
-          {companies.map((company) => (
-            company.establishments.length > 0 && (
-              <Link to={`/search?companyId=${company.id}`} key={company.id}>
-                {company.name}
-              </Link>
-            )
-          ))}
-        </div>
-      )}
+      <EstablishmentTypeProvider>
+        <NameAutocomplete
+          style={{ display: isNameFormFocused ? 'flex' : 'none' }}
+          companies={companies}
+          isLoading={isCompaniesLoading}
+        />
+      </EstablishmentTypeProvider>
       <div className={ style.SearchBarSeparator } />
       <Input
         variant="no-border"
@@ -57,9 +56,9 @@ function SearchBar({
         disabled={isLoading}
         onInput={(e) => setLocation(e.target.value)}
       />
-      <Button variant="black" type="submit">
+      {/* <Button variant="black" type="submit">
         {t('search')}
-      </Button>
+      </Button> */}
     </form>
   );
 }

@@ -6,29 +6,11 @@
   align-items: center;
   gap: var(--size-2);
   display: grid;
-  grid-template-columns: 1fr auto 1fr auto;
+  grid-template-columns: 1fr auto 1fr;
 
   &Separator {
     height: calc(100% - var(--size-2));
     width: 1px;
     background-color: var(--color-border);
-  }
-
-  &Suggestions {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    width: 42%;
-    background-color: var(--white);
-    border-radius: var(--radius-2);
-    box-shadow: var(--shadow);
-    padding: var(--size-2);
-    z-index: 1;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--size-2);
-    color: var(--color-text-regular);
-    margin-top: 1rem;
   }
 }
