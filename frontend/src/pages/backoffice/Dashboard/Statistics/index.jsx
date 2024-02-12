@@ -1,40 +1,42 @@
 import StatisticsCard from '@/components/Statistics/StatisticsCard';
 import StatisticsChart from '@/components/Statistics/StatisticsChart';
 import { CompanyStatisticsContext } from '@/contexts/api/CompanyStatisticsContext';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
 import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
+import { useTranslation } from 'react-i18next';
 
 export default function Statistics({ companyId }) {
+  const { t } = useTranslation('backofficeDashboard');
   const { isStatisticsLoading, statistics, getStatistics } = useContext(CompanyStatisticsContext);
 
   useEffect(() => {
     getStatistics(companyId);
-    console.log(statistics);
   }, [ companyId ]);
 
   const findById = (array, id) => array.find((item) => String(item.id) === String(id));
   return (
     <section className={styles.Statistics}>
-      {isStatisticsLoading && (<span>Chargement...</span>)}
+      {isStatisticsLoading && (<span>Loading...</span>)}
       {!isStatisticsLoading && Object.keys(statistics).length && (
         <>
           <div className={styles.StatisticsLeft}>
-            <StatisticsCard title="Recettes sur l'année" type='dark'>
+            <StatisticsCard title={t('statistics.graph.title')} type='dark'>
               <StatisticsChart data={statistics?.sumPerDayAllTime} />
             </StatisticsCard>
             <div className={styles.Statistics}>
-              <StatisticsCard title="Recette cette semaine" number={`${statistics?.companyWeeklySum}€`}/>
-              <StatisticsCard title="Recette ce mois ci" number={`${statistics?.companyMonthlySum}€`}/>
+              <StatisticsCard title={t('statistics.weeklySum')} number={`${statistics?.companyWeeklySum}€`}/>
+              <StatisticsCard title={t('statistics.monthlySum')} number={`${statistics?.companyMonthlySum}€`}/>
             </div>
-            <StatisticsCard title="Recette totale" number={`${statistics?.companyAllTimeSum}€`}/>
+            <StatisticsCard title={t('statistics.totalSum')} number={`${statistics?.companyAllTimeSum}€`}/>
           </div>
           <div className={styles.StatisticsRight}>
-            <StatisticsCard title="Etablissements les plus performants">
+            <StatisticsCard title={t('statistics.establishmentsPerf')}>
               <Tabs defaultTab="tab1">
                 <TabsList>
-                  <Tab value="tab1">Mensuel</Tab>
-                  <Tab value="tab2">Hebdomadaire</Tab>
+                  <Tab value="tab1">{t('statistics.timeRange.monthly')}</Tab>
+                  <Tab value="tab2">{t('statistics.timeRange.weekly')}</Tab>
                 </TabsList>
                 <TabContent value="tab1">
                   <ul className={styles.StatisticsPerfomanceList}>
@@ -45,7 +47,7 @@ export default function Statistics({ companyId }) {
                           <small>{findById(statistics.establishments, establishment.id).street}</small>
                         </div>
                         <span className={styles.StatisticsPerfomanceListItemNumber}>
-                          {statistics?.establishmentsMonthlySums[establishment.id] ?? '0'}$
+                          {statistics?.establishmentsMonthlySums[establishment.id] ?? '0'}€
                         </span>
                       </li>
                     ))}
@@ -60,7 +62,7 @@ export default function Statistics({ companyId }) {
                           <small>{findById(statistics.establishments, establishment.id).street}</small>
                         </div>
                         <span className={styles.StatisticsPerfomanceListItemNumber}>
-                          {statistics?.establishmentsWeeklySums[establishment.id] ?? '0'}$
+                          {statistics?.establishmentsWeeklySums[establishment.id] ?? '0'}€
                         </span>
                       </li>
                     ))}
@@ -68,11 +70,11 @@ export default function Statistics({ companyId }) {
                 </TabContent>
               </Tabs >
             </StatisticsCard>
-            <StatisticsCard title="Employés les plus performants">
+            <StatisticsCard title={t('statistics.employeesPerf')}>
               <Tabs defaultTab="tab1">
                 <TabsList>
-                  <Tab value="tab1">Mensuel</Tab>
-                  <Tab value="tab2">Hebdomadaire</Tab>
+                  <Tab value="tab1">{t('statistics.timeRange.monthly')}</Tab>
+                  <Tab value="tab2">{t('statistics.timeRange.weekly')}</Tab>
                 </TabsList>
                 <TabContent value="tab1">
                   <ul className={styles.StatisticsPerfomanceList}>
@@ -83,7 +85,7 @@ export default function Statistics({ companyId }) {
                           <small>{findById(statistics.employees, employee.id).lastname}</small>
                         </div>
                         <span className={styles.StatisticsPerfomanceListItemNumber}>
-                          {statistics?.employeesMonthlyPerformance[employee.id] ?? '0'}$
+                          {statistics?.employeesMonthlyPerformance[employee.id] ?? '0'}€
                         </span>
                       </li>
                     ))}
@@ -98,7 +100,7 @@ export default function Statistics({ companyId }) {
                           <small>{findById(statistics.employees, employee.id).lastname}</small>
                         </div>
                         <span className={styles.StatisticsPerfomanceListItemNumber}>
-                          {statistics?.employeesWeeklyPerformance[employee.id] ?? '0'}$
+                          {statistics?.employeesWeeklyPerformance[employee.id] ?? '0'}€
                         </span>
                       </li>
                     ))}
@@ -113,3 +115,7 @@ export default function Statistics({ companyId }) {
     </section>
   );
 }
+
+Statistics.propTypes = {
+  companyId: PropTypes.string,
+};
