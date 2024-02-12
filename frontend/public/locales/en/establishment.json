@@ -118,6 +118,21 @@
       "content": "Are you sure you want to delete your {{city}} establishment ?"
     }
   },
-  "feedbackTypePrestaSelector": "Select the feedback type"
+  "feedbackTypePrestaSelector": "Select the feedback type",
+  "establishmentPicture": {
+    "events": {
+      "creation": {
+        "success": "The picture has been added successfully",
+        "error": "An error occured while adding the picture"
+      },
+      "deletion": {
+        "success": "The picture has been deleted successfully",
+        "error": "An error occured while deleting the picture"
+      }
+    },
+    "deleteForm": "List of pictures",
+    "uploadForm": "Upload a picture",
+    "add": "Add"
+  }
 
 }

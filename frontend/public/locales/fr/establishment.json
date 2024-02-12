@@ -118,5 +118,20 @@
       "content": "Êtes-vous sûr de vouloir supprimer votre établissement dans la ville de {{city}} ?"
     }
   },
-  "feedbackTypePrestaSelector": "Selectionnez les types de feedback"
+  "feedbackTypePrestaSelector": "Selectionnez les types de feedback",
+  "establishmentPicture": {
+    "events": {
+      "creation": {
+        "success": "La photo a bien été ajoutée",
+        "error": "Une erreur est survenue lors de l'ajout de la photo"
+      },
+      "deletion": {
+        "success": "La photo a bien été supprimée",
+        "error": "Une erreur est survenue lors de la suppression de la photo"
+      }
+    },
+    "deleteForm": "Liste des photos",
+    "uploadForm": "Ajouter une photo",
+    "add": "Ajouter"
+  }
 }

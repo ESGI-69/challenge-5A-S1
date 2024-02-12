@@ -88,13 +88,11 @@ function Establishment() {
           </div>
         </div>
         <Gallery>
-          <img src="https://picsum.photos/seed/1/534/300" alt="random" />
-          <img src="https://picsum.photos/seed/2/534/300" alt="random" />
-          <img src="https://picsum.photos/seed/3/534/300" alt="random" />
-          <img src="https://picsum.photos/seed/4/534/300" alt="random" />
-          <img src="https://picsum.photos/seed/5/534/300" alt="random" />
-          <img src="https://picsum.photos/seed/6/534/300" alt="random" />
-          <img src="https://picsum.photos/seed/7/534/300" alt="random" />
+          {((!isEstablishmentLoading && establishment?.establishmentPictures && establishment?.establishmentPictures.length>0) &&
+            establishment.establishmentPictures.map(picture => (
+              <img src={`${import.meta.env.VITE_API_DOMAIN}${picture.pathPicture}`} key={picture.id} />
+            ))
+          )}
         </Gallery>
         <div className={styles.EstablishmentHeaderDescription}>
           <h2 className={styles.EstablishmentTitle}>{t('description', { establishmentName: establishment?.company?.name })}</h2>
