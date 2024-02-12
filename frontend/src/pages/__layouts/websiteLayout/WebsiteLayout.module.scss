@@ -1,7 +1,7 @@
 .WebsiteLayout {
   height: 100%;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
 
   &Content {
     width: 100%;
@@ -12,7 +12,7 @@
 
   &FullPage {
     .WebsiteLayoutContent {
-      height: 100%;
+      height: calc(100vh - 77px);
       max-width: unset;
       margin: unset;
       padding: unset;

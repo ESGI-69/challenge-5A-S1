@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { memo, useContext, useEffect } from 'react';
 import styles from './Search.module.scss';
 import Map from '@/components/Map';
 import EstablishmentCard from '@/components/Search/EstablishmentCard';
@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom';
 export default function Search() {
   const { establishments, get } = useContext(EstablishmentContext);
   const location = useLocation();
+  const MemorizedMap = memo(Map);
 
   const getQueryParams = () => {
     const query = new URLSearchParams(location.search);
@@ -15,6 +16,7 @@ export default function Search() {
       name: query.get('name'),
       location: query.get('location'),
       companyId: query.get('companyId'),
+      establishmentTypeId: query.get('establishmentTypeId'),
     };
     return searchData;
   };
@@ -23,6 +25,8 @@ export default function Search() {
     const queryParams = getQueryParams();
     if (queryParams.companyId) {
       get({ 'company.id': queryParams.companyId });
+    } else if (queryParams.establishmentTypeId) {
+      get({ 'type.id': queryParams.establishmentTypeId });
     }
   }, []);
 
@@ -46,7 +50,7 @@ export default function Search() {
 
       <div className={styles.SearchRight}>
         {establishments.length > 0 && (
-          <Map
+          <MemorizedMap
             className={styles.SearchMap}
             position={[ +establishments[0].lat, +establishments[0].long ]}
             markers={
