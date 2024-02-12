@@ -1,6 +1,15 @@
 # Platiny
-
 [![Frontend tests](https://github.com/ESGI-69/challenge-5A-S1/actions/workflows/frontend.yml/badge.svg)](https://github.com/ESGI-69/challenge-5A-S1/actions/workflows/frontend.yml)
+
+## Team
+- Gatien ANIZAN ([mrpinkcat](https://github.com/mrpinkcat))
+- Quentin PELTIER ([Timdev0](https://github.com/Timdev0))
+- Samuel GUENIER ([sguenier](https://github.com/sguenier))
+- Yohan CENTANNI ([ycenta](https://github.com/ycenta))
+- Sébastien GAUDARD ([SebGrd](https://github.com/SebGrd))
+
+## Features
+- Reviews system, type of reviews system and notation system (Quentin PELTIER)
 
 ## Recomended plugins
 
