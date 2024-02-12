@@ -51,7 +51,7 @@ class WorkingHoursRange
     #[ORM\JoinColumn(nullable: false)]
     private ?Employee $Employee = null;
 
-    #[Groups(['employee-getall'])]
+    #[Groups(['employee-getall','read-service'])]
     #[ORM\Column(length: 255, columnDefinition: 'ENUM("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")')]
     private ?string $day = null;
 

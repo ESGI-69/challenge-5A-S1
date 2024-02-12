@@ -28,6 +28,7 @@ class CreateAppointmentController
             throw new BadRequestHttpException('An appointment with the same service and start date already exists');
         }
         $dateRequested = $startDate->format('Y-m-d');
+        return $appointment;
 
         $isCreneauValid = false;
 

@@ -20,13 +20,14 @@ class GetServiceRecentWorkingHoursController
 
     public function __invoke(Service $service): Service
     {
+        return $service;
         //On enlève les workingHours qui sont passés !
-        $responseService = $this->serviceRepository->findRecentWorkingHours($service->getId())[0] ?? $service;
-        foreach ($responseService->getWorkingHoursRanges() as $workingHoursRange) {
-            if ($workingHoursRange->getStartDate() < new \DateTime()) {
-                $responseService->removeWorkingHoursRange($workingHoursRange);
-            }
-        }
-        return $responseService;
+        // $responseService = $this->serviceRepository->findRecentWorkingHours($service->getId())[0] ?? $service;
+        // foreach ($responseService->getWorkingHoursRanges() as $workingHoursRange) {
+        //     if ($workingHoursRange->getStartDate() < new \DateTime()) {
+        //         $responseService->removeWorkingHoursRange($workingHoursRange);
+        //     }
+        // }
+        // return $responseService;
     }
 }

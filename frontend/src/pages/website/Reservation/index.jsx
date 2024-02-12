@@ -69,9 +69,37 @@ export default function Reservation () {
   function generateSchedule(service) {
     const schedule = [];
     const employees = {};
+    let generatedWorkingHoursRanges = [];
+
+    //On va récuperer les 2 prochaines semaines & génerer un nouvel objet WorkingHoursRanges :)
+    let upcomingDays = getUpcomingDays(14);
+    let workingDays = Object.values(service.workingHoursRanges).map(range => range.day);
+    upcomingDays = upcomingDays.filter(upcomingDay => workingDays.includes(upcomingDay.dayName.toLowerCase()));
+
+    upcomingDays.forEach( upcomingDay => {
+      const currentWorkingHoursRanges = Object.values(service.workingHoursRanges).filter(range => range.day.toLowerCase() === upcomingDay.dayName.toLowerCase());
+
+      currentWorkingHoursRanges.forEach(currentWorkingHoursRange => {
+        const workingHoursRangeDate = new Date(currentWorkingHoursRange.startDate);
+        const workingHoursEndDate = new Date(currentWorkingHoursRange.endDate);
+        const newCorrectDate = new Date(upcomingDay.date.getFullYear(), upcomingDay.date.getMonth(), upcomingDay.date.getDate(), workingHoursRangeDate.getHours(), workingHoursRangeDate.getMinutes(), workingHoursRangeDate.getSeconds());
+        const newCorrectEndDate = new Date(upcomingDay.date.getFullYear(), upcomingDay.date.getMonth(), upcomingDay.date.getDate(), workingHoursEndDate.getHours(), workingHoursEndDate.getMinutes(), workingHoursEndDate.getSeconds());
+
+        const newWorkingHoursRange = {
+          startDate: newCorrectDate.toISOString(),
+          endDate: newCorrectEndDate.toISOString(),
+          day: currentWorkingHoursRange.day,
+          Employee: currentWorkingHoursRange.Employee,
+        };
+
+        generatedWorkingHoursRanges.push(newWorkingHoursRange);
+      });
+
+    });
 
     //WorkingHoursRanges est renvoyé sous forme d'objet :)
-    Object.values(service.workingHoursRanges).forEach(range => {
+    //Update j'utilise le workingHoursRanges generé maintenant
+    Object.values(generatedWorkingHoursRanges).forEach(range => {
       const startDate = new Date(range.startDate);
       const endDate = new Date(range.endDate);
       const serviceEmployee = range.Employee.id;
@@ -127,6 +155,30 @@ export default function Reservation () {
     tempDate.setDate(tempDate.getDate() + (3 - (tempDate.getDay() + 6) % 7));
     var firstDayOfYear = new Date(tempDate.getFullYear(), 0, 1);
     return 1 + Math.ceil(((tempDate - firstDayOfYear) / 86400000) / 7);
+  }
+
+  function getUpcomingDays(numDays) {
+    var result = [];
+    var daysOfWeek = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ];
+    var currentDate = new Date();
+
+    for (var i = 0; i < numDays; i++) {
+      var nextDate = new Date(currentDate);
+      nextDate.setDate(currentDate.getDate() + i);
+      var dayOfWeekIndex = nextDate.getDay();
+      var dayOfWeekName = daysOfWeek[dayOfWeekIndex];
+      result.push({ date: nextDate, dayName: dayOfWeekName });
+    }
+
+    return result;
   }
 
   return (
