@@ -24,12 +24,16 @@
   }
 
   &NoBorder {
-    border: none;
+    border-color: transparent;
 
     &:hover,
     &:focus {
-      border: none;
+      border-color: transparent;
       background-color: var(--color-hover);
+    }
+
+    &:focus {
+      border-color: var(--color-border-regular)
     }
 
     &:disabled {
