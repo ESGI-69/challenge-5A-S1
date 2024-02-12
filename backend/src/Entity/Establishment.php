@@ -20,6 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 use App\Denormalizer\EstablishmentAddressDenormalizer; // Import the custom denormalizer class
+use App\Controller\Establishment\MapEstablishmentPictureController;
 
 #[ORM\Entity(repositoryClass: EstablishmentRepository::class)]
 #[ApiResource(
@@ -32,7 +33,8 @@ use App\Denormalizer\EstablishmentAddressDenormalizer; // Import the custom deno
             normalizationContext: ['groups' => ['read-establishment-employees']],
         ),
         new Get(
-            normalizationContext: ['groups' => ['read-establishment', 'read-company']]
+            normalizationContext: ['groups' => ['read-establishment', 'read-company']],
+            controller: MapEstablishmentPictureController::class,
         ),
         new Post(
             denormalizationContext: [
@@ -171,6 +173,10 @@ class Establishment
     #[Groups(['read-establishment'])]
     private ?float $averageNotation = null;
 
+    #[Groups(['read-establishment'])]
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: EstablishmentPicture::class, orphanRemoval: true)]
+    private Collection $establishmentPictures;
+
     public function __construct()
     {
         $this->employees = new ArrayCollection();
@@ -180,6 +186,7 @@ class Establishment
         $this->serviceTypes = new ArrayCollection();
         $this->feedbackTypes = new ArrayCollection();
         $this->feedback = new ArrayCollection();
+        $this->establishmentPictures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -510,6 +517,36 @@ class Establishment
     public function setAverageNotation(?float $averageNotation): static
     {
         $this->averageNotation = $averageNotation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EstablishmentPicture>
+     */
+    public function getEstablishmentPictures(): Collection
+    {
+        return $this->establishmentPictures;
+    }
+
+    public function addEstablishmentPicture(EstablishmentPicture $establishmentPicture): static
+    {
+        if (!$this->establishmentPictures->contains($establishmentPicture)) {
+            $this->establishmentPictures->add($establishmentPicture);
+            $establishmentPicture->setEstablishment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEstablishmentPicture(EstablishmentPicture $establishmentPicture): static
+    {
+        if ($this->establishmentPictures->removeElement($establishmentPicture)) {
+            // set the owning side to null (unless already changed)
+            if ($establishmentPicture->getEstablishment() === $this) {
+                $establishmentPicture->setEstablishment(null);
+            }
+        }
 
         return $this;
     }
