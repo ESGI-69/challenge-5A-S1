@@ -12,6 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+// use App\Controller\EstablishmentPicture\DeletePictureOnDeleteController;
 
 #[ORM\Entity(repositoryClass: EstablishmentPictureRepository::class)]
 #[ApiResource(
@@ -20,11 +21,16 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             normalizationContext: ['groups' => ['establishement-picture-create']],
             denormalizationContext: ['groups' => ['establishement-picture-create']], inputFormats: ['multipart' => ['multipart/form-data']],
         ),
+        new Delete(
+            normalizationContext: ['groups' => ['delete-establishment-picture']],
+            denormalizationContext: ['groups' => ['delete-establishment-picture']],
+        ),
     ]
 )]
 #[Vich\Uploadable]
 class EstablishmentPicture
 {
+    #[Groups(['read-establishment'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -36,7 +42,7 @@ class EstablishmentPicture
     public ?File $filePicture = null;
 
     #[Groups(['read-establishment', 'get-all-etsbalishment-picture'])]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $pathPicture = null;
 
     #[Groups(['establishement-picture-create', 'get-all-etsbalishment-picture'])]
@@ -54,7 +60,7 @@ class EstablishmentPicture
         return $this->pathPicture;
     }
 
-    public function setPathPicture(string $pathPicture): static
+    public function setPathPicture(?string $pathPicture): static
     {
         $this->pathPicture = $pathPicture;
 

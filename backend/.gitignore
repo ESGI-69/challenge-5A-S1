@@ -146,4 +146,5 @@ yarn-error.log
 # prevent uploaded files folder
 public/company_kbis/*
 public/company_logo/*
+public/establishment_picture/*
 swagger.json
