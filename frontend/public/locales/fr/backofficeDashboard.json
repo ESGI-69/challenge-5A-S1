@@ -11,6 +11,15 @@
     "weeklySum": "Recettes cette semaine",
     "totalSum": "Recette totale",
     "establishmentsPerf": "Etablissements les plus performants",
-    "employeesPerf": "Employés les plus performants"
+    "employeesPerf": "Employés les plus performants",
+    "admin": {
+      "averageSumPerCompany": "Recette moyenne par entreprise",
+      "averageSumPerEstablishment": "Recette moyenne par établissement",
+      "averageSumPerEmployee": "Recette moyenne par employé",
+      "totalSum": "Recette totale",
+      "nbEstablishments": "Nombre d'établissements",
+      "nbCompanies": "Nombre d'entreprises",
+      "nbEmployees": "Nombre d'employés"
+    }
   }
 }

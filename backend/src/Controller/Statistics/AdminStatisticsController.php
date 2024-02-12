@@ -51,10 +51,10 @@ class AdminStatisticsController
       'nbCompanies' => $nbCompanies,
       'nbEmployees' => $nbEmployees,
       'nbEstablishments' => $nbEstablishments,
-      'totalSum' => $totalSum,
-      'averageSumPerCompany' => $averageSumPerCompany,
-      'averageSumPerEstablishment' => $averageSumPerEstablishment,
-      'averageSumPerEmployee' => $averageSumPerEmployee,
+      'totalSum' => round($totalSum, 2),
+      'averageSumPerCompany' => round($averageSumPerCompany, 2),
+      'averageSumPerEstablishment' => round($averageSumPerEstablishment, 2),
+      'averageSumPerEmployee' => round($averageSumPerEmployee, 2),
       'allTimeSumWithDate' => $allTimeSumWithDate
     ]);
   }
