@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
 import Review from '@/components/Notation/Review';
 import Map from '@/components/Map';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import AppointmentCard from '@/components/AppointmentCard';
 
 function Establishment() {
@@ -22,6 +22,7 @@ function Establishment() {
   const { getById, establishment, isEstablishmentLoading } = useContext(EstablishmentContext);
   const { getMyAppointments, myAppointments, isMyAppointmentsLoading } = useContext(AppointmentContext);
   const { profile } = useContext(ProfileContext);
+  const MemorizedMap = memo(Map);
 
   const now = new Date();
 
@@ -56,7 +57,7 @@ function Establishment() {
     if (profile){
       getMyAppointments(id);
     }
-  }, []);
+  }, [ profile ]);
 
   const handlePastAppointmentsClick = () => {
     setIsPastAppointmentsShowned(!isPastAppointmentsShowned);
@@ -163,13 +164,15 @@ function Establishment() {
             {establishment?.street}, {establishment?.zipCode} {establishment?.city}
           </span>
           {establishment && (
-            <Map position={[ parseFloat(establishment?.lat), parseFloat(establishment?.long) ]} markers={[
-              {
-                position: [ parseFloat(establishment?.lat), parseFloat(establishment?.long) ],
-                popup: 'Popup 1',
-              },
-            ]}
-            zoomLevel={13}
+            <MemorizedMap
+              position={[ parseFloat(establishment?.lat), parseFloat(establishment?.long) ]}
+              markers={[
+                {
+                  position: [ parseFloat(establishment?.lat), parseFloat(establishment?.long) ],
+                  popup: 'Popup 1',
+                },
+              ]}
+              zoomLevel={13}
             />
           )}
         </div>
