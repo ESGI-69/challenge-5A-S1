@@ -29,12 +29,18 @@ class AdminStatisticsController
     $nbEmployees = 0;
     $nbEstablishments = 0;
     $totalSum = 0;
+    $allTimeSumWithDate = [];
     foreach ($companies as $company) {
       $nbEmployees += count($company->getEmployees());
       $nbEstablishments += count($company->getEstablishments());
       foreach ($company->getEstablishments() as $establishment) {
         foreach ($establishment->getAppointments() as $appointment) {
           $totalSum += $appointment->getPrice();
+          $appointmentDate = $appointment->getEndDate()->format('Y-m-d');
+          if (!isset($allTimeSumWithDate[$appointmentDate])) {
+            $allTimeSumWithDate[$appointmentDate] = 0;
+          }
+          $allTimeSumWithDate[$appointmentDate] += $appointment->getPrice();
         }
       }
     }
@@ -48,7 +54,8 @@ class AdminStatisticsController
       'totalSum' => $totalSum,
       'averageSumPerCompany' => $averageSumPerCompany,
       'averageSumPerEstablishment' => $averageSumPerEstablishment,
-      'averageSumPerEmployee' => $averageSumPerEmployee
+      'averageSumPerEmployee' => $averageSumPerEmployee,
+      'allTimeSumWithDate' => $allTimeSumWithDate
     ]);
   }
 }
