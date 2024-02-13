@@ -19,7 +19,8 @@
       "totalSum": "Total revenue",
       "nbEstablishments": "Number of establishments",
       "nbCompanies": "Number of companies",
-      "nbEmployees": "Number of employees"
+      "nbEmployees": "Number of employees",
+      "averages": "Averages"
     }
   }
 }

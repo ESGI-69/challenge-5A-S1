@@ -160,16 +160,13 @@ export default function PTable({
                 ))}
                 <div className={styles.TableBodyRowActions}>
                   {!isActionHidden && (
-                    <Dropdown direction='br'>
+                    <Dropdown direction='bl'>
                       <DropdownButton>
                         <div className={styles.TableBodyRowActionsButton}>
                           <Dots />
                         </div>
                       </DropdownButton>
-                      <DropdownList style={{
-                        top: 0,
-                        right: 'calc(100% + 8px)',
-                      }}>
+                      <DropdownList>
                         {actions.length > 0 ?
                           actions.map((action) => (
                             <DropdownItem key={action.name} onClick={() => action.onClick(item)}>{action.name}</DropdownItem>
