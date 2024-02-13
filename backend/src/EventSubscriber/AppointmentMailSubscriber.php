@@ -42,8 +42,7 @@ class AppointmentMailSubscriber implements EventSubscriberInterface
         ->to($appointment->getClient()->getEmail())
         ->subject("Votre rendez-vous chez " . $appointment->getEstablishment()->getCompany()->getName() . " est confirmé")
         ->text("<p style='font-size: 24px; font-weight: bold; text-align: center;'>PLATINY</p>
-                <p>Nous vous confirmons que votre rendez-vous chez 
-                  <a href=" . $_ENV["URL_PROD"] . "/establishment/" . $appointment->getEstablishment()->getId() . " style='font-weight: bold; color: black;'>" . $appointment->getEstablishment()->getCompany()->getName() . "</a> avec " . $appointment->getEmployee()->getFirstname() . " a bien été pris en compte.</p>
+                <p>Nous vous confirmons que votre rendez-vous chez <a href=" . $_ENV["URL_PROD"] . "/establishment/" . $appointment->getEstablishment()->getId() . " style='font-weight: bold; color: black;'>" . $appointment->getEstablishment()->getCompany()->getName() . "</a> avec " . $appointment->getEmployee()->getFirstname() . " a bien été pris en compte.</p>
                 <p>Il aura lieu le <strong>" . $appointment->getStartDate()->format('d/m/Y') . "</strong> à <strong>" . $appointment->getStartDate()->format('H:i') . "</strong></p>
                 <p>" . $appointment->getEstablishment()->getStreet() . ", " . $appointment->getEstablishment()->getCity() . " " . $appointment->getEstablishment()->getZipCode() . "</p>
                 <p style='text-align: center;'><a href='" . $_ENV["URL_PROD"] . "/profile/' style='font-size: 20px; padding: 16px; background-color: #111111; border-radius: 8px; color: white; text-decoration: none;'>Voir mon rendez-vous</a></p>
