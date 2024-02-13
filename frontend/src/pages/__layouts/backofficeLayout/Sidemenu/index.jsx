@@ -88,7 +88,7 @@ export default function Sidemenu({ ...delegated }) {
             {/* <NavLink to="/settings" className={styles.UsermenuItem}>
               <Cog6ToothIcon />
             </NavLink> */}
-            <Dropdown direction='tl'>
+            <Dropdown direction='tr'>
               <DropdownButton>
                 <ProfileButton />
               </DropdownButton>
