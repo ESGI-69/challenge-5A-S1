@@ -60,15 +60,15 @@ class FeedbackType
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['read-establishment', 'feedback-type-read'])]
+    #[Groups(['read-establishment', 'feedback-type-read', 'appointment-me'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['feedback-read', 'feedback-type-create', 'feedback-type-read', 'read-establishment', 'feedback-type-patch'])]
+    #[Groups(['feedback-read', 'feedback-type-create', 'feedback-type-read', 'read-establishment', 'feedback-type-patch', 'appointment-me'])]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Establishment::class, inversedBy: 'feedbackTypes')]
-    #[Groups(['feedback-type-create', 'feedback-type-read'])]
+    #[Groups(['feedback-type-create', 'feedback-type-read', 'appointment-me'])]
     private Collection $establishments;
 
     #[ORM\OneToMany(mappedBy: 'feedbackType', targetEntity: SubFeedback::class, cascade: ['persist', 'remove'], orphanRemoval: true)]

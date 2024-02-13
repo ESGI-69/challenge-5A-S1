@@ -170,7 +170,7 @@ class Establishment
     private ?EstablishmentType $type = null;
     
     #[ORM\ManyToMany(targetEntity: FeedbackType::class, mappedBy: 'establishments', cascade: ['persist'])]
-    #[Groups(['read-establishment', 'update-establishment'])]
+    #[Groups(['read-establishment', 'update-establishment', 'appointment-me'])]
     private Collection $feedbackTypes;
 
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Feedback::class, cascade: ['remove'], orphanRemoval: true)]

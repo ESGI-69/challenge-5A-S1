@@ -31,7 +31,6 @@ import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
 import EmployeeProvider from '@/contexts/api/EmployeeContext';
 import EstablishmentTypeProvider from './contexts/api/EstablishmentTypeContext';
 import ServiceTypeProvider from './contexts/api/ServiceTypeContext';
-import FeedbackProvider from './contexts/api/FeedbackContext';
 
 import EmployeeCreation from '@/pages/backoffice/Employees/EmployeeCreation';
 import UserCreation from '@/pages/backoffice/Users/UserCreation';
@@ -63,7 +62,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/establishment/:id',
-        element: <AppointmentProvider><EstablishmentProvider><FeedbackProvider><Establishment /></FeedbackProvider></EstablishmentProvider></AppointmentProvider>,
+        element: <AppointmentProvider><EstablishmentProvider><Establishment /></EstablishmentProvider></AppointmentProvider>,
       },
       {
         path: '/search',
