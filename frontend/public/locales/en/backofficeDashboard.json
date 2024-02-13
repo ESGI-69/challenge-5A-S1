@@ -11,6 +11,15 @@
     "weeklySum": "Revenues this week",
     "totalSum": "Global revenues",
     "establishmentsPerf": "Most performing establishments",
-    "employeesPerf": "Most performing employees"
+    "employeesPerf": "Most performing employees",
+    "admin": {
+      "averageSumPerCompany": "Average revenue per company",
+      "averageSumPerEstablishment": "Average revenue per establishment",
+      "averageSumPerEmployee": "Average revenue per employee",
+      "totalSum": "Total revenue",
+      "nbEstablishments": "Number of establishments",
+      "nbCompanies": "Number of companies",
+      "nbEmployees": "Number of employees"
+    }
   }
 }

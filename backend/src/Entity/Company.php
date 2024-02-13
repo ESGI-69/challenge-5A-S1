@@ -27,6 +27,7 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
 use App\Controller\Statistics\CompanyStatisticsController;
+use App\Controller\Statistics\AdminStatisticsController;
 
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
@@ -37,6 +38,13 @@ use App\Controller\Statistics\CompanyStatisticsController;
             security: 'is_granted("ROLE_ADMIN")',
             normalizationContext: ['groups' => ['company-getall', 'read-company-as-admin']]
         ),
+        new GetCollection(
+          uriTemplate: '/admin/statistics',
+          security: 'is_granted("ROLE_ADMIN")',
+          normalizationContext: ['groups' => ['read-company-as-admin']],
+          paginationEnabled: false,
+          controller: AdminStatisticsController::class
+      ),
         new GetCollection(
             normalizationContext: ['groups' => ['company-getall', 'read-establishment']]
         ),

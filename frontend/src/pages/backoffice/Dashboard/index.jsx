@@ -6,6 +6,8 @@ import { ProfileContext } from '@/contexts/ProfileContext';
 import { useTranslation } from 'react-i18next';
 import CompanyStatisticsProvider from '@/contexts/api/CompanyStatisticsContext';
 import Statistics from './Statistics';
+import AdminStatisticsProvider from '@/contexts/api/AdminStatisticsContext';
+import AdminStatistics from './AdminStatistics';
 
 export default function Dashboard() {
   const { t } = useTranslation('dashboard');
@@ -29,7 +31,9 @@ export default function Dashboard() {
           <BackofficeHeader actionsComponent={<Button to='/'>{t('backToUserLand')}</Button>}>
             <h1>{t('title')} admin</h1>
           </BackofficeHeader>
-          <p>Se tableau le bord</p>
+          <AdminStatisticsProvider>
+            <AdminStatistics/>
+          </AdminStatisticsProvider>
         </>
       )}
       {userHighestRole === 'ROLE_PRESTA' && (
