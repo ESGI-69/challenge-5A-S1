@@ -5,20 +5,20 @@ import Tag from '@/components/lib/Tag';
 import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
 import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/components/lib/Dropdown';
 import GlobalNotation from '@/components/Notation/GlobalNotation';
-import Review from '@/components/Notation/Review';
+// import Review from '@/components/Notation/Review';
 import Note from '@/components/Notation/Note';
-import ServicesTable from '@/components/Services/ServicesTable';
-import Gallery from '@/components/Gallery';
-import SearchBar from '@/components/SearchBar';
-import OpeningHours from '@/components/OpeningHours';
+// import ServicesTable from '@/components/Services/ServicesTable';
+// import Gallery from '@/components/Gallery';
+// import SearchBar from '@/components/SearchBar';
+// import OpeningHours from '@/components/OpeningHours';
 import PTable from '@/components/lib/PTable';
 import Checkbox from '@/components/lib/Checkbox';
 import Popin from '@/components/Popin';
-import Map from '@/components/Map';
-import EstablishmentCard from '@/components/Search/EstablishmentCard';
+// import Map from '@/components/Map';
+// import EstablishmentCard from '@/components/Search/EstablishmentCard';
 import { useState } from 'react';
-import EntityTable, { EntityTableFooter } from '@/components/lib/EntityTable';
-import UserProvider, { UserContext } from '@/contexts/api/UserContext';
+// import EntityTable, { EntityTableFooter } from '@/components/lib/EntityTable';
+// import UserProvider, { UserContext } from '@/contexts/api/UserContext';
 
 const clickableEmail = ({ value }) => (
   <a href={`mailto:${value}`} style={{ textDecoration: 'underline' }}>{value}</a>
