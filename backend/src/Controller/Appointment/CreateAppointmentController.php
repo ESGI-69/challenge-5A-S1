@@ -86,6 +86,7 @@ class CreateAppointmentController
                         }
                         
                         if($isCreneauValid){
+                            $appointment->setEndDate($startDate->add(new \DateInterval('PT' . $serviceDuration . 'M')));
                             return $appointment;
                             // nice :)
                         }else{
@@ -96,9 +97,10 @@ class CreateAppointmentController
         }
 
         if(!$isCreneauValid){
-            throw new AccessDeniedHttpException('Appointment is not valid 5, current range : ' . $latestRange->getStartDate()->format('Y-m-d H:i:s') . ' - ' . $startDate->format('Y-m-d H:i:s'));
+            throw new AccessDeniedHttpException('Appointment is not valid 5');
         }
 
+        $appointment->setEndDate($startDate->add(new \DateInterval('PT' . $serviceDuration . 'M')));
         return $appointment;
     }
 }
