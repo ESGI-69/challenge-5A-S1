@@ -37,41 +37,35 @@ const Schedule = React.forwardRef(function Schedule(
           <div className={styles.FlexContainer} style={{ transform: `translateX(${currentWeek * -100}%)` }}>
 
             {schedule.map((page, index) => (
-              <>
-                <div key={index}>
-                </div>
-                <div className={styles.ColumnsContainer}>
-
-                  {page.days.map((day, index) => (
-                    <div className={styles.Column} key={index}>
-                      <div className={styles.ColumnHeader}>
-                        <span className={styles.ColumnTitle}>{dateCustom(day.date, i18n.resolvedLanguage, { weekday: 'long' })}</span>
-                        <span className={styles.ColumnDate}>{dateCustom(day.date, i18n.resolvedLanguage, { day: 'numeric', month: 'short' })}</span>
-                      </div>
-                      <div className={styles.ColumnBody}>
-                        {day.times.map((appointement, index) =>
-                          (
-                            <button
-                              key={index}
-                              className={appointement.available ? `${styles.ColumnButton}`: `${styles.ColumnButton} ${styles.ColumnButtonDisabled}`}
-                              onClick={() => {
-                                if (appointement.available) {
-                                  const selectedDate = new Date(`${day.date}T${appointement.time}:00.000Z`);
-                                  onDateSelect(selectedDate, appointement.employee);
-                                }
-                              }}
-                            >
-                              {appointement.time}
-                            </button>
-                          ),
-                        )}
-                      </div>
+              <div key={index} className={styles.ColumnsContainer}>
+                {page.days.map((day, index) => (
+                  <div className={styles.Column} key={index}>
+                    <div className={styles.ColumnHeader}>
+                      <span className={styles.ColumnTitle}>{dateCustom(day.date, i18n.resolvedLanguage, { weekday: 'long' })}</span>
+                      <span className={styles.ColumnDate}>{dateCustom(day.date, i18n.resolvedLanguage, { day: 'numeric', month: 'short' })}</span>
                     </div>
-                  ))}
+                    <div className={styles.ColumnBody}>
+                      {day.times.map((appointement, index) =>
+                        (
+                          <button
+                            key={index}
+                            className={appointement.available ? `${styles.ColumnButton}`: `${styles.ColumnButton} ${styles.ColumnButtonDisabled}`}
+                            onClick={() => {
+                              if (appointement.available) {
+                                const selectedDate = new Date(`${day.date}T${appointement.time}:00.000Z`);
+                                onDateSelect(selectedDate, appointement.employee);
+                              }
+                            }}
+                          >
+                            {appointement.time}
+                          </button>
+                        ),
+                      )}
+                    </div>
+                  </div>
+                ))}
 
-                </div>
-
-              </>
+              </div>
 
             ))}
 

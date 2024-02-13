@@ -32,7 +32,7 @@ const Profile = () => {
             {t('myAccount.myInformations')}
           </button>
           <div className={styles.ProfileMyProfileActionsSeparator} />
-          {profile?.roles?.includes('ROLE_ADMIN') || profile?.roles?.includes('ROLE_PRESTA') && (
+          {(profile?.roles?.includes('ROLE_ADMIN') || profile?.roles?.includes('ROLE_PRESTA')) && (
             <Link
               to="/backoffice/"
               className={styles.ProfileMyProfileActionsButton}

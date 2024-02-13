@@ -43,13 +43,14 @@ function ModalSendReview({
     e.preventDefault();
     const allFeedbackTypesHaveRating = feedbackTypes.every(feedbackType => ratings[feedbackType.id]);
     const commentIsNotEmpty = comment.trim() !== '';
+    const ratingsValues = Object.values(ratings);
+    const averageRating = ratingsValues.length > 0 ? ratingsValues.reduce((acc, rating) => acc + rating, 0) / feedbackTypes.length : null;
     if (allFeedbackTypesHaveRating && commentIsNotEmpty) {
       const data = {
         comment,
         employee: `/api/employees/${appointment.employee.id}`,
         appointment: `/api/appointments/${appointment.id}`,
         service: `/api/services/${appointment.service.id}`,
-        averageRating: Object.values(ratings).reduce((acc, rating) => acc + rating, 0) / feedbackTypes.length,
         subFeedback: [
           ...feedbackTypes.map(feedbackType => ({
             feedbackType: `/api/feedback_types/${feedbackType.id}`,
@@ -57,6 +58,9 @@ function ModalSendReview({
           })),
         ],
       };
+      if (averageRating !== null) {
+        data.averageRating = averageRating;
+      }
       await postFeedback(data);
       refetchEstablishment();
       toast.success(t('successForm'));

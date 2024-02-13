@@ -9,7 +9,7 @@ import { CompanyContext } from '@/contexts/api/CompanyContext';
 import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 
 export default function BackofficeLayout() {
-  const { profile, getAndSetUserData } = useContext(ProfileContext);
+  const { profile } = useContext(ProfileContext);
   const { prestaGetById, company } = useContext(CompanyContext);
   const { get } = useContext(EstablishmentContext);
 
@@ -22,9 +22,6 @@ export default function BackofficeLayout() {
           get({ 'company.id': company.id });
         }
       }
-
-    } else {
-      getAndSetUserData();
     }
     // if (profile && profile.roles.includes('ROLE_ADMIN')) {
     //   console.log('admin');

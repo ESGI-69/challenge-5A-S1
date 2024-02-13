@@ -63,16 +63,25 @@ function AppointmentCard({
             <CalendarIcon />{t('with')} {appointment.employee.firstname}
           </span>
         </div>
-        {isPast && !appointment.feedback &&
-        <>
+        <div className={styles.AppointmentCardInfoBtns}>
+          <Link
+            to={`/reservation/${appointment.service.id}/${appointment.employee.id}`}
+          >
+            <Button
+              variant="black"
+            >
+              {t('retakeAppointment')}
+            </Button>
+          </Link>
+          {isPast && !appointment.feedback &&
           <Button
             variant="black"
             onClick={openReviewModal}
           >
             {t('leaveComment')}
           </Button>
-        </>
-        }
+          }
+        </div>
         <ModalSendReview
           feedbackTypes={feedbackTypes}
           appointment={appointment}

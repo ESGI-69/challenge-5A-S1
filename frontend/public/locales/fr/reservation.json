@@ -7,7 +7,7 @@
     "with": "avec",
     "at": "à",
     "edit": "Modifier",
-    "Authentication": "Indentification",
+    "Authentication": "Identification",
     "catchPhraseRegister": "Nouveau sur platiny ?",
     "catchPhraseLogin": "Vous avez déjà utilisé platiny ?",
     "createAccount": "Créer mon compte",
@@ -21,6 +21,8 @@
             "error": "Erreur lors de la prise de rendez-vous"
         }
     },
-    "loading": "Chargement"
+    "loading": "Chargement",
+    "commentPlaceholder": "Commentaire...",
+    "titleComment": "Ajouter un commentaire (optionel)"
 }
 
