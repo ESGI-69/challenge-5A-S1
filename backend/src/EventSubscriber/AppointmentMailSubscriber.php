@@ -37,6 +37,7 @@ class AppointmentMailSubscriber implements EventSubscriberInterface
     }
 
     if ($appointment instanceof Appointment || Request::METHOD_POST === $method) {
+      // To the user
       $email = (new Email())
         ->from('notify@platiny.fr')
         ->to($appointment->getClient()->getEmail())
@@ -48,6 +49,26 @@ class AppointmentMailSubscriber implements EventSubscriberInterface
                 <p style='text-align: center;'><a href='" . $_ENV["URL_PROD"] . "/profile/' style='font-size: 20px; padding: 16px; background-color: #111111; border-radius: 8px; color: white; text-decoration: none;'>Voir mon rendez-vous</a></p>
                 <hr>
                 <p><small>Vous pouvez annuler votre rendez vous depuis votre profil.</small></p>
+                ");
+
+      $this->mailer->send($email);
+      // To the presta
+      $email = (new Email())
+        ->from('notify@platiny.fr')
+        ->to($appointment->getEstablishment()->getEmail())
+        ->subject("Un rendez-vous a été pris dans votre établissement")
+        ->text("<p style='font-size: 24px; font-weight: bold; text-align: center;'>PLATINY</p>
+                <p><strong>" . $appointment->getClient()->getFirstname() . "</strong> a pris rendez vous.</p>
+                <p><strong>Détails</strong> :
+                <strong>Client</strong> : " . $appointment->getClient()->getFirstname() . " " . $appointment->getClient()->getLastname() . "
+                <strong>Lieux</strong> : ".$appointment->getEstablishment()->getStreet() . ", " . $appointment->getEstablishment()->getCity() . " " . $appointment->getEstablishment()->getZipCode()."
+                <strong>Type de prestation</strong> : " . $appointment->getService()->getName() . "
+                <strong>Date</strong> : " . $appointment->getStartDate()->format('d/m/Y') . " à " . $appointment->getStartDate()->format('H:i') . "</p>
+                <strong>Employé(e)</strong> : " . $appointment->getEmployee()->getFirstname() . " " . $appointment->getEmployee()->getLastname() . "<br>
+                </p>
+                <p style='text-align: center;'><a href='" . $_ENV["URL_PROD"] . "/backoffice/' style='font-size: 20px; padding: 16px; background-color: #111111; border-radius: 8px; color: white; text-decoration: none;'>Voir vos rendez-vous</a></p>
+                <hr>
+                <p><small>Vous pouvez annuler la préstation depuis votre espace.</small></p>
                 ");
 
       $this->mailer->send($email);
