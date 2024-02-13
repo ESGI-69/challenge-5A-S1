@@ -77,13 +77,23 @@ class FeedbackCreationDenormalizer implements DenormalizerInterface
         $email = (new Email())
         ->from('notify@platiny.fr')
         ->to($establishment->getEmail())
-        ->subject("Nouvel avis pour votre établissement à" . $establishment->getCity() . ".")
+        ->subject("Nouvel avis pour votre établissement à " . $establishment->getCity() . ".")
         ->text("<p style='font-size: 24px; font-weight: bold; text-align: center;'>PLATINY</p>
                 <p>Un utilisateur a laissé un avis pour votre établissement à <strong>" . $establishment->getStreet() . ", " . $establishment->getCity() . " " . $establishment->getZipCode() ."</strong>.</p> 
                 <p style='background: #DEDEDE; border-radius: 16px; text-align: center; padding: 20px;'><strong>". $feedback->getAuthor()->getFirstname() ."</strong><br>". $feedback->getComment() ."<br><span style='font-weight: bold; font-size: 20px'>". $feedback->getAverageRating() . "/5</span></p>
                 <p style='text-align: center;'><a href='" . $_ENV["URL_PROD"] . "/backoffice/' style='font-size: 20px; padding: 16px; background-color: #111111; border-radius: 8px; color: white; text-decoration: none;'>Voir l'avis</a></p>
                 ");
+        $this->mailer->send($email);
 
+        $email = (new Email())
+        ->from('notify@platiny.fr')
+        ->to($establishment->getCompany()->getEmail())
+        ->subject("Nouvel avis dans un de vos établissements.")
+        ->text("<p style='font-size: 24px; font-weight: bold; text-align: center;'>PLATINY</p>
+                <p>Un utilisateur a laissé un avis pour votre établissement à <strong>" . $establishment->getStreet() . ", " . $establishment->getCity() . " " . $establishment->getZipCode() ."</strong>.</p> 
+                <p style='background: #DEDEDE; border-radius: 16px; text-align: center; padding: 20px;'><strong>". $feedback->getAuthor()->getFirstname() ."</strong><br>". $feedback->getComment() ."<br><span style='font-weight: bold; font-size: 20px'>". $feedback->getAverageRating() . "/5</span></p>
+                <p style='text-align: center;'><a href='" . $_ENV["URL_PROD"] . "/backoffice/' style='font-size: 20px; padding: 16px; background-color: #111111; border-radius: 8px; color: white; text-decoration: none;'>Voir l'avis</a></p>
+                ");
         $this->mailer->send($email);
 
         return $feedback;
