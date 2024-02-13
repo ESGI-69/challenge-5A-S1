@@ -42,7 +42,7 @@ class EstablishmentPicture
     public ?File $filePicture = null;
 
     #[Groups(['read-establishment', 'get-all-etsbalishment-picture'])]
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $pathPicture = null;
 
     #[Groups(['establishement-picture-create', 'get-all-etsbalishment-picture'])]

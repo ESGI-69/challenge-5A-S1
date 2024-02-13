@@ -110,6 +110,9 @@
     "deletion": {
       "success": "The establishment has been deleted successfully",
       "error": "An error occured while deleting the establishment"
+    },
+    "get": {
+      "error": "An error occured while getting the establishment"
     }
   },
   "modal": {

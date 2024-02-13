@@ -142,7 +142,7 @@ export default function EstablishmentUpdate() {
             disabled={isPostEstablishmentPictureLoading}
             required
           />
-          <Button disabled={isPostEstablishmentPictureLoading} onClick={() => postEstablishmentPictureHandler(document.getElementById('add-establishment-picture'))}>{ t('establishmentPicture.add') }</Button>
+          <Button disabled={isPostEstablishmentPictureLoading} onClick={() => postEstablishmentPictureHandler(document.getElementById('add-establishment-picture'))}>{t('add', { ns: 'base' })}</Button>
           <h2>{ t('feedbackTypeSelector') }</h2>
           <h2>{ t('feedbackTypePrestaSelector')}</h2>
           <FeedbackTypeProvider>

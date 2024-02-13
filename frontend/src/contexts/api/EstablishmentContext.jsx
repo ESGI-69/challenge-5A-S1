@@ -112,6 +112,7 @@ export default function EstablishmentProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.get.error', { ns: 'establishment' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -134,6 +135,7 @@ export default function EstablishmentProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.get.error', { ns: 'establishment' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -271,10 +273,10 @@ export default function EstablishmentProvider({ children }) {
           'Content-Type': 'multipart/form-data',
         },
       });
-      toast.success(i18n.t('establishmentPicture.events.creation.success'));
+      toast.success(i18n.t('establishmentPicture.events.creation.success', { ns: 'establishment' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('establishmentPicture.events.creation.error'));
+      toast.error(i18n.t('establishmentPicture.events.creation.error', { ns: 'establishment' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -291,10 +293,10 @@ export default function EstablishmentProvider({ children }) {
     });
     try {
       await apiCall.delete(`/establishment_pictures/${id}`);
-      toast.success(i18n.t('establishmentPicture.events.deletion.success'));
+      toast.success(i18n.t('establishmentPicture.events.deletion.success', { ns: 'establishment' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('establishmentPicture.events.deletion.error'));
+      toast.error(i18n.t('establishmentPicture.events.deletion.error', { ns: 'establishment' }));
       throw new Error(error);
     } finally {
       dispatch({

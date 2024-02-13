@@ -110,6 +110,9 @@
     "deletion": {
       "success": "L'établissement a bien été supprimé",
       "error": "Une erreur est survenue lors de la suppression de l'établissement"
+    },
+    "get": {
+      "error": "Une erreur est survenue lors de la récupération des établissements"
     }
   },
   "modal": {

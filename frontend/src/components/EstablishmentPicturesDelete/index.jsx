@@ -6,13 +6,14 @@ const EstablishmentPicturesUpload = ({
   establishmentPictures,
   deletePictureEstablishment,
   isDeletePictureEstablishmentLoading,
+  t,
 }) => (
   <>
     <div className={styles.EstablishmentPicturesUpload}>
       { establishmentPictures.map((picture) => (
         <div className={styles.EstablishmentPicturesUploadRow} key={picture.id}>
           <img className={styles.EstablishmentPicturesUploadRowImage} src={`${import.meta.env.VITE_API_DOMAIN}${picture.pathPicture}`} key={picture.id} alt="Establishment picture" />
-          <Button disabled={isDeletePictureEstablishmentLoading} onClick={() => deletePictureEstablishment(picture.id)}>delete</Button>
+          <Button variant='danger' disabled={isDeletePictureEstablishmentLoading} onClick={() => deletePictureEstablishment(picture.id)}>{t('delete', { ns: 'base' })}</Button>
         </div>
       ))}
     </div>
@@ -28,6 +29,7 @@ EstablishmentPicturesUpload.propTypes = {
   )).isRequired,
   deletePictureEstablishment: PropTypes.func.isRequired,
   isDeletePictureEstablishmentLoading: PropTypes.bool.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default EstablishmentPicturesUpload;
