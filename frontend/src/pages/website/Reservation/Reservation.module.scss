@@ -142,3 +142,27 @@
 
     
 }
+
+.Comment {
+    width: 100%;
+    padding:32px;
+    box-shadow: var(--shadow-3);
+    background-color: var(--white);
+    margin-bottom: 12px;
+    border-radius: var(--radius-3);
+    border: 1px solid var(--grey-200);
+    align-items: center;
+
+    &Textarea {
+        max-width: 100%;
+        width: 100%;
+        min-height: 100px;
+        max-height: 300px;
+        height: 100px;
+        padding: var(--size-3);
+        border: var(--border-size-1) solid var(--color-border-light);
+        border-radius: var(--radius-2-5);
+        font-size: var(--font-size-0-5);
+        resize: vertical;
+      }
+}

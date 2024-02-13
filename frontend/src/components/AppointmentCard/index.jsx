@@ -64,11 +64,15 @@ function AppointmentCard({
           </span>
         </div>
         <div className={styles.AppointmentCardInfoBtns}>
-          <Button
-            variant="black"
+          <Link
+            to={`/reservation/${appointment.service.id}/${appointment.employee.id}`}
           >
-            {t('retakeAppointment')}
-          </Button>
+            <Button
+              variant="black"
+            >
+              {t('retakeAppointment')}
+            </Button>
+          </Link>
           {isPast && !appointment.feedback &&
           <Button
             variant="black"

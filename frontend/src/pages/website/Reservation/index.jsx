@@ -4,7 +4,7 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/componen
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Schedule  from '@/components/Schedule';
+import Schedule from '@/components/Schedule';
 import { ProfileContext } from '@/contexts/ProfileContext';
 import { useContext, useEffect } from 'react';
 import { ServiceContext } from '@/contexts/api/ServiceContext';
@@ -13,16 +13,17 @@ import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import { useTranslation } from 'react-i18next';
 import { dateCustom } from '@/utils/formater/date';
 
-export default function Reservation () {
+export default function Reservation() {
   const { t } = useTranslation('reservation');
   const { i18n } = useTranslation();
   const { profile } = useContext(ProfileContext);
-  const { serviceEstablishmentId } = useParams();
+  const { serviceEstablishmentId, employeeId } = useParams();
   const { post, appointment, isPostAppointmentLoading } = useContext(AppointmentContext);
   const { getById: getEstablishmentById, establishment, isEstablishmentLoading } = useContext(EstablishmentContext);
   const [ selectedDate, setSelectedDate ] = useState(null);
   const [ selectedEmployee, setSelectedEmployee ] = useState(null);
   const [ persons, setPersons ] = useState([]);
+  const [ comment, setComment ] = useState('');
 
   const [ person, setPerson ] = useState(null);
   const handleDateSelect = (date, employeeId) => {
@@ -36,7 +37,6 @@ export default function Reservation () {
     startDate.setHours(startDate.getHours()); // Add 1 hour
     const endDate = new Date(selectedDate);
     endDate.setHours(endDate.getHours()); // Add 1 hour
-    const comment = 'test';
     post({
       employee: `/api/employees/${employeeId}`,
       establishment: `/api/establishments/${service.establishment.id}`,
@@ -60,11 +60,16 @@ export default function Reservation () {
       getEstablishmentById(service.establishment.id);
       const { schedule, persons } = generateSchedule(service);
       setSchedule(schedule);
-      setPersons(persons);    }
-    if (persons && !person){
-      setPerson(persons[0]);
+      setPersons(persons);
+
+      const preSelectedEmployee = persons.find(person => person.id == employeeId);
+      if (preSelectedEmployee) {
+        setPerson(preSelectedEmployee);
+      } else if (persons && !person) {
+        setPerson(persons[0]);
+      }
     }
-  }, [ service, person ]);
+  }, [ service, employeeId ]);
 
   function generateSchedule(service) {
     const schedule = [];
@@ -76,7 +81,7 @@ export default function Reservation () {
     let workingDays = Object.values(service.workingHoursRanges).map(range => range.day);
     upcomingDays = upcomingDays.filter(upcomingDay => workingDays.includes(upcomingDay.dayName.toLowerCase()));
 
-    upcomingDays.forEach( upcomingDay => {
+    upcomingDays.forEach(upcomingDay => {
       const currentWorkingHoursRanges = Object.values(service.workingHoursRanges).filter(range => range.day.toLowerCase() === upcomingDay.dayName.toLowerCase());
 
       currentWorkingHoursRanges.forEach(currentWorkingHoursRange => {
@@ -207,9 +212,13 @@ export default function Reservation () {
           </div>
           <div className={styles.ServicePerson}>
             <Dropdown>
-              <DropdownButton>
-                <Button variant="black" isPlain="false">{person?.name}</Button>
-              </DropdownButton>
+              {person?.name &&
+                <DropdownButton>
+                  <Button variant="black" isPlain={false}>
+                    {person?.name}
+                  </Button>
+                </DropdownButton>
+              }
               <DropdownList>
                 {persons.map(person => (
                   <DropdownItem key={person.id} onClick={() => setPerson(person)}>{person.name}</DropdownItem>
@@ -225,7 +234,7 @@ export default function Reservation () {
       <h2 className={styles.PageTitle}>2. {t('dateChoice')}</h2>
       <div>
         {!selectedDate && (
-          <Schedule schedule={schedule} personSelected={person} onDateSelect={handleDateSelect} />
+          <Schedule schedule={schedule} onDateSelect={handleDateSelect} />
         )}
         {selectedDate && (
           <div className={styles.AppointementPicked}>
@@ -234,7 +243,7 @@ export default function Reservation () {
                 <span>
                   {dateCustom(selectedDate, i18n.resolvedLanguage)}
                 </span>
-                <span className={styles.AppointementPickedSpecTime}>{t('at')} {new Date(selectedDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
+                <span className={styles.AppointementPickedSpecTime}>{t('at')} {dateCustom(selectedDate, i18n.resolvedLanguage, { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })}</span>
               </div>
             </div>
             <div className={styles.AppointementPickedAction}>
@@ -250,11 +259,15 @@ export default function Reservation () {
           <div className={styles.Identification}>
             <h2 className={styles.PageTitle}>{t('catchPhraseRegister')}</h2>
             <Link to="/register">
-              <Button variant="black" isPlain="true">{t('createAccount')}</Button>
+              <Button variant="black" isPlain={true}>
+                {t('createAccount')}
+              </Button>
             </Link>
             <h2 className={styles.PageTitle}>{t('catchPhraseLogin')}</h2>
             <Link to="/login">
-              <Button variant="black">{t('loginAccount')}</Button>
+              <Button variant="black">
+                {t('loginAccount')}
+              </Button>
             </Link>
           </div>
         </>
@@ -270,11 +283,24 @@ export default function Reservation () {
           </div>
         </>
       )}
+      {profile && selectedDate && (
+        <>
+          <h2 className={styles.PageTitle}>4. {t('titleComment')}</h2>
+          <div className={styles.Comment}>
+            <textarea
+              className={styles.CommentTextarea}
+              placeholder={t('commentPlaceholder')}
+              value={comment}
+              onChange={e => setComment(e.target.value)}
+            />
+          </div>
+        </>
+      )}
 
       {/* if profile and selectedDate */}
       {profile && selectedDate && (
         <>
-          <h2 className={styles.PageTitle}>4. {t('paymentMethod')}</h2>
+          <h2 className={styles.PageTitle}>5. {t('paymentMethod')}</h2>
           <div className={styles.Payment}>
             <>
               <div className={styles.PaymentService}>
@@ -282,13 +308,13 @@ export default function Reservation () {
                 <span className={styles.PaymentServicePrice}> {service.price}€</span>
               </div>
             </>
-            <div className={`${styles.PaymentService  } ${  styles.PaymentServiceTotal}`}>
+            <div className={`${styles.PaymentService} ${styles.PaymentServiceTotal}`}>
               <span>Total</span>
               <span> {service.price}€</span>
             </div>
             <div className={styles.PaymentMethod}>
               <Button onClick={appointment ? null : handlePayment} variant={appointment ? 'success' : 'black'}>
-                {isPostAppointmentLoading ? `${t('loading')}...` : appointment ? `${t('events.creation.success')}` : `${t('book')} ${service.price}€` }
+                {isPostAppointmentLoading ? `${t('loading')}...` : appointment ? `${t('events.creation.success')}` : `${t('book')} ${service.price}€`}
               </Button>
             </div>
           </div>
