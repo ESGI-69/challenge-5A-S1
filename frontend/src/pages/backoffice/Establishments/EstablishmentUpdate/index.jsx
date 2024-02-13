@@ -3,6 +3,7 @@ import EstablishmentUpdateForm from '@/components/EstablishmentUpdateForm';
 import Button from '@/components/lib/Button';
 import OpeningHoursSelector from '@/components/OpeningHoursSelector';
 import ServiceTypeSelector from '@/components/ServiceTypeSelector';
+import EstablishmentPicturesDelete from '@/components/EstablishmentPicturesDelete';
 import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import { EstablishmentTypeContext } from '@/contexts/api/EstablishmentTypeContext';
 import { ServiceTypeContext } from '@/contexts/api/ServiceTypeContext';
@@ -12,14 +13,13 @@ import style from './EstablishmentUpdate.module.scss';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import Input from '@/components/lib/Input';
 import FeedbackTypePrestaSelector from '@/components/FeedbackTypePrestaSelector';
-
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import ServiceProvider from '@/contexts/api/ServiceContext';
 import FeedbackTypeProvider from '@/contexts/api/FeedbackTypeContext';
 
 export default function EstablishmentUpdate() {
-  const { establishment, getById, isEstablishmentLoading, isPatchEstablishmentLoading, patch: patchEstablishment } = useContext(EstablishmentContext);
+  const { establishment, getById, isEstablishmentLoading, isPatchEstablishmentLoading, patch: patchEstablishment, isPostEstablishmentPictureLoading, postEstablishmentPicture, isDeletePictureEstablishmentLoading, deleteEstablishmentPicture } = useContext(EstablishmentContext);
   const { establishmentTypes, get: getEstablishmentTypes, isEstablishmentTypesLoading } = useContext(EstablishmentTypeContext);
   const {
     postServiceType,
@@ -62,6 +62,22 @@ export default function EstablishmentUpdate() {
       description: '',
     });
     setIsServiceTypeModalOpen(false);
+  };
+
+  const postEstablishmentPictureHandler = async (file) => {
+
+    if (file.files && file.files.length > 0) {
+      const formData = new FormData();
+      formData.append('filePicture', file.files[0]);
+      formData.append('establishment', `api/establishments/${id}`);
+      await postEstablishmentPicture(formData);
+      await getById(id);
+    }
+  };
+
+  const deleteEstablishmentPictureHandler = async (idPicture) => {
+    await deleteEstablishmentPicture(idPicture);
+    await getById(id);
   };
 
   const { t } = useTranslation('establishment');
@@ -109,6 +125,25 @@ export default function EstablishmentUpdate() {
           <Button onClick={() => setIsServiceTypeModalOpen(true)}>{t('serviceType.action.create')}</Button>
           <h2>{ t('openingHourSelector') }</h2>
           <OpeningHoursSelector />
+          <h2>{ t('establishmentPicture.deleteForm') }</h2>
+          <EstablishmentPicturesDelete
+            establishmentPictures={establishment.establishmentPictures}
+            deletePictureEstablishment={deleteEstablishmentPictureHandler}
+            isDeletePictureEstablishmentLoading={isDeletePictureEstablishmentLoading}
+            t={t}
+          />
+          <h2>{ t('establishmentPicture.uploadForm') }</h2>
+          <Input
+            id="add-establishment-picture"
+            name="filePicture"
+            type="file"
+            accept="image/jpeg, image/png"
+            placeholder={t('form.filePicture')}
+            disabled={isPostEstablishmentPictureLoading}
+            required
+          />
+          <Button disabled={isPostEstablishmentPictureLoading} onClick={() => postEstablishmentPictureHandler(document.getElementById('add-establishment-picture'))}>{t('add', { ns: 'base' })}</Button>
+          <h2>{ t('feedbackTypeSelector') }</h2>
           <h2>{ t('feedbackTypePrestaSelector')}</h2>
           <FeedbackTypeProvider>
             <FeedbackTypePrestaSelector />

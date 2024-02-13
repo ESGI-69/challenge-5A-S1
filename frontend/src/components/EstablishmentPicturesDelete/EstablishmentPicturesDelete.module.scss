@@ -1,0 +1,20 @@
+.EstablishmentPicturesUpload {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &Row {
+        width: 300px;
+        position: relative;
+
+        &Image {
+            width: 300px;
+        }
+
+        button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+        }
+    }
+}

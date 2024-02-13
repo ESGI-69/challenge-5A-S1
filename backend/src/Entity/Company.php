@@ -28,6 +28,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
 use App\Controller\Statistics\CompanyStatisticsController;
 use App\Controller\Statistics\AdminStatisticsController;
+use App\Controller\Company\MapLogoCompanyPath;
 
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
@@ -46,7 +47,8 @@ use App\Controller\Statistics\AdminStatisticsController;
           controller: AdminStatisticsController::class
       ),
         new GetCollection(
-            normalizationContext: ['groups' => ['company-getall', 'read-establishment']]
+            normalizationContext: ['groups' => ['company-getall', 'read-establishment']],
+            controller: MapLogoCompanyPath::class
         ),
         new Get(
             uriTemplate: '/admin/companies/{id}',

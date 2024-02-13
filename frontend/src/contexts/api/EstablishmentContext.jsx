@@ -20,6 +20,9 @@ const initialState = {
   isPatchOpeningHourLoading: false,
 
   isDeleteEstablishmentLoading: false,
+
+  isPostEstablishmentPictureLoading: false,
+  isDeletePictureEstablishmentLoading: false,
 };
 
 export const EstablishmentContext = createContext(initialState);
@@ -76,6 +79,16 @@ const reducer = (state, action) => {
         ...state,
         isDeleteEstablishmentLoading: action.payload,
       };
+    case 'isPostEstablishmentPicture':
+      return {
+        ...state,
+        isPostEstablishmentLoading: action.payload,
+      };
+    case 'isDeletePictureEstablishmentLoading':
+      return {
+        ...state,
+        isDeletePictureEstablishmentLoading: action.payload,
+      };
     default:
       return state;
   }
@@ -99,6 +112,7 @@ export default function EstablishmentProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.get.error', { ns: 'establishment' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -121,6 +135,7 @@ export default function EstablishmentProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.get.error', { ns: 'establishment' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -247,6 +262,50 @@ export default function EstablishmentProvider({ children }) {
     }
   };
 
+  const postEstablishmentPicture = async (payload) => {
+    dispatch({
+      type: 'isPostEstablishmentPictureLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.post('/establishment_pictures', payload, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      toast.success(i18n.t('establishmentPicture.events.creation.success', { ns: 'establishment' }));
+    } catch (error) {
+      console.error(error);
+      toast.error(i18n.t('establishmentPicture.events.creation.error', { ns: 'establishment' }));
+      throw new Error(error);
+    } finally {
+      dispatch({
+        type: 'isPostEstablishmentPictureLoading',
+        payload: false,
+      });
+    }
+  };
+
+  const deleteEstablishmentPicture = async (id) => {
+    dispatch({
+      type: 'isDeletePictureEstablishmentLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.delete(`/establishment_pictures/${id}`);
+      toast.success(i18n.t('establishmentPicture.events.deletion.success', { ns: 'establishment' }));
+    } catch (error) {
+      console.error(error);
+      toast.error(i18n.t('establishmentPicture.events.deletion.error', { ns: 'establishment' }));
+      throw new Error(error);
+    } finally {
+      dispatch({
+        type: 'isDeletePictureEstablishmentLoading',
+        payload: false,
+      });
+    }
+  };
+
   return (
     <EstablishmentContext.Provider value={{
       get,
@@ -268,6 +327,11 @@ export default function EstablishmentProvider({ children }) {
 
       deleteEstablishment,
       isDeleteEstablishmentLoading: state.isDeleteEstablishmentLoading,
+
+      postEstablishmentPicture,
+      isPostEstablishmentPictureLoading: state.isPostEstablishmentPictureLoading,
+      deleteEstablishmentPicture,
+      isDeletePictureEstablishmentLoading: state.isDeletePictureEstablishmentLoading,
     }}>
       {children}
     </EstablishmentContext.Provider>
