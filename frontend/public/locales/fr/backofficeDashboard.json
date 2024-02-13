@@ -19,7 +19,8 @@
       "totalSum": "Recette totale",
       "nbEstablishments": "Nombre d'établissements",
       "nbCompanies": "Nombre d'entreprises",
-      "nbEmployees": "Nombre d'employés"
+      "nbEmployees": "Nombre d'employés",
+      "averages": "Moyennes"
     }
   }
 }

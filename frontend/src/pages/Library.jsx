@@ -5,20 +5,20 @@ import Tag from '@/components/lib/Tag';
 import { Tab, TabContent, Tabs, TabsList } from '@/components/lib/Tabs';
 import { Dropdown, DropdownButton, DropdownItem, DropdownList } from '@/components/lib/Dropdown';
 import GlobalNotation from '@/components/Notation/GlobalNotation';
-import Review from '@/components/Notation/Review';
+// import Review from '@/components/Notation/Review';
 import Note from '@/components/Notation/Note';
-import ServicesTable from '@/components/Services/ServicesTable';
-import Gallery from '@/components/Gallery';
-import SearchBar from '@/components/SearchBar';
-import OpeningHours from '@/components/OpeningHours';
+// import ServicesTable from '@/components/Services/ServicesTable';
+// import Gallery from '@/components/Gallery';
+// import SearchBar from '@/components/SearchBar';
+// import OpeningHours from '@/components/OpeningHours';
 import PTable from '@/components/lib/PTable';
 import Checkbox from '@/components/lib/Checkbox';
 import Popin from '@/components/Popin';
-import Map from '@/components/Map';
-import EstablishmentCard from '@/components/Search/EstablishmentCard';
+// import Map from '@/components/Map';
+// import EstablishmentCard from '@/components/Search/EstablishmentCard';
 import { useState } from 'react';
-import EntityTable, { EntityTableFooter } from '@/components/lib/EntityTable';
-import UserProvider, { UserContext } from '@/contexts/api/UserContext';
+// import EntityTable, { EntityTableFooter } from '@/components/lib/EntityTable';
+// import UserProvider, { UserContext } from '@/contexts/api/UserContext';
 
 const clickableEmail = ({ value }) => (
   <a href={`mailto:${value}`} style={{ textDecoration: 'underline' }}>{value}</a>
@@ -106,11 +106,11 @@ export default function Library() {
       <h3>PTable</h3>
       <PTable template={DATA_TEMPLATE} data={DATA}></PTable>
       <h3>Entity Table (auto managed)</h3>
-      <UserProvider>
+      {/* <UserProvider>
         <EntityTable entity="User" entityContext={UserContext}>
           <EntityTableFooter></EntityTableFooter>
         </EntityTable>
-      </UserProvider>
+      </UserProvider> */}
 
       <h2>Button</h2>
       <Button variant="primary">Primary</Button>
@@ -230,17 +230,57 @@ export default function Library() {
           <DropdownItem>Item 3</DropdownItem>
         </DropdownList>
       </Dropdown>
+      <Dropdown direction='tl'>
+        <DropdownButton>
+          <Button>Dropdown</Button>
+        </DropdownButton>
+        <DropdownList>
+          <DropdownItem>Item 1</DropdownItem>
+          <DropdownItem>Item 2</DropdownItem>
+          <DropdownItem>Item 3</DropdownItem>
+        </DropdownList>
+      </Dropdown>
+      <Dropdown direction='tr'>
+        <DropdownButton>
+          <Button>Dropdown</Button>
+        </DropdownButton>
+        <DropdownList>
+          <DropdownItem>Item 1</DropdownItem>
+          <DropdownItem>Item 2</DropdownItem>
+          <DropdownItem>Item 3</DropdownItem>
+        </DropdownList>
+      </Dropdown>
+      <Dropdown direction='bl'>
+        <DropdownButton>
+          <button>zob</button>
+        </DropdownButton>
+        <DropdownList>
+          <DropdownItem>Item 1</DropdownItem>
+          <DropdownItem>Item 2</DropdownItem>
+          <DropdownItem>Item 3</DropdownItem>
+        </DropdownList>
+      </Dropdown>
+      <Dropdown direction='br'>
+        <DropdownButton>
+          <Button>Dropdown</Button>
+        </DropdownButton>
+        <DropdownList>
+          <DropdownItem>Item 1</DropdownItem>
+          <DropdownItem>Item 2</DropdownItem>
+          <DropdownItem>Item 3</DropdownItem>
+        </DropdownList>
+      </Dropdown>
 
       <h2>Notation/GlobalNotation</h2>
       <GlobalNotation />
 
-      <h2>Notation/Review</h2>
+      {/* <h2>Notation/Review</h2>
       <Review
         authorName="Jean"
         content="Monique et son équipe sont tres avenantes, très à l'écoute. Très fortes de conseils. Bravo à Monique qui pilote son bateau."
         date={new Date().toLocaleDateString()}
         note={5}
-      />
+      /> */}
 
       <h2>Notation/Note</h2>
       <Note value={4.2} />
@@ -255,7 +295,7 @@ export default function Library() {
       <Tag variant="warning">Warning</Tag>
 
       <h2>Services Table</h2>
-      <ServicesTable
+      {/* <ServicesTable
         type="Coiffures"
         description="Retrouvez toutes nos coiffures ici, les coiffures pour tout les styles blo bli blou, ahaha !!"
         services={[
@@ -302,9 +342,9 @@ export default function Library() {
             price: 180,
           },
         ]}
-      />
+      /> */}
       <h2>Gallery</h2>
-      <Gallery>
+      {/* <Gallery>
         <img src="https://picsum.photos/seed/1/534/300" alt="random" />
         <img src="https://picsum.photos/seed/2/534/300" alt="random" />
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
@@ -312,10 +352,10 @@ export default function Library() {
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
         <img src="https://picsum.photos/seed/4/534/300" alt="random" />
         <img src="https://picsum.photos/seed/3/534/300" alt="random" />
-      </Gallery>
+      </Gallery> */}
 
       <h2>SearchBar</h2>
-      <SearchBar />
+      {/* <SearchBar /> */}
       <h2>Popin</h2>
       <Button variant="black" onClick={openPopin}>Ouvrir la popin</Button>
       {popinIsOpen && (
@@ -326,7 +366,7 @@ export default function Library() {
       )}
 
       <h2>OpeningHour</h2>
-      <OpeningHours value={[
+      {/* <OpeningHours value={[
         { startTime: '2023-11-07T15:37:45+01:00', endTime: '2023-11-07T16:37:45+01:00' },
         { startTime: '2023-11-07T13:37:45+01:00', endTime: '2023-11-07T14:37:45+01:00' },
         { startTime: '2023-11-08T13:37:45+01:00', endTime: '2023-11-08T14:37:45+01:00' },
@@ -337,10 +377,10 @@ export default function Library() {
         { startTime: '2023-11-10T15:37:45+01:00', endTime: '2023-11-10T16:37:45+01:00' },
         { startTime: '2023-11-11T13:37:45+01:00', endTime: '2023-11-11T14:37:45+01:00' },
         { startTime: '2023-11-11T15:37:45+01:00', endTime: '2023-11-11T16:37:45+01:00' },
-      ]} />
+      ]} /> */}
 
       <h2>Map</h2>
-      <Map position={[ 48.8665, 2.3335 ]} markers={[
+      {/* <Map position={[ 48.8665, 2.3335 ]} markers={[
         {
           position: [ 48.867119, 2.376592 ],
           popup: 'Popup 1',
@@ -355,10 +395,10 @@ export default function Library() {
         },
       ]}
       zoomLevel={13}
-      />
+      /> */}
 
       <h2>EstablishmentCard</h2>
-      <EstablishmentCard
+      {/* <EstablishmentCard
         picturePath="https://picsum.photos/seed/1/534/300"
         name="Monique Coiffure"
         adress="12 rue de la paix"
@@ -366,7 +406,7 @@ export default function Library() {
         zipCode="75000"
         reviewsNumber={2}
         globalReview={3}
-      />
+      /> */}
 
     </main>
   );

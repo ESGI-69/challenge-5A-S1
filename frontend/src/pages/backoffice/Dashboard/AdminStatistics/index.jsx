@@ -23,7 +23,7 @@ export default function AdminStatistics() {
             <StatisticsCard title={t('statistics.graph.title')} type='dark'>
               <StatisticsChart data={statistics?.allTimeSumWithDate} />
             </StatisticsCard>
-            <h2>Averages</h2>
+            <h2>{t('statistics.admin.averages')}</h2>
             <div className={styles.Statistics}>
               <StatisticsCard title={t('statistics.admin.averageSumPerCompany')} number={`${statistics?.averageSumPerCompany}€`} />
               <StatisticsCard title={t('statistics.admin.averageSumPerEstablishment')} number={`${statistics?.averageSumPerEstablishment}€`} />
