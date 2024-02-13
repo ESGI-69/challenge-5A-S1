@@ -21,12 +21,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 use App\Denormalizer\EstablishmentAddressDenormalizer; // Import the custom denormalizer class
 use App\Controller\Establishment\MapEstablishmentPictureController;
+use App\Controller\Establishment\MapEstablishmentsPictureController;
 
 #[ORM\Entity(repositoryClass: EstablishmentRepository::class)]
 #[ApiResource(
     operations: [
         new GetCollection(
             normalizationContext: ['groups' => ['read-establishment', 'read-company']],
+            controller: MapEstablishmentsPictureController::class,
         ),
         new GetCollection(
             uriTemplate: '/establishments/{id}/employees',
@@ -173,7 +175,7 @@ class Establishment
     #[Groups(['read-establishment'])]
     private ?float $averageNotation = null;
 
-    #[Groups(['read-establishment'])]
+    #[Groups(['read-establishment', 'appointment-me'])]
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: EstablishmentPicture::class, orphanRemoval: true)]
     private Collection $establishmentPictures;
 

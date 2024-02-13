@@ -35,7 +35,7 @@ export default function Search() {
       <div className={styles.SearchLeft}>
         {establishments.map((establishment) => (
           <EstablishmentCard
-            picturePath="https://picsum.photos/seed/1/534/300"
+            picturePath={(establishment.establishmentPictures[0])?`${import.meta.env.VITE_API_DOMAIN}${establishment.establishmentPictures[0]?.pathPicture}`:null}
             name={establishment.company.name}
             adress={establishment.street}
             city={establishment.city}

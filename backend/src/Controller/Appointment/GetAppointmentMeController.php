@@ -5,6 +5,7 @@ namespace App\Controller\Appointment;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use App\Repository\AppointmentRepository;
+use App\Entity\Appointment;
 
 #[AsController]
 class GetAppointmentMeController
@@ -24,6 +25,12 @@ class GetAppointmentMeController
         'client' => $user,
       ]
     );
+
+    foreach ($appointments as $appointment) {
+      foreach ($appointment->getEstablishment()->getEstablishmentPictures() as $picture) {
+        $picture->setPathPicture('/establishment_picture/' . $picture->getPathPicture());
+      }
+    }
 
     return $appointments;
   }

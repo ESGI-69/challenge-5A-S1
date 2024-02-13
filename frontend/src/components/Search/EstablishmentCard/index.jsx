@@ -17,9 +17,10 @@ const EstablishmentCard = function EstablishmentCard({
   city,
 },
 ) {
+
   return (
     <Link to={`/establishment/${id}`} className={styles.Card}>
-      <img src={picturePath} className={styles.CardPicture}/>
+      <img src={(picturePath || 'https://picsum.photos/seed/1/534/300')} className={styles.CardPicture}/>
       <div className={styles.CardContent}>
         <div className={styles.CardContentName}>
           {name} - {city}
@@ -39,7 +40,7 @@ const EstablishmentCard = function EstablishmentCard({
 
 EstablishmentCard.propTypes = {
   id: PropTypes.number.isRequired,
-  picturePath: PropTypes.string.isRequired,
+  picturePath: PropTypes.string,
   name: PropTypes.string.isRequired,
   adress: PropTypes.string.isRequired,
   globalReview: PropTypes.number,

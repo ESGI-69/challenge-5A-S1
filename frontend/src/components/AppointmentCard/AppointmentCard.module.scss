@@ -10,7 +10,8 @@
   &Image {
     grid-area: image;
     width: 120px;
-    height: 120px;
+    height: auto;
+    margin-top: var(--size-4);
   }
 
   &Info {

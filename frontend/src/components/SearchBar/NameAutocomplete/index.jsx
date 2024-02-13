@@ -20,7 +20,7 @@ const NameAutocomplete = ({ companies, isLoading, ...delegated }) => {
           companies.length > 0 && companies.map((company) => (
             company.establishments.length > 0 && (
               <Link className={styles.NameAutocompleteCompany} to={`/search?companyId=${company.id}`} key={company.id}>
-                <img src={company.logoPath || 'https://placehold.co/600x400'} />
+                <img src={`${import.meta.env.VITE_API_DOMAIN}${company.logoPath}` || 'https://placehold.co/600x400'} />
                 <span>
                   {company.name}
                 </span>

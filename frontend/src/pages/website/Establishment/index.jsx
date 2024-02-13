@@ -87,13 +87,13 @@ function Establishment() {
             <Button variant="black">{t('makeAnAppointment')}</Button>
           </div>
         </div>
-        <Gallery>
-          {((!isEstablishmentLoading && establishment?.establishmentPictures && establishment?.establishmentPictures.length>0) &&
-            establishment.establishmentPictures.map(picture => (
+        {((!isEstablishmentLoading && establishment?.establishmentPictures && establishment?.establishmentPictures.length>0) &&
+          <Gallery>
+            {establishment.establishmentPictures.map(picture => (
               <img src={`${import.meta.env.VITE_API_DOMAIN}${picture.pathPicture}`} key={picture.id} />
-            ))
-          )}
-        </Gallery>
+            ))}
+          </Gallery>
+        )}
         <div className={styles.EstablishmentHeaderDescription}>
           <h2 className={styles.EstablishmentTitle}>{t('description', { establishmentName: establishment?.company?.name })}</h2>
           <p>{t('advantages')}</p>
