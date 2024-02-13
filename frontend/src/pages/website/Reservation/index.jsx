@@ -81,7 +81,7 @@ export default function Reservation() {
   function generateSchedule(service) {
     const schedule = [];
     const employees = {};
-    let  generatedWorkingHoursRanges = [];
+    let generatedWorkingHoursRanges = [];
 
     //On va récuperer les 2 prochaines semaines & génerer un nouvel objet WorkingHoursRanges :)
     let upcomingDays = getUpcomingDays(14);
