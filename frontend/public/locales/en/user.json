@@ -2,7 +2,7 @@
     "table": {
         "actions": {
             "edit": "Edit",
-            "create": "Create",
+            "create": "Create an user",
             "delete": "Delete"
         },
         "title": "Table"
@@ -13,10 +13,14 @@
     },
     "form": {
         "lastname": "Nom",
-        "firstnamename": "Prénom",
+        "firstname": "Prénom",
         "email": "Email",
-        "phoneNumber": "Téléphone",
-        "roles": "Roles"
+        "phonenumber": "Téléphone",
+        "roles": "Roles",
+        "password": "Password",
+        "actions": {
+            "create": "Créer"
+        }
     },
     "events": {
         "get": {
@@ -37,5 +41,9 @@
             "success": "User has been created",
             "error": "Error creating user"
         }
+    },
+    "create": {
+        "title": "Create an user",
+        "back": "Back to list of users"
     }
 }

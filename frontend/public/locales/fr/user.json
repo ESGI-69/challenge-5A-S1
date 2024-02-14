@@ -2,7 +2,7 @@
     "table": {
         "actions": {
             "edit": "Modifier",
-            "create": "Créer",
+            "create": "Créer un utilisateur",
             "delete": "Supprimer"
         },
         "title": "Liste des utilisateurs"
@@ -15,8 +15,12 @@
         "lastname": "Nom",
         "firstnamename": "Prénom",
         "email": "Email",
-        "phoneNumber": "Téléphone",
-        "roles": "Rôles"
+        "phonenumber": "Téléphone",
+        "roles": "Rôles",
+        "password": "Mot de passe",
+        "actions": {
+            "create": "Créer"
+        }
     },
     "modal": {
         "deletion": {
@@ -36,5 +40,9 @@
             "success": "L'utilisateur a bien été supprimé",
             "error": "Erreur lors de la suppression de l'utilisateur"
         }
+    },
+    "create": {
+        "title": "Créer un utilisateur",
+        "back": "Retour à la liste des utilisateurs"
     }
 }

@@ -34,6 +34,7 @@ import ServiceTypeProvider from './contexts/api/ServiceTypeContext';
 import FeedbackProvider from './contexts/api/FeedbackContext';
 
 import EmployeeCreation from '@/pages/backoffice/Employees/EmployeeCreation';
+import UserCreation from '@/pages/backoffice/Users/UserCreation';
 import ServiceProvider from '@/contexts/api/ServiceContext';
 import AppointmentProvider from '@/contexts/api/AppointmentContext';
 import UserProvider from './contexts/api/UserContext';
@@ -159,10 +160,10 @@ const router = createBrowserRouter([
             index: true,
             element: <Users />,
           },
-          // {
-          //   path: 'create',
-          //   element: <EmployeeCreation />,
-          // },
+          {
+            path: 'create',
+            element: <UserCreation />,
+          },
           {
             path: ':id',
             element: <UserProvider><UserUpdate /></UserProvider>,

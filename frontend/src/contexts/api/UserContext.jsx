@@ -9,6 +9,7 @@ const initialState = {
   users: [],
   isUserLoading: false,
   isUsersLoading: false,
+  isPostUserLoading: false,
   isPatchUserLoading: false,
   isUserDeleteLoading: false,
 };
@@ -36,6 +37,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         isUsersLoading: action.payload,
+      };
+    case 'isPostUserLoading':
+      return {
+        ...state,
+        isPostUserLoading: action.payload,
       };
     case 'isPatchUserLoading':
       return {
@@ -106,6 +112,10 @@ export default function UserProvider({ children }) {
       type: 'isUserLoading',
       payload: true,
     });
+    dispatch({
+      type: 'isPostUserLoading',
+      payload: true,
+    });
     try {
       const data = await apiCall.post('/users', payload);
       dispatch({
@@ -120,6 +130,10 @@ export default function UserProvider({ children }) {
     } finally {
       dispatch({
         type: 'isUserLoading',
+        payload: false,
+      });
+      dispatch({
+        type: 'isPostUserLoading',
         payload: false,
       });
     }
@@ -197,6 +211,7 @@ export default function UserProvider({ children }) {
       get,
       getById,
       post,
+      isPostUserLoading: state.isPostUserLoading,
       patch,
       isPatchUserLoading: state.isPatchUserLoading,
       remove,

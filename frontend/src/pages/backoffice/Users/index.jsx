@@ -12,8 +12,7 @@ export default function Employees() {
     <>
       <BackofficeHeader
         actionsComponent={
-        //   <Button to="/backoffice/users/create">
-          <Button>
+          <Button to="/backoffice/users/create">
             {t('table.actions.create')}
           </Button>
         }
