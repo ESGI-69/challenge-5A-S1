@@ -1,4 +1,30 @@
 .EstablishmentUpdate {
+  &Section {
+    margin-bottom: var(--size-5);
+
+    &Card {
+      padding: var(--size-3);
+      background: var(--white);
+      box-shadow: 0 0 0.5rem rgb(0 0 0 / 20%);
+      border-radius: var(--radius-2);
+      margin-bottom: var(--size-3);
+    }
+
+    &_Split {
+      display: flex;
+      gap: var(--size-3);
+
+      @media screen and (width <=768px) {
+        flex-direction: column;
+      }
+
+      &>* {
+        width: 100%;
+      }
+
+    }
+  }
+
   a {
     margin-top: var(--size-3);
   }
@@ -7,7 +33,7 @@
     height: 100%;
     display: grid;
     grid-template-rows: auto auto 1fr auto;
-    justify-items   : center;
+    justify-items: center;
     gap: var(--size-3);
 
     &Close {

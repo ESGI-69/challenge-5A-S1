@@ -2,6 +2,7 @@
   &List {
     display: flex;
     gap: var(--size-5);
+    flex-wrap: wrap;
 
     & > * {
       width: 100%;
