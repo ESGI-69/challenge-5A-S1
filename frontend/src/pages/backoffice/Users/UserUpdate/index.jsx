@@ -14,8 +14,9 @@ export default function EmployeeUpdate() {
     getById(id);
   }, []);
 
-  const updateUser = (data) => {
-    patch(id, data);
+  const updateUser = async (data) => {
+    await patch(id, data);
+    await getById(id);
   };
 
   const { t } = useTranslation('user');

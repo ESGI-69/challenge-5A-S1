@@ -15,6 +15,27 @@
         "lastname": "Nom",
         "firstnamename": "Prénom",
         "email": "Email",
-        "phoneNumber": "Téléphone"
+        "phoneNumber": "Téléphone",
+        "roles": "Roles"
+    },
+    "events": {
+        "get": {
+            "error": "Error fetching user data"
+        },
+        "getList": {
+            "error": "Error fetching users"
+        },
+        "update":{
+            "success": "User has been updated",
+            "error": "Error updating user"
+        },
+        "delete": {
+            "success": "User has been deleted",
+            "error": "Error deleting user"
+        },
+        "create": {
+            "success": "User has been created",
+            "error": "Error creating user"
+        }
     }
 }

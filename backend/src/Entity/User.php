@@ -37,7 +37,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         ),
         new Get(
             security: 'is_granted("ROLE_ADMIN")',
-            normalizationContext: ['groups' => ['read-user', 'read-company-as-admin']]
+            normalizationContext: ['groups' => ['read-user', 'read-company-as-admin', 'read-user-as-admin']]
         ),
         new GetCollection(
             security: 'is_granted("ROLE_ADMIN")',
@@ -47,7 +47,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Post(denormalizationContext: ['groups' => ['create-user']]),
         new Patch(
             security: 'is_granted("ROLE_ADMIN")',
-            denormalizationContext: ['groups' => ['update-user']]
+            denormalizationContext: ['groups' => ['update-user-admin']]
         ),
         new Delete(
             security: 'is_granted("ROLE_ADMIN")'
@@ -67,16 +67,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[Assert\Email()]
-    #[Groups(['read-user', 'read-user-as-admin', 'create-user', 'read-me', 'update-user'])]
+    #[Groups(['read-user', 'read-user-as-admin', 'create-user', 'read-me', 'update-user', 'update-user-admin'])]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column]
-    #[Groups(['read-company-as-admin', 'read-me'])]
+    #[Groups(['read-company-as-admin', 'read-me', 'update-user-admin', 'read-user-as-admin'])]
     private array $roles = [];
 
     #[Assert\NotBlank()]
-    #[Groups(['read-user', 'create-user', 'update-user', 'read-me', 'appointment-read', 'feedback-read', 'read-establishment'])]
+    #[Groups(['read-user', 'create-user', 'update-user', 'read-me', 'appointment-read', 'feedback-read', 'read-establishment', 'update-user-admin'])]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
@@ -96,7 +96,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $validatedServices;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['read-user', 'create-user', 'update-user', 'read-me', 'appointment-read'])]
+    #[Groups(['read-user', 'create-user', 'update-user', 'read-me', 'appointment-read', 'update-user-admin'])]
     private ?string $lastname = null;
 
     #[Groups(['read-user', 'read-me'])]
@@ -104,7 +104,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?Company $company = null;
 
     #[ORM\Column(length: 12)]
-    #[Groups(['read-user', 'create-user', 'update-user', 'read-me', 'appointment-read'])]
+    #[Groups(['read-user', 'create-user', 'update-user', 'read-me', 'appointment-read', 'update-user-admin'])]
     private ?string $phonenumber = null;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Appointment::class, orphanRemoval: true, cascade: ["remove"])]

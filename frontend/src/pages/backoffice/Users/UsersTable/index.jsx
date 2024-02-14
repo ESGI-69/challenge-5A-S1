@@ -10,7 +10,7 @@ import style from './UsersTable.module.scss';
 
 export default function EmployeesTable() {
   const { t } = useTranslation('user');
-  const { users, get: getUsers, isUsersLoading, isDeleteUserLoading, deleteUser } = useContext(UserContext);
+  const { users, get: getUsers, isUsersLoading, isDeleteUserLoading, remove } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export default function EmployeesTable() {
               variant="danger"
               disabled={isDeleteUserLoading}
               onClick={async () => {
-                await deleteUser(userToDelete.id);
+                await remove(userToDelete.id);
                 setIsConfirmDeletionModalOpen(false);
                 setUserToDelete(null);
                 await getUsers();

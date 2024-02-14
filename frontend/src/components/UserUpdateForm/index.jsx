@@ -10,25 +10,35 @@ export default function RegisterUpdateForm({
   firstname,
   phonenumber,
   email,
+  roles,
   onSubmit,
   isLoading = false,
 }) {
   const { t } = useTranslation('user');
+
+  const allRoles = [
+    'ROLE_USER',
+    'ROLE_ADMIN',
+    'ROLE_PRESTA',
+  ];
 
   const [ form, setForm ] = useState({
     lastname,
     firstname,
     phonenumber,
     email,
+    roles,
   });
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
     const data = {
       lastname: form.lastname,
       firstname: form.firstname,
       phonenumber: form.phonenumber,
       email: form.email,
+      roles: form.roles,
     };
     onSubmit(data);
   };
@@ -75,6 +85,27 @@ export default function RegisterUpdateForm({
           onChange={(newValue) => setForm({ ...form, email: newValue })}
         />
       </div>
+      <div className={styles.UserUpdateFormGroup}>
+        <label htmlFor="roles">{t('form.roles')}</label>
+        {allRoles.map((role) => (
+          <div key={role}>
+            <input
+              type="checkbox"
+              id={role}
+              value={role}
+              onChange={(e) => {
+                if (e.target.checked) {
+                  setForm({ ...form, roles: [ ...form.roles, role ] });
+                } else {
+                  setForm({ ...form, roles: form.roles.filter((r) => r !== role) });
+                }
+              }}
+              checked={form.roles.includes(role)}
+            />
+            <label htmlFor={role}>{role}</label>
+          </div>
+        ))}
+      </div>
       <Button disabled={isLoading} type="submit">
         {t('update', { ns: 'base' })}
       </Button>
@@ -87,6 +118,7 @@ RegisterUpdateForm.propTypes = {
   firstname: PropTypes.string.isRequired,
   phonenumber: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  roles: PropTypes.array,
   onSubmit: PropTypes.func.isRequired,
   getById: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,

@@ -1,6 +1,8 @@
 import { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import apiCall from '@/axios';
+import toast from 'react-hot-toast';
+import i18n from 'i18next';
 
 const initialState = {
   user: null,
@@ -66,6 +68,7 @@ export default function UserProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.getList.error', { ns: 'user' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -88,6 +91,7 @@ export default function UserProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.get.error', { ns: 'user' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -108,8 +112,10 @@ export default function UserProvider({ children }) {
         type: 'user',
         payload: data,
       });
+      toast.success(i18n.t('events.create.success', { ns: 'user' }));
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.create.error', { ns: 'user' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -137,8 +143,10 @@ export default function UserProvider({ children }) {
         type: 'user',
         payload: data,
       });
+      toast.success(i18n.t('events.update.success', { ns: 'user' }));
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.update.error', { ns: 'user' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -157,30 +165,22 @@ export default function UserProvider({ children }) {
       type: 'isUserLoading',
       payload: true,
     });
-    try {
-      await apiCall.delete(`/users/${id}`);
-    } catch (error) {
-      console.error(error);
-      throw new Error(error);
-    } finally {
-      dispatch({
-        type: 'isUserLoading',
-        payload: false,
-      });
-    }
-  };
-
-  const deleteUser = async (id) => {
     dispatch({
       type: 'isUserDeleteLoading',
       payload: true,
     });
     try {
       await apiCall.delete(`/users/${id}`);
+      toast.success(i18n.t('events.delete.success', { ns: 'user' }));
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('events.delete.error', { ns: 'user' }));
       throw new Error(error);
     } finally {
+      dispatch({
+        type: 'isUserLoading',
+        payload: false,
+      });
       dispatch({
         type: 'isUserDeleteLoading',
         payload: false,
@@ -200,7 +200,6 @@ export default function UserProvider({ children }) {
       patch,
       isPatchUserLoading: state.isPatchUserLoading,
       remove,
-      deleteUser,
       isUserDeleteLoading: state.isUserDeleteLoading,
     }}>
       {children}
