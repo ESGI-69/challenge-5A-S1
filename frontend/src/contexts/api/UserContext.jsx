@@ -7,6 +7,8 @@ const initialState = {
   users: [],
   isUserLoading: false,
   isUsersLoading: false,
+  isPatchUserLoading: false,
+  isUserDeleteLoading: false,
 };
 
 export const UserContext = createContext(initialState);
@@ -32,6 +34,16 @@ const reducer = (state, action) => {
       return {
         ...state,
         isUsersLoading: action.payload,
+      };
+    case 'isPatchUserLoading':
+      return {
+        ...state,
+        isPatchUserLoading: action.payload,
+      };
+    case 'isUserDeleteLoading':
+      return {
+        ...state,
+        isUserDeleteLoading: action.payload,
       };
     default:
       return state;
@@ -111,8 +123,16 @@ export default function UserProvider({ children }) {
       type: 'isUserLoading',
       payload: true,
     });
+    dispatch({
+      type: 'isUserPatchLoading',
+      payload: true,
+    });
     try {
-      const data = await apiCall.patch(`/users/${id}`, payload);
+      const data = await apiCall.patch(`/users/${id}`, payload, {
+        headers: {
+          'Content-Type': 'application/merge-patch+json',
+        },
+      });
       dispatch({
         type: 'user',
         payload: data,
@@ -123,6 +143,10 @@ export default function UserProvider({ children }) {
     } finally {
       dispatch({
         type: 'isUserLoading',
+        payload: false,
+      });
+      dispatch({
+        type: 'isUserPatchLoading',
         payload: false,
       });
     }
@@ -146,6 +170,24 @@ export default function UserProvider({ children }) {
     }
   };
 
+  const deleteUser = async (id) => {
+    dispatch({
+      type: 'isUserDeleteLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.delete(`/users/${id}`);
+    } catch (error) {
+      console.error(error);
+      throw new Error(error);
+    } finally {
+      dispatch({
+        type: 'isUserDeleteLoading',
+        payload: false,
+      });
+    }
+  };
+
   return (
     <UserContext.Provider value={{
       user: state.user,
@@ -156,7 +198,10 @@ export default function UserProvider({ children }) {
       getById,
       post,
       patch,
+      isPatchUserLoading: state.isPatchUserLoading,
       remove,
+      deleteUser,
+      isUserDeleteLoading: state.isUserDeleteLoading,
     }}>
       {children}
     </UserContext.Provider>

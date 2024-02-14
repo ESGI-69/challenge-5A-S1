@@ -49,6 +49,9 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: 'is_granted("ROLE_ADMIN")',
             denormalizationContext: ['groups' => ['update-user']]
         ),
+        new Delete(
+            security: 'is_granted("ROLE_ADMIN")'
+        ),
     ],
     normalizationContext: ['groups' => ['read-user', 'read-user-mutation']],
 )]
@@ -86,10 +89,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['create-user'])]
     private string $plainPassword = '';
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Service::class)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Service::class, orphanRemoval: true, cascade: ['remove'])]
     private Collection $authoredServices;
 
-    #[ORM\OneToMany(mappedBy: 'validatedBy', targetEntity: Service::class)]
+    #[ORM\OneToMany(mappedBy: 'validatedBy', targetEntity: Service::class, orphanRemoval: true, cascade: ['remove'])]
     private Collection $validatedServices;
 
     #[ORM\Column(length: 50)]
@@ -97,14 +100,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $lastname = null;
 
     #[Groups(['read-user', 'read-me'])]
-    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\ManyToOne(inversedBy: 'users', cascade: ["remove"])]
     private ?Company $company = null;
 
     #[ORM\Column(length: 12)]
     #[Groups(['read-user', 'create-user', 'update-user', 'read-me', 'appointment-read'])]
     private ?string $phonenumber = null;
 
-    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Appointment::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Appointment::class, orphanRemoval: true, cascade: ["remove"])]
     private Collection $appointments;
 
     #[Groups(['update-user-self'])]
@@ -113,7 +116,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['update-user-self'])]
     private $newPassword;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Feedback::class)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Feedback::class, cascade: ["remove"], orphanRemoval: true)]
     private Collection $feedback;
 
     public function __construct()

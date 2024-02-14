@@ -1,0 +1,26 @@
+{
+    "table": {
+        "actions": {
+            "edit": "Modifier",
+            "create": "Créer",
+            "delete": "Supprimer"
+        },
+        "title": "Liste des utilisateurs"
+    },
+    "update": {
+        "title": "Modifier l'utilisateur",
+        "back": "Retour à la liste des utilisateurs"
+    },
+    "form": {
+        "lastname": "Nom",
+        "firstnamename": "Prénom",
+        "email": "Email",
+        "phoneNumber": "Téléphone"
+    },
+    "modal": {
+        "deletion": {
+            "title": "Suppression de l'utilisateur",
+            "content": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?"
+        }
+    }
+}

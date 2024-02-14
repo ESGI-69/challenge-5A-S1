@@ -41,6 +41,10 @@ export default function EmployeesTable() {
           name: t('table.actions.edit'),
           onClick: ({ id }) => navigate(`/backoffice/employees/${id}`),
         },
+        {
+          name: t('table.actions.delete'),
+          onClick: ({ id }) => navigate(`/backoffice/employees/delete/${id}`),
+        },
       ]}
     />
   );
