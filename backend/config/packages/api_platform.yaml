@@ -10,6 +10,7 @@ api_platform:
             vary: ['Content-Type', 'Authorization', 'Origin']
         extra_properties:
             standard_put: true
+        pagination_enabled: false
 
     swagger:
         api_keys:

@@ -1,0 +1,29 @@
+.UsersTable {
+    &Modal {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      justify-items   : center;
+      gap: var(--size-3);
+  
+      &Close {
+        position: absolute;
+        top: var(--size-3);
+        right: var(--size-3);
+        height: var(--size-5);
+        width: var(--size-5);
+        cursor: pointer;
+      }
+  
+      &Title {
+        margin: 0;
+        font-weight: var(--font-weight-5);
+        font-size: var(--font-size-4);
+      }
+  
+      &Buttons {
+        display: flex;
+        gap: var(--size-3);
+      }
+    }
+  }

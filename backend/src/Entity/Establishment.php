@@ -176,7 +176,7 @@ class Establishment
     private ?float $averageNotation = null;
 
     #[Groups(['read-establishment', 'appointment-me'])]
-    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: EstablishmentPicture::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: EstablishmentPicture::class, orphanRemoval: true, cascade: ['remove'])]
     private Collection $establishmentPictures;
 
     public function __construct()

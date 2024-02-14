@@ -13,7 +13,7 @@ class MapLogoCompanyPath
     {
     }
 
-    public function __invoke($data): Paginator
+    public function __invoke($data): array
     {
         foreach ($data as $company) {
             $company->setLogoPath('/company_logo/'.$company->getLogoPath());

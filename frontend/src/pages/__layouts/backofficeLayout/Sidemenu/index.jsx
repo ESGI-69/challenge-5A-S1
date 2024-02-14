@@ -58,6 +58,9 @@ export default function Sidemenu({ ...delegated }) {
                 <SidemenuLink to="/backoffice/" svgJsx={<ChartPieIcon />}>
                   {t('menu.stats')}
                 </SidemenuLink>
+                <SidemenuLink to="/backoffice/users" svgJsx={<UsersIcon />}>
+                  {t('menu.users')}
+                </SidemenuLink>
                 <SidemenuLink to="/backoffice/companies-validation" svgJsx={<DocumentCheckIcon />}>
                   {t('menu.companiesValidation')}
                 </SidemenuLink>

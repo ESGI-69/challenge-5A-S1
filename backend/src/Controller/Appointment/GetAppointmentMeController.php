@@ -26,9 +26,13 @@ class GetAppointmentMeController
       ]
     );
 
+    $treatedEstablishments = [];
+
     foreach ($appointments as $appointment) {
       foreach ($appointment->getEstablishment()->getEstablishmentPictures() as $picture) {
-        $picture->setPathPicture('/establishment_picture/' . $picture->getPathPicture());
+        if ( !preg_match('/establishment_picture\/.*/', $picture->getPathPicture()) ) {
+          $picture->setPathPicture('/establishment_picture/' . $picture->getPathPicture());
+        }
       }
     }
 

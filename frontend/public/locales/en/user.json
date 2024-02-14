@@ -1,0 +1,49 @@
+{
+    "table": {
+        "actions": {
+            "edit": "Edit",
+            "create": "Create an user",
+            "delete": "Delete"
+        },
+        "title": "Table"
+    },
+    "update": {
+        "title": "Edit user",
+        "back": "Back to list of users"
+    },
+    "form": {
+        "lastname": "Nom",
+        "firstname": "Prénom",
+        "email": "Email",
+        "phonenumber": "Téléphone",
+        "roles": "Roles",
+        "password": "Password",
+        "actions": {
+            "create": "Créer"
+        }
+    },
+    "events": {
+        "get": {
+            "error": "Error fetching user data"
+        },
+        "getList": {
+            "error": "Error fetching users"
+        },
+        "update":{
+            "success": "User has been updated",
+            "error": "Error updating user"
+        },
+        "delete": {
+            "success": "User has been deleted",
+            "error": "Error deleting user"
+        },
+        "create": {
+            "success": "User has been created",
+            "error": "Error creating user"
+        }
+    },
+    "create": {
+        "title": "Create an user",
+        "back": "Back to list of users"
+    }
+}

@@ -209,7 +209,7 @@ class Company
         return $this->pathKbis;
     }
 
-    public function setPathKbis(string $pathKbis): static
+    public function setPathKbis(?string $pathKbis): static
     {
         $this->pathKbis = $pathKbis;
 

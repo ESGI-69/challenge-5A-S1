@@ -1,0 +1,48 @@
+{
+    "table": {
+        "actions": {
+            "edit": "Modifier",
+            "create": "Créer un utilisateur",
+            "delete": "Supprimer"
+        },
+        "title": "Liste des utilisateurs"
+    },
+    "update": {
+        "title": "Modifier l'utilisateur",
+        "back": "Retour à la liste des utilisateurs"
+    },
+    "form": {
+        "lastname": "Nom",
+        "firstnamename": "Prénom",
+        "email": "Email",
+        "phonenumber": "Téléphone",
+        "roles": "Rôles",
+        "password": "Mot de passe",
+        "actions": {
+            "create": "Créer"
+        }
+    },
+    "modal": {
+        "deletion": {
+            "title": "Suppression de l'utilisateur",
+            "content": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?"
+        }
+    },
+    "events": {
+        "get": {
+            "error": "Erreur lors de la récupération des utilisateurs"
+        },
+        "update":{
+            "success": "L'utilisateur a bien été modifié",
+            "error": "Erreur lors de la modification de l'utilisateur"
+        },
+        "delete": {
+            "success": "L'utilisateur a bien été supprimé",
+            "error": "Erreur lors de la suppression de l'utilisateur"
+        }
+    },
+    "create": {
+        "title": "Créer un utilisateur",
+        "back": "Retour à la liste des utilisateurs"
+    }
+}
