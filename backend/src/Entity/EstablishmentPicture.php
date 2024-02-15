@@ -20,10 +20,12 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         new Post(
             normalizationContext: ['groups' => ['establishement-picture-create']],
             denormalizationContext: ['groups' => ['establishement-picture-create']], inputFormats: ['multipart' => ['multipart/form-data']],
+            securityPostDenormalize: 'is_granted("ROLE_PRESTA") and object.getEstablishment().getCompany().getId() == user.getCompany().getId()',
         ),
         new Delete(
             normalizationContext: ['groups' => ['delete-establishment-picture']],
             denormalizationContext: ['groups' => ['delete-establishment-picture']],
+            securityPostDenormalize: 'is_granted("ROLE_PRESTA") and object.getEstablishment().getCompany().getId() == user.getCompany().getId()',
         ),
     ]
 )]

@@ -139,9 +139,9 @@ export default function WorkingHoursRangeSelector() {
               </div>
             )}
             <div className={styles.WorkingHoursRangeSelectorRowHours}>
-              <input type="text" name="" id="" placeholder="9:00" disabled={!workingDays.includes(day)} value={workingHoursRange[day].from} onChange={(e) => setWorkingHoursRange((old) => ({ ...old, [day]: { ...old[day], from: e.target.value } }))} />
+              <input type="text" name="" id="" placeholder="9:00" disabled={!workingDays.includes(day)} value={workingHoursRange[day].from || '09:00'} onChange={(e) => setWorkingHoursRange((old) => ({ ...old, [day]: { ...old[day], from: e.target.value } }))} />
             -
-              <input type="text" name="" id="" placeholder="18:00" disabled={!workingDays.includes(day)} value={workingHoursRange[day].to} onChange={(e) => setWorkingHoursRange((old) => ({ ...old, [day]: { ...old[day], to: e.target.value } }))} />
+              <input type="text" name="" id="" placeholder="18:00" disabled={!workingDays.includes(day)} value={workingHoursRange[day].to || '18:00'} onChange={(e) => setWorkingHoursRange((old) => ({ ...old, [day]: { ...old[day], to: e.target.value } }))} />
             </div>
           </div>
         ))}

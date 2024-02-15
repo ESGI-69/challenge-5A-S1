@@ -92,9 +92,9 @@ export default function OpeningHoursSelector() {
               {t(`weekDays.${day}`)}
             </div>
             <div className={styles.OpeningHoursSelectorRowHours}>
-              <input type="text" name="" id="" placeholder="9:00" disabled={!openingDays.includes(day)} value={openingHours[day].from} onChange={(e) => setOpeningHours((old) => ({ ...old, [day]: { ...old[day], from: e.target.value } }))} />
+              <input type="text" name="" id="" placeholder="9:00" disabled={!openingDays.includes(day)} value={openingHours[day].from || '09:00'} onChange={(e) => setOpeningHours((old) => ({ ...old, [day]: { ...old[day], from: e.target.value } }))} />
             -
-              <input type="text" name="" id="" placeholder="18:00" disabled={!openingDays.includes(day)} value={openingHours[day].to} onChange={(e) => setOpeningHours((old) => ({ ...old, [day]: { ...old[day], to: e.target.value } }))} />
+              <input type="text" name="" id="" placeholder="18:00" disabled={!openingDays.includes(day)} value={openingHours[day].to || '18:00'} onChange={(e) => setOpeningHours((old) => ({ ...old, [day]: { ...old[day], to: e.target.value } }))} />
             </div>
           </div>
         ))}
