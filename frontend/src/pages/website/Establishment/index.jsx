@@ -112,6 +112,7 @@ function Establishment() {
                   key={appointment.id}
                   appointment={appointment}
                   feedbackTypes={establishment?.feedbackTypes}
+                  isEstablishmentPage={true}
                 />
               ))}
             </div>
@@ -133,6 +134,7 @@ function Establishment() {
                       key={appointment.id}
                       appointment={appointment}
                       feedbackTypes={establishment?.feedbackTypes}
+                      isEstablishmentPage={true}
                     />
                   ))}
                 </div>

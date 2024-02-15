@@ -9,12 +9,14 @@ import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import { FeedbackContext } from '@/contexts/api/FeedbackContext';
 import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
+import { AppointmentContext } from '@/contexts/api/AppointmentContext';
 
 function ModalSendReview({
   appointment,
   feedbackTypes,
   modalIsOpen,
   setIsModalOpen,
+  isEstablishmentPage,
 }){
   const { i18n } = useTranslation();
   const { t } = useTranslation('modalSendReview');
@@ -22,6 +24,7 @@ function ModalSendReview({
   const [ comment, setComment ] = useState('');
   const { postFeedback, isPostFeedbackLoading } = useContext(FeedbackContext);
   const { refetchEstablishment } = useContext(EstablishmentContext);
+  const { refetchAppointments } = useContext(AppointmentContext);
 
   const ratingTexts = {
     1: t('notation.1'),
@@ -62,7 +65,11 @@ function ModalSendReview({
         data.averageRating = averageRating;
       }
       await postFeedback(data);
-      refetchEstablishment();
+      if (isEstablishmentPage) {
+        refetchEstablishment();
+      } else {
+        refetchAppointments();
+      }
       toast.success(t('successForm'));
       setIsModalOpen(false);
 
@@ -146,6 +153,7 @@ function ModalSendReview({
 }
 
 ModalSendReview.propTypes = {
+  isEstablishmentPage: PropTypes.bool,
   modalIsOpen: PropTypes.bool,
   setIsModalOpen: PropTypes.func,
   appointment: PropTypes.shape({

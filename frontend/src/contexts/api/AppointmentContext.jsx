@@ -71,13 +71,11 @@ export default function AppointmentProvider({ children }) {
     }
   };
 
-  const refetchAppointments = async (id) => {
-    // je suis pas sur de ca ???
-    // review pls
+  const refetchAppointments = async (establishmentId = null) => {
     dispatch({
       type: 'clearMyAppointments',
     });
-    await getMyAppointments(id);
+    await getMyAppointments(establishmentId);
   };
 
   const post = async (data) => {

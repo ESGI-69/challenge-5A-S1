@@ -7,11 +7,12 @@ import { BanknotesIcon, CalendarIcon, ClockIcon, MapPinIcon, SparklesIcon  } fro
 import { useState } from 'react';
 import ModalSendReview  from '@/components/ModalSendReview';
 import { Link } from 'react-router-dom';
+import FeedbackProvider from '@/contexts/api/FeedbackContext';
 
 function AppointmentCard({
   appointment,
-  feedbackTypes,
   showEstablishment = false,
+  isEstablishmentPage = false,
 }) {
   const { t } = useTranslation('appointmentCard');
   const { i18n } = useTranslation();
@@ -83,18 +84,22 @@ function AppointmentCard({
           </Button>
           }
         </div>
-        <ModalSendReview
-          feedbackTypes={feedbackTypes}
-          appointment={appointment}
-          modalIsOpen={modalIsOpen}
-          setIsModalOpen={setIsModalOpen}
-        />
+        <FeedbackProvider>
+          <ModalSendReview
+            feedbackTypes={appointment.establishment.feedbackTypes}
+            appointment={appointment}
+            modalIsOpen={modalIsOpen}
+            setIsModalOpen={setIsModalOpen}
+            isEstablishmentPage={isEstablishmentPage}
+          />
+        </FeedbackProvider>
       </div>
     </div>
   );
 }
 
 AppointmentCard.propTypes = {
+  isEstablishmentPage: PropTypes.bool,
   appointment: PropTypes.shape({
     id: PropTypes.number.isRequired,
     startDate: PropTypes.string.isRequired,
@@ -121,15 +126,15 @@ AppointmentCard.propTypes = {
       establishmentPictures: PropTypes.arrayOf(PropTypes.shape({
         pathPicture: PropTypes.string.isRequired,
       })),
+      feedbackTypes: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+      })),
       company: PropTypes.shape({
         name: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
   }),
-  feedbackTypes: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-  })),
   showEstablishment: PropTypes.bool,
 };
 
