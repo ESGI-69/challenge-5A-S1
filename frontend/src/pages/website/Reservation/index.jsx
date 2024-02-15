@@ -25,7 +25,7 @@ export default function Reservation() {
   const [ persons, setPersons ] = useState([]);
   const [ comment, setComment ] = useState('');
 
-  const [ person, setPerson ] = useState(null);
+  const [ person, setPerson ] = useState(undefined);
   const handleDateSelect = (date, employeeId) => {
     setSelectedDate(date);
     setSelectedEmployee(employeeId);
@@ -58,18 +58,25 @@ export default function Reservation() {
   useEffect(() => {
     if (service) {
       getEstablishmentById(service.establishment.id);
-      const { schedule, persons } = generateSchedule(service);
+      const { schedule, newPersons } = generateSchedule(service);
       setSchedule(schedule);
-      setPersons(persons);
-
+      if (persons !== newPersons) {
+        setPersons(newPersons);
+      }
       const preSelectedEmployee = persons.find(person => person.id == employeeId);
       if (preSelectedEmployee) {
-        setPerson(preSelectedEmployee);
-      } else if (persons && !person) {
+        if (person === undefined) {
+          setPerson(preSelectedEmployee);
+        }
+      } else if (persons && !person && persons[0] !== person) {
         setPerson(persons[0]);
       }
     }
-  }, [ service, employeeId ]);
+  }, [
+    service,
+    employeeId,
+    person,
+  ]);
 
   function generateSchedule(service) {
     const schedule = [];
@@ -152,7 +159,7 @@ export default function Reservation() {
       }
 
     });
-    return { schedule, persons: Object.values(employees) };
+    return { schedule, newPersons: Object.values(employees) };
   }
 
   function getWeek(date) {
