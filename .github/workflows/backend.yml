@@ -22,3 +22,19 @@ jobs:
         run: cp .env.prod.example .env
       - name: Build
         run: docker build .
+  php_unit:
+    runs-on: ubuntu-latest
+    name: Run tests (backend)
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v3
+      - name: Copiyng .env file
+        run: cp .env.prod.example .env
+      - name: launching backend container
+        run: docker-compose up -d
+      - name: Run tests
+        run: docker-compose exec -T php php bin/phpunit
+      - name: Stop container
+        run: docker-compose down -v
