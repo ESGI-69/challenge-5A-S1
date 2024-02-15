@@ -74,8 +74,7 @@ class CreateAppointmentController
                         $generatedStartDate->setDate($startDate->format('Y'), $startDate->format('m'), $startDate->format('d'));
                         $generatedEndDate->setDate($startDate->format('Y'), $startDate->format('m'), $startDate->format('d'));
 
-                        while($generatedStartDate < $generatedEndDate){
-                            
+                        while($generatedStartDate <= $generatedEndDate){
                             if($generatedStartDate->format('Y-m-d H:i:s') === $startDate->format('Y-m-d H:i:s')){
                                 //on a trouvé un créneau valide !!
                                 $isCreneauValid = true;
@@ -92,7 +91,7 @@ class CreateAppointmentController
                             return $appointment;
                             // nice :)
                         }else{
-                            throw new AccessDeniedHttpException('Appointment is not valid 4');
+                            throw new AccessDeniedHttpException('Appointment is not valid 4 :'.$generatedStartDate->format('Y-m-d H:i:s') . " !== " . $startDate->format('Y-m-d H:i:s'));
                         }
                     }
 
