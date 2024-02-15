@@ -42,3 +42,21 @@ jobs:
         run: docker-compose exec -T php php ./vendor/bin/phpunit
       - name: Stop container
         run: docker-compose down -v
+  php_lint:
+    runs-on: ubuntu-latest
+    name: Run PHP Lint(backend)
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v3
+      - name: Copiying .env file
+        run: cp .env.prod.example .env
+      - name: starting backend container
+        run: docker-compose up -d
+      - name : Install composer dependencies
+        run: docker-compose exec -T php composer install
+      - name: Run PHP Lint (Src folder)
+        run: docker-compose exec -T php php ./vendor/bin/phplint
+      - name: Stop container
+        run: docker-compose down -v
