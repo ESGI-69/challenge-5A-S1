@@ -49,7 +49,7 @@ WORKDIR /srv/app/
 COPY ./composer.json ./composer.lock* /srv/app/
 COPY ./symfony.lock /srv/app/
 
-RUN composer install --no-dev --no-scripts
+RUN composer install --no-scripts
 
 COPY /usr/bin/phpunit /usr/bin/phpunit
 
