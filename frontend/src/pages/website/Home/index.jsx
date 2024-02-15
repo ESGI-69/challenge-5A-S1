@@ -5,6 +5,7 @@ import SearchBar from '@/components/SearchBar';
 import CompanyProvider from '@/contexts/api/CompanyContext';
 import { useNavigate } from 'react-router-dom';
 import queryBuilder from '@/utils/queryBuilder';
+import EstablishmentProvider from '@/contexts/api/EstablishmentContext';
 
 export default function Home() {
   const { t } = useTranslation('home');
@@ -26,10 +27,12 @@ export default function Home() {
         {t('subtitle')}
       </p>
       <CompanyProvider>
-        <SearchBar
-          className={ styles.HomeSearchBar }
-          onSearch={navToSearchPage}
-        />
+        <EstablishmentProvider>
+          <SearchBar
+            className={ styles.HomeSearchBar }
+            onSearch={navToSearchPage}
+          />
+        </EstablishmentProvider>
       </CompanyProvider>
     </main>
   );
