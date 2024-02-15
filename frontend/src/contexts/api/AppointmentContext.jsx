@@ -11,6 +11,9 @@ const initialState = {
 
   appointment: null,
   isPostAppointmentLoading: false,
+
+  establishmentAppointments: [],
+  isEstablishmentAppointmentsLoading: false,
 };
 
 export const AppointmentContext = createContext(initialState);
@@ -36,6 +39,16 @@ const reducer = (state, action) => {
       return {
         ...state,
         appointment: action.payload,
+      };
+    case 'establishmentAppointments':
+      return {
+        ...state,
+        establishmentAppointments: action.payload,
+      };
+    case 'isEstablishmentAppointmentsLoading':
+      return {
+        ...state,
+        isEstablishmentAppointmentsLoading: action.payload,
       };
     case 'isPostAppointmentLoading':
       return {
@@ -79,6 +92,27 @@ export default function AppointmentProvider({ children }) {
     await getAppointments(querry);
   };
 
+  const getEstablishmentAppointments = async (establishmentId) => {
+    dispatch({
+      type: 'isEstablishmentAppointmentsLoading',
+      payload: true,
+    });
+    try {
+      const { data } = await apiCall.get(`/establishments/${establishmentId}/appointments`);
+      dispatch({
+        type: 'establishmentAppointments',
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isEstablishmentAppointmentsLoading',
+        payload: false,
+      });
+    }
+  };
+
   const post = async (data) => {
     dispatch({
       type: 'isPostAppointmentLoading',
@@ -104,9 +138,12 @@ export default function AppointmentProvider({ children }) {
   return (
     <AppointmentContext.Provider value={{
       getAppointments,
+      getEstablishmentAppointments,
       refetchAppointments,
       myAppointments: state.myAppointments,
       isMyAppointmentsLoading: state.isMyAppointmentsLoading,
+      establishmentAppointments: state.establishmentAppointments,
+      isEstablishmentAppointmentsLoading: state.isEstablishmentAppointmentsLoading,
 
       appointment: state.appointment,
       isPostAppointmentLoading: state.isPostAppointmentLoading,

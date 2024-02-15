@@ -37,6 +37,7 @@ import UserCreation from '@/pages/backoffice/Users/UserCreation';
 import ServiceProvider from '@/contexts/api/ServiceContext';
 import AppointmentProvider from '@/contexts/api/AppointmentContext';
 import UserProvider from './contexts/api/UserContext';
+import Appointments from './pages/backoffice/Appointments';
 
 const router = createBrowserRouter([
   {
@@ -75,13 +76,13 @@ const router = createBrowserRouter([
       {
         path: '/reservation/:serviceEstablishmentId/:employeeId?',
         element:
-        <ServiceProvider>
-          <AppointmentProvider>
-            <EstablishmentProvider>
-              <Reservation/>
-            </EstablishmentProvider>
-          </AppointmentProvider>
-        </ServiceProvider>,
+          <ServiceProvider>
+            <AppointmentProvider>
+              <EstablishmentProvider>
+                <Reservation />
+              </EstablishmentProvider>
+            </AppointmentProvider>
+          </ServiceProvider>,
       },
       {
         path: '/profile',
@@ -106,6 +107,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
+      },
+      {
+        path: 'appointments',
+        element: <Appointments />,
       },
       {
         path: 'employees',
