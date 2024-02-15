@@ -12,5 +12,9 @@
     "actions": {
       "cancel": "Cancel"
     }
+  },
+  "cancelModel": {
+    "title": "Cancel appointment?",
+    "message": "The client will be notified about the cancellation."
   }
 }

@@ -12,5 +12,9 @@
     "actions": {
       "cancel": "Annuler le RDV"
     }
+  },
+  "cancelModel": {
+    "title": "Annuler le rendez-vous ?",
+    "message": "Le client sera prévenu par mail."
   }
 }

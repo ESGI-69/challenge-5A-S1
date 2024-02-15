@@ -25,5 +25,7 @@
     "cancel": "Cancel",
     "confirm": "Confirm",
     "none": "None",
-    "add": "Add"
+    "add": "Add",
+    "yes": "Yes",
+    "no": "No"
 }

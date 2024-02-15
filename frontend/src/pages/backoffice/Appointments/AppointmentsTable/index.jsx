@@ -15,6 +15,7 @@ export default function AppointmentsTable({ establishmentId }) {
     cancelAppointment: cancelAppointmentAPI,
   } = useContext(AppointmentContext);
   const { t } = useTranslation('backofficeAppointments');
+  const { t: tBase } = useTranslation('base');
   const [ isCancelModalOpen, setIsCancelModalOpen ] = useState(false);
   const [ appointmentToCancel, setAppointmentToCancel ] = useState(null);
 
@@ -113,11 +114,11 @@ export default function AppointmentsTable({ establishmentId }) {
         ]}
       />
       <Modal isOpen={isCancelModalOpen} className={styles.Cancelmodal} ariaHideApp={false}>
-        <h3>Voulez vous annulez le RDV ?</h3>
-        <p>Le client sera prévenu par mail.</p>
+        <h3>{t('cancelModel.title')}</h3>
+        <p>{t('cancelModel.message')}</p>
         <div className={styles.CancelmodalActions}>
-          <Button variant="danger" onClick={() => cancelAppointment()}>Oui</Button>
-          <Button onClick={() => setIsCancelModalOpen(false)}>Non</Button>
+          <Button variant="danger" onClick={() => cancelAppointment()}>{tBase('yes')}</Button>
+          <Button onClick={() => setIsCancelModalOpen(false)}>{tBase('no')}</Button>
         </div>
       </Modal>
     </section >
