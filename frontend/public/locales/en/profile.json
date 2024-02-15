@@ -1,7 +1,8 @@
 {
   "myAccount": {
     "title": "My Account",
-    "myAppointments": "My Appointments",
+    "myPastAppointments": "My Past Appointments",
+    "myFutureAppointments": "My Future Appointments",
     "myInformations": "My Informations",
     "logout": "Logout",
     "goToBackoffice": "Go to Backoffice"
@@ -9,6 +10,10 @@
   "pastAppointments": {
     "title": "Past Appointments",
     "noAppointments": "No past appointments"
+  },
+  "futureAppointments": {
+    "title": "Future Appointments",
+    "noAppointments": "No future appointments"
   },
   "myInformations": {
     "title": "My Informations"

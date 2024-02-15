@@ -1,0 +1,11 @@
+.Appointments {
+  &List {
+    display: flex;
+    gap: var(--size-5);
+    flex-direction: column;
+
+    & > * {
+      width: 100%;
+    }
+  }
+}

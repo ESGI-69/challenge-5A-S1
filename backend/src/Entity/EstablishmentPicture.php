@@ -43,7 +43,7 @@ class EstablishmentPicture
     #[Vich\UploadableField(mapping: 'company_picture', fileNameProperty:'pathPicture')]
     public ?File $filePicture = null;
 
-    #[Groups(['read-establishment', 'get-all-etsbalishment-picture', 'appointment-me'])]
+    #[Groups(['read-establishment', 'get-all-etsbalishment-picture', 'appointment-getall'])]
     #[ORM\Column(length: 255)]
     private ?string $pathPicture = null;
 

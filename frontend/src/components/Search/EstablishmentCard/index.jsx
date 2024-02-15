@@ -6,37 +6,33 @@ import Shop from '@/components/lib/Icons/Shop';
 import { Link } from 'react-router-dom';
 import { addDigit } from '@/utils/formater/note';
 
-const EstablishmentCard = function EstablishmentCard({
+const EstablishmentCard = ({
   id,
-  picturePath,
+  picturePath = 'https://placehold.co/600x400',
   name,
   adress,
   globalReview = 0,
   reviewsNumber,
   zipCode,
   city,
-},
-) {
-
-  return (
-    <Link to={`/establishment/${id}`} className={styles.Card}>
-      <img src={(picturePath || 'https://picsum.photos/seed/1/534/300')} className={styles.CardPicture}/>
-      <div className={styles.CardContent}>
-        <div className={styles.CardContentName}>
-          {name} - {city}
-        </div>
-        <div className={styles.CardContentAdress}>
-          <Shop />
-          {` ${adress}, ${zipCode} ${city}`}
-        </div>
-        <div className={styles.CardContentReview}>
-          <Star className={styles.CardContentReviewStar}/>
-          {` ${addDigit(globalReview)} (${reviewsNumber} avis)`}
-        </div>
+}) => (
+  <Link to={`/establishment/${id}`} className={styles.Card}>
+    <img src={(picturePath)} className={styles.CardPicture}/>
+    <div className={styles.CardContent}>
+      <div className={styles.CardContentName}>
+        {name} - {city}
       </div>
-    </Link>
-  );
-};
+      <div className={styles.CardContentAdress}>
+        <Shop />
+        {` ${adress}, ${zipCode} ${city}`}
+      </div>
+      <div className={styles.CardContentReview}>
+        <Star className={styles.CardContentReviewStar}/>
+        {` ${addDigit(globalReview)} (${reviewsNumber} avis)`}
+      </div>
+    </div>
+  </Link>
+);
 
 EstablishmentCard.propTypes = {
   id: PropTypes.number.isRequired,

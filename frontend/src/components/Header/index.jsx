@@ -19,7 +19,9 @@ export default function Header() {
           <LanguageSelector />
           {profile && (
             <>
-              <Button to="/company-register" isPlain variant="primary">{t('menu.companyRegister')}</Button>
+              {!profile.company && (
+                <Button to="/company-register" isPlain variant="primary">{t('menu.companyRegister')}</Button>
+              )}
               <Button to="/profile" variant="black">{profile.firstname}</Button>
             </>
           )}

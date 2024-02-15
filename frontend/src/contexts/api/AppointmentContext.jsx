@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import apiCall from '@/axios';
 import toast from 'react-hot-toast';
 import i18n from 'i18next';
+import queryBuilder from '@/utils/queryBuilder';
 
 const initialState = {
   myAppointments: [],
@@ -49,13 +50,13 @@ const reducer = (state, action) => {
 export default function AppointmentProvider({ children }) {
   const [ state, dispatch ] = useReducer(reducer, initialState);
 
-  const getMyAppointments = async (establishmentId) => {
+  const getAppointments = async (queries) => {
     dispatch({
       type: 'isMyAppointmentsLoading',
       payload: true,
     });
     try {
-      const url = establishmentId ? `/appointments/me?establishment.id=${establishmentId}` : '/appointments/me';
+      const url = queries ? `/appointments${queryBuilder(queries)}` : '/appointments';
       const { data } = await apiCall.get(url);
       dispatch({
         type: 'myAppointments',
@@ -71,11 +72,11 @@ export default function AppointmentProvider({ children }) {
     }
   };
 
-  const refetchAppointments = async (establishmentId = null) => {
+  const refetchAppointments = async (querry) => {
     dispatch({
       type: 'clearMyAppointments',
     });
-    await getMyAppointments(establishmentId);
+    await getAppointments(querry);
   };
 
   const post = async (data) => {
@@ -102,7 +103,7 @@ export default function AppointmentProvider({ children }) {
 
   return (
     <AppointmentContext.Provider value={{
-      getMyAppointments,
+      getAppointments,
       refetchAppointments,
       myAppointments: state.myAppointments,
       isMyAppointmentsLoading: state.isMyAppointmentsLoading,

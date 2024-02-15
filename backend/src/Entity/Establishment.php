@@ -91,7 +91,7 @@ class Establishment
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['read-establishment','read-service','employee-getall', 'appointment-read', 'appointment-me'])]
+    #[Groups(['read-establishment','read-service','employee-getall', 'appointment-read', 'appointment-getall'])]
     private ?int $id = null;
 
     #[Assert\Email()]
@@ -102,19 +102,19 @@ class Establishment
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 255)]
     #[ORM\Column(length: 255)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'employee-getall', 'appointment-me','read-establishment-city'])]
+    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'employee-getall', 'appointment-getall','read-establishment-city'])]
     private ?string $city = null;
 
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 255)]
     #[ORM\Column(length: 255)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'employee-getall', 'appointment-me'])]
+    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'employee-getall', 'appointment-getall'])]
     private ?string $street = null;
 
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 255)]
     #[ORM\Column(length: 255)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'appointment-me'])]
+    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'appointment-getall'])]
     private ?string $zipCode = null;
 
     #[Assert\NotBlank()]
@@ -140,7 +140,7 @@ class Establishment
     ])]
     #[ORM\ManyToOne(inversedBy: 'establishments')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['read-establishment', 'create-establishment', 'appointment-me'])]
+    #[Groups(['read-establishment', 'create-establishment', 'appointment-getall'])]
     private ?Company $company = null;
 
     #[ORM\OneToMany(mappedBy: 'preferedEstablishment', targetEntity: Employee::class, cascade: ['remove'], orphanRemoval: true)]
@@ -170,7 +170,7 @@ class Establishment
     private ?EstablishmentType $type = null;
     
     #[ORM\ManyToMany(targetEntity: FeedbackType::class, mappedBy: 'establishments', cascade: ['persist'])]
-    #[Groups(['read-establishment', 'update-establishment', 'appointment-me'])]
+    #[Groups(['read-establishment', 'update-establishment', 'appointment-getall'])]
     private Collection $feedbackTypes;
 
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Feedback::class, cascade: ['remove'], orphanRemoval: true)]
@@ -181,7 +181,7 @@ class Establishment
     #[Groups(['read-establishment'])]
     private ?float $averageNotation = null;
 
-    #[Groups(['read-establishment', 'appointment-me'])]
+    #[Groups(['read-establishment', 'appointment-getall'])]
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: EstablishmentPicture::class, orphanRemoval: true, cascade: ['remove'])]
     private Collection $establishmentPictures;
 

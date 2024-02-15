@@ -20,7 +20,7 @@ function Establishment() {
   const { t } = useTranslation('establishment');
   const { id } = useParams();
   const { getById, establishment, isEstablishmentLoading } = useContext(EstablishmentContext);
-  const { getMyAppointments, myAppointments, isMyAppointmentsLoading } = useContext(AppointmentContext);
+  const { getAppointments, myAppointments, isMyAppointmentsLoading } = useContext(AppointmentContext);
   const { profile } = useContext(ProfileContext);
   const MemorizedMap = memo(Map);
 
@@ -55,7 +55,7 @@ function Establishment() {
   useEffect(() => {
     getById(id);
     if (profile){
-      getMyAppointments(id);
+      getAppointments({ establishmentId: id, 'client.id': profile.id });
     }
   }, [ profile ]);
 
