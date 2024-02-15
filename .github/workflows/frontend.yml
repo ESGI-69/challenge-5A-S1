@@ -44,6 +44,9 @@ jobs:
   
   tests:
     name: Jest tests 
+    defaults:
+      run:
+        working-directory: frontend
     runs-on: ubuntu-latest
 
     steps:
