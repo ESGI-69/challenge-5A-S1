@@ -35,12 +35,14 @@ class AdminStatisticsController
       $nbEstablishments += count($company->getEstablishments());
       foreach ($company->getEstablishments() as $establishment) {
         foreach ($establishment->getAppointments() as $appointment) {
-          $totalSum += $appointment->getPrice();
-          $appointmentDate = $appointment->getEndDate()->format('Y-m-d');
-          if (!isset($allTimeSumWithDate[$appointmentDate])) {
-            $allTimeSumWithDate[$appointmentDate] = 0;
+          if ($appointment->getCancelledAt() === null) {
+            $totalSum += $appointment->getPrice();
+            $appointmentDate = $appointment->getEndDate()->format('Y-m-d');
+            if (!isset($allTimeSumWithDate[$appointmentDate])) {
+              $allTimeSumWithDate[$appointmentDate] = 0;
+            }
+            $allTimeSumWithDate[$appointmentDate] += $appointment->getPrice();
           }
-          $allTimeSumWithDate[$appointmentDate] += $appointment->getPrice();
         }
       }
     }
