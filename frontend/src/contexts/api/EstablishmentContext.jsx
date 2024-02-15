@@ -145,6 +145,29 @@ export default function EstablishmentProvider({ children }) {
     }
   };
 
+  const getCities = async () => {
+    dispatch({
+      type: 'isEstablishmentLoading',
+      payload: true,
+    });
+
+    try {
+      const { data } = await apiCall.get('/establishments/cities');
+      dispatch({
+        type: 'establishments',
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(error);
+    } finally {
+      dispatch({
+        type: 'isEstablishmentsLoading',
+        payload: false,
+      });
+    }
+  };
+
   const post = async (data) => {
     dispatch({
       type: 'isPostEstablishmentLoading',
@@ -317,6 +340,8 @@ export default function EstablishmentProvider({ children }) {
       establishment: state.establishment,
       isEstablishmentLoading: state.isEstablishmentLoading,
       isPatchEstablishmentLoading: state.isPatchEstablishmentLoading,
+
+      getCities,
 
       post,
       patch,

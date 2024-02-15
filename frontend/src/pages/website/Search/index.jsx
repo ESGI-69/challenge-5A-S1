@@ -27,6 +27,8 @@ export default function Search() {
       get({ 'company.id': queryParams.companyId });
     } else if (queryParams.establishmentTypeId) {
       get({ 'type.id': queryParams.establishmentTypeId });
+    } else if (queryParams.location) {
+      get({ city: queryParams.location });
     }
   }, []);
 

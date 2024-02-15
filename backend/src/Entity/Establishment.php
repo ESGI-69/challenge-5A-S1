@@ -34,6 +34,12 @@ use App\Controller\Establishment\MapEstablishmentsPictureController;
             uriTemplate: '/establishments/{id}/employees',
             normalizationContext: ['groups' => ['read-establishment-employees']],
         ),
+        new GetCollection(
+            uriTemplate: '/establishments/cities',
+            normalizationContext: ['groups' => ['read-establishment-city']],
+            paginationEnabled: true,
+            paginationItemsPerPage: 5, // Limit the results to 5
+        ),
         new Get(
             normalizationContext: ['groups' => ['read-establishment', 'read-company']],
             controller: MapEstablishmentPictureController::class,
@@ -71,7 +77,7 @@ use App\Controller\Establishment\MapEstablishmentsPictureController;
 #[ApiFilter(
     SearchFilter::class,
     properties: [
-        'city' => 'partial',
+        'city' => 'ipartial',
         'zipCode' => 'start',
         'company.name' => 'partial',
         'services.id' => 'exact',
@@ -96,7 +102,7 @@ class Establishment
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 255)]
     #[ORM\Column(length: 255)]
-    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'employee-getall', 'appointment-me'])]
+    #[Groups(['read-establishment', 'create-establishment', 'update-establishment', 'appointment-read', 'employee-getall', 'appointment-me','read-establishment-city'])]
     private ?string $city = null;
 
     #[Assert\NotBlank()]
