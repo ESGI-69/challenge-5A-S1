@@ -35,6 +35,6 @@ jobs:
       - name: launching backend container
         run: docker-compose up -d
       - name: Run tests
-        run: docker-compose exec php php bin/phpunit
+        run: docker-compose exec -T php php bin/phpunit
       - name: Stop container
         run: docker-compose down -v
