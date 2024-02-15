@@ -24,6 +24,7 @@ class CreateAppointmentController
         $serviceId = $appointment->getService()->getId();
         $startDate = $appointment->getStartDate();
         $serviceDuration = $appointment->getService()->getDuration();
+        $servicePrice = $appointment->getService()->getPrice();
         if ($this->appointmentRepository->existsForUser($this->security->getUser()->getId(), $serviceId, $startDate, $employeeRequested)) {
             throw new BadRequestHttpException('An appointment with the same service and start date already exists');
         }
@@ -87,6 +88,7 @@ class CreateAppointmentController
                         
                         if($isCreneauValid){
                             $appointment->setEndDate($startDate->add(new \DateInterval('PT' . $serviceDuration . 'M')));
+                            $appointment->setPrice($servicePrice);
                             return $appointment;
                             // nice :)
                         }else{
@@ -99,7 +101,7 @@ class CreateAppointmentController
         if(!$isCreneauValid){
             throw new AccessDeniedHttpException('Appointment is not valid 5');
         }
-
+        $appointment->setPrice($servicePrice);
         $appointment->setEndDate($startDate->add(new \DateInterval('PT' . $serviceDuration . 'M')));
         return $appointment;
     }
