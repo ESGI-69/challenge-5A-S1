@@ -147,4 +147,5 @@ yarn-error.log
 public/company_kbis/*
 public/company_logo/*
 public/establishment_picture/*
+public/avatar_employee/*
 swagger.json
