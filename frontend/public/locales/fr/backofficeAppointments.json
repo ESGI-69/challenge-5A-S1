@@ -1,0 +1,20 @@
+{
+  "title": "Rendez-vous",
+  "table": {
+    "titles": {
+      "employee": "Employé(e)",
+      "client": "Client(e)",
+      "service": "Service",
+      "date": "Date",
+      "comment": "Commentaire",
+      "cancelledAt": "Annulé le"
+    },
+    "actions": {
+      "cancel": "Annuler le RDV"
+    }
+  },
+  "cancelModel": {
+    "title": "Annuler le rendez-vous ?",
+    "message": "Le client sera prévenu par mail."
+  }
+}

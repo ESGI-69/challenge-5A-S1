@@ -13,6 +13,7 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;  
 use App\Filter\IsOpenFilter;
 use ApiPlatform\Serializer\Filter\PropertyFilter;
+use App\Controller\Establishment\GetEstablishmentAppointments;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -39,6 +40,12 @@ use App\Controller\Establishment\MapEstablishmentsPictureController;
             normalizationContext: ['groups' => ['read-establishment-city']],
             paginationEnabled: true,
             paginationItemsPerPage: 5, // Limit the results to 5
+        ),
+        new GetCollection(
+          uriTemplate: '/establishments/{id}/appointments',
+          security: 'is_granted("ROLE_PRESTA")',
+          normalizationContext: ['groups' => ['appointment-getall', 'employee-get', 'read-user', 'appointment-me']],
+          controller: GetEstablishmentAppointments::class,
         ),
         new Get(
             normalizationContext: ['groups' => ['read-establishment', 'read-company']],

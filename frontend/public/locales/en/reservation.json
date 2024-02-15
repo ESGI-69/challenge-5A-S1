@@ -19,6 +19,10 @@
         "creation": {
             "success": "The appointment has been successfully created",
             "error": "Error during appointment scheduling"
+        },
+        "cancel": {
+            "success": "The appointment has been successfully canceled",
+            "error": "Error during appointment cancellation"
         }
     },
     "loading": "Loading",

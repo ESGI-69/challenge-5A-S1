@@ -7,6 +7,7 @@ import { Expand } from '@/components/lib/Icons';
 import {
   BuildingStorefrontIcon,
   ChartPieIcon,
+  ClipboardDocumentListIcon,
   CursorArrowRippleIcon,
   DocumentCheckIcon,
   FunnelIcon,
@@ -73,6 +74,9 @@ export default function Sidemenu({ ...delegated }) {
               <ul className={styles.NavMenu}>
                 <SidemenuLink to="/backoffice/" svgJsx={<ChartPieIcon />}>
                   {t('menu.stats')}
+                </SidemenuLink>
+                <SidemenuLink to="/backoffice/appointments" svgJsx={<ClipboardDocumentListIcon />}>
+                  {t('menu.appointments')}
                 </SidemenuLink>
                 <SidemenuLink to="/backoffice/employees" svgJsx={<UsersIcon />}>
                   {t('menu.employees')}
