@@ -100,6 +100,13 @@
       font-size: var(--font-size-0-5);
       color: var(--color-text-light);
 
+      &Image {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
       svg {
         width: var(--size-4);
       }

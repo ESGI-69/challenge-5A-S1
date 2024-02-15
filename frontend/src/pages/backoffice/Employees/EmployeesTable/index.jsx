@@ -4,6 +4,7 @@ import { ProfileContext } from '@/contexts/ProfileContext';
 import { EmployeeContext } from '@/contexts/api/EmployeeContext';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from './EmployeesTable.module.scss';
 
 export default function EmployeesTable() {
   const { t } = useTranslation('employee');
@@ -27,6 +28,11 @@ export default function EmployeesTable() {
       lastname: {
         name: 'Nom',
         width: '120px',
+      },
+      avatar: {
+        name: 'Avatar',
+        width: '120px',
+        formatingMethod: (currentAvatar) => ( currentAvatar ? <img className={styles.EmployeesTableAvatar} src={`${import.meta.env.VITE_API_DOMAIN}${currentAvatar}`} alt="avatar" /> : 'No avatar' ),
       },
     },
   };

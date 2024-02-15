@@ -34,6 +34,10 @@ class GetAppointmentMeController
           $picture->setPathPicture('/establishment_picture/' . $picture->getPathPicture());
         }
       }
+
+      if ( !empty($appointment->getEmployee()) && !preg_match('/\/avatar_employee\//', $appointment->getEmployee()->getAvatar()) ) {
+        $appointment->getEmployee()->setAvatar('/avatar_employee/'.$appointment->getEmployee()->getAvatar());
+      }
     }
 
     return $appointments;

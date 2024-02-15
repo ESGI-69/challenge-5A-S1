@@ -120,7 +120,11 @@ export default function EmployeeProvider({ children }) {
       payload: true,
     });
     try {
-      await apiCall.post('/companies/employees', data);
+      await apiCall.post('/companies/employees', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       toast.success(i18n.t('events.creation.success', { ns: 'employee' }));
     } catch (error) {
       console.error(error);

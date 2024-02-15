@@ -22,6 +22,10 @@ class GetWorkingHoursRangesOfEmployeeController
                 'endDate' => $workingHoursRange->getEndDate(),
             ];
         }
+
+        if (!empty($employee->getAvatar())) {
+            $employee->setAvatar('/avatar_employee/'.$employee->getAvatar());
+        }
         return $workingHoursRangesArray;
     }
 }

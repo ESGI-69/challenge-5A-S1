@@ -23,6 +23,7 @@ function AppointmentCard({
   const openReviewModal = () => {
     setIsModalOpen(true);
   };
+
   return (
     <div className={`${styles.AppointmentCard} ${showEstablishment && styles.AppointmentCard_ShowEstablishment}`}>
       {showEstablishment &&
@@ -60,7 +61,7 @@ function AppointmentCard({
             {appointment.service.price} €
           </span>
           <span className={styles.AppointmentCardDetailsText}>
-            <CalendarIcon />{t('with')} {appointment.employee.firstname}
+            <CalendarIcon />{t('with')} {appointment.employee.firstname} {(appointment.employee.avatar && showEstablishment) && <img className={styles.AppointmentCardDetailsTextImage} src={`${import.meta.env.VITE_API_DOMAIN}${appointment.employee.avatar}`} alt="employee-picture" />}
           </span>
         </div>
         <div className={styles.AppointmentCardInfoBtns}>
@@ -110,6 +111,7 @@ AppointmentCard.propTypes = {
     employee: PropTypes.shape({
       id: PropTypes.number.isRequired,
       firstname: PropTypes.string.isRequired,
+      avatar: PropTypes.string.isRequired,
     }),
     establishment: PropTypes.shape({
       id: PropTypes.number.isRequired,

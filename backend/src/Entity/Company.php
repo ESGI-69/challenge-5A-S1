@@ -29,6 +29,7 @@ use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
 use App\Controller\Statistics\CompanyStatisticsController;
 use App\Controller\Statistics\AdminStatisticsController;
 use App\Controller\Company\MapLogoCompanyPath;
+use App\Controller\Company\MapEmployeeAvatarPath;
 
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
@@ -63,6 +64,7 @@ use App\Controller\Company\MapLogoCompanyPath;
             name: 'get-company-employees',
             uriTemplate: '/companies/{id}/employees',
             normalizationContext: ['groups' => ['company-getall','read-company-employees']],
+            controller: MapEmployeeAvatarPath::class
         ),
         new Get(
             uriTemplate: '/companies/{id}/kbis',

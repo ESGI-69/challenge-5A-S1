@@ -17,6 +17,12 @@ class MapLogoCompanyPath
     {
         foreach ($data as $company) {
             $company->setLogoPath('/company_logo/'.$company->getLogoPath());
+
+            foreach ($company->getEmployees() as $employee) {
+                if (!empty($employee->getAvatar()) && !preg_match('/\/avatar_employee\//', $employee->getAvatar())) {
+                    $employee->setAvatar('/avatar_employee/'.$employee->getAvatar());
+                }
+            }
         }
 
         return $data;
