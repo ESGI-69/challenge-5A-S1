@@ -135,11 +135,35 @@ export default function AppointmentProvider({ children }) {
     }
   };
 
+  const cancelAppointment = async (id) => {
+    dispatch({
+      type: 'isPostAppointmentLoading',
+      payload: true,
+    });
+    try {
+      await apiCall.patch(`/appointments/${id}/cancel`, {}, {
+        headers: {
+          'Content-Type': 'application/merge-patch+json',
+        },
+      });
+      toast.success(i18n.t('events.cancel.success', { ns: 'reservation' }));
+    } catch (error) {
+      toast.error(i18n.t('events.cancel.error', { ns: 'reservation' }));
+      console.error(error);
+    } finally {
+      dispatch({
+        type: 'isPostAppointmentLoading',
+        payload: false,
+      });
+    }
+  };
+
   return (
     <AppointmentContext.Provider value={{
       getAppointments,
       getEstablishmentAppointments,
       refetchAppointments,
+      cancelAppointment,
       myAppointments: state.myAppointments,
       isMyAppointmentsLoading: state.isMyAppointmentsLoading,
       establishmentAppointments: state.establishmentAppointments,

@@ -19,6 +19,10 @@
         "creation": {
             "success": "Le rendez vous à bien été créé",
             "error": "Erreur lors de la prise de rendez-vous"
+        },
+        "cancel": {
+            "success": "Le rendez vous à bien été annulé",
+            "error": "Erreur lors de l'annulation du rendez-vous"
         }
     },
     "loading": "Chargement",

@@ -6,7 +6,8 @@
       "client": "Client(e)",
       "service": "Service",
       "date": "Date",
-      "comment": "Commentaire"
+      "comment": "Commentaire",
+      "cancelledAt": "Annulé le"
     },
     "actions": {
       "cancel": "Annuler le RDV"

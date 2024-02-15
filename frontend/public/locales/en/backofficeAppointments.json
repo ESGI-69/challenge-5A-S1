@@ -6,7 +6,8 @@
       "client": "Client",
       "service": "Service",
       "date": "Date",
-      "comment": "Comment"
+      "comment": "Comment",
+      "cancelledAt": "Cancelled at"
     },
     "actions": {
       "cancel": "Cancel"

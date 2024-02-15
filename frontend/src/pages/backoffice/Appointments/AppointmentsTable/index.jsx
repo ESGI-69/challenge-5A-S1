@@ -1,12 +1,33 @@
 import PTable from '@/components/lib/PTable';
 import { AppointmentContext } from '@/contexts/api/AppointmentContext';
 import { useTranslation } from 'react-i18next';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import Modal from 'react-modal';
+import Button from '@/components/lib/Button';
+import styles from './styles.module.scss';
 
 export default function AppointmentsTable({ establishmentId }) {
-  const { getEstablishmentAppointments, establishmentAppointments, isEstablishmentAppointmentsLoading } = useContext(AppointmentContext);
+  const {
+    getEstablishmentAppointments,
+    establishmentAppointments,
+    isEstablishmentAppointmentsLoading,
+    cancelAppointment: cancelAppointmentAPI,
+  } = useContext(AppointmentContext);
   const { t } = useTranslation('backofficeAppointments');
+  const [ isCancelModalOpen, setIsCancelModalOpen ] = useState(false);
+  const [ appointmentToCancel, setAppointmentToCancel ] = useState(null);
+
+  const handleCancelAppointment = (id) => {
+    setIsCancelModalOpen(true);
+    setAppointmentToCancel(id);
+  };
+
+  const cancelAppointment = () => {
+    setIsCancelModalOpen(false);
+    cancelAppointmentAPI(appointmentToCancel);
+    getEstablishmentAppointments(establishmentId);
+  };
 
   useEffect(() => {
     if (establishmentId) {
@@ -57,6 +78,22 @@ export default function AppointmentsTable({ establishmentId }) {
       comment: {
         name: t('table.titles.comment'),
       },
+      cancelledAt: {
+        name: t('table.titles.cancelledAt'),
+        component: ({ value }) => {
+          if (value) {
+            const date = new Date(value);
+            const formattedDate = date.toLocaleDateString();
+            const formattedTime = date.toLocaleTimeString();
+            return (
+              <span>
+                {formattedDate} <b>{formattedTime}</b>
+              </span>
+            );
+          }
+          return <span></span>;
+        },
+      },
     },
   };
 
@@ -69,10 +106,21 @@ export default function AppointmentsTable({ establishmentId }) {
         actions={[
           {
             name: t('table.actions.cancel'),
+            onClick: (item) => {
+              handleCancelAppointment(item.id);
+            },
           },
         ]}
       />
-    </section>
+      <Modal isOpen={isCancelModalOpen} className={styles.Cancelmodal}>
+        <h3>Voulez vous annulez le RDV ?</h3>
+        <p>Le client sera prévenu par mail.</p>
+        <div className={styles.CancelmodalActions}>
+          <Button variant="danger" onClick={() => cancelAppointment()}>Oui</Button>
+          <Button onClick={() => setIsCancelModalOpen(false)}>Non</Button>
+        </div>
+      </Modal>
+    </section >
   );
 }
 

@@ -29,3 +29,7 @@ body {
 .rbc-day-slot .rbc-event {
   border: 1px solid var(--color-primary)!important;
 }
+/* stylelint-disable-next-line selector-class-pattern */
+.rbc-row-content {
+  z-index: 0!important;
+}

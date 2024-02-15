@@ -1,0 +1,17 @@
+.Cancelmodal {
+  width: 350px;
+  margin: 0 auto;
+  margin-top: var(--size-10);
+  background-color: var(--white);
+  outline: none;
+  box-shadow: var(--shadow-2);
+  padding: var(--size-3);
+  border-radius: var(--radius-2);
+
+  &Actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: var(--size-2);
+  }
+}
