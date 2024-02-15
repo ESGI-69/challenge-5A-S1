@@ -25,6 +25,7 @@ use App\Controller\Establishment\MapEstablishmentsPictureController;
 
 #[ORM\Entity(repositoryClass: EstablishmentRepository::class)]
 #[ApiResource(
+    paginationEnabled: true,
     operations: [
         new GetCollection(
             normalizationContext: ['groups' => ['read-establishment', 'read-company']],
