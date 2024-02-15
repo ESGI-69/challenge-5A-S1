@@ -15,26 +15,24 @@ const EstablishmentCard = ({
   reviewsNumber,
   zipCode,
   city,
-}) => {
-  console.log(picturePath);
-  return (
-    <Link to={`/establishment/${id}`} className={styles.Card}>
-      <img src={(picturePath)} className={styles.CardPicture}/>
-      <div className={styles.CardContent}>
-        <div className={styles.CardContentName}>
-          {name} - {city}
-        </div>
-        <div className={styles.CardContentAdress}>
-          <Shop />
-          {` ${adress}, ${zipCode} ${city}`}
-        </div>
-        <div className={styles.CardContentReview}>
-          <Star className={styles.CardContentReviewStar}/>
-          {` ${addDigit(globalReview)} (${reviewsNumber} avis)`}
-        </div>
+}) => (
+  <Link to={`/establishment/${id}`} className={styles.Card}>
+    <img src={(picturePath)} className={styles.CardPicture}/>
+    <div className={styles.CardContent}>
+      <div className={styles.CardContentName}>
+        {name} - {city}
       </div>
-    </Link>
-  );};
+      <div className={styles.CardContentAdress}>
+        <Shop />
+        {` ${adress}, ${zipCode} ${city}`}
+      </div>
+      <div className={styles.CardContentReview}>
+        <Star className={styles.CardContentReviewStar}/>
+        {` ${addDigit(globalReview)} (${reviewsNumber} avis)`}
+      </div>
+    </div>
+  </Link>
+);
 
 EstablishmentCard.propTypes = {
   id: PropTypes.number.isRequired,
