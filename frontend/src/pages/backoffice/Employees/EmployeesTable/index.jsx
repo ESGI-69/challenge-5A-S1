@@ -8,13 +8,18 @@ import styles from './EmployeesTable.module.scss';
 
 export default function EmployeesTable() {
   const { t } = useTranslation('employee');
-  const { employees, get: getEmployees, isEmployeesLoading } = useContext(EmployeeContext);
+  const { employees, get: getEmployees, isEmployeesLoading, remove } = useContext(EmployeeContext);
   const { profile } = useContext(ProfileContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     getEmployees(profile.company.id);
   }, []);
+
+  const handleRemove = async (id) => {
+    await remove(id);
+    await getEmployees(profile.company.id);
+  };
 
   const DATA_TEMPLATE = {
     properties: {
@@ -49,7 +54,7 @@ export default function EmployeesTable() {
         },
         {
           name: t('table.actions.delete'),
-          onClick: ({ id }) => navigate(`/backoffice/employees/delete/${id}`),
+          onClick: (employee) => handleRemove(employee.id),
         },
       ]}
     />

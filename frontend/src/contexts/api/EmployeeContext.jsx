@@ -13,6 +13,7 @@ const initialState = {
 
   isPostEmployeeLoading: false,
   isPatchEmployeeLoading: false,
+  isDeleteEmployeeLoading: false,
 
   isPostworkingHoursRangeLoading: false,
   isPatchworkingHoursRangeLoading: false,
@@ -61,6 +62,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         isPatchWorkingHoursRangeLoading: action.payload,
+      };
+    case 'isDeleteEmployeeLoading':
+      return {
+        ...state,
+        isDeleteEmployeeLoading: action.payload,
       };
     default:
       return state;
@@ -170,6 +176,10 @@ export default function EmployeeProvider({ children }) {
       type: 'isEmployeeLoading',
       payload: true,
     });
+    dispatch({
+      type: 'isDeleteEmployeeLoading',
+      payload: true,
+    });
     try {
       await apiCall.delete(`/companies/employees/${id}`);
       toast.success(i18n.t('events.delete.success', { ns: 'employee' }));
@@ -179,6 +189,10 @@ export default function EmployeeProvider({ children }) {
     } finally {
       dispatch({
         type: 'isEmployeeLoading',
+        payload: false,
+      });
+      dispatch({
+        type: 'isDeleteEmployeeLoading',
         payload: false,
       });
     }
@@ -241,6 +255,7 @@ export default function EmployeeProvider({ children }) {
       post,
       patch,
       remove,
+      isDeleteEmployeeLoading: state.isDeleteEmployeeLoading,
 
       postWorkingHoursRange,
       isPostWorkingHoursRangeLoading: state.isPostWorkingHoursRangeLoading,
