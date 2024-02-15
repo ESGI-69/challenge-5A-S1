@@ -17,7 +17,7 @@ const LocationAutoComplete = ({ ...delegated }) => {
     <div className={styles.LocationAutocomplete} {...delegated}>
       {!isEstablishmentsLoading
         ? (
-          establishments.length > 0
+          establishments && establishments.length > 0
             ? establishments.map((establishment) =>
               <Link className={styles.LocationAutocompleteType} to={`/search?location=${establishment.city}`} key={establishment.city}>
                 {establishment.city}
