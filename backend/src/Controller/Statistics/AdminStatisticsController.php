@@ -44,9 +44,9 @@ class AdminStatisticsController
         }
       }
     }
-    $averageSumPerCompany = $totalSum / $nbCompanies;
-    $averageSumPerEstablishment = $totalSum / $nbEstablishments;
-    $averageSumPerEmployee = $totalSum / $nbEmployees;
+    $averageSumPerCompany = $nbCompanies !== 0 ? $totalSum / $nbCompanies : 0;
+    $averageSumPerEstablishment = $nbEstablishments !== 0 ? $totalSum / $nbEstablishments : 0;
+    $averageSumPerEmployee = $nbEmployees !== 0 ? $totalSum / $nbEmployees : 0;
     return new JsonResponse([
       'nbCompanies' => $nbCompanies,
       'nbEmployees' => $nbEmployees,
