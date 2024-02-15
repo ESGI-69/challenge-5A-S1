@@ -119,14 +119,14 @@ class Employee
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
 
-    #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Appointment::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Appointment::class, orphanRemoval: true, cascade: ['remove'])]
     private Collection $appointments;
 
     #[Groups(['employee-getall'])]
-    #[ORM\OneToMany(mappedBy: 'Employee', targetEntity: WorkingHoursRange::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'Employee', targetEntity: WorkingHoursRange::class, orphanRemoval: true, cascade: ['remove'])]
     private Collection $workingHoursRanges;
 
-    #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Feedback::class)]
+    #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Feedback::class, orphanRemoval: true, cascade: ['remove'])]
     private Collection $feedback;
 
     public function __construct()
