@@ -39,6 +39,6 @@ jobs:
       - name: Install dependencies
         run: docker-compose exec -T php composer install
       - name: Run tests
-        run: docker-compose exec -T php php bin/phpunit
+        run: docker-compose exec -T php php /usr/bin/phpunit
       - name: Stop container
         run: docker-compose down -v
