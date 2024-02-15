@@ -30,6 +30,8 @@ jobs:
         working-directory: backend
     steps:
       - uses: actions/checkout@v3
+      - name: Copiyng .env file
+        run: cp .env.prod.example .env
       - name: launching backend container
         run: docker-compose up -d
       - name: Run tests
