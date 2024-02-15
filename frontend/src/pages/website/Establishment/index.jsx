@@ -84,7 +84,7 @@ function Establishment() {
                 {t('editEstablishment')}
               </Button>
             )}
-            <Button variant="black">{t('makeAnAppointment')}</Button>
+            {/* <Button variant="black">{t('makeAnAppointment')}</Button> */}
           </div>
         </div>
         {((!isEstablishmentLoading && establishment?.establishmentPictures && establishment?.establishmentPictures.length>0) &&
