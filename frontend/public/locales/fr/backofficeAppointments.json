@@ -1,0 +1,15 @@
+{
+  "title": "Rendez-vous",
+  "table": {
+    "titles": {
+      "employee": "Employé(e)",
+      "client": "Client(e)",
+      "service": "Service",
+      "date": "Date",
+      "comment": "Commentaire"
+    },
+    "actions": {
+      "cancel": "Annuler le RDV"
+    }
+  }
+}

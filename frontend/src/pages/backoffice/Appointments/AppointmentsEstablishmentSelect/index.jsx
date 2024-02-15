@@ -23,7 +23,7 @@ export default function AppointmentsEstablishmentSelect({ onChange }) {
         {isEstablishmentsLoading && <option>Loading...</option>}
         {!isEstablishmentsLoading && establishments.map((esta) => (
           <option key={esta.id} value={esta.id}>
-            {esta.street}
+            {esta.street}, {esta.city} {esta.zipCode}
           </option>
         ))}
       </select>

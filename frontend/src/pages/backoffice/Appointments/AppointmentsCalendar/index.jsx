@@ -25,7 +25,6 @@ const localizer = dateFnsLocalizer({
 export default function AppointmentsCalendar({ establishmentId }) {
   const {
     getEstablishmentAppointments,
-    getEstablishmentAppointmentsLoading,
     establishmentAppointments,
   } = useContext(AppointmentContext);
   const [ events, setEvents ] = useState([]);

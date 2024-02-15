@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 export default function AppointmentsTable({ establishmentId }) {
   const { getEstablishmentAppointments, establishmentAppointments, isEstablishmentAppointmentsLoading } = useContext(AppointmentContext);
-  const { t } = useTranslation('base');
+  const { t } = useTranslation('backofficeAppointments');
 
   useEffect(() => {
     if (establishmentId) {
@@ -20,17 +20,17 @@ export default function AppointmentsTable({ establishmentId }) {
         width: '50px',
       },
       employee: {
-        name: 'Employé(e)',
+        name: t('table.titles.employee'),
         width: '120px',
         component: ({ value }) => <span>{value.firstname}</span>,
       },
       client: {
-        name: 'Client(e)',
+        name: t('table.titles.client'),
         width: '120px',
         component: ({ value }) => <span>{value.firstname}</span>,
       },
       service: {
-        name: 'Service',
+        name: t('table.titles.service'),
         width: '300px',
         component: ({ value }) => <>
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
@@ -41,7 +41,7 @@ export default function AppointmentsTable({ establishmentId }) {
         </>,
       },
       startDate: {
-        name: 'Date de début',
+        name: t('table.titles.date'),
         width: '200px',
         component: ({ value }) => {
           const date = new Date(value);
@@ -55,7 +55,7 @@ export default function AppointmentsTable({ establishmentId }) {
         },
       },
       comment: {
-        name: 'Commentaire',
+        name: t('table.titles.comment'),
       },
     },
   };
@@ -68,10 +68,7 @@ export default function AppointmentsTable({ establishmentId }) {
         loading={isEstablishmentAppointmentsLoading}
         actions={[
           {
-            name: t('table.actions.edit'),
-          },
-          {
-            name: t('table.actions.delete'),
+            name: t('table.actions.cancel'),
           },
         ]}
       />

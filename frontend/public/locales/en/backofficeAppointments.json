@@ -1,0 +1,15 @@
+{
+  "title": "Appointments",
+  "table": {
+    "titles": {
+      "employee": "Employee",
+      "client": "Client",
+      "service": "Service",
+      "date": "Date",
+      "comment": "Comment"
+    },
+    "actions": {
+      "cancel": "Cancel"
+    }
+  }
+}
