@@ -23,6 +23,9 @@ class CancelAppointmentController
 
   public function __invoke(Appointment $appointment): Appointment
   {
+    if ($appointment->getCancelledAt() !== null) {
+      throw new \Exception("This appointment has already been cancelled");
+    }
     $appointment->setCancelledAt(new \DateTimeImmutable());
 
     $email = (new Email())

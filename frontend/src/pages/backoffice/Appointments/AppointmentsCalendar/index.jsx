@@ -34,7 +34,7 @@ export default function AppointmentsCalendar({ establishmentId }) {
     }
   }, [ establishmentId ]);
   useEffect(() => {
-    const evs = establishmentAppointments.map((appointment) => ({
+    const evs = establishmentAppointments.filter((appointment) => !appointment.cancelledAt).map((appointment) => ({
       title: `[${appointment.employee.firstname}] ${appointment.service.name} avec ${appointment.client.firstname}`,
       start: new Date(appointment.startDate),
       end: new Date(appointment.endDate),

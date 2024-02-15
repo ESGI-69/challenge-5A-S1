@@ -23,9 +23,9 @@ export default function AppointmentsTable({ establishmentId }) {
     setAppointmentToCancel(id);
   };
 
-  const cancelAppointment = () => {
+  const cancelAppointment = async () => {
     setIsCancelModalOpen(false);
-    cancelAppointmentAPI(appointmentToCancel);
+    await cancelAppointmentAPI(appointmentToCancel);
     getEstablishmentAppointments(establishmentId);
   };
 
@@ -112,7 +112,7 @@ export default function AppointmentsTable({ establishmentId }) {
           },
         ]}
       />
-      <Modal isOpen={isCancelModalOpen} className={styles.Cancelmodal}>
+      <Modal isOpen={isCancelModalOpen} className={styles.Cancelmodal} ariaHideApp={false}>
         <h3>Voulez vous annulez le RDV ?</h3>
         <p>Le client sera prévenu par mail.</p>
         <div className={styles.CancelmodalActions}>
