@@ -149,3 +149,13 @@ public/company_logo/*
 public/establishment_picture/*
 public/avatar_employee/*
 swagger.json
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
