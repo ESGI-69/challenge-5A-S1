@@ -14,6 +14,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 // @todo : Adapt this entity to block other Company to get others Company data
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
@@ -47,7 +50,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             name: 'create-employee-of-company',
             uriTemplate: '/companies/employees',
             normalizationContext: ['groups' => ['employee-post']],
-            denormalizationContext: ['groups' => ['employee-post']],
+            denormalizationContext: ['groups' => ['employee-post']], inputFormats: ['multipart' => ['multipart/form-data']],
             securityPostDenormalize: 'is_granted("ROLE_PRESTA") and object.getCompanyId() == user.getCompany()',
             securityPostDenormalizeMessage: 'You can only create employees for your company',
             read: false,
@@ -79,6 +82,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         ),
     ]
 )]
+#[Vich\Uploadable]
 class Employee
 {
     #[ORM\Id]
@@ -106,7 +110,12 @@ class Employee
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
-    #[Groups(['employee-post', 'employee-get', 'employee-patch', 'employee-getall','read-company-employees'])]
+    #[Assert\File(mimeTypes: ['image/jpeg', 'image/png', 'image/webp'])]
+    #[Vich\UploadableField(mapping: 'avatar_employee', fileNameProperty:'avatar')]
+    #[Groups(['employee-post'])]
+    public ?File $fileAvatar = null;
+
+    #[Groups(['employee-get', 'employee-patch', 'employee-getall','read-company-employees', 'appointment-me'])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
 

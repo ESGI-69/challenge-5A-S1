@@ -48,7 +48,7 @@ export default function RegisterForm() {
 
   const [ avatarInput, setAvatarInput ] = useState({
     id: v4(),
-    name: 'avatar',
+    name: 'fileAvatar',
     value: '',
   });
 
@@ -75,11 +75,12 @@ export default function RegisterForm() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+
     const data = {
       firstname: formData.get('firstname'),
       lastname: formData.get('lastname'),
       companyId: `/api/companies/${profile.company.id}`,
-      avatar: formData.get('avatar'),
+      fileAvatar: formData.get('fileAvatar'),
       preferedEstablishment: formData.get('preferedEstablishment'),
     };
     await post(data);
@@ -123,6 +124,7 @@ export default function RegisterForm() {
               disabled={isPostEmployeeLoading}
               value={avatarInput.value}
               onInput={handleAvatarInputChange}
+              type="file"
               required
             />
           </div>

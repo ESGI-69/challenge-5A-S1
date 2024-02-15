@@ -36,6 +36,10 @@
     "delete": {
       "success": "Employee deleted successfully",
       "error": "An error occured during the employee deletion"
+    },
+    "workinghoursRange": {
+      "error": "An error occured during the working hours range update",
+      "success": "Working hours range updated successfully"
     }
   },
   "list": {
