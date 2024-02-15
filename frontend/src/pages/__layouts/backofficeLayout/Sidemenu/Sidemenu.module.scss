@@ -142,6 +142,11 @@
         background: var(--color-hover);
       }
 
+      svg {
+        width: var(--size-4);
+        height: var(--size-4);
+      }
+
       &_Danger {
         color: var(--color-danger);
       }

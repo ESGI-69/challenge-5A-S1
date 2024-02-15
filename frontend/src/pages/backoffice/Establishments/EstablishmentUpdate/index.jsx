@@ -92,10 +92,10 @@ export default function EstablishmentUpdate() {
   return (
     <div className={style.EstablishmentUpdate}>
       <BackofficeHeader>
-        <h1>{ t('update.title') }</h1>
+        <h1>{t('update.title')}</h1>
       </BackofficeHeader>
-      <Button to="/backoffice/establishments">{ t('update.back') }</Button>
-      <Button to={`/establishment/${id}`}>{ t('seeInUserLand', { ns: 'base' }) }</Button>
+      <Button to="/backoffice/establishments">{t('update.back')}</Button>
+      <Button to={`/establishment/${id}`}>{t('seeInUserLand', { ns: 'base' })}</Button>
       {(!isEstablishmentTypesLoading && !isEstablishmentLoading && establishment && establishmentTypes) && (
         <>
           <EstablishmentUpdateForm
@@ -104,50 +104,68 @@ export default function EstablishmentUpdate() {
             isLoading={isPatchEstablishmentLoading}
             {...establishment}
           />
-          <h2>{ t('serviceType.title') }</h2>
-          {(establishment.serviceTypes.length > 0
-            ? establishment.serviceTypes.map((serviceType) => (
-              <ServiceProvider
-                key={serviceType.id}
-              >
-                <ServiceTypeSelector
-                  {...serviceType}
-                  isLoading={isDeleteServiceTypeLoading || isPatchServiceTypeLoading}
-                  onUpdateServiceType={updateServiceTypeHandler}
-                  onDeleteServiceType={deleteServiceTypeHandler}
-                />
-              </ServiceProvider>
-            ))
-            : <div>
-              <span>{ t('serviceType.empty') }</span>
+          <section className={`${style.EstablishmentUpdateSection} ${style.EstablishmentUpdateSection_Split}`}>
+            <div>
+              <h2>{t('serviceType.title')}</h2>
+              {(establishment.serviceTypes.length > 0
+                ? establishment.serviceTypes.map((serviceType) => (
+                  <ServiceProvider
+                    key={serviceType.id}
+                  >
+                    <ServiceTypeSelector
+                      {...serviceType}
+                      isLoading={isDeleteServiceTypeLoading || isPatchServiceTypeLoading}
+                      onUpdateServiceType={updateServiceTypeHandler}
+                      onDeleteServiceType={deleteServiceTypeHandler}
+                    />
+                  </ServiceProvider>
+                ))
+                : <div>
+                  <span>{t('serviceType.empty')}</span>
+                </div>
+              )}
+              <Button onClick={() => setIsServiceTypeModalOpen(true)}>{t('serviceType.action.create')}</Button>
             </div>
-          )}
-          <Button onClick={() => setIsServiceTypeModalOpen(true)}>{t('serviceType.action.create')}</Button>
-          <h2>{ t('openingHourSelector') }</h2>
-          <OpeningHoursSelector />
-          <h2>{ t('establishmentPicture.deleteForm') }</h2>
-          <EstablishmentPicturesDelete
-            establishmentPictures={establishment.establishmentPictures}
-            deletePictureEstablishment={deleteEstablishmentPictureHandler}
-            isDeletePictureEstablishmentLoading={isDeletePictureEstablishmentLoading}
-            t={t}
-          />
-          <h2>{ t('establishmentPicture.uploadForm') }</h2>
-          <Input
-            id="add-establishment-picture"
-            name="filePicture"
-            type="file"
-            accept="image/jpeg, image/png"
-            placeholder={t('form.filePicture')}
-            disabled={isPostEstablishmentPictureLoading}
-            required
-          />
-          <Button disabled={isPostEstablishmentPictureLoading} onClick={() => postEstablishmentPictureHandler(document.getElementById('add-establishment-picture'))}>{t('add', { ns: 'base' })}</Button>
-          <h2>{ t('feedbackTypeSelector') }</h2>
-          <h2>{ t('feedbackTypePrestaSelector')}</h2>
-          <FeedbackTypeProvider>
-            <FeedbackTypePrestaSelector />
-          </FeedbackTypeProvider>
+            <div>
+              <h2>{t('openingHourSelector')}</h2>
+              <OpeningHoursSelector />
+            </div>
+          </section>
+          <section className={style.EstablishmentUpdateSection}>
+            <h2>{t('establishmentPicture.deleteForm')}</h2>
+            <div className={style.EstablishmentUpdateSectionCard}>
+              <EstablishmentPicturesDelete
+                establishmentPictures={establishment.establishmentPictures}
+                deletePictureEstablishment={deleteEstablishmentPictureHandler}
+                isDeletePictureEstablishmentLoading={isDeletePictureEstablishmentLoading}
+                t={t}
+              />
+              <h3>{t('establishmentPicture.uploadForm')}</h3>
+              <Input
+                id="add-establishment-picture"
+                name="filePicture"
+                type="file"
+                accept="image/jpeg, image/png"
+                placeholder={t('form.filePicture')}
+                disabled={isPostEstablishmentPictureLoading}
+                required
+              />
+              <Button
+                disabled={isPostEstablishmentPictureLoading}
+                onClick={() => postEstablishmentPictureHandler(document.getElementById('add-establishment-picture'))}>
+                {t('add', { ns: 'base' })}
+              </Button>
+            </div>
+          </section>
+          <h2>{t('feedbackTypeSelector')}</h2>
+          <section className={style.EstablishmentUpdateSection}>
+            <div className={style.EstablishmentUpdateSectionCard}>
+              <h3>{t('feedbackTypePrestaSelector')}</h3>
+              <FeedbackTypeProvider>
+                <FeedbackTypePrestaSelector />
+              </FeedbackTypeProvider>
+            </div>
+          </section>
         </>
       )}
       <Modal style={{
