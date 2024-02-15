@@ -1,27 +1,18 @@
 import PTable from '@/components/lib/PTable';
-import { ProfileContext } from '@/contexts/ProfileContext';
 import { AppointmentContext } from '@/contexts/api/AppointmentContext';
-import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import { useTranslation } from 'react-i18next';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-export default function AppointmentsTable() {
+export default function AppointmentsTable({ establishmentId }) {
   const { getEstablishmentAppointments, establishmentAppointments, isEstablishmentAppointmentsLoading } = useContext(AppointmentContext);
-  const { establishments, isEstablishmentLoading, get } = useContext(EstablishmentContext);
-  const { profile } = useContext(ProfileContext);
-  const [ establishmentId, setEstablishmentId ] = useState(null);
   const { t } = useTranslation('base');
 
   useEffect(() => {
-    setEstablishmentId(establishments[0]?.id);
     if (establishmentId) {
       getEstablishmentAppointments(establishmentId);
     }
-  }, [ establishmentId, establishments ]);
-  useEffect(() => {
-    // Getting the establishments of the company
-    get({ 'company.id': profile.company.id });
-  }, []);
+  }, [ establishmentId ]);
 
   const DATA_TEMPLATE = {
     properties: {
@@ -71,13 +62,6 @@ export default function AppointmentsTable() {
 
   return (
     <section>
-      <select onChange={(e) => setEstablishmentId(e.target.value)}>
-        {establishments.map((esta) => (
-          <option key={esta.id} value={esta.id}>
-            {esta.street}
-          </option>
-        ))}
-      </select>
       <PTable
         template={DATA_TEMPLATE}
         data={establishmentAppointments}
@@ -94,3 +78,7 @@ export default function AppointmentsTable() {
     </section>
   );
 }
+
+AppointmentsTable.propTypes = {
+  establishmentId: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+};
