@@ -51,6 +51,8 @@ COPY ./symfony.lock /srv/app/
 
 RUN composer install --no-dev --no-scripts
 
+COPY /usr/bin/phpunit /usr/bin/phpunit
+
 COPY . /srv/app/
 
 # Add write permissions 777 to the var director
