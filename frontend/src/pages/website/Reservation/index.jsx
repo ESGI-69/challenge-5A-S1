@@ -22,7 +22,7 @@ export default function Reservation() {
   const { getById: getEstablishmentById, establishment, isEstablishmentLoading } = useContext(EstablishmentContext);
   const [ selectedDate, setSelectedDate ] = useState(null);
   const [ selectedEmployee, setSelectedEmployee ] = useState(null);
-  const [ persons, setPersons ] = useState([]);
+  const [ persons, setPersons ] = useState(undefined);
   const [ comment, setComment ] = useState('');
 
   const [ person, setPerson ] = useState(undefined);
@@ -57,12 +57,27 @@ export default function Reservation() {
 
   useEffect(() => {
     if (service) {
-      getEstablishmentById(service.establishment.id);
-      const { schedule, newPersons } = generateSchedule(service);
-      setSchedule(schedule);
-      if (persons !== newPersons) {
-        setPersons(newPersons);
+      const uniquePersons = [];
+      const ids = new Set();
+
+      for (const range of service.workingHoursRanges) {
+        if (!ids.has(range.Employee.id)) {
+          uniquePersons.push(range.Employee);
+          ids.add(range.Employee.id);
+        }
       }
+
+      setPersons(uniquePersons);
+    }
+  }, [ service ]);
+
+  useEffect(() => {
+    if (service && persons) {
+      getEstablishmentById(service.establishment.id);
+
+      const { schedule } = generateSchedule(service);
+      setSchedule(schedule);
+
       const preSelectedEmployee = persons.find(person => person.id == employeeId);
       if (preSelectedEmployee) {
         if (person === undefined) {
@@ -76,6 +91,7 @@ export default function Reservation() {
     service,
     employeeId,
     person,
+    persons,
   ]);
 
   function generateSchedule(service) {
@@ -121,7 +137,6 @@ export default function Reservation() {
         id: serviceEmployee,
         name: `${serviceEmployeeName}`,
       };
-
       if (serviceEmployee === person?.id) {
 
         let currentTime = startDate;
@@ -159,7 +174,7 @@ export default function Reservation() {
       }
 
     });
-    return { schedule, newPersons: Object.values(employees) };
+    return { schedule };
   }
 
   function getWeek(date) {
@@ -218,20 +233,22 @@ export default function Reservation() {
             </div>
           </div>
           <div className={styles.ServicePerson}>
-            <Dropdown>
-              {person?.name &&
+            {persons && person && (
+              <Dropdown>
+                {person.firstname &&
                 <DropdownButton>
                   <Button variant="black" isPlain={false}>
-                    {person?.name}
+                    {person.firstname}
                   </Button>
                 </DropdownButton>
-              }
-              <DropdownList>
-                {persons.map(person => (
-                  <DropdownItem key={person.id} onClick={() => setPerson(person)}>{person.name}</DropdownItem>
-                ))}
-              </DropdownList>
-            </Dropdown>
+                }
+                <DropdownList>
+                  {persons.map(person => (
+                    <DropdownItem key={person.id} onClick={() => setPerson(person)}>{person.firstname}</DropdownItem>
+                  ))}
+                </DropdownList>
+              </Dropdown>
+            )}
           </div>
           <div className={styles.ServiceAction}>
             <a href="#" className={styles.ServiceActionDelete}>{t('delete')}</a>
