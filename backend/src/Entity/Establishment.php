@@ -25,7 +25,6 @@ use App\Controller\Establishment\MapEstablishmentsPictureController;
 
 #[ORM\Entity(repositoryClass: EstablishmentRepository::class)]
 #[ApiResource(
-    paginationEnabled: true,
     operations: [
         new GetCollection(
             normalizationContext: ['groups' => ['read-establishment', 'read-company']],
@@ -38,6 +37,7 @@ use App\Controller\Establishment\MapEstablishmentsPictureController;
         new GetCollection(
             uriTemplate: '/establishments/cities',
             normalizationContext: ['groups' => ['read-establishment-city']],
+            paginationEnabled: true,
             paginationItemsPerPage: 5, // Limit the results to 5
         ),
         new Get(
