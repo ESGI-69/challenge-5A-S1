@@ -27,7 +27,7 @@ function AppointmentCard({
   return (
     <div className={`${styles.AppointmentCard} ${showEstablishment && styles.AppointmentCard_ShowEstablishment}`}>
       {showEstablishment &&
-        <img className={styles.AppointmentCardImage} src={`${import.meta.env.VITE_API_DOMAIN}${appointment.establishment.establishmentPictures[0]?.pathPicture}` || 'https://placehold.co/600x400'} />
+        <img className={styles.AppointmentCardImage} src={appointment.establishment.establishmentPictures[0]?.pathPicture ? `${import.meta.env.VITE_API_DOMAIN}${appointment.establishment.establishmentPictures[0]?.pathPicture}` : 'https://placehold.co/600x400'} />
       }
       <div className={styles.AppointmentCardInfo}>
         <p className={styles.AppointmentCardDate}>
