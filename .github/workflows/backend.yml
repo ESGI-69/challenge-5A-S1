@@ -36,10 +36,8 @@ jobs:
         run: docker build .
       - name: launching backend container
         run: docker-compose up -d
-      - name: Debug - Show Docker containers
-        run: docker ps
-      - name: Debug - Show PHP service logs
-        run: docker logs php
+      - name: Install dependencies
+        run: docker-compose exec -T php composer install
       - name: Run tests
         run: docker-compose exec -T php php bin/phpunit
       - name: Stop container
