@@ -75,8 +75,9 @@ function AppointmentCard({
               {t('retakeAppointment')}
             </Button>
           </Link>
-          {isPast && !appointment.feedback &&
+          {isPast &&
           <Button
+            disabled={appointment.feedback}
             variant="black"
             onClick={openReviewModal}
           >

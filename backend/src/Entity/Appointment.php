@@ -83,7 +83,7 @@ class Appointment
     #[ORM\JoinColumn(nullable: false)]
     private ?Service $service = null;
 
-    #[Groups(['appointment-getall', 'appointment-read', 'appointment-getall'])]
+    #[Groups(['appointment-getall', 'appointment-read'])]
     #[ORM\ManyToOne(inversedBy: 'appointments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
@@ -104,7 +104,7 @@ class Appointment
     #[ORM\Column (nullable: true)]
     private ?\DateTimeImmutable $cancelledAt = null;
 
-    #[Groups(['appointment-getall', 'appointment-read', 'appointment-getall', 'company-statistics-getall'])]
+    #[Groups(['appointment-getall', 'appointment-read', 'company-statistics-getall'])]
     #[ORM\Column(nullable: true)]
     private ?float $price = null;
 

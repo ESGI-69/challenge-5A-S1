@@ -72,11 +72,11 @@ export default function AppointmentProvider({ children }) {
     }
   };
 
-  const refetchAppointments = async (establishmentId = null) => {
+  const refetchAppointments = async (querry) => {
     dispatch({
       type: 'clearMyAppointments',
     });
-    await getMyAppointments(establishmentId);
+    await getAppointments(querry);
   };
 
   const post = async (data) => {

@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 import { FeedbackContext } from '@/contexts/api/FeedbackContext';
 import { EstablishmentContext } from '@/contexts/api/EstablishmentContext';
 import { AppointmentContext } from '@/contexts/api/AppointmentContext';
+import { ProfileContext } from '@/contexts/ProfileContext';
 
 function ModalSendReview({
   appointment,
@@ -22,6 +23,7 @@ function ModalSendReview({
   const { t } = useTranslation('modalSendReview');
   const [ ratings, setRatings ] = useState({});
   const [ comment, setComment ] = useState('');
+  const { profile } = useContext(ProfileContext);
   const { postFeedback, isPostFeedbackLoading } = useContext(FeedbackContext);
   const { refetchEstablishment } = useContext(EstablishmentContext);
   const { refetchAppointments } = useContext(AppointmentContext);
@@ -68,7 +70,7 @@ function ModalSendReview({
       if (isEstablishmentPage) {
         refetchEstablishment();
       } else {
-        refetchAppointments();
+        refetchAppointments({ 'client.id': profile.id });
       }
       toast.success(t('successForm'));
       setIsModalOpen(false);

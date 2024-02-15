@@ -18,7 +18,7 @@ const AppointmentsList = ({
   } = useContext(AppointmentContext);
 
   useEffect(() => {
-    if (!isFutureAppointments) {
+    if (isFutureAppointments) {
       getAppointments({
         'startDate[after]': new Date().toISOString(),
         'client.id': profile.id,
