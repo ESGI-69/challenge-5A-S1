@@ -42,7 +42,8 @@ jobs:
       - name: Launch stylelint
         run: npm run lint:style
   
-  test:
+  tests:
+    name: Jest tests 
     runs-on: ubuntu-latest
 
     steps:
@@ -64,6 +65,7 @@ jobs:
     needs:
       - eslint
       - stylelint
+      - tests
     runs-on: ubuntu-latest
     name: Build (frontend)
     defaults:
