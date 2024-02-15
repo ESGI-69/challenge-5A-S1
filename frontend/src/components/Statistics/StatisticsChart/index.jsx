@@ -58,6 +58,8 @@ export default function StatisticsChart({ data }) {
         date: key,
         sum: data[key],
       }));
+      // Sort the data by date
+      formatted.sort((a, b) => new Date(a.date) - new Date(b.date));
       setFormattedData(formatted);
       updateChartsData();
     }

@@ -35,18 +35,20 @@ class AdminStatisticsController
       $nbEstablishments += count($company->getEstablishments());
       foreach ($company->getEstablishments() as $establishment) {
         foreach ($establishment->getAppointments() as $appointment) {
-          $totalSum += $appointment->getPrice();
-          $appointmentDate = $appointment->getEndDate()->format('Y-m-d');
-          if (!isset($allTimeSumWithDate[$appointmentDate])) {
-            $allTimeSumWithDate[$appointmentDate] = 0;
+          if ($appointment->getCancelledAt() === null) {
+            $totalSum += $appointment->getPrice();
+            $appointmentDate = $appointment->getEndDate()->format('Y-m-d');
+            if (!isset($allTimeSumWithDate[$appointmentDate])) {
+              $allTimeSumWithDate[$appointmentDate] = 0;
+            }
+            $allTimeSumWithDate[$appointmentDate] += $appointment->getPrice();
           }
-          $allTimeSumWithDate[$appointmentDate] += $appointment->getPrice();
         }
       }
     }
-    $averageSumPerCompany = $totalSum / $nbCompanies;
-    $averageSumPerEstablishment = $totalSum / $nbEstablishments;
-    $averageSumPerEmployee = $totalSum / $nbEmployees;
+    $averageSumPerCompany = $nbCompanies !== 0 ? $totalSum / $nbCompanies : 0;
+    $averageSumPerEstablishment = $nbEstablishments !== 0 ? $totalSum / $nbEstablishments : 0;
+    $averageSumPerEmployee = $nbEmployees !== 0 ? $totalSum / $nbEmployees : 0;
     return new JsonResponse([
       'nbCompanies' => $nbCompanies,
       'nbEmployees' => $nbEmployees,
