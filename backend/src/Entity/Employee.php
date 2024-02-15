@@ -115,7 +115,7 @@ class Employee
     #[Groups(['employee-post'])]
     public ?File $fileAvatar = null;
 
-    #[Groups(['employee-get', 'employee-patch', 'employee-getall','read-company-employees', 'appointment-me'])]
+    #[Groups(['employee-get', 'employee-patch', 'employee-getall','read-company-employees', 'appointment-getall'])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
 
