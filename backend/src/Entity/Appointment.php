@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use App\Controller\Appointment\CancelAppointmentController;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use App\Controller\Appointment\GetAppointmentMeController;
 
@@ -35,9 +36,15 @@ use App\Controller\Appointment\GetAppointmentMeController;
             controller: CreateAppointmentController::class
         ),
         new Patch(
-            security: 'is_granted("ROLE_USER") and (object.getClient() == user or object.establishment.getCompany() == user.getCompany())',
+            security: 'is_granted("ROLE_USER") and (object.getClient() == user or object.getEstablishment().getCompany() == user.getCompany())',
             normalizationContext: ['groups' => ['appointment-update']],
             denormalizationContext: ['groups' => ['appointment-update']],
+        ),
+        new Patch(
+          uriTemplate: '/appointments/{id}/cancel',
+          security: 'is_granted("ROLE_PRESTA") and object.getEstablishment().getCompany() == user.getCompany()',
+          denormalizationContext: ['groups' => ['appointment-cancel']],
+          controller: CancelAppointmentController::class
         ),
         new Delete(
             security: 'is_granted("ROLE_ADMIN")',
@@ -100,7 +107,7 @@ class Appointment
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $comment = null;
 
-    #[Groups(['appointment-read', 'appointment-update', 'appointment-getall'])]
+    #[Groups(['appointment-read', 'appointment-update', 'appointment-getall', 'appointment-cancel'])]
     #[ORM\Column (nullable: true)]
     private ?\DateTimeImmutable $cancelledAt = null;
 
