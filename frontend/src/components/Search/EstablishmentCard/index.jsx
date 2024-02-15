@@ -6,21 +6,20 @@ import Shop from '@/components/lib/Icons/Shop';
 import { Link } from 'react-router-dom';
 import { addDigit } from '@/utils/formater/note';
 
-const EstablishmentCard = function EstablishmentCard({
+const EstablishmentCard = ({
   id,
-  picturePath,
+  picturePath = 'https://placehold.co/600x400',
   name,
   adress,
   globalReview = 0,
   reviewsNumber,
   zipCode,
   city,
-},
-) {
-
+}) => {
+  console.log(picturePath);
   return (
     <Link to={`/establishment/${id}`} className={styles.Card}>
-      <img src={(picturePath || 'https://picsum.photos/seed/1/534/300')} className={styles.CardPicture}/>
+      <img src={(picturePath)} className={styles.CardPicture}/>
       <div className={styles.CardContent}>
         <div className={styles.CardContentName}>
           {name} - {city}
@@ -35,8 +34,7 @@ const EstablishmentCard = function EstablishmentCard({
         </div>
       </div>
     </Link>
-  );
-};
+  );};
 
 EstablishmentCard.propTypes = {
   id: PropTypes.number.isRequired,
