@@ -32,6 +32,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Copiyng .env file
         run: cp .env.prod.example .env
+      - name: Build image
+        run: docker build .
       - name: run composer install
         run: docker-compose exec php composer install
       - name: launching backend container
