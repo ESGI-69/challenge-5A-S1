@@ -1,5 +1,4 @@
-
-import PastAppointments from '@/pages/website/Profile/PastAppointments';
+import AppointmentsList from '@/pages/website/Profile/AppointmentsList';
 import styles from './Profile.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useContext, useState } from 'react';
@@ -10,7 +9,7 @@ const Profile = () => {
   const { t } = useTranslation('profile');
   const { profile, logout } = useContext(ProfileContext);
 
-  const [ currentPage, setCurrentPage ] = useState('myAppointments');
+  const [ currentPage, setCurrentPage ] = useState('myPastAppointments');
 
   return (
     <div className={styles.Profile}>
@@ -20,10 +19,16 @@ const Profile = () => {
         <h2>{t('myAccount.title')}</h2>
         <div className={styles.ProfileMyProfileActions}>
           <button
-            onClick={() => setCurrentPage('myAppointments')}
-            className={`${styles.ProfileMyProfileActionsButton} ${currentPage === 'myAppointments' && styles.ProfileMyProfileActionsButton_Active}`}
+            onClick={() => setCurrentPage('myPastAppointments')}
+            className={`${styles.ProfileMyProfileActionsButton} ${currentPage === 'myPastAppointments' && styles.ProfileMyProfileActionsButton_Active}`}
           >
-            {t('myAccount.myAppointments')}
+            {t('myAccount.myPastAppointments')}
+          </button>
+          <button
+            onClick={() => setCurrentPage('myFutureAppointments')}
+            className={`${styles.ProfileMyProfileActionsButton} ${currentPage === 'myFutureAppointments' && styles.ProfileMyProfileActionsButton_Active}`}
+          >
+            {t('myAccount.myFutureAppointments')}
           </button>
           <button
             onClick={() => setCurrentPage('myInformations')}
@@ -48,13 +53,24 @@ const Profile = () => {
           </button>
         </div>
       </div>
-      {currentPage === 'myAppointments' && (
-        <PastAppointments />
-      )}
-      {currentPage === 'myInformations' && (
-        <div>
-          {t('myInformations.title')}
-        </div>
+      {profile ? (
+        <>
+          {currentPage === 'myPastAppointments' && (
+            <AppointmentsList />
+          )}
+          {currentPage === 'myFutureAppointments' && (
+            <AppointmentsList isFutureAppointments />
+          )}
+          {currentPage === 'myInformations' && (
+            <div>
+              {t('myInformations.title')}
+            </div>
+          )}
+        </>
+      ) : (
+        <span>
+          {t('loading', { ns: 'base' })}...
+        </span>
       )}
     </div>
   );

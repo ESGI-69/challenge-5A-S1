@@ -68,13 +68,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 )]
 class Service
 {
-    #[Groups(['read-service', 'read-service-all', 'read-establishment', 'appointment-me', 'employee-getall'])]
+    #[Groups(['read-service', 'read-service-all', 'read-establishment', 'appointment-getall', 'employee-getall'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read', 'read-establishment', 'appointment-me', 'employee-getall'])]
+    #[Groups(['create-service', 'read-service', 'read-service-all', 'appointment-read', 'read-establishment', 'appointment-getall', 'employee-getall'])]
     #[Assert\NotBlank]
     #[Assert\NotNull]
     #[ORM\Column(length: 50, unique: true)]
@@ -115,11 +115,11 @@ class Service
     #[ORM\JoinColumn(nullable: false)]
     private ?ServiceType $type = null;
 
-    #[Groups(['read-establishment', 'appointment-me','read-service'])]
+    #[Groups(['read-establishment', 'appointment-getall','read-service'])]
     #[ORM\Column]
     private ?int $duration = null;
 
-    #[Groups(['read-establishment', 'appointment-me','read-service'])]
+    #[Groups(['read-establishment', 'appointment-getall','read-service'])]
     #[ORM\Column]
     private ?float $price = null;
 

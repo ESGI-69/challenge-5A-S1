@@ -57,7 +57,7 @@ class Feedback
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['feedback-read', 'feedback-read-admin', 'read-establishment', 'appointment-me'])]
+    #[Groups(['feedback-read', 'feedback-read-admin', 'read-establishment', 'appointment-getall'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 1000)]

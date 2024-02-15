@@ -1,7 +1,8 @@
 {
   "myAccount": {
     "title": "Mon compte",
-    "myAppointments": "Mes rendez-vous",
+    "myPastAppointments": "Mes rendez-vous passés",
+    "myFutureAppointments": "Mes rendez-vous à venir",
     "myInformations": "Mes informations",
     "logout": "Se déconnecter",
     "goToBackoffice": "Aller au Backoffice"
@@ -9,6 +10,10 @@
   "pastAppointments": {
     "title": "Rendez-vous passés",
     "noAppointments": "Vous n'avez pas de rendez-vous passés"
+  },
+  "futureAppointments": {
+    "title": "Rendez-vous à venir",
+    "noAppointments": "Vous n'avez pas de rendez-vous à venir"
   },
   "myInformations": {
     "title": "Mes informations"
