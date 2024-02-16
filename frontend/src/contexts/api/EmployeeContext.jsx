@@ -89,7 +89,7 @@ export default function EmployeeProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.get.error', { ns: 'employee' }));
+      toast.error(i18n.t('employee.get.error', { ns: 'toastsNotification' }));
     } finally {
       dispatch({
         type: 'isEmployeesLoading',
@@ -111,7 +111,7 @@ export default function EmployeeProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.get.errorList', { ns: 'employee' }));
+      toast.error(i18n.t('employee.get.errorList', { ns: 'toastsNotification' }));
     } finally {
       dispatch({
         type: 'isEmployeeLoading',
@@ -131,10 +131,10 @@ export default function EmployeeProvider({ children }) {
           'Content-Type': 'multipart/form-data',
         },
       });
-      toast.success(i18n.t('events.creation.success', { ns: 'employee' }));
+      toast.success(i18n.t('employe.creation.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.creation.error', { ns: 'employee' }));
+      toast.error(i18n.t('employe.creation.error', { ns: 'toastsNotification' }));
     } finally {
       dispatch({
         type: 'isPostEmployeeLoading',
@@ -159,10 +159,10 @@ export default function EmployeeProvider({ children }) {
         type: 'employee',
         payload: employee.data,
       });
-      toast.success(i18n.t('events.update.success', { ns: 'employee' }));
+      toast.success(i18n.t('employee.update.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.update.error', { ns: 'employee' }));
+      toast.error(i18n.t('employee.update.error', { ns: 'toastsNotification' }));
     } finally {
       dispatch({
         type: 'isPatchEmployeeLoading',
@@ -182,10 +182,10 @@ export default function EmployeeProvider({ children }) {
     });
     try {
       await apiCall.delete(`/companies/employees/${id}`);
-      toast.success(i18n.t('events.delete.success', { ns: 'employee' }));
+      toast.success(i18n.t('employee.delete.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.delete.error', { ns: 'employee' }));
+      toast.error(i18n.t('employee.delete.error', { ns: 'toastsNotification' }));
     } finally {
       dispatch({
         type: 'isEmployeeLoading',
@@ -205,10 +205,10 @@ export default function EmployeeProvider({ children }) {
     });
     try {
       await apiCall.post('/working_hours_ranges', data);
-      toast.success(i18n.t('events.workingHoursRange.success', { ns: 'employee' }));
+      toast.success(i18n.t('employee.workingHoursRange.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.workingHoursRange.error', { ns: 'employee' }));
+      toast.error(i18n.t('employee.workingHoursRange.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -229,10 +229,10 @@ export default function EmployeeProvider({ children }) {
           'Content-Type': 'application/merge-patch+json',
         },
       });
-      toast.success(i18n.t('events.workingHoursRange.success', { ns: 'employee' }));
+      toast.success(i18n.t('employee.workingHoursRange.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.workingHoursRange.error', { ns: 'employee' }));
+      toast.error(i18n.t('employee.workingHoursRange.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({

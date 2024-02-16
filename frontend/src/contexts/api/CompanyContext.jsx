@@ -2,6 +2,8 @@ import { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import apiCall from '@/axios';
 import queryBuilder from '@/utils/queryBuilder';
+import i18n from 'i18next';
+import toast from 'react-hot-toast';
 
 const initialState = {
   company: null,
@@ -64,6 +66,7 @@ export default function CompanyProvider({ children }) {
       return window.URL.createObjectURL(response.data);
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('company.get.errorKbis', { ns: 'toastsNotification' }));
       throw new Error(error);
     }
   };
@@ -81,6 +84,7 @@ export default function CompanyProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('company.get.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -104,6 +108,7 @@ export default function CompanyProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('company.get.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -120,8 +125,10 @@ export default function CompanyProvider({ children }) {
           'Content-Type': 'application/merge-patch+json',
         },
       });
+      toast.success(i18n.t('company.validate.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('company.validate.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     }
   };
@@ -133,8 +140,10 @@ export default function CompanyProvider({ children }) {
           'Content-Type': 'application/merge-patch+json',
         },
       });
+      toast.success(i18n.t('company.reject.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('company.reject.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     }
   };
@@ -152,6 +161,7 @@ export default function CompanyProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('company.get.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -175,6 +185,7 @@ export default function CompanyProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('company.get.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -197,6 +208,7 @@ export default function CompanyProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('company.get.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -221,8 +233,10 @@ export default function CompanyProvider({ children }) {
         type: 'company',
         payload: data,
       });
+      toast.success(i18n.t('company.post.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error;
+      toast.error(i18n.t('company.post.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({

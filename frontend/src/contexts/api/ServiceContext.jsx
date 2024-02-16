@@ -70,11 +70,11 @@ export default function ServiceProvider({ children }) {
     try {
       const response = await apiCall.post('/services', data);
       if (response.status === 201) {
-        toast.success(i18n.t('toast.creation.success', { ns: 'service' }));
+        toast.success(i18n.t('service.creation.success', { ns: 'toastsNotification' }));
       }
       return response.data;
     } catch (error) {
-      toast.error(i18n.t('toast.creation.error', { ns: 'service' }));
+      toast.error(i18n.t('service.creation.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({ type: 'isPostServiceLoading', payload: false });
@@ -90,10 +90,10 @@ export default function ServiceProvider({ children }) {
         },
       });
       if (response.status === 200) {
-        toast.success(i18n.t('toast.update.success', { ns: 'service' }));
+        toast.success(i18n.t('service.update.success', { ns: 'toastsNotification' }));
       }
     } catch (error) {
-      toast.error(i18n.t('toast.update.error', { ns: 'service' }));
+      toast.error(i18n.t('service.update.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({ type: 'isPatchServiceLoading', payload: false });
@@ -105,10 +105,10 @@ export default function ServiceProvider({ children }) {
     try {
       const response = await apiCall.delete(`/services/${id}`);
       if (response.status === 204) {
-        toast.success(i18n.t('toast.deletion.success', { ns: 'service' }));
+        toast.success(i18n.t('service.deletion.success', { ns: 'toastsNotification' }));
       }
     } catch (error) {
-      toast.error(i18n.t('toast.deletion.error', { ns: 'service' }));
+      toast.error(i18n.t('service.deletion.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({ type: 'isDeleteServiceLoading', payload: false });
@@ -128,6 +128,7 @@ export default function ServiceProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('service.get.errorList', { ns: 'toastsNotification' }));
     } finally {
       dispatch({
         type: 'isServicesLoading',
@@ -149,6 +150,7 @@ export default function ServiceProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
+      toast.error(i18n.t('service.get.error', { ns: 'toastsNotification' }));
     } finally {
       dispatch({
         type: 'isServiceLoading',

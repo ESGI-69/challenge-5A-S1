@@ -42,11 +42,11 @@ export default function ServiceTypeProvider({ children }) {
     try {
       const response = await apiCall.post('/service_types', data);
       if (response.status === 201) {
-        toast.success(i18n.t('serviceType.toast.creation.success', { ns: 'establishment' }));
+        toast.success(i18n.t('serviceType.creation.success', { ns: 'toastsNotification' }));
       }
       return response.data;
     } catch (error) {
-      toast.error(i18n.t('serviceType.toast.creation.error', { ns: 'establishment' }));
+      toast.error(i18n.t('serviceType.creation.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({ type: 'isPostServiceTypeLoading', payload: false });
@@ -62,10 +62,10 @@ export default function ServiceTypeProvider({ children }) {
         },
       });
       if (response.status === 200) {
-        toast.success(i18n.t('serviceType.toast.update.success', { ns: 'establishment' }));
+        toast.success(i18n.t('serviceType.update.success', { ns: 'toastsNotification' }));
       }
     } catch (error) {
-      toast.error(i18n.t('serviceType.toast.update.error', { ns: 'establishment' }));
+      toast.error(i18n.t('serviceType.update.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({ type: 'isPatchServiceTypeLoading', payload: false });
@@ -77,10 +77,10 @@ export default function ServiceTypeProvider({ children }) {
     try {
       const response = await apiCall.delete(`/service_types/${id}`);
       if (response.status === 204) {
-        toast.success(i18n.t('serviceType.toast.deletion.success', { ns: 'establishment' }));
+        toast.success(i18n.t('serviceType.deletion.success', { ns: 'toastNotification' }));
       }
     } catch (error) {
-      toast.error(i18n.t('serviceType.toast.deletion.error', { ns: 'establishment' }));
+      toast.error(i18n.t('serviceType.deletion.error', { ns: 'toastNotification' }));
       throw new Error(error);
     } finally {
       dispatch({ type: 'isDeleteServiceTypeLoading', payload: false });

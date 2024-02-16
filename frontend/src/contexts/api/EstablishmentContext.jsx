@@ -112,7 +112,7 @@ export default function EstablishmentProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.get.error', { ns: 'establishment' }));
+      toast.error(i18n.t('establishment.get.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -135,7 +135,7 @@ export default function EstablishmentProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.get.error', { ns: 'establishment' }));
+      toast.error(i18n.t('establishment.get.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -175,10 +175,10 @@ export default function EstablishmentProvider({ children }) {
     });
     try {
       await apiCall.post('/establishments', data);
-      toast.success(i18n.t('events.creation.success', { ns: 'establishment' }));
+      toast.success(i18n.t('establishment.creation.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.creation.error', { ns: 'establishment' }));
+      toast.error(i18n.t('establishment.creation.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -199,10 +199,10 @@ export default function EstablishmentProvider({ children }) {
           'Content-Type': 'application/merge-patch+json',
         },
       });
-      toast.success(i18n.t('events.update.success', { ns: 'establishment' }));
+      toast.success(i18n.t('establishment.update.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.update.error', { ns: 'establishment' }));
+      toast.error(i18n.t('establishment.update.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -219,10 +219,10 @@ export default function EstablishmentProvider({ children }) {
     });
     try {
       await apiCall.post('/opening_hours', data);
-      toast.success(i18n.t('events.openingHours.success', { ns: 'establishment' }));
+      toast.success(i18n.t('establishment.openingHours.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.openingHours.error', { ns: 'establishment' }));
+      toast.error(i18n.t('establishment.openingHours.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -243,10 +243,10 @@ export default function EstablishmentProvider({ children }) {
           'Content-Type': 'application/merge-patch+json',
         },
       });
-      toast.success(i18n.t('events.openingHours.success', { ns: 'establishment' }));
+      toast.success(i18n.t('establishment.openingHours.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.openingHours.error', { ns: 'establishment' }));
+      toast.error(i18n.t('establishment.openingHours.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -272,10 +272,10 @@ export default function EstablishmentProvider({ children }) {
     });
     try {
       await apiCall.delete(`/establishments/${id}`);
-      toast.success(i18n.t('events.deletion.success', { ns: 'establishment' }));
+      toast.success(i18n.t('establishment.deletion.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.deletion.error', { ns: 'establishment' }));
+      toast.error(i18n.t('establishment.deletion.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -296,10 +296,10 @@ export default function EstablishmentProvider({ children }) {
           'Content-Type': 'multipart/form-data',
         },
       });
-      toast.success(i18n.t('establishmentPicture.events.creation.success', { ns: 'establishment' }));
+      toast.success(i18n.t('establishment.establishmentPicturePost.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('establishmentPicture.events.creation.error', { ns: 'establishment' }));
+      toast.error(i18n.t('establishment.establishmentPicturePost.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -316,10 +316,10 @@ export default function EstablishmentProvider({ children }) {
     });
     try {
       await apiCall.delete(`/establishment_pictures/${id}`);
-      toast.success(i18n.t('establishmentPicture.events.deletion.success', { ns: 'establishment' }));
+      toast.success(i18n.t('establishment.establishmentPictureDeletion.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('establishmentPicture.events.deletion.error', { ns: 'establishment' }));
+      toast.error(i18n.t('establishment.establishmentPictureDeletion.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({

@@ -11,7 +11,7 @@ i18next
     debug: import.meta.env.NODE_ENV === 'developement',
     fallbackLng: 'en',
     partialBundledLanguages: true,
-    ns: [],
+    ns: [ 'toastsNotification' ],
     resources: {},
     defaultNS: 'base',
   });

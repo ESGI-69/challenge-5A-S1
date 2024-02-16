@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import apiCall from '@/axios';
 import Cookies from 'js-cookie';
 import { toast } from 'react-hot-toast';
+import i18n from 'i18next';
 
 const initialState = {
   profile: null,
@@ -75,7 +76,7 @@ export default function ProfileProvider({ children }) {
       });
     } catch (error) {
       resetProfileState();
-      toast.error('Error while fetching user data');
+      toast.error(i18n.t('profile.errorWhileFetchingUserData', { ns: 'toastsNotification' }));
       throw error;
     } finally {
       dispatch({
@@ -109,7 +110,7 @@ export default function ProfileProvider({ children }) {
       Cookies.set('token', data.token);
     } catch (error) {
       resetProfileState();
-      toast.error('Error while logging in');
+      toast.error(i18n.t('profile.login.error', { ns: 'toastsNotification' }));
       throw error;
     } finally {
       dispatch({

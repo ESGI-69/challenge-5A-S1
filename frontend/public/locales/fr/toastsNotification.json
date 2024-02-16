@@ -1,0 +1,147 @@
+{
+    "appointment": {
+        "creation": {
+            "success": "Le rendez vous à bien été créé",
+            "error": "Erreur lors de la prise de rendez-vous"
+        },
+        "cancel": {
+            "success": "Le rendez vous à bien été annulé",
+            "error": "Erreur lors de l'annulation du rendez-vous"
+        }
+    },
+    "company": {
+        "get" : {
+            "error": "Erreur lors de la récupération des informations de l'entreprise",
+            "errorKbis": "Erreur lors de la récupération du Kbis de l'entreprise"
+        },
+        "validate": {
+            "success": "L'entreprise à bien été validée",
+            "error": "Erreur lors de la validation de l'entreprise"
+        },
+        "reject": {
+            "success": "L'entreprise à bien été rejetée",
+            "error": "Erreur lors du rejet de l'entreprise"
+        },
+        "post": {
+            "success": "L'entreprise à bien été créée",
+            "error": "Erreur lors de la création de l'entreprise"
+        }
+    },
+    "statistic": {
+        "get": {
+            "error": "Erreur lors de la récupération des statistiques"
+        }
+    },
+    "employee": {
+        "get": {
+            "error": "Erreur lors de la récupération des informations de l'employé",
+            "errorList": "Erreur lors de la récupération de la liste des employés"
+        },
+        "creation": {
+            "success": "L'employé à bien été créé",
+            "error": "Erreur lors de la création de l'employé"
+        },
+        "update": {
+            "success": "L'employé à bien été modifié",
+            "error": "Erreur lors de la modification de l'employé"
+        },
+        "delete": {
+            "success": "L'employé à bien été supprimé",
+            "error": "Erreur lors de la suppression de l'employé"
+        },
+        "workingHoursRange": {
+            "success": "Les horaires de travail ont bien été modifiés",
+            "error": "Erreur lors de la modification des horaires de travail"
+        }
+    },
+    "establishment": {
+        "get": {
+            "error": "Erreur lors de la récupération des informations de l'établissement",
+            "errorList": "Erreur lors de la récupération de la liste des établissements"
+        },
+        "creation": {
+            "success": "L'établissement à bien été créé",
+            "error": "Erreur lors de la création de l'établissement"
+        },
+        "update": {
+            "success": "L'établissement à bien été modifié",
+            "error": "Erreur lors de la modification de l'établissement"
+        },
+        "delete": {
+            "success": "L'établissement à bien été supprimé",
+            "error": "Erreur lors de la suppression de l'établissement"
+        },
+        "openingHours": {
+            "success": "Les horaires d'ouverture ont bien été modifiés",
+            "error": "Erreur lors de la modification des horaires d'ouverture"
+        },
+        "establishmentPicturePost": {
+            "success": "L'image de l'établissement à bien été ajoutée",
+            "error": "Erreur lors de l'ajout de l'image de l'établissement"
+        },
+        "establishmentPictureDeletion": {
+            "success": "L'image de l'établissement à bien été supprimée",
+            "error": "Erreur lors de la suppression de l'image de l'établissement"
+        }
+    },
+    "service": {
+        "creation": {
+            "success": "Le service à bien été créé",
+            "error": "Erreur lors de la création du service"
+        },
+        "update": {
+            "success": "Le service à bien été modifié",
+            "error": "Erreur lors de la modification du service"
+        },
+        "deletion": {
+            "success": "Le service à bien été supprimé",
+            "error": "Erreur lors de la suppression du service"
+        },
+        "get" : {
+            "error": "Erreur lors de la récupération des informations du service",
+            "errorList": "Erreur lors de la récupération de la liste des services"
+        }
+    },
+    "serviceType": {
+        "creation": {
+            "success": "Le type de service à bien été créé",
+            "error": "Erreur lors de la création du type de service"
+        },
+        "update": {
+            "success": "Le type de service à bien été modifié",
+            "error": "Erreur lors de la modification du type de service"
+        },
+        "deletion": {
+            "success": "Le type de service à bien été supprimé",
+            "error": "Erreur lors de la suppression du type de service"
+        },
+        "get" : {
+            "error": "Erreur lors de la récupération des informations du type de service",
+            "errorList": "Erreur lors de la récupération de la liste des types de service"
+        }
+    },
+    "user": {
+        "get": {
+            "error": "Erreur lors de la récupération des informations de l'utilisateur",
+            "errorList": "Erreur lors de la récupération de la liste des utilisateurs"
+        },
+        "creation": {
+            "success": "L'utilisateur à bien été créé",
+            "error": "Erreur lors de la création de l'utilisateur"
+        },
+        "update": {
+            "success": "L'utilisateur à bien été modifié",
+            "error": "Erreur lors de la modification de l'utilisateur"
+        },
+        "delete": {
+            "success": "L'utilisateur à bien été supprimé",
+            "error": "Erreur lors de la suppression de l'utilisateur"
+        }
+    },
+    "profile": {
+        "errorWhileFetchingUserData": "Erreur lors de la récupération des informations de l'utilisateur",
+        "login": {
+            "error": "Erreur lors de la connexion"
+        }
+    }
+}
