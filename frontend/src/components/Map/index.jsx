@@ -3,11 +3,14 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import styles from './Map.module.scss';
 import 'leaflet/dist/leaflet.css';
 import PropTypes from 'prop-types';
+import Button from '../lib/Button';
+import { useTranslation } from 'react-i18next';
 
 const Map = React.forwardRef(function Map(
   { position, zoomLevel, markers, ...delegated },
   ref,
 ) {
+  const { t } = useTranslation('base');
   return (
     <MapContainer
       center={position}
@@ -24,7 +27,7 @@ const Map = React.forwardRef(function Map(
 
       {markers.map((marker, index) => (
         <Marker key={index} position={marker.position}>
-          <Popup>{marker.popup}</Popup>
+          <Popup>{marker.popup}<Button to={`/establishment/${marker.id}`}>{t('seePage')}</Button></Popup>
         </Marker>
       ))}
 

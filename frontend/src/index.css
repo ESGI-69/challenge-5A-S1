@@ -33,3 +33,8 @@ body {
 .rbc-row-content {
   z-index: 0!important;
 }
+
+/* stylelint-disable-next-line selector-class-pattern */
+.leaflet-container a {
+  color: white!important;
+}
