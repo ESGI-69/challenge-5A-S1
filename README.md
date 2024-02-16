@@ -24,6 +24,8 @@
 - Fixtures (Sébastien GAUDARD)
 - DB structure and Schema (Gatien ANIZAN & Samuel GUENIER)
 - Figma (Sébastien GAUDARD)
+- Front CD (Gatien ANIZAN)
+- CI (Gatien ANIZAN, Quentin PELTIER, Yohan CENTANNI)
 
 ## CI/CD Schema
 ![CI/CID Schema img](./assets/ci-cd.png)
