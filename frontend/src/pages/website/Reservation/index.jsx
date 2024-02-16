@@ -142,11 +142,20 @@ export default function Reservation() {
         let currentTime = startDate;
         while (currentTime <= endDate) {
 
+          let showIt = true;
+          if (currentTime.toDateString() === new Date().toDateString()) {
+            if (currentTime.getTime() < new Date().getTime()) {
+              showIt = false;
+            }
+          }
+
           let timeFix = new Date(currentTime);
           timeFix.setHours(timeFix.getHours() + 1);
           const timeSlot = {
             time: timeFix.toISOString().slice(11, 16), // format HH:mm
-            available: !(service.appointments.some(appointment => new Date(appointment.startDate).getTime() === currentTime.getTime() && appointment.employee.id === serviceEmployee)), // vérifie si le créneau est dispo
+            available: !(service.appointments.some(appointment =>
+              new Date(appointment.startDate).getTime() === currentTime.getTime() &&
+              appointment.employee.id === serviceEmployee)) && showIt, // vérifie si le créneau est dispo et si currentTime est inférieur au temps actuel
             employee: serviceEmployee,
           };
           // Trouvez la semaine correspondante ou créez-en une nouvelle si elle n'existe pas
