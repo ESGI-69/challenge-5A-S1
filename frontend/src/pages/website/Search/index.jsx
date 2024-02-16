@@ -56,8 +56,9 @@ export default function Search() {
             className={styles.SearchMap}
             position={[ +establishments[0].lat, +establishments[0].long ]}
             markers={
-              establishments.reduce((acc, { lat, long, city, street }) => {
+              establishments.reduce((acc, { lat, long, city, street, id }) => {
                 acc.push({
+                  id,
                   position: [ +lat, +long ],
                   popup: `${city} ${street}`,
                 });
