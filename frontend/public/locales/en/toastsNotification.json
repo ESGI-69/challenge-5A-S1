@@ -1,0 +1,128 @@
+{
+    "appointment": {
+        "creation": {
+            "success": "The appointment has been successfully created",
+            "error": "Error during appointment scheduling"
+        },
+        "cancel": {
+            "success": "The appointment has been successfully canceled",
+            "error": "Error during appointment cancellation"
+        }
+    },
+    "company": {
+        "get": {
+            "error": "Error during company data retrieval",
+            "errorkbis": "Error during KBIS data retrieval"
+        },
+        "validate": {
+            "success": "Company has been successfully validated",
+            "error": "Error during company validation"
+        },
+        "reject": {
+            "success": "Company has been successfully rejected",
+            "error": "Error during company rejection"
+        },
+        "post": {
+            "success": "Company has been successfully created",
+            "error": "Error during company creation"
+        }
+    },
+    "statistic": {
+        "get": {
+            "error": "Error during statistic data retrieval"
+        }
+    },
+    "employee": {
+        "get": {
+            "error": "Error during employee data retrieval",
+            "errorList": "Error during employee list data retrieval"
+        },
+        "creation": {
+            "success": "Employee has been successfully created",
+            "error": "Error during employee creation"
+        },
+        "update": {
+            "success": "Employee has been successfully updated",
+            "error": "Error during employee update"
+        },
+        "delete": {
+            "success": "Employee has been successfully deleted",
+            "error": "Error during employee deletion"
+        },
+        "workingHoursRange": {
+            "success": "Employee working hours range has been successfully updated",
+            "error": "Error during update of employee working hours range"
+        }
+    },
+    "establishment": {
+        "get": {
+            "error": "Error during establishment data retrieval"
+        },
+        "creation": {
+            "success": "Establishment has been successfully created",
+            "error": "Error during establishment creation"
+        },
+        "update": {
+            "success": "Establishment has been successfully updated",
+            "error": "Error during establishment update"
+        },
+        "deletion": {
+            "success": "Establishment has been successfully deleted",
+            "error": "Error during establishment deletion"
+        },
+        "openingHours": {
+            "success": "Establishment opening hours have been successfully updated",
+            "error": "Error during update of establishment opening hours"
+        },
+        "establishmentPicturePost": {
+            "success": "Establishment picture has been successfully uploaded",
+            "error": "Error during establishment picture upload"
+        },
+        "establishmentPictureDeletion": {
+            "success": "Establishment picture has been successfully deleted",
+            "error": "Error during establishment picture deletion"
+        }
+    },
+    "service": {
+        "creation": {
+            "success": "Service has been successfully created",
+            "error": "Error during service creation"
+        },
+        "update": {
+            "success": "Service has been successfully updated",
+            "error": "Error during service update"
+        },
+        "deletion": {
+            "success": "Service has been successfully deleted",
+            "error": "Error during service deletion"
+        },
+        "get": {
+            "error": "Error during service data retrieval",
+            "errorList": "Error during service list data retrieval"
+        }
+    },
+    "serviceType": {
+        "creation": {
+            "success": "Service type has been successfully created",
+            "error": "Error during service type creation"
+        },
+        "update": {
+            "success": "Service type has been successfully updated",
+            "error": "Error during service type update"
+        },
+        "deletion": {
+            "success": "Service type has been successfully deleted",
+            "error": "Error during service type deletion"
+        },
+        "get": {
+            "error": "Error during service type data retrieval",
+            "errorList": "Error during service type list data retrieval"
+        }
+    },
+    "profile": {
+        "errorWhileFetchingUserData": "Error while fetching user data",
+        "login": {
+            "error": "Error during login"
+        }
+    }
+}

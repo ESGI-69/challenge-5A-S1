@@ -125,7 +125,7 @@ export default function AppointmentProvider({ children }) {
         payload: data,
       });
     } catch (error) {
-      toast.error(i18n.t('events.creation.error', { ns: 'reservation' }));
+      toast.error(i18n.t('appointment.creation.error', { ns: 'toastsNotification' }));
       console.error(error);
     } finally {
       dispatch({
@@ -146,9 +146,9 @@ export default function AppointmentProvider({ children }) {
           'Content-Type': 'application/merge-patch+json',
         },
       });
-      toast.success(i18n.t('events.cancel.success', { ns: 'reservation' }));
+      toast.success(i18n.t('appointment.cancel.success', { ns: 'toastsNotification' }));
     } catch (error) {
-      toast.error(i18n.t('events.cancel.error', { ns: 'reservation' }));
+      toast.error(i18n.t('appointment.cancel.error', { ns: 'toastsNotification' }));
       console.error(error);
     } finally {
       dispatch({

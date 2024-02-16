@@ -74,7 +74,7 @@ export default function UserProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.getList.error', { ns: 'user' }));
+      toast.error(i18n.t('user.get.errorList', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -97,7 +97,7 @@ export default function UserProvider({ children }) {
       });
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.get.error', { ns: 'user' }));
+      toast.error(i18n.t('user.get.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -122,10 +122,10 @@ export default function UserProvider({ children }) {
         type: 'user',
         payload: data,
       });
-      toast.success(i18n.t('events.create.success', { ns: 'user' }));
+      toast.success(i18n.t('user.creation.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.create.error', { ns: 'user' }));
+      toast.error(i18n.t('user.creation.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -157,10 +157,10 @@ export default function UserProvider({ children }) {
         type: 'user',
         payload: data,
       });
-      toast.success(i18n.t('events.update.success', { ns: 'user' }));
+      toast.success(i18n.t('user.update.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.update.error', { ns: 'user' }));
+      toast.error(i18n.t('user.update.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({
@@ -185,10 +185,10 @@ export default function UserProvider({ children }) {
     });
     try {
       await apiCall.delete(`/users/${id}`);
-      toast.success(i18n.t('events.delete.success', { ns: 'user' }));
+      toast.success(i18n.t('user.delete.success', { ns: 'toastsNotification' }));
     } catch (error) {
       console.error(error);
-      toast.error(i18n.t('events.delete.error', { ns: 'user' }));
+      toast.error(i18n.t('user.delete.error', { ns: 'toastsNotification' }));
       throw new Error(error);
     } finally {
       dispatch({

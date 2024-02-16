@@ -1,6 +1,8 @@
 import { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import apiCall from '@/axios';
+import i18n from 'i18next';
+import toast from 'react-hot-toast';
 
 const initialState = {
   statistics: {},
@@ -41,6 +43,7 @@ export default function CompanyStatisticsProvider({ children }) {
         payload: data,
       });
     } catch (error) {
+      toast.error(i18n.t('statistic.get.error', { ns: 'toastsNotification' }));
       console.error(error);
     } finally {
       dispatch({
