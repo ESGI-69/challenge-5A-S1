@@ -11,6 +11,9 @@
 ## Features
 - Reviews system, type of reviews system and notation system (Quentin PELTIER)
 
+## CI/CD Schema
+![CI/CID Schema img](./assets/ci-cd.png)
+
 ## Recomended plugins
 
 When you go to the extensions tab in VSCode, you will see (at the bootom left of your screen) a list of recommended extensions for this project. You can install them for a better development experience.
