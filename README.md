@@ -8,8 +8,22 @@
 - Yohan CENTANNI ([ycenta](https://github.com/ycenta))
 - Sébastien GAUDARD ([SebGrd](https://github.com/SebGrd))
 
-## Features
-- Reviews system, type of reviews system and notation system (Quentin PELTIER)
+## Main Features
+- Reviews, type of reviews and notation systems (Quentin PELTIER)
+- Reservation and schedule system (Yohan CENTANNI)
+- Images Upload (Samuel GUENIER)
+- Homepage (Gatien ANIZAN)
+- Searchbar (Gatie ANIZAN & Yohan CENTANNI)
+- Search result page (Gatien ANIZAN & Samuel GUENIER) 
+- Establishment page (Quentin PELTIER, Gatien Anizan, Yohan CENTANNI)
+- Postion Resolver for Map (Yoahn CENTANNI)
+- Back-Office CRUDs (Everyone)
+- Dashboard, Stats (back-office) (Sébastien GAUDARD)
+- Mailing System (Sébastien GAUDARD)
+- Front-Library (Everyone)
+- Fixtures (Sébastien GAUDARD)
+- DB structure and Schema (Gatien ANIZAN & Samuel GUENIER)
+- Figma (Sébastien GAUDARD)
 
 ## CI/CD Schema
 ![CI/CID Schema img](./assets/ci-cd.png)
